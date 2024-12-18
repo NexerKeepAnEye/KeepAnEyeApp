@@ -1,22 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
-import Accordion from './Accordion';
+import React from 'react';
+import { View } from 'react-native';
+import { Text } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { GeneralStyle } from './Style/ChartStyle';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <Accordion />
-    </View>
+    <SafeAreaView style={GeneralStyle.container}>
+      <View style={GeneralStyle.container}>
+        <Text> App start sida </Text>
+      </View>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'f4f5f7',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 200,
-  },
-});
