@@ -10,6 +10,7 @@ export const BarChartStyle = StyleSheet.create({
   chartContainer: {
     width: '100%',
     alignItems: 'center',
+    overflow: 'scroll',
   },
   tooltip: {
     position: 'absolute',
@@ -23,5 +24,14 @@ export const BarChartStyle = StyleSheet.create({
   },
   tooltipText: {
     color: '#000',
+  },
+});
+
+export const GeneralStyle = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'scroll',
   },
 });
