@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Pressable, TouchableOpacity, View } from 'react-native';
 import { DataTable, List, Text } from 'react-native-paper';
 import { mockedData, reportPretendData } from '../MockedData/mockedReportTypes';
+import { AccordionStyle, DataTableStyle } from '../Style/AccordionStyle';
 
 const Accordion = () => {
   const [expanded, setExpanded] = useState(true);
@@ -18,62 +19,26 @@ const Accordion = () => {
   return (
     <>
       <List.Section>
-        <View
-          style={{
-            width: '90%',
-            borderWidth: 1,
-            borderColor: '#d9d9d9',
-            borderRadius: 10,
-            alignItems: 'center',
-            overflow: 'hidden',
-          }}
-        >
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              width: '100%',
-              padding: '5%',
-              justifyContent: 'center',
-              position: 'relative',
-            }}
-          >
-            <Text
-              style={{
-                textAlign: 'center',
-                flex: 1,
-                fontSize: 18,
-                fontWeight: 'bold',
-              }}
-            >
+        <View style={AccordionStyle.accordionContainer}>
+          <View style={AccordionStyle.accordionContent}>
+            <Text style={AccordionStyle.accordionHeader}>
               {selectedReport || '-- Välj rapport --'}
             </Text>
             <TouchableOpacity
               onPress={handlePress}
-              style={{ position: 'absolute', right: -1 }}
+              style={AccordionStyle.accordionDDL}
             >
               <List.Icon
                 icon={expanded ? 'chevron-up' : 'chevron-down'}
-                style={{
-                  width: 65,
-                  height: 65,
-                  backgroundColor: '#d9d9d9',
-                  borderTopRightRadius: 10,
-                  borderBottomRightRadius: expanded ? 0 : 10,
-                }}
+                style={[
+                  AccordionStyle.accordionListButton,
+                  { borderBottomRightRadius: expanded ? 0 : 10 },
+                ]}
               />
             </TouchableOpacity>
           </View>
           {expanded && (
-            <View
-              style={{
-                width: '100%',
-                borderTopWidth: 1,
-                borderColor: '#d9d9d9',
-                borderBottomLeftRadius: 10,
-                borderBottomRightRadius: 10,
-              }}
-            >
+            <View style={AccordionStyle.accordionListExpanded}>
               {mockedData.rapporter.map((report) => (
                 <Pressable
                   key={report.id}
@@ -81,10 +46,7 @@ const Accordion = () => {
                 >
                   <List.Item
                     title={report.type}
-                    style={{
-                      borderBottomWidth: 1,
-                      borderColor: '#d9d9d9',
-                    }}
+                    style={AccordionStyle.accordionListItem}
                   />
                 </Pressable>
               ))}
@@ -92,28 +54,14 @@ const Accordion = () => {
           )}
         </View>
       </List.Section>
-      <View style={{ width: '90%', marginTop: 20 }}>
+      <View style={DataTableStyle.dataTableContainer}>
         {selectedReport && (
           <>
-            <Text
-              style={{
-                textAlign: 'center',
-                fontSize: 20,
-                fontWeight: 'bold',
-                marginBottom: 10,
-              }}
-            >
+            <Text style={AccordionStyle.accordionHeaderChanged}>
               {selectedReport}
             </Text>
             <DataTable>
-              <DataTable.Header
-                style={{
-                  backgroundColor: '#d9d9d9',
-                  justifyContent: 'space-evenly',
-                  borderTopLeftRadius: 10,
-                  borderTopRightRadius: 10,
-                }}
-              >
+              <DataTable.Header style={DataTableStyle.dataTableHeader}>
                 <DataTable.Title>ID</DataTable.Title>
                 <DataTable.Title>Value</DataTable.Title>
                 <DataTable.Title>Cost</DataTable.Title>
