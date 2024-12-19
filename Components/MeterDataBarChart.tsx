@@ -4,7 +4,7 @@ import { BarChart } from 'react-native-gifted-charts';
 import { Text } from 'react-native-paper';
 import { data } from '../MockedData/MeterData';
 import { BarChartStyle } from '../Style/ChartStyle';
-import { Tooltip } from '../Types/Interfaces/Interfaces';
+import { Tooltip } from '../Types/Interfaces/Type';
 
 export default function MeterDataBarChart() {
   const [tooltip, setTooltip] = useState<Tooltip>({

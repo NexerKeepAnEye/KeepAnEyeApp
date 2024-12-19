@@ -1,4 +1,4 @@
-import { MeterData } from '../Types/Interfaces/Interfaces';
+import { MeterData } from '../Types/Interfaces/Type';
 
 export const data: MeterData[] = [
   {
