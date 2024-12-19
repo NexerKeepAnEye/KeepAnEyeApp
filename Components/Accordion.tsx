@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { Pressable, TouchableOpacity, View } from 'react-native';
 import { DataTable, List, Text } from 'react-native-paper';
-import { mockedData, reportPretendData } from './MockedData/mockedReportTypes';
+import { mockedData, reportPretendData } from '../MockedData/mockedReportTypes';
 
 const Accordion = () => {
   const [expanded, setExpanded] = useState(true);
