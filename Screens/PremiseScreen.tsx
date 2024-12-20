@@ -1,17 +1,11 @@
-import { RouteProp } from '@react-navigation/native';
 import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from 'react-native-paper';
-import { RootStackParamList } from '../Navigation/RootStackNavigation';
+import { usePremiseContext } from '../PremiseState/PremiseContext';
 
-type PremiseScreenRouteProp = RouteProp<RootStackParamList, 'PremiseScreen'>;
-
-type Props = {
-  route: PremiseScreenRouteProp;
-};
-
-export default function PremiseScreen({ route }: Props) {
-  const { premiseId } = route.params;
+export default function PremiseScreen() {
+  const { state } = usePremiseContext();
+  const { premiseId } = state;
 
   return (
     <View>
