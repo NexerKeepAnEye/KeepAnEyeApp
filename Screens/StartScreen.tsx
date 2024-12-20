@@ -1,16 +1,37 @@
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { View } from 'react-native';
+import { FlatList, TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-paper';
+import { mockedPremises } from '../MockedData/MockedPremises';
+import { RootStackParamList } from '../Navigation/RootStackNavigation';
 
-export default function StartScreen() {
+type StartScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'StartScreen'
+>;
+
+type Props = {
+  navigation: StartScreenNavigationProp;
+};
+
+export default function StartScreen({ navigation }: Props) {
+  const renderItem = ({ item }: { item: { id: number; name: string } }) => (
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate('PremiseScreen', { premiseId: item.id })
+      }
+    >
+      <Text>{item.name}</Text>
+    </TouchableOpacity>
+  );
   return (
-    <View>
+    <View style={{ marginTop: 50 }}>
       <Text>START SCREEN</Text>
-      {/* 
-      Initial bottomTab is "Fastighet"
-      "Fastighet" as bottomTab
-      List all premises as pressables, if you click on one you navigate to the correct  premise-screen.
-      */}
+      <FlatList
+        data={mockedPremises}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={renderItem}
+      />
     </View>
   );
 }

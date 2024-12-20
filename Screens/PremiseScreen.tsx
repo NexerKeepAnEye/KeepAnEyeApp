@@ -1,15 +1,29 @@
 import * as React from 'react';
-import { View } from 'react-native';
-import { Text } from 'react-native-paper';
+import { FlatList, View } from 'react-native';
+import { List, Text } from 'react-native-paper';
+import { mockedPremises } from '../MockedData/MockedPremises';
 
 export default function PremiseScreen() {
+  const renderItem = ({
+    item,
+  }: {
+    item: { id: number; name: string; designation: string };
+  }) => (
+    <List.Item
+      title={item.name}
+      description={`Designation: ${item.designation}`}
+      left={() => <List.Icon icon="home" />}
+    />
+  );
+
   return (
     <View>
       <Text>PREMISE SCREEN</Text>
-      {/* 
-      "Fastighet" as bottomTab
-      Box with the selected premise and listing all meters connected to the premise. The meters should be pressable and navigate to meterdata screen.
-      */}
+      <FlatList
+        data={mockedPremises}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={renderItem}
+      />
     </View>
   );
 }

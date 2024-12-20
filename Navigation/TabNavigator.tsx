@@ -1,8 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as React from 'react';
 import { Text } from 'react-native-paper';
+import PremiseScreen from '../Screens/PremiseScreen';
 import ReportScreen from '../Screens/ReportScreen';
-import StartScreen from '../Screens/StartScreen';
 
 export type TabParamList = {
   Fastighet: undefined;
@@ -18,16 +18,16 @@ export default function TabNavigator() {
         headerRight: () => (
           <Text
             style={{ marginRight: 16 }}
-            onPress={() => navigation.navigate('Fastighet')}
+            onPress={() => navigation.navigate('Fastighet')} //temporary
           >
-            Navigate
+            LOGGA UT temp redirect fastighet
           </Text>
         ),
       })}
     >
       <Tab.Screen
         name="Fastighet"
-        component={StartScreen}
+        component={PremiseScreen}
       />
       <Tab.Screen
         name="Rapporter"
