@@ -31,7 +31,6 @@ export default function StartScreen({ navigation }: Props) {
     <>
       <View style={{ marginTop: 50 }}>
         <Text>START SCREEN</Text>
-        Go to Premises
         <FlatList
           data={mockedPremises}
           keyExtractor={(item) => item.id.toString()}
