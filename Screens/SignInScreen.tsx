@@ -6,6 +6,9 @@ export default function SignInScreen() {
   return (
     <View>
       <Text>SIGN-IN SCREEN</Text>
+      {/* 
+      Textfiled where a API key is required to "sign in",
+      */}
     </View>
   );
 }

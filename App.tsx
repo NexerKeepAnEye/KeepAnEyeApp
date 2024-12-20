@@ -1,16 +1,14 @@
-import { View } from 'react-native';
-import { Text } from 'react-native-paper';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import SignInScreen from './Screens/SignInScreen';
-import { GeneralStyle } from './Style/ChartStyle';
+import { NavigationContainer } from '@react-navigation/native';
+import * as React from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import RootStackNavigator from './Navigation/RootStackNavigation';
 
 export default function App() {
   return (
-    <SafeAreaView style={GeneralStyle.container}>
-      <View style={GeneralStyle.container}>
-        <Text> App start sida </Text>
-        <SignInScreen />
-      </View>
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <RootStackNavigator />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }

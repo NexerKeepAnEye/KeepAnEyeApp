@@ -6,6 +6,8 @@ export default function SplashScreen() {
   return (
     <View>
       <Text>SPLASH SCREEN</Text>
+      {/* 
+      Loading screen while the app is starting (need some kind of animation) */}
     </View>
   );
 }
