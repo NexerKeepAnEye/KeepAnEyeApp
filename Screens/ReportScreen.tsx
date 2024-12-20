@@ -1,16 +1,21 @@
+import { RouteProp } from '@react-navigation/native';
 import * as React from 'react';
-import { View } from 'react-native';
-import { Text } from 'react-native-paper';
+import { Text, View } from 'react-native';
+import { TabParamList } from '../Navigation/TabNavigator';
 
-export default function ReportScreen() {
+type ReportScreenRouteProp = RouteProp<TabParamList, 'ReportScreen'>;
+
+type Props = {
+  route: ReportScreenRouteProp;
+};
+
+export default function ReportScreen({ route }: Props) {
+  const { premiseId } = route.params;
+
   return (
     <View>
       <Text>REPORT SCREEN</Text>
-      {/*
-     "Rapporter" as bottomTab
-     Show which premises you're at, and report-selector. WHen a report is selected a filter component is rendered and when you've selected all you want render charts and data benieth it.
-     Functionality to rotate the screen 90 degrees.
-       */}
+      <Text>Premise Id: {premiseId}</Text>
     </View>
   );
 }

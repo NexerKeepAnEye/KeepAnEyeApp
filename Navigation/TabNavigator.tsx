@@ -5,7 +5,7 @@ import ReportScreen from '../Screens/ReportScreen';
 
 export type TabParamList = {
   PremiseScreen: { premiseId: number };
-  Rapporter: undefined;
+  ReportScreen: { premiseId: number };
 };
 
 const Tab = createBottomTabNavigator<TabParamList>();
@@ -18,7 +18,7 @@ export default function TabNavigator() {
         component={PremiseScreen}
       />
       <Tab.Screen
-        name="Rapporter"
+        name="ReportScreen"
         component={ReportScreen}
       />
     </Tab.Navigator>

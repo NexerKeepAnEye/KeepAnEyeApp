@@ -17,12 +17,16 @@ type Props = {
 export default function StartScreen({ navigation }: Props) {
   const renderItem = ({ item }: { item: { id: number; name: string } }) => (
     <TouchableOpacity
-      onPress={() =>
+      onPress={() => {
+        navigation.navigate('tabs', {
+          screen: 'ReportScreen',
+          params: { premiseId: item.id },
+        });
         navigation.navigate('tabs', {
           screen: 'PremiseScreen',
           params: { premiseId: item.id },
-        })
-      }
+        });
+      }}
     >
       <Text>{item.name}</Text>
     </TouchableOpacity>

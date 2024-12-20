@@ -4,6 +4,7 @@ import * as React from 'react';
 import PremiseScreen from '../Screens/PremiseScreen';
 import SignInScreen from '../Screens/SignInScreen';
 import StartScreen from '../Screens/StartScreen';
+import ReportScreen from '../Screens/ReportScreen';
 import TabNavigator, { TabParamList } from './TabNavigator';
 
 export type RootStackParamList = {
@@ -11,7 +12,7 @@ export type RootStackParamList = {
   StartScreen: undefined;
   SplashScreen: undefined;
   PremiseScreen: { premiseId: number };
-  Fastighet: undefined;
+  ReportScreen: { premiseId: number };
   tabs: NavigatorScreenParams<TabParamList>;
 };
 
@@ -38,6 +39,11 @@ export default function RootStackNavigator() {
       <RootStack.Screen
         name="PremiseScreen"
         component={PremiseScreen}
+        options={{ headerShown: false }}
+      />
+      <RootStack.Screen
+        name="ReportScreen"
+        component={ReportScreen}
         options={{ headerShown: false }}
       />
     </RootStack.Navigator>
