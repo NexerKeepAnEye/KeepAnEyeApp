@@ -18,7 +18,7 @@ export default function ReportScreen() {
       >
         REPORT SCREEN
       </Text>
-      {state.premise?.name ? (
+      {state.premise?.Name ? (
         <View>
           <Text
             style={{
@@ -27,7 +27,7 @@ export default function ReportScreen() {
               fontSize: 15,
             }}
           >
-            Premise Id: {state.premise.premiseId}
+            Premise Id: {state.premise.Id}
           </Text>
           <Text
             style={{
@@ -36,7 +36,7 @@ export default function ReportScreen() {
               fontSize: 15,
             }}
           >
-            Designation: {state.premise.designation}
+            Designation: {state.premise.Designation}
           </Text>
           <Text
             style={{
@@ -45,7 +45,7 @@ export default function ReportScreen() {
               fontSize: 15,
             }}
           >
-            Name: {state.premise.name}
+            Name: {state.premise.Name}
           </Text>
           <Accordion />
         </View>
