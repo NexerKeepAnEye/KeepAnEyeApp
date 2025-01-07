@@ -5,12 +5,12 @@ import { usePremiseContext } from '../PremiseState/PremiseContext';
 
 export default function PremiseScreen() {
   const { state } = usePremiseContext();
-  const { premiseId } = state;
+  // const { premiseId } = state;
 
   return (
     <View>
       <Text>PREMISE SCREEN</Text>
-      <Text>Fastighet Id: {premiseId}</Text>
+      <Text>Fastighet Id: {state.premise?.premiseId}</Text>
     </View>
   );
 }

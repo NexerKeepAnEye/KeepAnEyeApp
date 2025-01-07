@@ -1,12 +1,18 @@
 import React, { createContext, ReactNode, useContext, useReducer } from 'react';
 
-type State = {
+type Premise = {
   premiseId: number;
+  designation: string;
+  name: string;
+};
+
+type State = {
+  premise: Premise | null;
 };
 
 type Action = {
-  type: 'SET_PREMISE_ID' | 'CHANGE_PREMISE_ID';
-  payload: number;
+  type: 'SET_PREMISE' | 'CHANGE_PREMISE';
+  payload: Premise;
 };
 
 type ContextType = {
@@ -16,13 +22,13 @@ type ContextType = {
 
 const PremiseContext = createContext<ContextType | undefined>(undefined);
 
-const initialState: State = { premiseId: 0 };
+const initialState: State = { premise: null };
 
 const premiseReducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case 'SET_PREMISE_ID':
-    case 'CHANGE_PREMISE_ID':
-      return { premiseId: action.payload };
+    case 'SET_PREMISE':
+    case 'CHANGE_PREMISE':
+      return { premise: action.payload };
     default:
       return state;
   }
