@@ -1,6 +1,6 @@
 import { MeterData } from '../Types/Interfaces/Type';
 
-export const data: MeterData[] = [
+export const meterdata: MeterData[] = [
   {
     DateTime: '2023-08-01T00:00:00',
     Value: 0,
