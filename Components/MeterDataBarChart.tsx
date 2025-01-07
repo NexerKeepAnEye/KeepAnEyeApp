@@ -5,9 +5,11 @@ import { Text } from 'react-native-paper';
 import { data } from '../MockedData/MeterData';
 import { BarChartStyle } from '../Style/ChartStyle';
 import { Tooltip } from '../Types/Interfaces/Type';
+import * as React from 'react';
 
 export default function MeterDataBarChart() {
   const [tooltip, setTooltip] = useState<Tooltip>({
+    originalValue: 0,
     visible: false,
     value: 0,
     x: 0,
@@ -40,7 +42,7 @@ export default function MeterDataBarChart() {
     y: number,
     originalValue: number,
   ) => {
-    setTooltip({ visible: true, value: originalValue, x, y });
+    setTooltip({ originalValue, visible: true, value: originalValue, x, y });
   };
 
   return (
@@ -59,10 +61,10 @@ export default function MeterDataBarChart() {
         )}
         stepValue={stepValue}
         maxValue={maxValue}
-        onPress={(item: any, index: number, x: number, y: number) =>
+        onPress={(item: Tooltip, index: number, x: number, y: number) =>
           handleBarPress(item.value, x, y, item.originalValue)
         }
-        renderTooltip={(item: any, index: number) => {
+        renderTooltip={() => {
           return (
             <View style={BarChartStyle.tooltip}>
               <Text style={BarChartStyle.tooltipText}>{tooltip.value}</Text>
