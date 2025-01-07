@@ -4,6 +4,7 @@ import { FlatList, TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { mockedPremises } from '../MockedData/MockedPremises';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
+import { usePremiseContext } from '../PremiseState/PremiseContext';
 
 type StartScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -15,16 +16,23 @@ type Props = {
 };
 
 export default function StartScreen({ navigation }: Props) {
-  const renderItem = ({ item }: { item: { id: number; name: string } }) => (
+  const { dispatch } = usePremiseContext();
+
+  const renderItem = ({
+    item,
+  }: {
+    item: { premiseId: number; designation: string; name: string };
+  }) => (
     <TouchableOpacity
       onPress={() => {
+        dispatch({ type: 'SET_PREMISE', payload: item });
         navigation.navigate('tabs', {
           screen: 'ReportScreen',
-          params: { premiseId: item.id },
+          params: { premiseId: item.premiseId },
         });
         navigation.navigate('tabs', {
           screen: 'PremiseScreen',
-          params: { premiseId: item.id },
+          params: { premiseId: item.premiseId },
         });
       }}
     >
@@ -37,7 +45,7 @@ export default function StartScreen({ navigation }: Props) {
         <Text>START SCREEN</Text>
         <FlatList
           data={mockedPremises}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={(item) => item.premiseId.toString()}
           renderItem={renderItem}
         />
       </View>
