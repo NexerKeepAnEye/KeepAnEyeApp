@@ -5,6 +5,7 @@ import { Text } from 'react-native-paper';
 import { mockedPremises } from '../MockedData/MockedPremises';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { usePremiseContext } from '../PremiseState/PremiseContext';
+import { StartScreenStyle } from '../Style/StartScreenStyle';
 
 type StartScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -41,8 +42,8 @@ export default function StartScreen({ navigation }: Props) {
   );
   return (
     <>
-      <View style={{ marginTop: 50 }}>
-        <Text>START SCREEN</Text>
+      <View style={StartScreenStyle.container}>
+        <Text style={StartScreenStyle.textHeader}>Mina Fastigheter</Text>
         <FlatList
           data={mockedPremises}
           keyExtractor={(item) => item.premiseId.toString()}
