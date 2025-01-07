@@ -7,13 +7,13 @@ export type Tooltip = {
 };
 
 export type MeterData = {
-  datetime: Date;
-  value: number;
-  cost: number;
-  oode: string;
-  premiseId: number;
-  designation: string;
-  meterId: number;
+  DateTime: string;
+  Value: number;
+  Cost: number;
+  Code: string;
+  PremiseId: number;
+  Designation?: string | null;
+  MeterId: number;
 };
 
 export type Product = {
