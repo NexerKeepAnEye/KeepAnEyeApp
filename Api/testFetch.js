@@ -5,16 +5,66 @@ const agent = new https.Agent({
   rejectUnauthorized: false,
 });
 
-export async function fetchProduct(apiKey) {
+// export async function fetchProduct(apiKey) {
+//   try {
+//     const response = await fetch('https://test.keepaneye.net/api/v1/Product', {
+//       method: 'GET',
+//       headers: {
+//         Accept: 'application/json',
+//         'X-API-Key': apiKey,
+//       },
+//       agent,
+//     });
+
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+//     const data = await response.json();
+//     const jsonString = JSON.stringify(data);
+//     console.log(jsonString);
+//     // console.log(data);
+//     return data;
+//   } catch (error) {
+//     console.error('Error fetching products:', error);
+//   }
+// }
+
+// fetchProduct('fc41e3f1-f155-4465-b908-a79991643b0a');
+
+export async function fetchMeterData(
+  apiKey,
+  productId,
+  resolution,
+  from,
+  to,
+  correctedValues = false,
+  premiseIds = [],
+  designations = [],
+  meterIds = [],
+) {
   try {
-    const response = await fetch('https://test.keepaneye.net/api/v1/Premise', {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'X-API-Key': apiKey,
+    const response = await fetch(
+      'https://test.keepaneye.net/api/v1/MeterData',
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'X-API-Key': apiKey,
+        },
+        agent,
+        body: JSON.stringify({
+          productId,
+          resolution,
+          from,
+          to,
+          correctedValues,
+          premiseIds,
+          designations,
+          meterIds,
+        }),
       },
-      agent,
-    });
+    );
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -22,11 +72,21 @@ export async function fetchProduct(apiKey) {
     const data = await response.json();
     const jsonString = JSON.stringify(data);
     console.log(jsonString);
-    // console.log(data);
     return data;
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error('Error fetching meter data:', error);
+    throw error;
   }
 }
 
-fetchProduct('fc41e3f1-f155-4465-b908-a79991643b0a');
+fetchMeterData(
+  'fc41e3f1-f155-4465-b908-a79991643b0a', // apiKey
+  25, // productId
+  'monthly', // resolution
+  '2023-01-01T00:00:00Z', // from
+  '2024-01-01T00:00:00Z', // to
+  false, // correctedValues
+  [], // premiseIds
+  [], // designations
+  [], // meterIds
+);

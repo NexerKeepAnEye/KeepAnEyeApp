@@ -14,7 +14,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "infoPlist":{
+      "infoPlist": {
         "NsAppTransportSecurity": "NSAllowArbitraryLoads"
       }
     },
