@@ -1,10 +1,11 @@
 import React, { createContext, ReactNode, useContext, useReducer } from 'react';
+import { Premise } from '../Types/Interfaces/Type';
 
-type Premise = {
-  premiseId: number;
-  designation: string;
-  name: string;
-};
+// type Premise = {
+//   premiseId: number;
+//   designation: string;
+//   name: string;
+// };
 
 type State = {
   premise: Premise | null;

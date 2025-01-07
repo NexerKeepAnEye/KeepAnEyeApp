@@ -7,32 +7,32 @@ export type Tooltip = {
 };
 
 export type MeterData = {
-  datetime: Date;
-  value: number;
-  cost: number;
-  oode: string;
-  premiseId: number;
-  designation: string;
-  meterId: number;
+  DateTime: string;
+  Value: number;
+  Cost: number;
+  Code: string;
+  PremiseId: number;
+  Designation: string | null | undefined;
+  MeterId: number;
 };
 
 export type Product = {
-  id: number;
-  code: string;
-  unit: string;
+  Id: number;
+  Code: string;
+  Unit: string;
 };
 
 export type Premise = {
-  id: number;
-  designation: string;
-  name: string;
-  meter: Meter[];
+  Id: number;
+  Designation: string | null | undefined;
+  Name: string;
+  Meters: Meter[];
 };
 export type Meter = {
-  id: number;
-  name: number;
-  productId: number;
-  productCode: number;
+  Id: number;
+  Name: string;
+  ProductId: number;
+  ProductCode: string;
 };
 
 export type PostMeterData = {

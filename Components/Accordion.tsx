@@ -58,7 +58,8 @@ const Accordion = () => {
         {selectedReport && (
           <>
             <Text style={AccordionStyle.accordionHeaderChanged}>
-              {selectedReport}
+              {selectedReport} !!!!OBS FELAKTIG DATA!!!
+              {/* need to create calculations insted of fetching from mocked reports */}
             </Text>
             <DataTable>
               <DataTable.Header style={DataTableStyle.dataTableHeader}>
