@@ -1,4 +1,5 @@
 export type Tooltip = {
+  originalValue: number;
   visible: boolean;
   value: number;
   x: number;
@@ -7,40 +8,40 @@ export type Tooltip = {
 
 export type MeterData = {
   datetime: Date;
-  value: Number;
-  cost: Number;
-  oode: String;
-  premiseId: Number;
-  designation: String;
-  meterId: Number;
+  value: number;
+  cost: number;
+  oode: string;
+  premiseId: number;
+  designation: string;
+  meterId: number;
 };
 
 export type Product = {
-  id: Number;
-  code: String;
-  unit: String;
+  id: number;
+  code: string;
+  unit: string;
 };
 
 export type Premise = {
-  id: Number;
-  designation: String;
-  name: String;
+  id: number;
+  designation: string;
+  name: string;
   meter: Meter[];
 };
 export type Meter = {
-  id: Number;
-  name: Number;
-  productId: Number;
-  productCode: Number;
+  id: number;
+  name: number;
+  productId: number;
+  productCode: number;
 };
 
 export type PostMeterData = {
-  productId: Number; //Required
-  resolution: String; //Required
+  productId: number; //Required
+  resolution: string; //Required
   from: Date; //Required
   to: Date; //Required
-  correctedValues: Boolean; //Optional
-  premiseIds: Number[]; //Optional
-  designations: String[]; //Optional
-  meterIds: Number[]; //Optional
+  correctedValues: boolean; //Optional
+  premiseIds: number[]; //Optional
+  designations: string[]; //Optional
+  meterIds: number[]; //Optional
 };
