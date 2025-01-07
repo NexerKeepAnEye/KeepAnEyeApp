@@ -1,6 +1,6 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { FlatList, TouchableOpacity, View } from 'react-native';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-paper';
 // import { mockedPremises } from '../MockedData/MockedPremises';
 import { mockedPremise } from '../MockedData/MockedPremise';
@@ -21,17 +21,14 @@ type Props = {
 export default function StartScreen({ navigation }: Props) {
   const { dispatch } = usePremiseContext();
 
-  const renderItem = ({
-    item,
-  }: {
-    item: {
-      Id: number;
-      Designation: string | null | undefined;
-      Name: string;
-      Meters: Meter[];
-    };
+  const renderItem = (item: {
+    Id: number;
+    Designation: string | null | undefined;
+    Name: string;
+    Meters: Meter[];
   }) => (
     <TouchableOpacity
+      style={StartScreenStyle.listItem}
       onPress={() => {
         dispatch({ type: 'SET_PREMISE', payload: item });
         navigation.navigate('tabs', {
@@ -48,15 +45,13 @@ export default function StartScreen({ navigation }: Props) {
     </TouchableOpacity>
   );
   return (
-    <>
-      <View style={StartScreenStyle.container}>
+    <View style={StartScreenStyle.container}>
+      <View style={StartScreenStyle.headerBox}>
         <Text style={StartScreenStyle.textHeader}>Mina Fastigheter</Text>
-        <FlatList
-          data={mockedPremise}
-          keyExtractor={(item) => item.Id.toString()}
-          renderItem={renderItem}
-        />
       </View>
-    </>
+      <ScrollView style={StartScreenStyle.itemBox}>
+        {mockedPremise.map((item) => renderItem(item))}
+      </ScrollView>
+    </View>
   );
 }
