@@ -1,4 +1,6 @@
-export const mockedData = [
+import { Product } from '../Types/Interfaces/Type';
+
+export const mockedData: Product[] = [
   { Id: 25, Code: 'FJV', Unit: 'kWh' },
   { Id: 26, Code: 'El', Unit: 'kWh' },
   { Id: 27, Code: 'FJK', Unit: 'kWh' },

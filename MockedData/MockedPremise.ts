@@ -1,4 +1,6 @@
-export const mockedPremise = [
+import { Premise } from '../Types/Interfaces/Type';
+
+export const mockedPremise: Premise[] = [
   {
     Id: 51,
     Designation: null,
