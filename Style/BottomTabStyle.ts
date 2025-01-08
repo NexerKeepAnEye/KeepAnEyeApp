@@ -22,7 +22,6 @@ export const BottomTabStyle = StyleSheet.create({
     padding: '10%',
   },
   selectedTab: {
-    flex: 1,
     backgroundColor: '#f2e2ce',
     borderRadius: 15,
     width: '200%',
