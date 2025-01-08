@@ -2,23 +2,22 @@ import { StyleSheet } from 'react-native';
 
 export const StartScreenStyle = StyleSheet.create({
     container : {
-        marginTop: 10,
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         overflow: 'visible',
     },
     headerBox: {
-        marginTop: 50,
+        // marginTop: '10%',
         width: '100%',
-        height: 100,
+        height: '20%',
         backgroundColor: '#f4f5f7',
         // justifyContent: 'center',
         alignItems: 'center',
         flex: 1,
     },
     textHeader: {
-        marginTop: 30,
+        marginTop: '20%',
         fontSize: 30,
         fontWeight: 'bold',
         justifyContent: 'center',
@@ -26,16 +25,35 @@ export const StartScreenStyle = StyleSheet.create({
     },
    itemBox: {
         width: '100%',
-        height: 600,
+        height: '50%',
         backgroundColor: 'white',
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        marginBottom: 70,
+        marginBottom: '15%',
+    },
+    listItems: {
+        flex: 1,
+        borderBottomWidth: 1,
+        borderBottomColor: '#d9d9d9',
+        // alignContent: 'center',
+        flexDirection: 'row',
+        alignItems: 'center',
+        // justifyContent: 'space-between',
+        height: 50,
+        marginLeft: '5%',
+        marginRight: '5%',
    },
-   listItem: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#d9d9d9',
-    padding: 20,
-    alignContent: 'center',
-   }
+    textItem: {
+        fontSize: 17,
+        marginLeft: '5%',
+        color: 'black',
+        flex: 1,
+    },
+    listItemPositionStart: {
+        justifyContent: 'flex-start',
+    },
+    listItemPositionEnd: {
+        justifyContent: 'flex-end',
+        marginRight: '1%',
+    },
+   
+   
 });

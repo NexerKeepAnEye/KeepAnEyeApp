@@ -3,6 +3,7 @@ import * as React from 'react';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-paper';
 // import { mockedPremises } from '../MockedData/MockedPremises';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { mockedPremise } from '../MockedData/MockedPremise';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { usePremiseContext } from '../PremiseState/PremiseContext';
@@ -28,7 +29,7 @@ export default function StartScreen({ navigation }: Props) {
     Meters: Meter[];
   }) => (
     <TouchableOpacity
-      style={StartScreenStyle.listItem}
+      style={StartScreenStyle.listItems}
       onPress={() => {
         dispatch({ type: 'SET_PREMISE', payload: item });
         navigation.navigate('tabs', {
@@ -41,7 +42,19 @@ export default function StartScreen({ navigation }: Props) {
         });
       }}
     >
-      <Text>{item.Name}</Text>
+      <Icon
+        name="home"
+        size={30}
+        color="#949494"
+        style={StartScreenStyle.listItemPositionStart}
+      />
+      <Text style={StartScreenStyle.textItem}>{item.Name}</Text>
+      <Icon
+        name="play-arrow"
+        size={30}
+        color="black"
+        style={StartScreenStyle.listItemPositionEnd}
+      />
     </TouchableOpacity>
   );
   return (
