@@ -23,7 +23,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-       "package": "com.NexerKAE.KeepAnEyeApp"
+      "package": "com.NexerKAE.KeepAnEyeApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
