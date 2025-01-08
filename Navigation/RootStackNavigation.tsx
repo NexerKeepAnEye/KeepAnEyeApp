@@ -2,9 +2,9 @@ import { NavigatorScreenParams } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import PremiseScreen from '../Screens/PremiseScreen';
+import ReportScreen from '../Screens/ReportScreen';
 import SignInScreen from '../Screens/SignInScreen';
 import StartScreen from '../Screens/StartScreen';
-import ReportScreen from '../Screens/ReportScreen';
 import TabNavigator, { TabParamList } from './TabNavigator';
 
 export type RootStackParamList = {
