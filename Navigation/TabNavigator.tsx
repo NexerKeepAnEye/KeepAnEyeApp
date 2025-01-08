@@ -1,12 +1,12 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as React from 'react';
+import { Pressable, View } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { LogoTitle } from '../Components/Header';
 import PremiseScreen from '../Screens/PremiseScreen';
 import ReportScreen from '../Screens/ReportScreen';
 import { BottomTabStyle } from '../Style/BottomTabStyling';
-import { Pressable, View } from 'react-native';
-import { LogoTitle } from '../Components/Header';
-import { Icon } from 'react-native-paper';
 
 export type TabParamList = {
   PremiseScreen: { premiseId: number };
@@ -39,6 +39,10 @@ export default function TabNavigator() {
         ),
         headerTitle: () => <LogoTitle />,
         headerTitleAlign: 'center',
+        tabBarStyle: BottomTabStyle.tabBar,
+        tabBarLabelStyle: BottomTabStyle.tabBarText,
+        tabBarActiveTintColor: '#222',
+        tabBarInactiveTintColor: '#d9d9d9',
       })}
     >
       <Tab.Screen
