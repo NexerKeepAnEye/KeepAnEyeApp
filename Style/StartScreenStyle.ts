@@ -15,7 +15,8 @@ export const StartScreenStyle = StyleSheet.create({
     flex: 1,
   },
   textHeader: {
-    marginTop: '10%',
+    marginTop: '8%',
+
     fontSize: 30,
     fontWeight: 'bold',
     justifyContent: 'center',
