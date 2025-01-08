@@ -5,22 +5,34 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  StyleSheet,
   View,
 } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import logoKAE from '../assets/logoKAE.png';
 import NexerLogo from '../assets/NexerLogo.png';
+import { SignIn } from '../Style/SignInStyle';
 export default function SignInScreen() {
   const [form, setForm] = useState({ ApiKey: '' });
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = () => {
+    setLoading(true);
+    // Simulate login process
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    <SafeAreaView style={SignIn.SafeAreaContainer}>
+      <ScrollView
+        keyboardShouldPersistTaps={'handled'}
+        style={SignIn.Scontainer}
       >
-        <ScrollView keyboardShouldPersistTaps={'handled'}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        >
           <View style={SignIn.root}>
             <Image
               source={logoKAE}
@@ -38,59 +50,22 @@ export default function SignInScreen() {
               />
             </View>
             <Button
-              style={SignIn.button}
+              style={loading ? SignIn.buttonDisabled : SignIn.button}
               icon="login"
               mode="contained"
-              // onPress={handleLogin}
-              // disabled={loading}
+              onPress={handleLogin}
+              disabled={loading}
             >
-              Logga In
-              {/* {loading ? 'Logging in...' : 'Log In'} */}
+              {loading ? 'Loggar in...' : 'Logga in'}
             </Button>
           </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
-      <Image
-        source={NexerLogo}
-        resizeMode="contain"
-        style={SignIn.footerLogo}
-      />
+          <Image
+            source={NexerLogo}
+            resizeMode="contain"
+            style={SignIn.footerLogo}
+          />
+        </KeyboardAvoidingView>
+      </ScrollView>
     </SafeAreaView>
   );
 }
-
-export const SignIn = StyleSheet.create({
-  logo: {
-    marginBottom: 30,
-    width: 200,
-    height: 320,
-  },
-  root: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#f4f5f7',
-  },
-  container: {
-    width: '80%',
-  },
-  title: {
-    fontSize: 15,
-    marginBottom: 10,
-  },
-  input: {
-    borderRadius: 10,
-  },
-  button: {
-    marginTop: 20,
-    backgroundColor: '#ff7043',
-    width: '70%',
-    alignItems: 'center',
-  },
-  footerLogo: {
-    marginTop: 250,
-    alignSelf: 'center',
-    width: 150,
-    height: 150,
-  },
-});
