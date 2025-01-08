@@ -8,7 +8,7 @@ export const BottomTabStyle = StyleSheet.create({
     backgroundColor: '#FFF',
   },
   iconContainer: {
-    marginTop: '100%',
+    marginTop: '70%',
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',

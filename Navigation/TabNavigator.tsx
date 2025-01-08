@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { LogoTitle } from '../Components/Header';
 import PremiseScreen from '../Screens/PremiseScreen';
 import ReportScreen from '../Screens/ReportScreen';
-import { BottomTabStyle } from '../Style/BottomTabStyling';
+import { BottomTabStyle } from '../Style/BottomTabStyle';
 
 export type TabParamList = {
   PremiseScreen: { premiseId: number };
