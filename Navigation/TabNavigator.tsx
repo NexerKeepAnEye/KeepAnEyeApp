@@ -1,7 +1,9 @@
+import { MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as React from 'react';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { LogoTitle } from '../Components/Header';
 import PremiseScreen from '../Screens/PremiseScreen';
 import ReportScreen from '../Screens/ReportScreen';
 import { BottomTabStyle } from '../Style/BottomTabStyling';
@@ -16,12 +18,32 @@ const Tab = createBottomTabNavigator<TabParamList>();
 export default function TabNavigator() {
   return (
     <Tab.Navigator
-      screenOptions={{
+      screenOptions={({ navigation }) => ({
+        headerRight: () => (
+          <Pressable onPress={() => console.log('navigating')}>
+            <MaterialIcons
+              name="exit-to-app"
+              size={30}
+              color="#D32F2F"
+            />
+          </Pressable>
+        ),
+        headerLeft: () => (
+          <Pressable onPress={() => navigation.goBack()}>
+            <MaterialIcons
+              name="arrow-back"
+              size={30}
+              color="#000"
+            />
+          </Pressable>
+        ),
+        headerTitle: () => <LogoTitle />,
+        headerTitleAlign: 'center',
         tabBarStyle: BottomTabStyle.tabBar,
         tabBarLabelStyle: BottomTabStyle.tabBarText,
         tabBarActiveTintColor: '#222',
         tabBarInactiveTintColor: '#d9d9d9',
-      }}
+      })}
     >
       <Tab.Screen
         name="PremiseScreen"
