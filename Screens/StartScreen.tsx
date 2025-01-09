@@ -29,6 +29,7 @@ export default function StartScreen({ navigation }: Props) {
     Meters: Meter[];
   }) => (
     <TouchableOpacity
+      key={item.Id}
       style={StartScreenStyle.listItems}
       onPress={() => {
         dispatch({ type: 'SET_PREMISE', payload: item });
