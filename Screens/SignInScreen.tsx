@@ -26,10 +26,7 @@ export default function SignInScreen() {
 
   return (
     <SafeAreaView style={SignIn.SafeAreaContainer}>
-      <ScrollView
-        keyboardShouldPersistTaps={'handled'}
-        style={SignIn.Scontainer}
-      >
+      <ScrollView keyboardShouldPersistTaps={'handled'}>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         >
