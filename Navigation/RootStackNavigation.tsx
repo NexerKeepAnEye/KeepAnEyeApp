@@ -9,13 +9,18 @@ import ReportScreen from '../Screens/ReportScreen';
 import SignInScreen from '../Screens/SignInScreen';
 import StartScreen from '../Screens/StartScreen';
 import TabNavigator, { TabParamList } from './TabNavigator';
+import MeterDataScreen from '../Screens/MeterDataScreen';
 
 export type RootStackParamList = {
   SignInScreen: undefined;
   StartScreen: undefined;
   SplashScreen: undefined;
-  PremiseScreen: { premiseId: number };
+  PremiseScreen: {
+    navigation: NavigatorScreenParams<TabParamList>;
+    premiseId: number;
+  };
   ReportScreen: { premiseId: number };
+  MeterDataScreen: { meterId: number };
   tabs: NavigatorScreenParams<TabParamList>;
 };
 
@@ -71,6 +76,11 @@ export default function RootStackNavigator() {
       <RootStack.Screen
         name="ReportScreen"
         component={ReportScreen}
+        options={{ headerShown: true }}
+      />
+      <RootStack.Screen
+        name="MeterDataScreen"
+        component={MeterDataScreen}
         options={{ headerShown: true }}
       />
     </RootStack.Navigator>

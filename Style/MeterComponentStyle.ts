@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export const MeterComponentStyle = StyleSheet.create({
   container: {
     width: '100%',
-    marginTop: '12%',
+    marginTop: '5%',
     backgroundColor: '#fff',
   },
   listItem: {
