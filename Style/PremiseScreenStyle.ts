@@ -23,6 +23,7 @@ export const PremiseScreenStyle = StyleSheet.create({
         fontWeight: 'bold',
         color: '#222',
         marginLeft: '1%',
+        marginRight: '10%',
     },
     secondHeaders:{
         fontSize: 18,
