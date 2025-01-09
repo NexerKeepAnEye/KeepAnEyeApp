@@ -4,12 +4,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { Pressable } from 'react-native';
 import { LogoTitle } from '../Components/Header';
+import MeterDataScreen from '../Screens/MeterDataScreen';
 import PremiseScreen from '../Screens/PremiseScreen';
 import ReportScreen from '../Screens/ReportScreen';
 import SignInScreen from '../Screens/SignInScreen';
 import StartScreen from '../Screens/StartScreen';
 import TabNavigator, { TabParamList } from './TabNavigator';
-import MeterDataScreen from '../Screens/MeterDataScreen';
 
 export type RootStackParamList = {
   SignInScreen: undefined;

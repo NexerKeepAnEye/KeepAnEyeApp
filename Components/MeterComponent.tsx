@@ -1,14 +1,13 @@
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { usePremiseContext } from '../PremiseState/PremiseContext';
 import { MeterComponentStyle } from '../Style/MeterComponentStyle';
 import MeterIcon from './MeterIcon';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../Navigation/RootStackNavigation';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'MeterDataScreen'>;
-  navigation1: NativeStackNavigationProp<RootStackParamList, 'PremiseScreen'>;
 };
 
 export default function MeterComponent({ navigation }: Props) {

@@ -5,13 +5,10 @@ import MeterComponent from '../Components/MeterComponent';
 import PremiseCard from '../Components/PremiseCard';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 
-type PremiseScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  'PremiseScreen'
->;
+type Prop = NativeStackNavigationProp<RootStackParamList, 'MeterDataScreen'>;
 
 type Props = {
-  navigation: PremiseScreenNavigationProp;
+  navigation: Prop;
 };
 
 export default function PremiseScreen({ navigation }: Props) {
