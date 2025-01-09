@@ -61,7 +61,6 @@ export default function TabNavigator() {
                 name="home"
                 color={color}
                 size={30}
-                style={BottomTabStyle.tabBarIcon}
               />
             </View>
           ),
