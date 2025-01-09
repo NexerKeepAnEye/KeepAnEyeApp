@@ -18,7 +18,6 @@ export default function MeterIcon({ productCode }: { productCode: string }) {
     } else if (productCode.includes('OLJA')) {
       return 'local-gas-station';
     }
-
     return 'help-outline';
   };
 
