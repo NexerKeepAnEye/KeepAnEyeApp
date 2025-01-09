@@ -1,50 +1,61 @@
 import { StyleSheet } from 'react-native';
 
 export const AccordionStyle = StyleSheet.create({
-  accordionContainer: {
+  container: {
     width: '90%',
     borderWidth: 1,
     borderColor: '#d9d9d9',
     borderRadius: 10,
     alignItems: 'center',
     overflow: 'hidden',
+    backgroundColor: '#ffffff',
   },
-  accordionContent: {
+  content: {
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
     padding: '5%',
     justifyContent: 'center',
     position: 'relative',
+    fontWeight: 'bold',
   },
-  accordionHeader: {
+  header: {
     textAlign: 'center',
+    // marginLeft: '28%',
     flex: 1,
     fontSize: 18,
     fontWeight: 'bold',
   },
-  accordionDDL: {
+  dDL: {
     position: 'absolute',
     right: -1,
   },
-  accordionListButton: {
-    width: 65,
-    height: 65,
+  listButton: {
+    width: '250%',
+    height: '254%',
+    bottom: '78%',
+    right: '150%',
     backgroundColor: '#d9d9d9',
     borderTopRightRadius: 10,
   },
-  accordionListExpanded: {
+  listExpanded: {
     width: '100%',
     borderTopWidth: 1,
     borderColor: '#d9d9d9',
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
   },
-  accordionListItem: {
+  listItem: {
     borderBottomWidth: 1,
     borderColor: '#d9d9d9',
+    fontWeight: 'bold',
+    justifyContent: 'center', // Center the content horizontally
   },
-  accordionHeaderChanged: {
+  listText: {
+    // fontWeight: 'bold',
+    textAlign: 'center', // Center the text horizontally
+  },
+  headerChanged: {
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
@@ -53,11 +64,11 @@ export const AccordionStyle = StyleSheet.create({
 });
 
 export const DataTableStyle = StyleSheet.create({
-  dataTableContainer: {
+  container: {
     width: '90%',
     marginTop: 20,
   },
-  dataTableHeader: {
+  header: {
     backgroundColor: '#d9d9d9',
     justifyContent: 'space-evenly',
     borderTopLeftRadius: 10,

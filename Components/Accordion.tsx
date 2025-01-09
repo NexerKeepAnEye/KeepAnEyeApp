@@ -6,7 +6,7 @@ import { mockedData, reportPretendData } from '../MockedData/mockedReportTypes';
 import { AccordionStyle, DataTableStyle } from '../Style/AccordionStyle';
 
 const Accordion = () => {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
   const [selectedReport, setSelectedReport] = useState('');
 
   const handlePress = () => setExpanded(!expanded);
@@ -19,26 +19,26 @@ const Accordion = () => {
   return (
     <>
       <List.Section>
-        <View style={AccordionStyle.accordionContainer}>
-          <View style={AccordionStyle.accordionContent}>
-            <Text style={AccordionStyle.accordionHeader}>
+        <View style={AccordionStyle.container}>
+          <View style={AccordionStyle.content}>
+            <Text style={AccordionStyle.header}>
               {selectedReport || '-- Välj rapport --'}
             </Text>
             <TouchableOpacity
               onPress={handlePress}
-              style={AccordionStyle.accordionDDL}
+              style={AccordionStyle.dDL}
             >
               <List.Icon
                 icon={expanded ? 'chevron-up' : 'chevron-down'}
                 style={[
-                  AccordionStyle.accordionListButton,
+                  AccordionStyle.listButton,
                   { borderBottomRightRadius: expanded ? 0 : 10 },
                 ]}
               />
             </TouchableOpacity>
           </View>
           {expanded && (
-            <View style={AccordionStyle.accordionListExpanded}>
+            <View style={AccordionStyle.listExpanded}>
               {mockedData.rapporter.map((report) => (
                 <Pressable
                   key={report.id}
@@ -46,7 +46,8 @@ const Accordion = () => {
                 >
                   <List.Item
                     title={report.type}
-                    style={AccordionStyle.accordionListItem}
+                    style={AccordionStyle.listItem}
+                    titleStyle={AccordionStyle.listText}
                   />
                 </Pressable>
               ))}
@@ -54,15 +55,15 @@ const Accordion = () => {
           )}
         </View>
       </List.Section>
-      <View style={DataTableStyle.dataTableContainer}>
+      <View style={DataTableStyle.container}>
         {selectedReport && (
           <>
-            <Text style={AccordionStyle.accordionHeaderChanged}>
+            <Text style={AccordionStyle.headerChanged}>
               {selectedReport} !!!!OBS FELAKTIG DATA!!!
               {/* need to create calculations insted of fetching from mocked reports */}
             </Text>
             <DataTable>
-              <DataTable.Header style={DataTableStyle.dataTableHeader}>
+              <DataTable.Header style={DataTableStyle.header}>
                 <DataTable.Title>ID</DataTable.Title>
                 <DataTable.Title>Value</DataTable.Title>
                 <DataTable.Title>Cost</DataTable.Title>
