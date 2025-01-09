@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons'; // Import the icon set
+import MeterComponent from '../Components/MeterComponent';
 import { usePremiseContext } from '../PremiseState/PremiseContext';
 import { PremiseScreenStyle } from '../Style/PremiseScreenStyle';
 
@@ -33,11 +34,7 @@ export default function PremiseScreen() {
           {state.premise?.Id}
         </Text>
       </View>
-      {/* 
-      <Text>Meters</Text>
-      <Text>meter name : {state.premise?.Meters[1]?.Name}</Text>
-      <Text>meter code : {state.premise?.Meters[1]?.ProductCode}</Text>
-      <Text>meter Id: {state.premise?.Meters[1]?.ProductId}</Text> */}
+      <MeterComponent />
     </View>
   );
 }
