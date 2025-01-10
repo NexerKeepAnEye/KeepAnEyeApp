@@ -1,4 +1,4 @@
-import { MeterData } from '../Types/Interfaces/Type';
+import { MeterData } from '../Types/Type';
 
 export const meterData: MeterData[] = [
   {
@@ -8,7 +8,7 @@ export const meterData: MeterData[] = [
     Code: 'FJV',
     PremiseId: 1178,
     Designation: null,
-    MeterId: 8195,
+    MeterId: 210,
   },
   {
     DateTime: '2023-05-01T00:00:00',

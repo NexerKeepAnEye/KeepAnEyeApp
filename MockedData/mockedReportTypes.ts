@@ -1,32 +1,3 @@
-export const mockedData = {
-  rapporter: [
-    {
-      id: 1,
-      type: 'Månadsrapport',
-    },
-    {
-      id: 2,
-      type: 'Kvartalsrapport',
-    },
-    {
-      id: 3,
-      type: 'Årsrapport',
-    },
-    {
-      id: 4,
-      type: 'Veckorapport',
-    },
-    {
-      id: 5,
-      type: 'Dagsrapport',
-    },
-    {
-      id: 6,
-      type: 'Miljörapport',
-    },
-  ],
-};
-
 export const reportPretendData = {
   Månadsrapport: [
     { id: 1, value: 5, cost: 50, timestamp: '2023-01-01' },

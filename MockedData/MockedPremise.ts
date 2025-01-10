@@ -1,4 +1,4 @@
-import { Premise } from '../Types/Interfaces/Type';
+import { Premise } from '../Types/Type';
 
 export const mockedPremise: Premise[] = [
   {

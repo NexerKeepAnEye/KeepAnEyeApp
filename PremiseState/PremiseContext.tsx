@@ -1,5 +1,5 @@
 import React, { createContext, ReactNode, useContext, useReducer } from 'react';
-import { Premise } from '../Types/Interfaces/Type';
+import { Premise } from '../Types/Type';
 
 // type Premise = {
 //   premiseId: number;
