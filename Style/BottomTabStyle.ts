@@ -1,30 +1,32 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 export const BottomTabStyle = StyleSheet.create({
   tabBar: {
-    height: '10%',
+    height: height * 0.1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FFF',
   },
   iconContainer: {
-    marginTop: '70%',
+    marginTop: height * 0.03,
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
   },
   tabBarIcon: {
-    height: '100%',
+    height: height * 0.04,
   },
   tabBarText: {
-    fontSize: 15,
+    fontSize: width * 0.03,
     fontWeight: 'bold',
-    padding: '10%',
+    padding: width * 0.055,
   },
   selectedTab: {
     backgroundColor: '#f2e2ce',
     borderRadius: 15,
-    width: '200%',
-    height: '110%',
+    width: width * 0.15,
+    height: height * 0.05,
   },
 });

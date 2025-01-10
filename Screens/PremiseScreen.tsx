@@ -16,6 +16,7 @@ export default function PremiseScreen({ navigation }: Props) {
     <View style={{ flex: 1 }}>
       <PremiseCard />
       <MeterComponent navigation={navigation} />
+
     </View>
   );
 }
