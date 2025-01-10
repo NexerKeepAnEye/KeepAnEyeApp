@@ -78,11 +78,6 @@ export default function RootStackNavigator() {
         component={ReportScreen}
         options={{ headerShown: true }}
       />
-      {/* <RootStack.Screen
-        name="MeterDataScreen"
-        component={MeterDataScreen}
-        options={{ headerShown: true }}
-      /> */}
     </RootStack.Navigator>
   );
 }
