@@ -2,6 +2,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import MeterDataCard from '../Components/MeterDataCard';
+import MeterDataGrid from '../Components/MeterDataGrid';
 import PremiseCard from '../Components/PremiseCard';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { usePremiseContext } from '../PremiseState/PremiseContext';
@@ -20,6 +21,8 @@ export default function MeterDataScreen({ route }: Props) {
       {meter ? (
         <>
           <MeterDataCard meterId={meter.Id} />
+          <MeterDataGrid meterId={meter.Id} />
+
           {/* <Text>Meter ID: {meter.Id}</Text>
           <Text>Meter Name: {meter.Name}</Text>
           <Text>Product Code: {meter.ProductCode}</Text> */}

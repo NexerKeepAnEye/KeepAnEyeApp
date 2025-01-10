@@ -1,5 +1,6 @@
 import { MeterData } from '../Types/Interfaces/Type';
 
+
 export const meterData: MeterData[] = [
   {
     DateTime: '2023-08-01T00:00:00',
@@ -8,7 +9,7 @@ export const meterData: MeterData[] = [
     Code: 'FJV',
     PremiseId: 1178,
     Designation: null,
-    MeterId: 8195,
+    MeterId: 210,
   },
   {
     DateTime: '2023-05-01T00:00:00',
@@ -17,7 +18,7 @@ export const meterData: MeterData[] = [
     Code: 'FJV',
     PremiseId: 1178,
     Designation: null,
-    MeterId: 8195,
+    MeterId: 210,
   },
   {
     DateTime: '2023-02-01T00:00:00',
@@ -26,7 +27,7 @@ export const meterData: MeterData[] = [
     Code: 'FJV',
     PremiseId: 1178,
     Designation: null,
-    MeterId: 8195,
+    MeterId: 210,
   },
   {
     DateTime: '2023-03-01T00:00:00',
@@ -35,7 +36,7 @@ export const meterData: MeterData[] = [
     Code: 'FJV',
     PremiseId: 1178,
     Designation: null,
-    MeterId: 8195,
+    MeterId: 210,
   },
   {
     DateTime: '2023-04-01T00:00:00',
@@ -44,7 +45,7 @@ export const meterData: MeterData[] = [
     Code: 'FJV',
     PremiseId: 1178,
     Designation: null,
-    MeterId: 8195,
+    MeterId: 210,
   },
   {
     DateTime: '2023-06-01T00:00:00',
