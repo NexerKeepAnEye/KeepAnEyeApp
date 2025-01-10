@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import MeterComponent from '../Components/MeterComponent';
 import PremiseCard from '../Components/PremiseCard';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
+import { PremiseScreenStyle } from '../Style/PremiseScreenStyle';
 
 type Prop = NativeStackNavigationProp<RootStackParamList, 'MeterDataScreen'>;
 
@@ -13,7 +14,7 @@ type Props = {
 
 export default function PremiseScreen({ navigation }: Props) {
   return (
-    <View style={{ flex: 1 }}>
+    <View style={PremiseScreenStyle.container}>
       <PremiseCard />
       <MeterComponent navigation={navigation} />
     </View>
