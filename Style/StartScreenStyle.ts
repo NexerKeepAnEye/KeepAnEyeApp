@@ -16,7 +16,6 @@ export const StartScreenStyle = StyleSheet.create({
   },
   textHeader: {
     marginTop: '8%',
-
     fontSize: 30,
     fontWeight: 'bold',
     justifyContent: 'center',
