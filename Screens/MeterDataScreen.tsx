@@ -6,6 +6,7 @@ import MeterDataGrid from '../Components/MeterDataGrid';
 import PremiseCard from '../Components/PremiseCard';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { usePremiseContext } from '../PremiseState/PremiseContext';
+import { MeterDataScreenStyle } from '../Style/MeterDataScreenStyle';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'MeterDataScreen'>;
 
@@ -16,17 +17,17 @@ export default function MeterDataScreen({ route }: Props) {
   const meter = state.premise?.Meters.find((m) => m.Id === meterId);
 
   return (
-    <View>
+    <View style={MeterDataScreenStyle.container}>
       <PremiseCard />
       {meter ? (
-        <>
+        <View style={MeterDataScreenStyle.container2}>
           <MeterDataCard meterId={meter.Id} />
           <MeterDataGrid meterId={meter.Id} />
 
           {/* <Text>Meter ID: {meter.Id}</Text>
           <Text>Meter Name: {meter.Name}</Text>
           <Text>Product Code: {meter.ProductCode}</Text> */}
-        </>
+        </View>
       ) : (
         <Text>Meter not found</Text>
       )}
