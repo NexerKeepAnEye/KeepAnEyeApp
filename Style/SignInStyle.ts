@@ -1,19 +1,15 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 export const SignIn = StyleSheet.create({
   SafeAreaContainer: {
     flex: 1,
-    // height: '80%',
-    backgroundColor: '#f4f5f7',
-  },
-  Scontainer: {
-    width: '100%',
-    height: '100%',
     backgroundColor: '#f4f5f7',
   },
   logo: {
-    marginBottom: '-10%',
-    width: '80%',
+    marginBottom: height * -0.05,
+    width: width * 0.8,
     height: undefined,
     aspectRatio: 1,
     backgroundColor: '#f4f5f7',
@@ -25,35 +21,46 @@ export const SignIn = StyleSheet.create({
     backgroundColor: '#f4f5f7',
   },
   container: {
-    width: '80%',
-    backgroundColor: '#f4f5f7',
+    width: width * 0.9,
+    alignItems: 'center',
   },
   title: {
-    fontSize: 20,
-    marginBottom: '5%',
+    fontSize: width * 0.05,
+    marginBottom: height * 0.01,
   },
   input: {
-    borderRadius: 10,
+    width: width * 0.8,
+    marginBottom: height * 0.01,
   },
   button: {
-    marginTop: '5%',
-    backgroundColor: '#ff7043',
-    width: '70%',
+    marginTop: height * 0.01,
+    width: width * 0.7,
+    height: height * 0.07,
+    justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 30,
+    backgroundColor: '#ff7043',
   },
-  buttonDisabled: {
-    marginTop: '5%',
-    backgroundColor: '#ff7043',
-    opacity: 0.8,
-    width: '70%',
-    alignItems: 'center',
+  buttonText: {
+    fontSize: width * 0.045,
+    color: '#fff',
+    fontWeight: 'bold',
   },
   footerLogo: {
-    bottom: '-35%',
+    top: height * 0.3,
     alignSelf: 'center',
-    width: '40%',
+    width: width * 0.4,
     height: undefined,
     aspectRatio: 1,
-    backgroundColor: '#f4f5f7',
+  },
+  buttonDisabled: {
+    marginTop: height * 0.01,
+    width: width * 0.7,
+    height: height * 0.07,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 30,
+    backgroundColor: '#ff7043',
+    opacity: 0.8,
   },
 });

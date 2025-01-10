@@ -1,8 +1,10 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 export const AccordionStyle = StyleSheet.create({
   container: {
-    width: '90%',
+    width: width * 0.9, // 90% of screen width
     borderWidth: 1,
     borderColor: '#d9d9d9',
     borderRadius: 10,
@@ -14,16 +16,15 @@ export const AccordionStyle = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
-    padding: '5%',
+    padding: width * 0.05, // 5% of screen width
     justifyContent: 'center',
     position: 'relative',
     fontWeight: 'bold',
   },
   header: {
     textAlign: 'center',
-    // marginLeft: '28%',
     flex: 1,
-    fontSize: 18,
+    fontSize: width * 0.045, // 4.5% of screen width
     fontWeight: 'bold',
   },
   dDL: {
@@ -31,10 +32,8 @@ export const AccordionStyle = StyleSheet.create({
     right: -1,
   },
   listButton: {
-    width: '250%',
-    height: '254%',
-    bottom: '78%',
-    right: '150%',
+    width: width * 0.15, // 15% of screen width
+    height: height * 0.082, // 8.4% of screen height
     backgroundColor: '#d9d9d9',
     borderTopRightRadius: 10,
   },
@@ -57,7 +56,7 @@ export const AccordionStyle = StyleSheet.create({
   },
   headerChanged: {
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: width * 0.05, // 5% of screen width
     fontWeight: 'bold',
     marginBottom: 10,
   },
@@ -65,7 +64,7 @@ export const AccordionStyle = StyleSheet.create({
 
 export const DataTableStyle = StyleSheet.create({
   container: {
-    width: '90%',
+    width: width * 0.9, // 90% of screen width
     marginTop: 20,
   },
   header: {
