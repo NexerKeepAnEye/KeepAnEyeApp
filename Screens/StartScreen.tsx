@@ -38,7 +38,7 @@ export default function StartScreen({ navigation }: Props) {
           params: { premiseId: item.Id },
         });
         navigation.navigate('tabs', {
-          screen: 'PremiseScreen',
+          screen: 'PremiseStackNavigator',
           params: { premiseId: item.Id },
         });
       }}

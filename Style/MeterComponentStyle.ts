@@ -5,6 +5,7 @@ const { width, height } = Dimensions.get('window');
 export const MeterComponentStyle = StyleSheet.create({
   container: {
     width: '100%',
+
     marginTop: height * 0.02,
     backgroundColor: '#fff',
   },
