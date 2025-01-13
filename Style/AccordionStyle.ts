@@ -65,7 +65,7 @@ export const AccordionStyle = StyleSheet.create({
 export const DataTableStyle = StyleSheet.create({
   container: {
     width: width * 0.9, // 90% of screen width
-    marginTop: 20,
+    // marginTop: 10,
   },
   header: {
     backgroundColor: '#d9d9d9',

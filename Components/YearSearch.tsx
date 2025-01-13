@@ -6,10 +6,11 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export const YearSearch = () => {
   const [year, setYear] = useState<string>(new Date().getFullYear().toString());
@@ -25,54 +26,55 @@ export const YearSearch = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.pickerContainer}
-        onPress={() => setModalVisible(true)}
-      >
-        <Text style={styles.pickerText}>{year}</Text>
-      </TouchableOpacity>
-      <Modal
-        visible={modalVisible}
-        transparent={true}
-        animationType="slide"
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <FlatList
-              data={years}
-              keyExtractor={(item) => item}
-              renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => handleSelectYear(item)}>
-                  <Text style={styles.modalItem}>{item}</Text>
-                </TouchableOpacity>
-              )}
-            />
-            <TouchableOpacity onPress={() => setModalVisible(false)}>
-              <Text style={styles.closeButton}>Stäng</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+    <View>
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={styles.pickerContainer}
+          onPress={() => setModalVisible(true)}
+        >
+          <Text style={styles.pickerText}>{year}</Text>
+        </TouchableOpacity>
+        <Modal
+          visible={modalVisible}
+          transparent={true}
+          animationType="fade"
+        >
+          <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+            <View style={styles.modalContainer}>
+              <TouchableWithoutFeedback>
+                <View style={styles.modalContent}>
+                  <FlatList
+                    data={years}
+                    keyExtractor={(item) => item}
+                    renderItem={({ item }) => (
+                      <TouchableOpacity onPress={() => handleSelectYear(item)}>
+                        <Text style={styles.modalItem}>{item}</Text>
+                      </TouchableOpacity>
+                    )}
+                  />
+                  <TouchableOpacity onPress={() => setModalVisible(false)}>
+                    <Text style={styles.closeButton}>Stäng</Text>
+                  </TouchableOpacity>
+                </View>
+              </TouchableWithoutFeedback>
+            </View>
+          </TouchableWithoutFeedback>
+        </Modal>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
     alignItems: 'center',
-    padding: 10,
-  },
-  selectedYearText: {
-    marginBottom: 10,
   },
   pickerContainer: {
     borderWidth: 1,
     borderColor: 'black',
     borderRadius: 10,
     width: width * 0.15,
-    height: 40,
+    height: height * 0.04,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
@@ -88,7 +90,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
-    width: width * 0.8,
+    width: width * 0.3,
+    maxHeight: height * 0.5,
     backgroundColor: 'white',
     borderRadius: 10,
     padding: 20,
@@ -102,6 +105,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: 'center',
     color: 'blue',
+    fontSize: height * 0.02,
   },
 });
 

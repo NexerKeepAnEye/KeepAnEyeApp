@@ -2,21 +2,32 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { DataTable } from 'react-native-paper';
 import { AccordionStyle, DataTableStyle } from '../Style/AccordionStyle';
-import YearSearch from './YearSearch';
+import FromToDate from './FromToDate';
+import { MeterSearch } from './MeterSearch';
 
 interface ReportGridProps {
   selectedReport: string;
   searchResults: any[];
 }
 
-const ReportGrid: React.FC<ReportGridProps> = ({
+export const ReportGrid = ({
   selectedReport,
   searchResults,
-}) => {
+}: ReportGridProps) => {
   return (
     <>
-      <View>
-        <YearSearch />
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          width: '100%',
+          gap: 10,
+        }}
+      >
+        {/* <YearSearch /> */}
+        <FromToDate />
+        <MeterSearch />
       </View>
       <View style={DataTableStyle.container}>
         {selectedReport && (
@@ -47,5 +58,3 @@ const ReportGrid: React.FC<ReportGridProps> = ({
     </>
   );
 };
-
-export default ReportGrid;
