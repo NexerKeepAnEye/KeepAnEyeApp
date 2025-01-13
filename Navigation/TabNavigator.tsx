@@ -4,13 +4,14 @@ import * as React from 'react';
 import { Pressable, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { LogoTitle } from '../Components/Header';
-import PremiseScreen from '../Screens/PremiseScreen';
 import ReportScreen from '../Screens/ReportScreen';
 import { BottomTabStyle } from '../Style/BottomTabStyle';
+import PremiseStackNavigator from './PremiseStackNavigator';
 
 export type TabParamList = {
-  PremiseScreen: { premiseId: number };
+  PremiseStackNavigator: { premiseId: number };
   ReportScreen: { premiseId: number };
+  MeterDataScreen: { meterId: number };
 };
 
 const Tab = createBottomTabNavigator<TabParamList>();
@@ -46,8 +47,8 @@ export default function TabNavigator() {
       })}
     >
       <Tab.Screen
-        name="PremiseScreen"
-        component={PremiseScreen}
+        name="PremiseStackNavigator"
+        component={PremiseStackNavigator}
         options={{
           tabBarLabel: 'Fastighet',
           tabBarIcon: ({ color, focused }) => (

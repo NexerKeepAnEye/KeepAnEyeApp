@@ -16,7 +16,6 @@ export const StartScreenStyle = StyleSheet.create({
   },
   textHeader: {
     marginTop: '8%',
-
     fontSize: 30,
     fontWeight: 'bold',
     justifyContent: 'center',
@@ -26,7 +25,7 @@ export const StartScreenStyle = StyleSheet.create({
     width: '100%',
     height: '65%',
     backgroundColor: 'white',
-    marginBottom: '15%',
+    // marginBottom: '1%',
   },
   listItems: {
     flex: 1,
@@ -50,5 +49,10 @@ export const StartScreenStyle = StyleSheet.create({
   listItemPositionEnd: {
     justifyContent: 'flex-end',
     marginRight: '1%',
+  },
+  footer: {
+    width: '30%',
+    height: '10%',
+    resizeMode: 'contain',
   },
 });

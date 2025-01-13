@@ -1,15 +1,36 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { View } from 'react-native';
-import { Text } from 'react-native-paper';
+import { Text, View } from 'react-native';
+import MeterDataCard from '../Components/MeterDataCard';
+import MeterDataGrid from '../Components/MeterDataGrid';
+import PremiseCard from '../Components/PremiseCard';
+import { RootStackParamList } from '../Navigation/RootStackNavigation';
+import { usePremiseContext } from '../PremiseState/PremiseContext';
+import { MeterDataScreenStyle } from '../Style/MeterDataScreenStyle';
 
-export default function MeterDataScreen() {
+type Props = NativeStackScreenProps<RootStackParamList, 'MeterDataScreen'>;
+
+export default function MeterDataScreen({ route }: Props) {
+  const { meterId } = route.params;
+  const { state } = usePremiseContext();
+
+  const meter = state.premise?.Meters.find((m) => m.Id === meterId);
+
   return (
-    <View>
-      <Text>METER DATA SCREEN</Text>
-      {/* 
-    "Fastighet" as bottomTab
-    Show which premises you're at, which meter you've selected and a filter button to render data 
-      */}
+    <View style={MeterDataScreenStyle.container}>
+      <PremiseCard />
+      {meter ? (
+        <View style={MeterDataScreenStyle.container2}>
+          <MeterDataCard meterId={meter.Id} />
+          <MeterDataGrid meterId={meter.Id} />
+
+          {/* <Text>Meter ID: {meter.Id}</Text>
+          <Text>Meter Name: {meter.Name}</Text>
+          <Text>Product Code: {meter.ProductCode}</Text> */}
+        </View>
+      ) : (
+        <Text>Meter not found</Text>
+      )}
     </View>
   );
 }
