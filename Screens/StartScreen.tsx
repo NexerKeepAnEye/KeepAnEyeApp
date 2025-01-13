@@ -1,6 +1,6 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ScrollView, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-paper';
 // import { mockedPremises } from '../MockedData/MockedPremises';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -9,6 +9,7 @@ import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { usePremiseContext } from '../PremiseState/PremiseContext';
 import { StartScreenStyle } from '../Style/StartScreenStyle';
 import { Meter } from '../Types/Interfaces/Type';
+import NexerLogo from '../assets/NexerLogo.png';
 
 type StartScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -66,6 +67,12 @@ export default function StartScreen({ navigation }: Props) {
       <ScrollView style={StartScreenStyle.itemBox}>
         {mockedPremise.map((item) => renderItem(item))}
       </ScrollView>
+      <Image
+        source={NexerLogo}
+        style={StartScreenStyle.footer}
+      />
+
+      {/* nexer logo */}
     </View>
   );
 }
