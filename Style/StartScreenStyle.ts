@@ -25,7 +25,7 @@ export const StartScreenStyle = StyleSheet.create({
     width: '100%',
     height: '65%',
     backgroundColor: 'white',
-    marginBottom: '1%',
+    // marginBottom: '1%',
   },
   listItems: {
     flex: 1,
