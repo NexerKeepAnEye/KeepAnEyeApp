@@ -1,7 +1,7 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as React from 'react';
-import { Pressable, View } from 'react-native';
+import { Dimensions, Pressable, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { LogoTitle } from '../Components/Header';
 import ReportScreen from '../Screens/ReportScreen';
@@ -13,7 +13,8 @@ export type TabParamList = {
   ReportScreen: { premiseId: number };
   MeterDataScreen: { meterId: number };
 };
-
+const { width } = Dimensions.get('window');
+const paddingHorizontal = width * 0.025;
 const Tab = createBottomTabNavigator<TabParamList>();
 
 export default function TabNavigator() {
@@ -26,6 +27,7 @@ export default function TabNavigator() {
               name="exit-to-app"
               size={30}
               color="#D32F2F"
+              style={{ paddingRight: paddingHorizontal }}
             />
           </Pressable>
         ),
@@ -35,6 +37,7 @@ export default function TabNavigator() {
               name="arrow-back"
               size={30}
               color="#000"
+              style={{ paddingLeft: paddingHorizontal }}
             />
           </Pressable>
         ),
