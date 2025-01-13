@@ -30,7 +30,8 @@ export default function RootStackNavigator() {
   return (
     <RootStack.Navigator
       initialRouteName="StartScreen"
-      screenOptions={({ navigation }) => ({
+      // screenOptions={({ navigation }) => ({
+      screenOptions={() => ({
         headerRight: () => (
           <Pressable onPress={() => console.log('navigating')}>
             <MaterialIcons
@@ -40,15 +41,15 @@ export default function RootStackNavigator() {
             />
           </Pressable>
         ),
-        headerLeft: () => (
-          <Pressable onPress={() => navigation.goBack()}>
-            <MaterialIcons
-              name="arrow-back"
-              size={30}
-              color="#000"
-            />
-          </Pressable>
-        ),
+        // headerLeft: () => (
+        //   <Pressable onPress={() => navigation.goBack()}>
+        //     <MaterialIcons
+        //       name="arrow-back"
+        //       size={30}
+        //       color="#000"
+        //     />
+        //   </Pressable>
+        // ),
         headerTitle: () => <LogoTitle />,
         headerTitleAlign: 'center',
       })}
