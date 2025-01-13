@@ -71,8 +71,6 @@ export default function StartScreen({ navigation }: Props) {
         source={NexerLogo}
         style={StartScreenStyle.footer}
       />
-
-      {/* nexer logo */}
     </View>
   );
 }
