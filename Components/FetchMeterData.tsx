@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { meterData } from '../MockedData/MockedMeterData';
+import { meterData } from '../MockedData/MockedMeterDataMonth';
 import { usePremiseContext } from '../PremiseState/PremiseContext';
 
 export const FetchMeterData = () => {

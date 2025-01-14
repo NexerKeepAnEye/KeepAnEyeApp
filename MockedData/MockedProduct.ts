@@ -1,4 +1,4 @@
-import { Product } from '../Types/Interfaces/Type';
+import { Product } from '../Types/Type';
 
 export const mockedData: Product[] = [
   { Id: 25, Code: 'FJV', Unit: 'kWh' },

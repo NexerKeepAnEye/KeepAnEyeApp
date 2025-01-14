@@ -1,5 +1,5 @@
 import React, { createContext, ReactNode, useContext, useReducer } from 'react';
-import { MeterData, Premise } from '../Types/Interfaces/Type';
+import { MeterData, Premise } from '../Types/Type';
 
 type State = {
   premise: Premise | null;

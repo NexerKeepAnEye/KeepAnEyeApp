@@ -1,6 +1,5 @@
-import { Dimensions, StyleSheet } from 'react-native';
-
-const { width, height } = Dimensions.get('window');
+import { StyleSheet } from 'react-native';
+import { height, width } from './Dimensions';
 
 export const AccordionStyle = StyleSheet.create({
   container: {
@@ -59,19 +58,5 @@ export const AccordionStyle = StyleSheet.create({
     fontSize: width * 0.05, // 5% of screen width
     fontWeight: 'bold',
     marginBottom: 10,
-  },
-});
-
-export const DataTableStyle = StyleSheet.create({
-  container: {
-    width: width * 0.9, // 90% of screen width
-    marginTop: 20,
-  },
-  header: {
-    backgroundColor: '#d9d9d9',
-    justifyContent: 'space-evenly',
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    width: '100%',
   },
 });

@@ -13,7 +13,7 @@ import { mockedPremise } from '../MockedData/MockedPremise';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { usePremiseContext } from '../PremiseState/PremiseContext';
 import { StartScreenStyle } from '../Style/StartScreenStyle';
-import { Meter } from '../Types/Interfaces/Type';
+import { Meter } from '../Types/Type';
 import NexerLogo from '../assets/NexerLogo.png';
 
 function resetNavigationStack(
