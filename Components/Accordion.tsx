@@ -15,6 +15,7 @@ const Accordion = () => {
 
   const doSomething = (reportType: string) => {
     setSelectedReport(reportType);
+    setSearchResults([]);
     setExpanded(false);
   };
 
