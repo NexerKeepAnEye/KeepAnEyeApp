@@ -1,19 +1,19 @@
 import { SimpleLineIcons } from '@expo/vector-icons';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { Pressable, View } from 'react-native';
 import { Card, Text } from 'react-native-paper';
+import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { usePremiseContext } from '../PremiseState/PremiseContext';
 import { premiseCardStyle } from '../Style/PremiseCardStyle';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../Navigation/RootStackNavigation';
 
-type Prop = NativeStackNavigationProp<RootStackParamList, 'MeterDataScreen'>;
-
-type Props = {
-  navigation: Prop;
+type Props<T extends keyof RootStackParamList> = {
+  navigation: NativeStackNavigationProp<RootStackParamList, T>;
 };
 
-const PremiseCard = ({ navigation }: Props) => {
+const PremiseCard = <T extends keyof RootStackParamList>({
+  navigation,
+}: Props<T>) => {
   const { state } = usePremiseContext();
 
   return (
