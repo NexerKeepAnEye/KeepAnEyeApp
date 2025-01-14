@@ -30,22 +30,14 @@ export default function RootStackNavigator() {
   return (
     <RootStack.Navigator
       initialRouteName="StartScreen"
-      screenOptions={({ navigation }) => ({
+      // screenOptions={({ navigation }) => ({
+      screenOptions={() => ({
         headerRight: () => (
           <Pressable onPress={() => console.log('navigating')}>
             <MaterialIcons
               name="exit-to-app"
               size={30}
               color="#D32F2F"
-            />
-          </Pressable>
-        ),
-        headerLeft: () => (
-          <Pressable onPress={() => navigation.goBack()}>
-            <MaterialIcons
-              name="arrow-back"
-              size={30}
-              color="#000"
             />
           </Pressable>
         ),
@@ -56,7 +48,7 @@ export default function RootStackNavigator() {
       <RootStack.Screen
         name="StartScreen"
         component={StartScreen}
-        options={{ headerShown: true }}
+        options={{ headerLeft: () => null, headerBackVisible: false }}
       />
       <RootStack.Screen
         name="SignInScreen"
@@ -71,12 +63,12 @@ export default function RootStackNavigator() {
       <RootStack.Screen
         name="PremiseScreen"
         component={PremiseScreen}
-        options={{ headerShown: true }}
+        options={{ headerShown: false }}
       />
       <RootStack.Screen
         name="ReportScreen"
         component={ReportScreen}
-        options={{ headerShown: true }}
+        options={{ headerShown: false }}
       />
     </RootStack.Navigator>
   );
