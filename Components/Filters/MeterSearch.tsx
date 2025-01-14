@@ -11,15 +11,10 @@ import {
 } from 'react-native';
 import { List } from 'react-native-paper';
 import { usePremiseContext } from '../../PremiseState/PremiseContext';
+import { Meter } from '../../Types/Type';
 import MeterIcon from '../MeterIcon';
 
 const { width, height } = Dimensions.get('window');
-
-interface Meter {
-  Id: number;
-  Name: string;
-  ProductCode: string;
-}
 
 interface Section {
   title: string;
@@ -27,25 +22,34 @@ interface Section {
 }
 
 interface MeterSearchProps {
-  setSelectedMeter: (meterId: string) => void;
+  setSelectedMeter: (meter: Meter[]) => void;
 }
 
-export const MeterSearch: React.FC<MeterSearchProps> = ({
-  setSelectedMeter,
-}) => {
+export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedMeter, setSelectedMeterState] = useState<string | null>(null);
+  const [selectedMeter, setSelectedMeterState] = useState<
+    string[] | undefined
+  >();
+  const { state } = usePremiseContext();
+  const meters: Meter[] = state.premise?.Meters || [];
 
   const handlePress = () => setModalVisible(true);
 
-  const handleSelectMeter = (meter: Meter) => {
-    setSelectedMeterState(meter.Name);
-    setSelectedMeter(meter.Id.toString());
+  const handleSelectMeter = (meter: Meter[]) => {
+    setSelectedMeter(meter);
+
+    setSelectedMeterState(meter.map((m) => m.Name));
     setModalVisible(false);
+    console.log(meter);
   };
 
-  const { state } = usePremiseContext();
-  const meters: Meter[] = state.premise?.Meters || [];
+  const handleSelectCategory = (category: Section) => {
+    const selectedMeters = category.data;
+    setSelectedMeter(selectedMeters);
+    setSelectedMeterState([category.title]);
+    setModalVisible(false);
+    console.log(selectedMeters);
+  };
 
   const sections: Section[] = [
     {
@@ -76,7 +80,7 @@ export const MeterSearch: React.FC<MeterSearchProps> = ({
       title: 'Temperatur',
       data: meters.filter((meter) => meter.ProductCode.includes('TMP')),
     },
-  ].filter((section) => section.data.length > 0); // Filtrera bort tomma kategorier
+  ].filter((section) => section.data.length > 0);
 
   return (
     <View style={styles.container}>
@@ -86,7 +90,7 @@ export const MeterSearch: React.FC<MeterSearchProps> = ({
           numberOfLines={1}
           ellipsizeMode="tail"
         >
-          {selectedMeter || '- Välj -'}
+          {selectedMeter?.toString() || '- Välj -'}
         </Text>
         <TouchableOpacity
           onPress={handlePress}
@@ -114,7 +118,7 @@ export const MeterSearch: React.FC<MeterSearchProps> = ({
                   renderItem={({ item }) => (
                     <TouchableOpacity
                       style={styles.dropdownItem}
-                      onPress={() => handleSelectMeter(item)}
+                      onPress={() => handleSelectMeter([item])}
                     >
                       <MeterIcon productCode={item.ProductCode} />
                       <View style={styles.meterTextContainer}>
@@ -147,7 +151,7 @@ export const MeterSearch: React.FC<MeterSearchProps> = ({
       </Modal>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

@@ -21,12 +21,12 @@ interface FromToDateProps {
   setToDate: (date: Date) => void;
 }
 
-export const FromToDate: React.FC<FromToDateProps> = ({
+export function FromToDate({
   fromDate,
   toDate,
   setFromDate,
   setToDate,
-}) => {
+}: FromToDateProps) {
   const [modalVisible, setModalVisible] = useState(false);
   const [currentPicker, setCurrentPicker] = useState<'from' | 'to' | null>(
     null,
@@ -124,7 +124,7 @@ export const FromToDate: React.FC<FromToDateProps> = ({
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

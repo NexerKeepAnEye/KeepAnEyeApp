@@ -16,7 +16,7 @@ interface YearSearchProps {
   setSelectedYear: (year: string) => void;
 }
 
-export const YearSearch: React.FC<YearSearchProps> = ({ setSelectedYear }) => {
+export function YearSearch({ setSelectedYear }: YearSearchProps) {
   const [year, setYear] = useState<string>(new Date().getFullYear().toString());
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -68,22 +68,23 @@ export const YearSearch: React.FC<YearSearchProps> = ({ setSelectedYear }) => {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    width: width * 0.45,
+    padding: 10,
   },
   pickerContainer: {
     borderWidth: 1,
     borderColor: 'black',
     borderRadius: 10,
-    width: width * 0.15,
+    width: '100%',
     height: height * 0.04,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    opacity: 0.8,
   },
   pickerText: {
     fontSize: width * 0.045,
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
-    width: width * 0.3,
+    width: width * 0.8,
     maxHeight: height * 0.5,
     backgroundColor: 'white',
     borderRadius: 10,
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: 'center',
     color: 'blue',
-    fontSize: height * 0.02,
+    fontSize: width * 0.04,
   },
 });
 
