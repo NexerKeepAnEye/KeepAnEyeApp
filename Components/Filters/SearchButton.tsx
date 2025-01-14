@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
+import { searchButtonStyle } from '../../Style/SearchButtonStyle';
 import { Meter, MeterData } from '../../Types/Type';
 
 interface SearchButtonProps {
@@ -48,9 +49,11 @@ export function SearchButton({
   };
 
   return (
-    <Button
+    <TouchableOpacity
       onPress={handleSearch}
-      title="Skapa rapport"
-    />
+      style={searchButtonStyle.button}
+    >
+      <Text style={searchButtonStyle.text}>Skapa rapport</Text>
+    </TouchableOpacity>
   );
 }

@@ -4,14 +4,13 @@ import { height, width } from './Dimensions';
 export const yearSearchStyle = StyleSheet.create({
   container: {
     alignItems: 'center',
-    width: width * 0.45,
-    padding: 10,
+    marginRight: 5,
   },
   pickerContainer: {
     borderWidth: 1,
     borderColor: 'black',
     borderRadius: 10,
-    width: '100%',
+    width: width * 0.15,
     height: height * 0.04,
     justifyContent: 'center',
     alignItems: 'center',
@@ -27,7 +26,7 @@ export const yearSearchStyle = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
-    width: width * 0.8,
+    width: width * 0.3,
     maxHeight: height * 0.5,
     backgroundColor: 'white',
     borderRadius: 10,

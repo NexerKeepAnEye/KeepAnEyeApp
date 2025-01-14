@@ -7,11 +7,10 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import { List } from 'react-native-paper';
 import { usePremiseContext } from '../../PremiseState/PremiseContext';
+import { meterSearch } from '../../Style/MeterSearchStyle';
 import { Meter } from '../../Types/Type';
 import MeterIcon from '../MeterIcon';
-import { meterSearch } from '../../Style/MeterSearchStyle';
 
 interface Section {
   title: string;
@@ -82,21 +81,23 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
   return (
     <View style={meterSearch.container}>
       <View style={meterSearch.pickerContainer}>
-        <Text
-          style={meterSearch.pickerText}
-          numberOfLines={1}
-          ellipsizeMode="tail"
-        >
-          {selectedMeter?.toString() || '- Välj -'}
-        </Text>
         <TouchableOpacity
+          style={meterSearch.touchArea}
           onPress={handlePress}
-          style={meterSearch.iconContainer}
         >
-          <List.Icon
-            icon="chevron-down"
-            style={meterSearch.icon}
-          />
+          <Text
+            style={meterSearch.pickerText}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            {selectedMeter?.toString() || '- Mätare -'}
+          </Text>
+          {/* <View style={meterSearch.iconContainer}>
+            <List.Icon
+              icon="chevron-down"
+              style={meterSearch.icon}
+            />
+          </View> */}
         </TouchableOpacity>
       </View>
       <Modal

@@ -3,29 +3,29 @@ import { height, width } from './Dimensions';
 
 export const meterSearch = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    width: width * 0.45,
-    padding: 10,
+    maxWidth: width * 0.45,
   },
   pickerContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
     borderWidth: 1,
     borderColor: 'black',
     borderRadius: 10,
-    width: '100%',
+    // width: width * 0.4,
     height: height * 0.04,
-    justifyContent: 'space-between',
     paddingHorizontal: 10,
     backgroundColor: 'white',
     opacity: 0.8,
   },
   pickerText: {
     fontSize: width * 0.045,
-    flex: 1,
+  },
+  touchArea: {
+    maxWidth: width * 0.4,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   iconContainer: {
-    paddingLeft: 10,
+    paddingLeft: 0,
   },
   icon: {
     marginLeft: 0,

@@ -37,7 +37,7 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
     <View>
       {/* example how to use the component Filter*/}
       <Filter
-        filters={['dateRange']}
+        filters={['year', 'meter']}
         setYear={(year) => dispatch({ type: 'SET_YEAR', payload: year })}
         setMeter={(meter) => dispatch({ type: 'SET_METER', payload: meter })}
         setFromDate={(date) =>

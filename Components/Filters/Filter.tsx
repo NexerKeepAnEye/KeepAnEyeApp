@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { filterStyle } from '../../Style/FilterStyle';
 import { Meter, MeterData } from '../../Types/Type';
 import { FromToDate } from './FromToDate';
@@ -21,7 +21,7 @@ interface FilterProps {
   setFilteredResults: (data: MeterData[]) => void;
 }
 
-const Filter: React.FC<FilterProps> = ({
+export default function Filter({
   filters,
   setYear,
   setMeter,
@@ -33,16 +33,13 @@ const Filter: React.FC<FilterProps> = ({
   toDate,
   meterData,
   setFilteredResults,
-}) => {
+}: FilterProps) {
   return (
     <View>
-      <View style={filterStyle.container}>
-        {filters.includes('year') && setYear && (
-          <YearSearch setSelectedYear={setYear} />
-        )}
-        {filters.includes('meter') && setMeter && (
-          <MeterSearch setSelectedMeter={setMeter} />
-        )}
+      <ScrollView
+        horizontal={true}
+        style={filterStyle.container}
+      >
         {filters.includes('dateRange') && setFromDate && setToDate && (
           <FromToDate
             setFromDate={setFromDate}
@@ -51,7 +48,13 @@ const Filter: React.FC<FilterProps> = ({
             toDate={toDate ?? null}
           />
         )}
-      </View>
+        {filters.includes('year') && setYear && (
+          <YearSearch setSelectedYear={setYear} />
+        )}
+        {filters.includes('meter') && setMeter && (
+          <MeterSearch setSelectedMeter={setMeter} />
+        )}
+      </ScrollView>
       <SearchButton
         meterData={meterData}
         setFilteredResults={setFilteredResults}
@@ -62,6 +65,4 @@ const Filter: React.FC<FilterProps> = ({
       />
     </View>
   );
-};
-
-export default Filter;
+}

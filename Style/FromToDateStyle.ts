@@ -4,7 +4,9 @@ import { height, width } from './Dimensions';
 export const dateStyles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    gap: 10,
+    gap: 5,
+    marginBottom: 10,
+    marginRight: 5,
   },
   dateContainer: {
     alignItems: 'center',
