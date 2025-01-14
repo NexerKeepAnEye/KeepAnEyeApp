@@ -1,6 +1,6 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Text, TouchableHighlight, View } from 'react-native';
 import { Card } from 'react-native-paper';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { usePremiseContext } from '../PremiseState/PremiseContext';
@@ -18,10 +18,12 @@ export default function MeterDataCard({ meterId, navigation }: Props) {
   const meter = state.premise?.Meters.find((m) => m.Id === meterId);
 
   return (
-    <Pressable
+    <TouchableHighlight
       onPress={() => {
         navigation?.goBack();
       }}
+      underlayColor={'#ddd'}
+      style={{ borderRadius: 10 }}
     >
       <Card style={MeterDataCardStyle.card}>
         <View style={MeterDataCardStyle.row}>
@@ -46,6 +48,6 @@ export default function MeterDataCard({ meterId, navigation }: Props) {
           )}
         </View>
       </Card>
-    </Pressable>
+    </TouchableHighlight>
   );
 }
