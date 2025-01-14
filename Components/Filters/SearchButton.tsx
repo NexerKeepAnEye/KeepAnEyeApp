@@ -5,7 +5,7 @@ import { Meter, MeterData } from '../../Types/Type';
 interface SearchButtonProps {
   meterData: MeterData[];
   setFilteredResults: (data: MeterData[]) => void;
-  meter?: { meter: Meter[] }[];
+  meter?: Meter[];
   year?: string;
   fromDate?: Date;
   toDate?: Date;
@@ -35,7 +35,7 @@ const SearchButton: React.FC<SearchButtonProps> = ({
 
     if (meter !== undefined) {
       filteredData = filteredData.filter((data) =>
-        meter.some((m) => m.meter.some((meter) => meter.Id === data.MeterId)),
+        meter.some((m) => m.Id === data.MeterId),
       );
     }
 

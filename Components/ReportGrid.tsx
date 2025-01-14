@@ -1,7 +1,14 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Reducer, useEffect, useReducer } from 'react';
+import { Text, View } from 'react-native';
 import { DataTable } from 'react-native-paper';
-import { Meter, MeterData } from '../Types/Type';
+import { meterData } from '../MockedData/MockedMeterDataMonth';
+import {
+  FilterAction,
+  filterReducer,
+  FilterState,
+  initialState,
+} from '../PremiseState/FilterReducer';
+import { DataTableStyle } from '../Style/DataTableStyle';
 import Filter from './Filters/Filter';
 
 interface ReportGridProps {
@@ -10,32 +17,44 @@ interface ReportGridProps {
 }
 
 export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
-  const [meterData, setMeterData] = useState<MeterData[]>([]);
-  const [filteredResults, setFilteredResults] = useState<MeterData[]>([]);
-  const [meter, setMeter] = useState<Meter[]>([]);
-  const [year, setYear] = useState<string | undefined>(undefined);
-  const [fromDate, setFromDate] = useState<Date | undefined>(undefined);
-  const [toDate, setToDate] = useState<Date | undefined>(undefined);
+  const [state, dispatch] = useReducer<Reducer<FilterState, FilterAction>>(
+    filterReducer,
+    initialState,
+  );
+
+  useEffect(() => {
+    // Använd mockad data
+    dispatch({
+      type: 'SET_METER_DATA',
+      payload: meterData,
+    });
+  }, []);
+
+  const filteredResults = state.filteredResults;
 
   return (
     <View>
       <Filter
-        filters={['year', 'meter']}
-        setYear={setYear}
-        setMeter={setMeter}
-        setFromDate={setFromDate}
-        setToDate={setToDate}
-        year={year}
-        meter={meter}
-        fromDate={fromDate}
-        toDate={toDate}
-        meterData={meterData}
-        setFilteredResults={setFilteredResults}
+        filters={['dateRange']}
+        setYear={(year) => dispatch({ type: 'SET_YEAR', payload: year })}
+        setMeter={(meter) => dispatch({ type: 'SET_METER', payload: meter })}
+        setFromDate={(date) =>
+          dispatch({ type: 'SET_FROM_DATE', payload: date })
+        }
+        setToDate={(date) => dispatch({ type: 'SET_TO_DATE', payload: date })}
+        year={state.year}
+        meter={state.meter}
+        fromDate={state.fromDate}
+        toDate={state.toDate}
+        meterData={state.meterData}
+        setFilteredResults={(data) =>
+          dispatch({ type: 'SET_FILTERED_RESULTS', payload: data })
+        }
       />
-      <View style={styles.container}>
+      <View style={DataTableStyle.container}>
         {selectedReport && (
           <>
-            <Text style={styles.header}>{selectedReport}</Text>
+            <Text style={DataTableStyle.header}>{selectedReport}</Text>
             <DataTable>
               <DataTable.Header>
                 <DataTable.Title>Date</DataTable.Title>
@@ -60,22 +79,5 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-  },
-  filtersContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 10,
-  },
-  header: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-});
 
 export default ReportGrid;

@@ -13,7 +13,7 @@ interface FilterProps {
   setFromDate?: (date: Date) => void;
   setToDate?: (date: Date) => void;
   year?: string;
-  meter?: { meter: Meter[] }[];
+  meter?: Meter[];
   fromDate?: Date | null;
   toDate?: Date | null;
   meterData: MeterData[];
