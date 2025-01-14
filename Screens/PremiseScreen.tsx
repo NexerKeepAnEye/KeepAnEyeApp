@@ -15,7 +15,7 @@ type Props = {
 export default function PremiseScreen({ navigation }: Props) {
   return (
     <View style={PremiseScreenStyle.container}>
-      <PremiseCard />
+      <PremiseCard navigation={navigation} />
       <MeterComponent navigation={navigation} />
     </View>
   );

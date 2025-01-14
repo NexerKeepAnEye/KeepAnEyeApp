@@ -4,9 +4,10 @@ import MeterDataScreen from '../Screens/MeterDataScreen';
 import PremiseScreen from '../Screens/PremiseScreen';
 
 export type PremiseStackParamList = {
-  PremiseScreen: undefined;
+  PremiseScreen: { premiseId: number };
   MeterDataScreen: { meterId: number };
 };
+
 const PremiseStack = createStackNavigator<PremiseStackParamList>();
 
 export default function PremiseStackNavigator() {

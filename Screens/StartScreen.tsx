@@ -1,8 +1,13 @@
+import {
+  CommonActions,
+  NavigationProp,
+  useIsFocused,
+} from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
+import { useEffect } from 'react';
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-paper';
-// import { mockedPremises } from '../MockedData/MockedPremises';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { mockedPremise } from '../MockedData/MockedPremise';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
@@ -10,6 +15,19 @@ import { usePremiseContext } from '../PremiseState/PremiseContext';
 import { StartScreenStyle } from '../Style/StartScreenStyle';
 import { Meter } from '../Types/Type';
 import NexerLogo from '../assets/NexerLogo.png';
+
+function resetNavigationStack(
+  navigation: NavigationProp<RootStackParamList>,
+  routeName: string,
+  params?: object,
+) {
+  navigation.dispatch(
+    CommonActions.reset({
+      index: 0,
+      routes: [{ name: routeName, params }],
+    }),
+  );
+}
 
 type StartScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -22,6 +40,17 @@ type Props = {
 
 export default function StartScreen({ navigation }: Props) {
   const { dispatch } = usePremiseContext();
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (isFocused) {
+      const state = navigation.getState();
+      const currentRoute = state.routes[state.index];
+      if (currentRoute.name !== 'StartScreen') {
+        resetNavigationStack(navigation, 'StartScreen');
+      }
+    }
+  }, [isFocused, navigation]);
 
   const renderItem = (item: {
     Id: number;
@@ -59,6 +88,7 @@ export default function StartScreen({ navigation }: Props) {
       />
     </TouchableOpacity>
   );
+
   return (
     <View style={StartScreenStyle.container}>
       <View style={StartScreenStyle.headerBox}>
