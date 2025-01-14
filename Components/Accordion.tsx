@@ -6,7 +6,7 @@ import { AccordionStyle } from '../Style/AccordionStyle';
 import { filterTypes } from '../Types/FilterTypes';
 import { ReportGrid } from './ReportGrid';
 
-const Accordion = () => {
+export const Accordion = () => {
   const [expanded, setExpanded] = useState(false);
   const [selectedReport, setSelectedReport] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -18,11 +18,6 @@ const Accordion = () => {
     setSearchResults([]);
     setExpanded(false);
   };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // const handleSearchResults = (results: any[]) => {
-  //   setSearchResults(results);
-  // };
 
   return (
     <>
@@ -72,5 +67,3 @@ const Accordion = () => {
     </>
   );
 };
-
-export default Accordion;

@@ -2,17 +2,8 @@ import DateTimePicker, {
   DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
 import React, { useState } from 'react';
-import {
-  Alert,
-  Dimensions,
-  Modal,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-
-const { width, height } = Dimensions.get('window');
+import { Alert, Modal, Text, TouchableOpacity, View } from 'react-native';
+import { dateStyles } from '../../Style/FromToDateStyle';
 
 interface FromToDateProps {
   fromDate: Date | null;
@@ -76,27 +67,31 @@ export function FromToDate({
 
   return (
     <View>
-      <View style={styles.container}>
-        <View style={styles.dateContainer}>
+      <View style={dateStyles.container}>
+        <View style={dateStyles.dateContainer}>
           <TouchableOpacity
-            style={styles.pickerContainer}
+            style={dateStyles.pickerContainer}
             onPress={() => {
               setCurrentPicker('from');
               setModalVisible(true);
             }}
           >
-            <Text style={styles.pickerText}>{formatDate(fromDate)}</Text>
+            <Text style={dateStyles.pickerText}>
+              {formatDate(fromDate) || 'Från datum'}
+            </Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.dateContainer}>
+        <View style={dateStyles.dateContainer}>
           <TouchableOpacity
-            style={styles.pickerContainer}
+            style={dateStyles.pickerContainer}
             onPress={() => {
               setCurrentPicker('to');
               setModalVisible(true);
             }}
           >
-            <Text style={styles.pickerText}>{formatDate(toDate)}</Text>
+            <Text style={dateStyles.pickerText}>
+              {formatDate(toDate) || 'Till datum'}
+            </Text>
           </TouchableOpacity>
         </View>
         {modalVisible && (
@@ -105,8 +100,8 @@ export function FromToDate({
             transparent={true}
             animationType="slide"
           >
-            <View style={styles.modalContainer}>
-              <View style={styles.modalContent}>
+            <View style={dateStyles.modalContainer}>
+              <View style={dateStyles.modalContent}>
                 <DateTimePicker
                   value={
                     currentPicker === 'from'
@@ -125,41 +120,3 @@ export function FromToDate({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    gap: 10,
-  },
-  dateContainer: {
-    alignItems: 'center',
-    opacity: 0.8,
-  },
-  pickerContainer: {
-    borderWidth: 1,
-    borderColor: 'black',
-    borderRadius: 10,
-    width: width * 0.28,
-    height: height * 0.04,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-  },
-  pickerText: {
-    fontSize: width * 0.045,
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  modalContent: {
-    width: width * 0.8,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    alignItems: 'center',
-  },
-});
-
-export default FromToDate;

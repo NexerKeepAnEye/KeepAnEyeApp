@@ -11,20 +11,15 @@ interface SearchButtonProps {
   toDate?: Date;
 }
 
-const SearchButton: React.FC<SearchButtonProps> = ({
+export function SearchButton({
   meterData,
   setFilteredResults,
   meter,
   year,
   fromDate,
   toDate,
-}) => {
+}: SearchButtonProps) {
   const handleSearch = () => {
-    // console.log('meterData:', meterData);
-    // console.log('year:', year);
-    // console.log('meter:', meter);
-    // console.log('fromDate:', fromDate);
-    // console.log('toDate:', toDate);
     let filteredData = meterData;
 
     if (year !== undefined) {
@@ -55,9 +50,7 @@ const SearchButton: React.FC<SearchButtonProps> = ({
   return (
     <Button
       onPress={handleSearch}
-      title="Sök"
+      title="Skapa rapport"
     />
   );
-};
-
-export default SearchButton;
+}

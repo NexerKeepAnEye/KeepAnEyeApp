@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import {
-  Dimensions,
   Modal,
   SectionList,
-  StyleSheet,
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -13,8 +11,7 @@ import { List } from 'react-native-paper';
 import { usePremiseContext } from '../../PremiseState/PremiseContext';
 import { Meter } from '../../Types/Type';
 import MeterIcon from '../MeterIcon';
-
-const { width, height } = Dimensions.get('window');
+import { meterSearch } from '../../Style/MeterSearchStyle';
 
 interface Section {
   title: string;
@@ -83,10 +80,10 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
   ].filter((section) => section.data.length > 0);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.pickerContainer}>
+    <View style={meterSearch.container}>
+      <View style={meterSearch.pickerContainer}>
         <Text
-          style={styles.pickerText}
+          style={meterSearch.pickerText}
           numberOfLines={1}
           ellipsizeMode="tail"
         >
@@ -94,11 +91,11 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
         </Text>
         <TouchableOpacity
           onPress={handlePress}
-          style={styles.iconContainer}
+          style={meterSearch.iconContainer}
         >
           <List.Icon
             icon="chevron-down"
-            style={styles.icon}
+            style={meterSearch.icon}
           />
         </TouchableOpacity>
       </View>
@@ -109,21 +106,21 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
         onRequestClose={() => setModalVisible(false)}
       >
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-          <View style={styles.modalContainer}>
+          <View style={meterSearch.modalContainer}>
             <TouchableWithoutFeedback>
-              <View style={styles.modalContent}>
+              <View style={meterSearch.modalContent}>
                 <SectionList
                   sections={sections}
                   keyExtractor={(item) => item.Id.toString()}
                   renderItem={({ item }) => (
                     <TouchableOpacity
-                      style={styles.dropdownItem}
+                      style={meterSearch.dropdownItem}
                       onPress={() => handleSelectMeter([item])}
                     >
                       <MeterIcon productCode={item.ProductCode} />
-                      <View style={styles.meterTextContainer}>
-                        <Text style={styles.meterText}>{item.Name}</Text>
-                        <Text style={styles.meterSubText}>
+                      <View style={meterSearch.meterTextContainer}>
+                        <Text style={meterSearch.meterText}>{item.Name}</Text>
+                        <Text style={meterSearch.meterSubText}>
                           {item.ProductCode}
                         </Text>
                       </View>
@@ -131,18 +128,18 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
                   )}
                   renderSectionHeader={({ section }) => (
                     <TouchableOpacity
-                      style={styles.sectionHeader}
+                      style={meterSearch.sectionHeader}
                       onPress={() => handleSelectCategory(section)}
                     >
-                      <Text style={styles.sectionHeaderText}>
+                      <Text style={meterSearch.sectionHeaderText}>
                         {section.title}
                       </Text>
                     </TouchableOpacity>
                   )}
-                  style={styles.sectionList}
+                  style={meterSearch.sectionList}
                 />
                 <TouchableOpacity onPress={() => setModalVisible(false)}>
-                  <Text style={styles.closeButton}>Stäng</Text>
+                  <Text style={meterSearch.closeButton}>Stäng</Text>
                 </TouchableOpacity>
               </View>
             </TouchableWithoutFeedback>
@@ -152,86 +149,5 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    width: width * 0.45,
-    padding: 10,
-  },
-  pickerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: 'black',
-    borderRadius: 10,
-    width: '100%',
-    height: height * 0.04,
-    justifyContent: 'space-between',
-    paddingHorizontal: 10,
-    backgroundColor: 'white',
-    opacity: 0.8,
-  },
-  pickerText: {
-    fontSize: width * 0.045,
-    flex: 1,
-  },
-  iconContainer: {
-    paddingLeft: 10,
-  },
-  icon: {
-    marginLeft: 0,
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  modalContent: {
-    width: width * 0.8,
-    maxHeight: height * 0.5,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 20,
-  },
-  sectionList: {
-    width: '100%',
-  },
-  sectionHeader: {
-    backgroundColor: '#f4f4f4',
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-  },
-  sectionHeaderText: {
-    fontSize: width * 0.045,
-    fontWeight: 'bold',
-  },
-  dropdownItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-  },
-  meterTextContainer: {
-    flex: 1,
-    marginLeft: 10,
-  },
-  meterText: {
-    fontSize: width * 0.04,
-  },
-  meterSubText: {
-    fontSize: width * 0.035,
-    color: 'gray',
-  },
-  closeButton: {
-    marginTop: 10,
-    textAlign: 'center',
-    color: 'blue',
-    fontSize: width * 0.04,
-  },
-});
 
 export default MeterSearch;

@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
+import { filterStyle } from '../../Style/FilterStyle';
 import { Meter, MeterData } from '../../Types/Type';
-import FromToDate from './FromToDate';
+import { FromToDate } from './FromToDate';
 import MeterSearch from './MeterSearch';
-import SearchButton from './SearchButton';
+import { SearchButton } from './SearchButton';
 import YearSearch from './YearSearch';
 
 interface FilterProps {
@@ -35,7 +36,7 @@ const Filter: React.FC<FilterProps> = ({
 }) => {
   return (
     <View>
-      <View style={styles.container}>
+      <View style={filterStyle.container}>
         {filters.includes('year') && setYear && (
           <YearSearch setSelectedYear={setYear} />
         )}
@@ -62,12 +63,5 @@ const Filter: React.FC<FilterProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    gap: 10,
-  },
-});
 
 export default Filter;

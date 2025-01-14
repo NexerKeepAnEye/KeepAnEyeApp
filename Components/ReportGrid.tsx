@@ -13,10 +13,11 @@ import Filter from './Filters/Filter';
 
 interface ReportGridProps {
   selectedReport: string;
-  searchResults: any[];
+  searchResults: string[];
 }
 
 export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
+  //example how to use the component Filter
   const [state, dispatch] = useReducer<Reducer<FilterState, FilterAction>>(
     filterReducer,
     initialState,
@@ -34,6 +35,7 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
 
   return (
     <View>
+      {/* example how to use the component Filter*/}
       <Filter
         filters={['dateRange']}
         setYear={(year) => dispatch({ type: 'SET_YEAR', payload: year })}
@@ -79,5 +81,3 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
     </View>
   );
 };
-
-export default ReportGrid;

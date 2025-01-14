@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import {
-  Dimensions,
   FlatList,
   Modal,
-  StyleSheet,
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-
-const { width, height } = Dimensions.get('window');
+import { yearSearchStyle } from '../../Style/YearSearchStyle';
 
 interface YearSearchProps {
   setSelectedYear: (year: string) => void;
@@ -32,12 +29,12 @@ export function YearSearch({ setSelectedYear }: YearSearchProps) {
 
   return (
     <View>
-      <View style={styles.container}>
+      <View style={yearSearchStyle.container}>
         <TouchableOpacity
-          style={styles.pickerContainer}
+          style={yearSearchStyle.pickerContainer}
           onPress={() => setModalVisible(true)}
         >
-          <Text style={styles.pickerText}>{year}</Text>
+          <Text style={yearSearchStyle.pickerText}>{year}</Text>
         </TouchableOpacity>
         <Modal
           visible={modalVisible}
@@ -45,20 +42,20 @@ export function YearSearch({ setSelectedYear }: YearSearchProps) {
           animationType="fade"
         >
           <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-            <View style={styles.modalContainer}>
+            <View style={yearSearchStyle.modalContainer}>
               <TouchableWithoutFeedback>
-                <View style={styles.modalContent}>
+                <View style={yearSearchStyle.modalContent}>
                   <FlatList
                     data={years}
                     keyExtractor={(item) => item}
                     renderItem={({ item }) => (
                       <TouchableOpacity onPress={() => handleSelectYear(item)}>
-                        <Text style={styles.modalItem}>{item}</Text>
+                        <Text style={yearSearchStyle.modalItem}>{item}</Text>
                       </TouchableOpacity>
                     )}
                   />
                   <TouchableOpacity onPress={() => setModalVisible(false)}>
-                    <Text style={styles.closeButton}>Stäng</Text>
+                    <Text style={yearSearchStyle.closeButton}>Stäng</Text>
                   </TouchableOpacity>
                 </View>
               </TouchableWithoutFeedback>
@@ -69,50 +66,5 @@ export function YearSearch({ setSelectedYear }: YearSearchProps) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    width: width * 0.45,
-    padding: 10,
-  },
-  pickerContainer: {
-    borderWidth: 1,
-    borderColor: 'black',
-    borderRadius: 10,
-    width: '100%',
-    height: height * 0.04,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-  },
-  pickerText: {
-    fontSize: width * 0.045,
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  modalContent: {
-    width: width * 0.8,
-    maxHeight: height * 0.5,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 20,
-  },
-  modalItem: {
-    padding: 10,
-    fontSize: width * 0.045,
-    textAlign: 'center',
-  },
-  closeButton: {
-    marginTop: 10,
-    textAlign: 'center',
-    color: 'blue',
-    fontSize: width * 0.04,
-  },
-});
 
 export default YearSearch;
