@@ -1,5 +1,10 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import {
+//   NavigationProp,
+//   useNavigation,
+//   useRoute,
+// } from '@react-navigation/native';
 import * as React from 'react';
 import { Dimensions, Pressable, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -12,15 +17,23 @@ export type TabParamList = {
   PremiseStackNavigator: { premiseId: number };
   ReportScreen: { premiseId: number };
   MeterDataScreen: { meterId: number };
+  PremiseScreen: { premiseId: number };
 };
+
 const { width } = Dimensions.get('window');
 const paddingHorizontal = width * 0.025;
 const Tab = createBottomTabNavigator<TabParamList>();
 
 export default function TabNavigator() {
+  // const { state } = usePremiseContext();
+  // const navigation = useNavigation<NavigationProp<TabParamList>>();
+  // const route = useRoute();
+  // const id = state.premise?.Id ?? 0;
+  // console.log(state);
   return (
     <Tab.Navigator
-      screenOptions={({ navigation }) => ({
+      // screenOptions={({ navigation }) => ({
+      screenOptions={() => ({
         headerRight: () => (
           <Pressable onPress={() => console.log('navigating')}>
             <MaterialIcons
@@ -31,16 +44,16 @@ export default function TabNavigator() {
             />
           </Pressable>
         ),
-        headerLeft: () => (
-          <Pressable onPress={() => navigation.goBack()}>
-            <MaterialIcons
-              name="arrow-back"
-              size={30}
-              color="#000"
-              style={{ paddingLeft: paddingHorizontal }}
-            />
-          </Pressable>
-        ),
+        // headerLeft: () => (
+        //   <Pressable onPress={handleGoBack}>
+        //     <MaterialIcons
+        //       name="arrow-back"
+        //       size={30}
+        //       color="#000"
+        //       style={{ paddingLeft: paddingHorizontal }}
+        //     />
+        //   </Pressable>
+        // ),
         headerTitle: () => <LogoTitle />,
         headerTitleAlign: 'center',
         tabBarStyle: BottomTabStyle.tabBar,
