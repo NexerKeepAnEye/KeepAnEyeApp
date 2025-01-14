@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 import { width } from './Dimensions';
-s;
 
 export const DataTableStyle = StyleSheet.create({
   container: {
