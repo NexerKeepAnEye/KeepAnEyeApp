@@ -1,7 +1,7 @@
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
-import { Pressable, View } from 'react-native';
+import { TouchableHighlight, View } from 'react-native';
 import { Card, Text } from 'react-native-paper';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { usePremiseContext } from '../PremiseState/PremiseContext';
@@ -17,7 +17,11 @@ const PremiseCard = <T extends keyof RootStackParamList>({
   const { state } = usePremiseContext();
 
   return (
-    <Pressable onPress={() => navigation.navigate('StartScreen')}>
+    <TouchableHighlight
+      onPress={() => navigation.navigate('StartScreen')}
+      underlayColor={'#ddd'}
+      style={{ borderRadius: 10 }}
+    >
       <Card style={premiseCardStyle.card}>
         <View style={premiseCardStyle.row}>
           {state.premise?.Name ? (
@@ -45,7 +49,7 @@ const PremiseCard = <T extends keyof RootStackParamList>({
           )}
         </View>
       </Card>
-    </Pressable>
+    </TouchableHighlight>
   );
 };
 
