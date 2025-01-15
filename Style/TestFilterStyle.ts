@@ -13,7 +13,7 @@ export const TestFilterStyle = StyleSheet.create({
   },
   filterBtnContainer: {
     flexDirection: 'row',
-    marginRight: '30%',
+    marginRight: '10%',
   },
   button: {
     marginHorizontal: 5,
@@ -21,6 +21,7 @@ export const TestFilterStyle = StyleSheet.create({
     padding: 10,
     borderColor: '#ddd',
     borderWidth: 1,
+    marginRight: '10%',
     borderRadius: 10,
   },
   searchButton: {
@@ -29,7 +30,7 @@ export const TestFilterStyle = StyleSheet.create({
     borderColor: '#ddd',
     borderWidth: 1,
     width: 70,
-    borderRadius: 17,
+    borderRadius: 20,
     marginRight: 10,
   },
   searchButtonText: {
