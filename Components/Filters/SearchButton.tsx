@@ -43,7 +43,7 @@ export function SearchButton({
       );
     }
 
-    console.log(filteredData);
+    // console.log(filteredData);
     setFilteredResults(filteredData);
     return filteredData;
   };
