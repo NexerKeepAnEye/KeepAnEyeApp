@@ -2,7 +2,7 @@ import DateTimePicker, {
   DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
 import React, { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View, Alert } from 'react-native';
 import { TestFilterStyle } from '../Style/TestFilterStyle';
 
 type FilterProps = {
@@ -33,6 +33,17 @@ export default function TestFilter({ onFilter }: FilterProps) {
     if (selectedDate) {
       setEndDate(selectedDate);
     }
+  };
+
+  const handleFilter = () => {
+    if (startDate && endDate && endDate <= startDate) {
+      Alert.alert('Fel', 'Slutdatum måste vara senare än startdatum.');
+      return;
+    }
+    onFilter(
+      startDate?.toISOString().split('T')[0] || '',
+      endDate?.toISOString().split('T')[0] || '',
+    );
   };
 
   return (
@@ -75,12 +86,7 @@ export default function TestFilter({ onFilter }: FilterProps) {
         </View>
         <TouchableOpacity
           style={TestFilterStyle.searchButton}
-          onPress={() =>
-            onFilter(
-              startDate?.toISOString().split('T')[0] || '',
-              endDate?.toISOString().split('T')[0] || '',
-            )
-          }
+          onPress={handleFilter}
         >
           <Text style={TestFilterStyle.searchButtonText}>Sök</Text>
         </TouchableOpacity>
