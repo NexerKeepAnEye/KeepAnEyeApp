@@ -44,9 +44,7 @@ export default function TestFilter({ onFilter }: FilterProps) {
             onPress={() => setShowStartDatePicker(true)}
           >
             <Text style={TestFilterStyle.buttonText}>
-              {startDate
-                ? startDate.toISOString().split('T')[0]
-                : 'Select Start Date'}
+              {startDate ? startDate.toISOString().split('T')[0] : 'Från datum'}
             </Text>
           </TouchableOpacity>
           {showStartDatePicker && (
@@ -63,9 +61,7 @@ export default function TestFilter({ onFilter }: FilterProps) {
             onPress={() => setShowEndDatePicker(true)}
           >
             <Text style={TestFilterStyle.buttonText}>
-              {endDate
-                ? endDate.toISOString().split('T')[0]
-                : 'Select End Date'}
+              {endDate ? endDate.toISOString().split('T')[0] : 'Till datum'}
             </Text>
           </TouchableOpacity>
           {showEndDatePicker && (
