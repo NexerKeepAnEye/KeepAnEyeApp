@@ -34,6 +34,10 @@ export default function TabNavigator() {
     <Tab.Navigator
       // screenOptions={({ navigation }) => ({
       screenOptions={() => ({
+        headerStyle: {
+          height: 120,
+          backgroundColor: '#f8f8f8',
+        },
         headerRight: () => (
           <Pressable onPress={() => console.log('navigating')}>
             <MaterialIcons
