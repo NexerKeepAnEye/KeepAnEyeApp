@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+const { width } = Dimensions.get('window');
 
 export const TestFilterStyle = StyleSheet.create({
   container: {
@@ -6,6 +8,7 @@ export const TestFilterStyle = StyleSheet.create({
     backgroundColor: '#f5f5f5',
     borderRadius: 10,
     justifyContent: 'space-around',
+    width: width * 1,
   },
   row: {
     flexDirection: 'row',
@@ -21,7 +24,7 @@ export const TestFilterStyle = StyleSheet.create({
     padding: 10,
     borderColor: '#ddd',
     borderWidth: 1,
-    marginRight: '10%',
+    marginRight: '2%',
     borderRadius: 10,
   },
   searchButton: {
@@ -31,7 +34,7 @@ export const TestFilterStyle = StyleSheet.create({
     borderWidth: 1,
     width: 70,
     borderRadius: 20,
-    marginRight: 10,
+    marginLeft: '20%',
   },
   searchButtonText: {
     fontSize: 16,
