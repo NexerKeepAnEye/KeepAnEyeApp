@@ -1,6 +1,9 @@
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { useState } from 'react';
 import {
+  Alert,
   Image,
   KeyboardAvoidingView,
   Platform,
@@ -11,17 +14,26 @@ import { Button, Text, TextInput } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import logoKAE from '../assets/logoKAE.png';
 import NexerLogo from '../assets/NexerLogo.png';
+import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { SignIn } from '../Style/SignInStyle';
+
 export default function SignInScreen() {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [form, setForm] = useState({ ApiKey: '' });
   const [loading, setLoading] = useState(false);
 
   const handleLogin = () => {
-    setLoading(true);
     // Simulate login process
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
+    if (form.ApiKey === 'fc41e3f1-f155-4465-b908-a79991643b0a') {
+      setLoading(true);
+      navigation.navigate('StartScreen');
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    } else {
+      Alert.alert('Fel', 'Felaktig API nyckel.');
+    }
   };
 
   return (
