@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { DataTable } from 'react-native-paper';
 import { usePremiseContext } from '../PremiseState/PremiseContext';
 import { MeterDataGridStyle } from '../Style/MeterDataGridStyle';
 import { MeterData } from '../Types/Type';
-import { FetchMeterData } from './FetchMeterData';
+import { fetchMeterData } from '../Api/jsonApi';
 import TestFilter from './TestFilter'; // Ensure this path is correct
 
 type Props = {
@@ -14,6 +14,17 @@ type Props = {
 export default function MeterDataGrid({ meterId }: Props) {
   const { state } = usePremiseContext();
   const [filteredData, setFilteredData] = useState<MeterData[]>([]);
+  const apiKey = 'fc41e3f1-f155-4465-b908-a79991643b0a';
+
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await fetchMeterData(apiKey);
+      setFilteredData(
+        data.filter((item) => item.MeterId === meterId).slice(-20),
+      );
+    };
+    loadData();
+  }, [meterId]);
 
   const handleFilter = (startDate: string | null, endDate: string | null) => {
     if (startDate === null && endDate === null) {
@@ -38,7 +49,6 @@ export default function MeterDataGrid({ meterId }: Props) {
     <View style={MeterDataGridStyle.container}>
       <TestFilter onFilter={handleFilter} />
       <ScrollView>
-        <FetchMeterData />
         <DataTable style={MeterDataGridStyle.gridContainer}>
           <DataTable.Header style={MeterDataGridStyle.header}>
             <DataTable.Title textStyle={MeterDataGridStyle.title}>
