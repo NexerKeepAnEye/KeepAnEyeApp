@@ -35,6 +35,7 @@ export const TestFilterStyle = StyleSheet.create({
     width: 70,
     borderRadius: 20,
     marginLeft: '20%',
+    elevation: 3,
   },
   searchButtonText: {
     fontSize: 16,

@@ -56,7 +56,10 @@ export default function MeterDataGrid({ meterId }: Props) {
           </DataTable.Header>
           {filteredData.length > 0 ? (
             filteredData.map((data, index) => (
-              <DataTable.Row key={index}>
+              <DataTable.Row
+                key={index}
+                style={MeterDataGridStyle.cell}
+              >
                 <DataTable.Cell>{data.DateTime.split('T')[0]}</DataTable.Cell>
                 <DataTable.Cell>{data.Value}</DataTable.Cell>
                 <DataTable.Cell>{data.Cost}</DataTable.Cell>
