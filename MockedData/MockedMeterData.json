@@ -1,0 +1,299 @@
+[
+    {
+        "DateTime": "2023-08-01T00:00:00",
+        "Value": 0,
+        "Cost": 2336.75,
+        "Code": "FJV",
+        "PremiseId": 1178,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-05-01T00:00:00",
+        "Value": 0,
+        "Cost": 2418,
+        "Code": "FJV",
+        "PremiseId": 1178,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-02-01T00:00:00",
+        "Value": 0,
+        "Cost": 2184,
+        "Code": "FJV",
+        "PremiseId": 1178,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-03-01T00:00:00",
+        "Value": 0,
+        "Cost": 2418,
+        "Code": "FJV",
+        "PremiseId": 1178,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-04-01T00:00:00",
+        "Value": 0,
+        "Cost": 2340,
+        "Code": "FJV",
+        "PremiseId": 1178,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-06-01T00:00:00",
+        "Value": 0,
+        "Cost": 1950,
+        "Code": "FJV",
+        "PremiseId": 1178,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-07-01T00:00:00",
+        "Value": 0,
+        "Cost": 2258.75,
+        "Code": "FJV",
+        "PremiseId": 1178,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-09-01T00:00:00",
+        "Value": 0,
+        "Cost": 1868.75,
+        "Code": "FJV",
+        "PremiseId": 1178,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-10-01T00:00:00",
+        "Value": 0,
+        "Cost": 1010.75,
+        "Code": "FJV",
+        "PremiseId": 1178,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-10-01T00:00:00",
+        "Value": 9780.004,
+        "Cost": 6912.400000000001,
+        "Code": "FJV",
+        "PremiseId": 20,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2024-01-01T00:00:00",
+        "Value": 65994,
+        "Cost": 37621.91,
+        "Code": "FJV",
+        "PremiseId": 20,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-12-01T00:00:00",
+        "Value": 45691,
+        "Cost": 26859.51,
+        "Code": "FJV",
+        "PremiseId": 20,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-04-01T00:00:00",
+        "Value": 34277,
+        "Cost": 21761.940000000002,
+        "Code": "FJV",
+        "PremiseId": 20,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-07-01T00:00:00",
+        "Value": 10269,
+        "Cost": 10037.6,
+        "Code": "FJV",
+        "PremiseId": 20,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-03-01T00:00:00",
+        "Value": 51623,
+        "Cost": 30508.49,
+        "Code": "FJV",
+        "PremiseId": 20,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-05-01T00:00:00",
+        "Value": 16731,
+        "Cost": 13236.640000000001,
+        "Code": "FJV",
+        "PremiseId": 20,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-08-01T00:00:00",
+        "Value": 10825,
+        "Cost": 10312.779999999999,
+        "Code": "FJV",
+        "PremiseId": 20,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-02-01T00:00:00",
+        "Value": 47338,
+        "Cost": 27907.96,
+        "Code": "FJV",
+        "PremiseId": 20,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-09-01T00:00:00",
+        "Value": 9018,
+        "Cost": 8459.83,
+        "Code": "FJV",
+        "PremiseId": 20,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-06-01T00:00:00",
+        "Value": 11069,
+        "Cost": 10273.93,
+        "Code": "FJV",
+        "PremiseId": 20,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-03-01T00:00:00",
+        "Value": 16949,
+        "Cost": 11372.579999999998,
+        "Code": "FJV",
+        "PremiseId": 21,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-06-01T00:00:00",
+        "Value": 2771,
+        "Cost": 4259.35,
+        "Code": "FJV",
+        "PremiseId": 21,
+        "Designation": null,
+        "MeterId": 210
+    },
+    {
+        "DateTime": "2023-07-01T00:00:00",
+        "Value": 2771,
+        "Cost": 4355.77,
+        "Code": "FJV",
+        "PremiseId": 21,
+        "Designation": null,
+        "MeterId": 2101
+    },
+    {
+        "DateTime": "2023-04-01T00:00:00",
+        "Value": 10541,
+        "Cost": 8104.55,
+        "Code": "FJV",
+        "PremiseId": 21,
+        "Designation": null,
+        "MeterId": 2265
+    },
+    {
+        "DateTime": "2023-09-01T00:00:00",
+        "Value": 2610,
+        "Cost": 3698.19,
+        "Code": "FJV",
+        "PremiseId": 21,
+        "Designation": null,
+        "MeterId": 2265
+    },
+    {
+        "DateTime": "2023-08-01T00:00:00",
+        "Value": 3433,
+        "Cost": 4683.26,
+        "Code": "FJV",
+        "PremiseId": 21,
+        "Designation": null,
+        "MeterId": 2265
+    },
+    {
+        "DateTime": "2023-05-01T00:00:00",
+        "Value": 5107,
+        "Cost": 5511.280000000001,
+        "Code": "FJV",
+        "PremiseId": 21,
+        "Designation": null,
+        "MeterId": 2265
+    },
+    {
+        "DateTime": "2023-02-01T00:00:00",
+        "Value": 15668,
+        "Cost": 10450.14,
+        "Code": "FJV",
+        "PremiseId": 21,
+        "Designation": null,
+        "MeterId": 2265
+    },
+    {
+        "DateTime": "2023-10-01T00:00:00",
+        "Value": 3394.008,
+        "Cost": 2926.92,
+        "Code": "FJV",
+        "PremiseId": 21,
+        "Designation": null,
+        "MeterId": 2265
+    },
+    {
+        "DateTime": "2023-10-01T00:00:00",
+        "Value": 3990,
+        "Cost": 6232.67,
+        "Code": "FJV",
+        "PremiseId": 22,
+        "Designation": null,
+        "MeterId": 2266
+    },
+    {
+        "DateTime": "2023-05-01T00:00:00",
+        "Value": 3420,
+        "Cost": 11878.26,
+        "Code": "FJV",
+        "PremiseId": 22,
+        "Designation": null,
+        "MeterId": 2266
+    },
+    {
+        "DateTime": "2023-08-01T00:00:00",
+        "Value": 450,
+        "Cost": 10394.42,
+        "Code": "FJV",
+        "PremiseId": 22,
+        "Designation": null,
+        "MeterId": 2266
+    },
+    {
+        "DateTime": "2023-04-01T00:00:00",
+        "Value": 16850,
+        "Cost": 18197.54,
+        "Code": "FJV",
+        "PremiseId": 22,
+        "Designation": null,
+        "MeterId": 2266
+    }
+]
