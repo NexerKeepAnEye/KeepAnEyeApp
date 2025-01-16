@@ -2,11 +2,11 @@ import DateTimePicker, {
   DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
 import React, { useState } from 'react';
-import { Text, TouchableOpacity, View, Alert } from 'react-native';
+import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import { TestFilterStyle } from '../Style/TestFilterStyle';
 
 type FilterProps = {
-  onFilter: (startDate: string, endDate: string) => void;
+  onFilter: (startDate: string | null, endDate: string | null) => void;
 };
 
 export default function TestFilter({ onFilter }: FilterProps) {
@@ -40,10 +40,15 @@ export default function TestFilter({ onFilter }: FilterProps) {
       Alert.alert('Fel', 'Slutdatum måste vara senare än startdatum.');
       return;
     }
-    onFilter(
-      startDate?.toISOString().split('T')[0] || '',
-      endDate?.toISOString().split('T')[0] || '',
-    );
+    if (!startDate && !endDate) {
+      // Fetch the latest 20 posts
+      onFilter(null, null);
+    } else {
+      onFilter(
+        startDate?.toISOString().split('T')[0] || '',
+        endDate?.toISOString().split('T')[0] || '',
+      );
+    }
   };
 
   return (

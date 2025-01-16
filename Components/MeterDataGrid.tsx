@@ -15,16 +15,23 @@ export default function MeterDataGrid({ meterId }: Props) {
   const { state } = usePremiseContext();
   const [filteredData, setFilteredData] = useState<MeterData[]>([]);
 
-  const handleFilter = (startDate: string, endDate: string) => {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    const data = state.meterData.filter(
-      (data) =>
-        data.MeterId === meterId &&
-        new Date(data.DateTime) >= start &&
-        new Date(data.DateTime) <= end,
-    );
-    setFilteredData(data);
+  const handleFilter = (startDate: string | null, endDate: string | null) => {
+    if (startDate === null && endDate === null) {
+      const latestData = state.meterData
+        .filter((data) => data.MeterId === meterId)
+        .slice(-20);
+      setFilteredData(latestData);
+    } else {
+      const start = new Date(startDate || '');
+      const end = new Date(endDate || '');
+      const data = state.meterData.filter(
+        (data) =>
+          data.MeterId === meterId &&
+          new Date(data.DateTime) >= start &&
+          new Date(data.DateTime) <= end,
+      );
+      setFilteredData(data);
+    }
   };
 
   return (
