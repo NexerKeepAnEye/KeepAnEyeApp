@@ -29,7 +29,7 @@ export default function TestFilter({ onFilter }: FilterProps) {
   const [showEndDatePicker, setShowEndDatePicker] = useState(false);
   const [showResolutionModal, setShowResolutionModal] = useState(false);
 
-  const resolutions: string[] = ['Timma', 'Dag', 'Månad', 'År'];
+  const resolutions: string[] = ['Timma', 'Dag', 'Månad', 'År']; //mockat
 
   const handleStartDateChange = (
     event: DateTimePickerEvent,
@@ -127,7 +127,6 @@ export default function TestFilter({ onFilter }: FilterProps) {
               onChange={handleStartDateChange}
             />
           )}
-
           <TouchableOpacity
             style={TestFilterStyle.button}
             onPress={() => setShowEndDatePicker(true)}
