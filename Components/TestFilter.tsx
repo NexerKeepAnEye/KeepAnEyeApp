@@ -72,8 +72,8 @@ export default function TestFilter({ onFilter }: FilterProps) {
     }
     if (!startDate && !endDate && resolution) {
       onFilter(null, null, resolution);
-      // renders everything at the moment- but this will render according to
-      // selected resolution
+      // renders everything at the moment- but this will render (after modifications) according to
+      // selected resolution after api-access
     } else {
       onFilter(
         startDate?.toISOString().split('T')[0] || '',
