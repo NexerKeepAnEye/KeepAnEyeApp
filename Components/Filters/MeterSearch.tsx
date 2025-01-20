@@ -19,6 +19,8 @@ interface Section {
 
 interface MeterSearchProps {
   setSelectedMeter: (meter: Meter[]) => void;
+
+  meters: Meter[] | undefined;
 }
 
 export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
@@ -103,7 +105,7 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
       <Modal
         visible={modalVisible}
         transparent={true}
-        animationType="slide"
+        animationType="fade"
         onRequestClose={() => setModalVisible(false)}
       >
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>

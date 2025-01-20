@@ -7,6 +7,7 @@ export const dateStyles = StyleSheet.create({
     gap: 5,
     marginBottom: 10,
     marginRight: 5,
+    marginLeft: 5,
   },
   dateContainer: {
     alignItems: 'center',
