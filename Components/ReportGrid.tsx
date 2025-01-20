@@ -1,5 +1,5 @@
 import React, { Reducer, useEffect, useReducer } from 'react';
-import { Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { DataTable } from 'react-native-paper';
 import { meterData } from '../MockedData/MockedMeterDataMonth';
 import {
@@ -10,6 +10,7 @@ import {
 } from '../PremiseState/FilterReducer';
 import { DataTableStyle } from '../Style/DataTableStyle';
 import Filter from './Filters/Filter';
+import MeterDataBarChart from './MeterDataBarChart';
 
 interface ReportGridProps {
   selectedReport: string;
@@ -32,27 +33,40 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
   }, []);
 
   const filteredResults = state.filteredResults;
-
+  
   return (
-    <View>
+    <ScrollView style={DataTableStyle.container}>
       {/* example how to use the component Filter*/}
-      <Filter
-        filters={['year', 'meter']}
-        setYear={(year) => dispatch({ type: 'SET_YEAR', payload: year })}
-        setMeter={(meter) => dispatch({ type: 'SET_METER', payload: meter })}
-        setFromDate={(date) =>
-          dispatch({ type: 'SET_FROM_DATE', payload: date })
-        }
-        setToDate={(date) => dispatch({ type: 'SET_TO_DATE', payload: date })}
-        year={state.year}
-        meter={state.meter}
-        fromDate={state.fromDate}
-        toDate={state.toDate}
-        meterData={state.meterData}
-        setFilteredResults={(data) =>
-          dispatch({ type: 'SET_FILTERED_RESULTS', payload: data })
-        }
-      />
+      {selectedReport === 'Månadsrapport' && (
+        <>
+          <Filter
+            filters={['year', 'meter']}
+            setYear={(year) => dispatch({ type: 'SET_YEAR', payload: year })}
+            setMeter={(meter) =>
+              dispatch({ type: 'SET_METER', payload: meter })
+            }
+            setFromDate={(date) =>
+              dispatch({ type: 'SET_FROM_DATE', payload: date })
+            }
+            setToDate={(date) =>
+              dispatch({ type: 'SET_TO_DATE', payload: date })
+            }
+            year={state.year}
+            meter={state.meter}
+            fromDate={state.fromDate}
+            toDate={state.toDate}
+            meterData={state.meterData}
+            setFilteredResults={(data) =>
+              dispatch({ type: 'SET_FILTERED_RESULTS', payload: data })
+            }
+          />
+          {selectedReport === 'Månadsrapport' && (
+            <ScrollView horizontal={true}>
+              <MeterDataBarChart filteredResults={filteredResults} />
+            </ScrollView>
+          )}
+        </>
+      )}
       <View style={DataTableStyle.container}>
         {selectedReport && (
           <>
@@ -78,6 +92,6 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
           </>
         )}
       </View>
-    </View>
+    </ScrollView>
   );
 };

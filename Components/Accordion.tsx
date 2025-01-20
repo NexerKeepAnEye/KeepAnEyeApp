@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { Pressable, TouchableOpacity, View } from 'react-native';
 import { List, Text } from 'react-native-paper';
+import { FilterProvider } from '../PremiseState/FilterContext';
 import { AccordionStyle } from '../Style/AccordionStyle';
 import { filterTypes } from '../Types/FilterTypes';
 import { ReportGrid } from './ReportGrid';
@@ -59,10 +60,12 @@ export const Accordion = () => {
             )}
           </View>
         </List.Section>
-        <ReportGrid
-          selectedReport={selectedReport}
-          searchResults={searchResults}
-        />
+        <FilterProvider>
+          <ReportGrid
+            selectedReport={selectedReport}
+            searchResults={searchResults}
+          />
+        </FilterProvider>
       </View>
     </>
   );

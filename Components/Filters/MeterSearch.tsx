@@ -103,7 +103,7 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
       <Modal
         visible={modalVisible}
         transparent={true}
-        animationType="slide"
+        animationType="fade"
         onRequestClose={() => setModalVisible(false)}
       >
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>

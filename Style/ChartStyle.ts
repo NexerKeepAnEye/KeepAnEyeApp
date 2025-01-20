@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { height } from './Dimensions';
 
 export const BarChartStyle = StyleSheet.create({
   container: {
@@ -8,9 +9,10 @@ export const BarChartStyle = StyleSheet.create({
     overflow: 'visible',
   },
   chartContainer: {
-    width: '100%',
+    height: height * 1.5,
     alignItems: 'center',
-    overflow: 'scroll',
+    overflow: 'visible',
+    // marginTop: 20,
   },
   tooltip: {
     position: 'absolute',
@@ -21,17 +23,9 @@ export const BarChartStyle = StyleSheet.create({
     borderColor: '#ccc',
     marginLeft: -7,
     marginTop: 25,
+    zIndex: 1,
   },
   tooltipText: {
     color: '#000',
-  },
-});
-
-export const GeneralStyle = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    overflow: 'scroll',
   },
 });
