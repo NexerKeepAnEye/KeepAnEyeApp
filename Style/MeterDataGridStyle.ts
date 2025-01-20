@@ -27,7 +27,7 @@ export const MeterDataGridStyle = StyleSheet.create({
   text: {
     fontSize: 18,
     textAlign: 'left',
-    marginTop: 15,
+    marginTop: '50%',
     fontStyle: 'italic',
     color: '#ababab',
   }
