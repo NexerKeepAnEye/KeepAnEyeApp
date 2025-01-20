@@ -1,6 +1,6 @@
 import React, { Reducer, useEffect, useReducer, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import { DataTable } from 'react-native-paper';
+import { DataTable, Divider } from 'react-native-paper';
 import { meterData } from '../MockedData/MockedMeterDataMonth';
 import {
   FilterAction,
@@ -8,7 +8,7 @@ import {
   FilterState,
   initialState,
 } from '../PremiseState/FilterReducer';
-import { DataTableStyle } from '../Style/DataTableStyle';
+import { ReportGridStyle } from '../Style/ReportGridStyleStyle';
 import Filter from './Filters/Filter';
 import MeterDataBarChart from './MeterDataBarChart';
 
@@ -41,7 +41,7 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
   };
 
   return (
-    <ScrollView style={DataTableStyle.container}>
+    <ScrollView style={ReportGridStyle.root}>
       {selectedReport === 'Månadsrapport' && (
         <>
           <Filter
@@ -65,7 +65,7 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
               dispatch({ type: 'SET_FILTERED_RESULTS', payload: data });
               setSearchClicked(true);
             }}
-            buttonText="Sök"
+            buttonText="Skapa rapport"
           />
           {searchClicked ? (
             filteredResults.length > 0 ? (
@@ -73,10 +73,10 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
                 <View>
                   <MeterDataBarChart filteredResults={filteredResults} />
                 </View>
-                <View style={DataTableStyle.container}>
+                <View style={ReportGridStyle.container}>
                   {selectedReport && (
                     <>
-                      <Text style={DataTableStyle.header}>Data</Text>
+                      <Divider style={ReportGridStyle.header} />
                       <DataTable>
                         <DataTable.Header>
                           <DataTable.Title>Månad</DataTable.Title>
@@ -96,8 +96,8 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
                 </View>
               </>
             ) : (
-              <View style={DataTableStyle.container}>
-                <Text style={DataTableStyle.noDataText}>Finns ingen data</Text>
+              <View style={ReportGridStyle.container}>
+                <Text style={ReportGridStyle.noDataText}>Finns ingen data</Text>
               </View>
             )
           ) : null}

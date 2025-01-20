@@ -17,28 +17,6 @@ type Props = {
 };
 
 export default function MeterDataGrid({ meterId }: Props) {
-  // const { state } = usePremiseContext();
-  // const [filteredData, setFilteredData] = useState<MeterData[]>([]);
-
-  // const handleFilter = (startDate: string | null, endDate: string | null) => {
-  //   if (startDate === null && endDate === null) {
-  //     const latestData = state.meterData
-  //       .filter((data) => data.MeterId === meterId)
-  //       .slice(-20);
-  //     setFilteredData(latestData);
-  //   } else {
-  //     const start = new Date(startDate || '');
-  //     const end = new Date(endDate || '');
-  //     const data = state.meterData.filter(
-  //       (data) =>
-  //         data.MeterId === meterId &&
-  //         new Date(data.DateTime) >= start &&
-  //         new Date(data.DateTime) <= end,
-  //     );
-  //     setFilteredData(data);
-  //   }
-  // };
-
   const [state, dispatch] = useReducer<
     React.Reducer<FilterState, FilterAction>
   >(filterReducer, initialState);
@@ -48,15 +26,15 @@ export default function MeterDataGrid({ meterId }: Props) {
   const [filterApplied, setFilterApplied] = useState(false);
 
   useEffect(() => {
-    // Använd mockad data
+    // Använder mockad data
     dispatch({
       type: 'SET_METER_DATA',
       payload: meterData,
     });
   }, []);
-  console.log('filteredResults:', filteredResults);
+
   return (
-    <>
+    <View style={MeterDataGridStyle.root}>
       <Filter
         filters={['dateRange']}
         setFromDate={(date) =>
@@ -74,10 +52,8 @@ export default function MeterDataGrid({ meterId }: Props) {
         buttonText={'sök'}
       />
       <View style={MeterDataGridStyle.container}>
-        {/* <TestFilter onFilter={handleFilter} /> */}
         {filterApplied ? (
           <ScrollView>
-            {/* <FetchMeterData /> */}
             <DataTable style={MeterDataGridStyle.gridContainer}>
               <DataTable.Header style={MeterDataGridStyle.header}>
                 <DataTable.Title textStyle={MeterDataGridStyle.title}>
@@ -114,6 +90,6 @@ export default function MeterDataGrid({ meterId }: Props) {
           </ScrollView>
         ) : null}
       </View>
-    </>
+    </View>
   );
 }

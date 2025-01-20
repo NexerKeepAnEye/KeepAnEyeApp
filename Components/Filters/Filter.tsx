@@ -6,6 +6,7 @@ import { Meter, MeterData } from '../../Types/Type';
 import { FromToDate } from './FromToDate';
 import MeterSearch from './MeterSearch';
 import YearSearch from './YearSearch';
+import { filterStyle } from '../../Style/FilterStyle';
 
 interface FilterProps {
   filters: string[];
@@ -75,7 +76,7 @@ const Filter: React.FC<FilterProps> = ({
 
   return (
     <>
-      <View style={styles.container}>
+      <View style={filterStyle.container}>
         {filters.includes('year') && setYear && (
           <YearSearch setSelectedYear={setYear} />
         )}
@@ -105,12 +106,5 @@ const Filter: React.FC<FilterProps> = ({
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    gap: 10,
-  },
-});
 
 export default Filter;

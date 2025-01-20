@@ -6,9 +6,10 @@ export const searchButtonStyle = StyleSheet.create({
     backgroundColor: '#FF7043',
     borderRadius: 20,
     padding: 10,
-    width: width / 3,
+    maxWidth: width / 3,
+    minWidth: width / 6,
     alignSelf: 'flex-end',
-    marginTop: 10,
+    marginTop: 3,
   },
   text: {
     color: 'white',

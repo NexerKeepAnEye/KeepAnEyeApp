@@ -14,7 +14,7 @@ interface YearSearchProps {
 }
 
 export function YearSearch({ setSelectedYear }: YearSearchProps) {
-  const [year, setYear] = useState<string>(new Date().getFullYear().toString());
+  const [year, setYear] = useState<string | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
 
   const years = Array.from({ length: 50 }, (_, i) =>
@@ -34,7 +34,7 @@ export function YearSearch({ setSelectedYear }: YearSearchProps) {
           style={yearSearchStyle.pickerContainer}
           onPress={() => setModalVisible(true)}
         >
-          <Text style={yearSearchStyle.pickerText}>{year}</Text>
+          <Text style={yearSearchStyle.pickerText}>{year ? year : 'År'}</Text>
         </TouchableOpacity>
         <Modal
           visible={modalVisible}
