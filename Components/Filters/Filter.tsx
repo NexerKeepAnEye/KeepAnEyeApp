@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-paper';
+import { filterStyle } from '../../Style/FilterStyle';
 import { searchButtonStyle } from '../../Style/SearchButtonStyle';
 import { Meter, MeterData } from '../../Types/Type';
 import { FromToDate } from './FromToDate';
 import MeterSearch from './MeterSearch';
 import YearSearch from './YearSearch';
-import { filterStyle } from '../../Style/FilterStyle';
 
 interface FilterProps {
   filters: string[];
