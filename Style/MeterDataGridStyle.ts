@@ -30,5 +30,5 @@ export const MeterDataGridStyle = StyleSheet.create({
     marginTop: '50%',
     fontStyle: 'italic',
     color: '#ababab',
-  }
+  },
 });
