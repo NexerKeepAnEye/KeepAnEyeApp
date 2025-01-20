@@ -1,4 +1,4 @@
-import React, { Reducer, useEffect, useReducer } from 'react';
+import React, { Reducer, useEffect, useReducer, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { DataTable } from 'react-native-paper';
 import { meterData } from '../MockedData/MockedMeterDataMonth';
@@ -18,11 +18,12 @@ interface ReportGridProps {
 }
 
 export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
-  //example how to use the component Filter
   const [state, dispatch] = useReducer<Reducer<FilterState, FilterAction>>(
     filterReducer,
     initialState,
   );
+
+  const [searchClicked, setSearchClicked] = useState(false);
 
   useEffect(() => {
     // Använd mockad data
@@ -33,10 +34,14 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
   }, []);
 
   const filteredResults = state.filteredResults;
-  
+
+  const formatMonth = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleString('default', { month: 'long' });
+  };
+
   return (
     <ScrollView style={DataTableStyle.container}>
-      {/* example how to use the component Filter*/}
       {selectedReport === 'Månadsrapport' && (
         <>
           <Filter
@@ -56,42 +61,48 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
             fromDate={state.fromDate}
             toDate={state.toDate}
             meterData={state.meterData}
-            setFilteredResults={(data) =>
-              dispatch({ type: 'SET_FILTERED_RESULTS', payload: data })
-            }
+            setFilteredResults={(data) => {
+              dispatch({ type: 'SET_FILTERED_RESULTS', payload: data });
+              setSearchClicked(true);
+            }}
+            buttonText="Sök"
           />
-          {selectedReport === 'Månadsrapport' && (
-            <ScrollView horizontal={true}>
-              <MeterDataBarChart filteredResults={filteredResults} />
-            </ScrollView>
-          )}
+          {searchClicked ? (
+            filteredResults.length > 0 ? (
+              <>
+                <View>
+                  <MeterDataBarChart filteredResults={filteredResults} />
+                </View>
+                <View style={DataTableStyle.container}>
+                  {selectedReport && (
+                    <>
+                      <Text style={DataTableStyle.header}>Data</Text>
+                      <DataTable>
+                        <DataTable.Header>
+                          <DataTable.Title>Månad</DataTable.Title>
+                          <DataTable.Title>Value</DataTable.Title>
+                        </DataTable.Header>
+                        {filteredResults.map((item, index) => (
+                          <DataTable.Row key={index}>
+                            <DataTable.Cell>
+                              {formatMonth(item.DateTime)}
+                            </DataTable.Cell>
+                            <DataTable.Cell>{item.Value}</DataTable.Cell>
+                          </DataTable.Row>
+                        ))}
+                      </DataTable>
+                    </>
+                  )}
+                </View>
+              </>
+            ) : (
+              <View style={DataTableStyle.container}>
+                <Text style={DataTableStyle.noDataText}>Finns ingen data</Text>
+              </View>
+            )
+          ) : null}
         </>
       )}
-      <View style={DataTableStyle.container}>
-        {selectedReport && (
-          <>
-            <Text style={DataTableStyle.header}>{selectedReport}</Text>
-            <DataTable>
-              <DataTable.Header>
-                <DataTable.Title>Date</DataTable.Title>
-                <DataTable.Title>Value</DataTable.Title>
-                <DataTable.Title>Cost</DataTable.Title>
-                <DataTable.Title>Code</DataTable.Title>
-                <DataTable.Title>Meter ID</DataTable.Title>
-              </DataTable.Header>
-              {filteredResults.map((item, index) => (
-                <DataTable.Row key={index}>
-                  <DataTable.Cell>{item.DateTime}</DataTable.Cell>
-                  <DataTable.Cell>{item.Value}</DataTable.Cell>
-                  <DataTable.Cell>{item.Cost}</DataTable.Cell>
-                  <DataTable.Cell>{item.Code}</DataTable.Cell>
-                  <DataTable.Cell>{item.MeterId}</DataTable.Cell>
-                </DataTable.Row>
-              ))}
-            </DataTable>
-          </>
-        )}
-      </View>
     </ScrollView>
   );
 };

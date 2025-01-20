@@ -19,6 +19,8 @@ interface Section {
 
 interface MeterSearchProps {
   setSelectedMeter: (meter: Meter[]) => void;
+
+  meters: Meter[] | undefined;
 }
 
 export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {

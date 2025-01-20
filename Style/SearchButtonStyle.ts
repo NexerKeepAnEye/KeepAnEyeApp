@@ -8,6 +8,7 @@ export const searchButtonStyle = StyleSheet.create({
     padding: 10,
     width: width / 3,
     alignSelf: 'flex-end',
+    marginTop: 10,
   },
   text: {
     color: 'white',
