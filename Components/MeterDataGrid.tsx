@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useState } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { DataTable } from 'react-native-paper';
 import { meterData } from '../MockedData/MockedMeterDataMonth';
 import {
@@ -45,6 +45,8 @@ export default function MeterDataGrid({ meterId }: Props) {
 
   const [filteredResults, setFilteredResults] = useState<MeterData[]>([]);
 
+  const [filterApplied, setFilterApplied] = useState(false);
+
   useEffect(() => {
     // Använd mockad data
     dispatch({
@@ -65,47 +67,52 @@ export default function MeterDataGrid({ meterId }: Props) {
         toDate={state.toDate}
         meterData={state.meterData}
         meterId={meterId}
-        setFilteredResults={(data) => setFilteredResults(data)}
+        setFilteredResults={(data) => {
+          setFilteredResults(data);
+          setFilterApplied(true);
+        }}
         buttonText={'sök'}
       />
       <View style={MeterDataGridStyle.container}>
         {/* <TestFilter onFilter={handleFilter} /> */}
-        <ScrollView>
-          {/* <FetchMeterData /> */}
-          <DataTable style={MeterDataGridStyle.gridContainer}>
-            <DataTable.Header style={MeterDataGridStyle.header}>
-              <DataTable.Title textStyle={MeterDataGridStyle.title}>
-                Datum
-              </DataTable.Title>
-              <DataTable.Title textStyle={MeterDataGridStyle.title}>
-                Värde
-              </DataTable.Title>
-              <DataTable.Title textStyle={MeterDataGridStyle.title}>
-                Kostnad
-              </DataTable.Title>
-              <DataTable.Title textStyle={MeterDataGridStyle.title}>
-                Kod
-              </DataTable.Title>
-            </DataTable.Header>
-            {filteredResults.length > 0 ? (
-              filteredResults.map((data, index) => (
-                <DataTable.Row
-                  key={index}
-                  style={MeterDataGridStyle.cell}
-                >
-                  <DataTable.Cell>{data.DateTime.split('T')[0]}</DataTable.Cell>
-                  <DataTable.Cell>{data.Value}</DataTable.Cell>
-                  <DataTable.Cell>{data.Cost}</DataTable.Cell>
-                  <DataTable.Cell>{data.Code}</DataTable.Cell>
-                </DataTable.Row>
-              ))
-            ) : (
-              <DataTable.Row>
-                <DataTable.Cell>No data available</DataTable.Cell>
-              </DataTable.Row>
-            )}
-          </DataTable>
-        </ScrollView>
+        {filterApplied ? (
+          <ScrollView>
+            {/* <FetchMeterData /> */}
+            <DataTable style={MeterDataGridStyle.gridContainer}>
+              <DataTable.Header style={MeterDataGridStyle.header}>
+                <DataTable.Title textStyle={MeterDataGridStyle.title}>
+                  Datum
+                </DataTable.Title>
+                <DataTable.Title textStyle={MeterDataGridStyle.title}>
+                  Värde
+                </DataTable.Title>
+                <DataTable.Title textStyle={MeterDataGridStyle.title}>
+                  Kostnad
+                </DataTable.Title>
+                <DataTable.Title textStyle={MeterDataGridStyle.title}>
+                  Kod
+                </DataTable.Title>
+              </DataTable.Header>
+              {filteredResults.length > 0 ? (
+                filteredResults.map((data, index) => (
+                  <DataTable.Row
+                    key={index}
+                    style={MeterDataGridStyle.cell}
+                  >
+                    <DataTable.Cell>
+                      {data.DateTime.split('T')[0]}
+                    </DataTable.Cell>
+                    <DataTable.Cell>{data.Value}</DataTable.Cell>
+                    <DataTable.Cell>{data.Cost}</DataTable.Cell>
+                    <DataTable.Cell>{data.Code}</DataTable.Cell>
+                  </DataTable.Row>
+                ))
+              ) : (
+                <Text style={MeterDataGridStyle.text}>Data saknas</Text>
+              )}
+            </DataTable>
+          </ScrollView>
+        ) : null}
       </View>
     </>
   );
