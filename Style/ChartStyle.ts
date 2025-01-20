@@ -1,29 +1,31 @@
 import { StyleSheet } from 'react-native';
-import { height } from './Dimensions';
 
 export const BarChartStyle = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    overflow: 'visible',
-  },
+  // container: {
+  //   // flex: 1,
+  //   // justifyContent: 'center',
+  //   // alignItems: 'center',
+  //   overflow: 'visible',
+  //   borderWidth: 1,
+  //   borderColor: '#ccc',
+  // },
   chartContainer: {
-    height: height * 1.5,
+    marginTop: 10,
+    marginBottom: 10,
     alignItems: 'center',
     overflow: 'visible',
-    // marginTop: 20,
   },
   tooltip: {
-    position: 'absolute',
+    position: 'relative',
     backgroundColor: 'white',
     padding: 5,
     borderRadius: 5,
     borderWidth: 1,
     borderColor: '#ccc',
     marginLeft: -7,
-    marginTop: 25,
+    marginBottom: -40,
     zIndex: 1,
+    top: 50,
   },
   tooltipText: {
     color: '#000',

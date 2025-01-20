@@ -41,12 +41,13 @@ export default function MeterDataBarChart({
     frontColor: '#ea5b0c',
     gradientColor: '#ea5b0c',
     originalValue: item.Value,
+    dataPointText: item.Value.toString(),
   }));
 
   const maxValue =
-    Math.ceil(Math.max(...filteredResults.map((item) => item.Value)) / 1000) *
-    1000;
-  const stepValue = maxValue / 3;
+    Math.ceil(Math.max(...filteredResults.map((item) => item.Value)) / 10000) *
+    10000;
+  const stepValue = maxValue / 5;
 
   const handleBarPress = (
     value: number,
@@ -60,6 +61,7 @@ export default function MeterDataBarChart({
   return (
     <View style={BarChartStyle.chartContainer}>
       <BarChart
+        overflowTop={50}
         data={chartData}
         focusBarOnPress
         isAnimated
@@ -68,17 +70,20 @@ export default function MeterDataBarChart({
         barBorderTopLeftRadius={4}
         barBorderTopRightRadius={4}
         frontColor="#6a1b9a"
-        yAxisLabelTexts={Array.from({ length: 4 }, (_, i) =>
-          (i * stepValue).toString(),
-        )}
         stepValue={stepValue}
         maxValue={maxValue}
+        yAxisLabelWidth={50}
         onPress={(item: Tooltip, index: number, x: number, y: number) =>
           handleBarPress(item.value, x, y, item.originalValue)
         }
         renderTooltip={() => {
           return (
-            <View style={BarChartStyle.tooltip}>
+            <View
+              style={[
+                BarChartStyle.tooltip,
+                { top: tooltip.y, left: tooltip.x },
+              ]}
+            >
               <Text style={BarChartStyle.tooltipText}>{tooltip.value}</Text>
             </View>
           );
