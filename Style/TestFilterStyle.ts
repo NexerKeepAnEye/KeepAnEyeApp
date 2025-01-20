@@ -1,6 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native';
-
-const { width } = Dimensions.get('window');
+import { StyleSheet } from 'react-native';
 
 export const TestFilterStyle = StyleSheet.create({
   container: {
@@ -8,7 +6,7 @@ export const TestFilterStyle = StyleSheet.create({
     backgroundColor: '#f5f5f5',
     borderRadius: 10,
     justifyContent: 'space-around',
-    width: width * 1,
+    width: '100%',
   },
   row: {
     flexDirection: 'row',
@@ -16,7 +14,7 @@ export const TestFilterStyle = StyleSheet.create({
   },
   filterBtnContainer: {
     flexDirection: 'row',
-    marginRight: '10%',
+    // marginRight: '3%',
   },
   button: {
     marginHorizontal: 5,
@@ -34,7 +32,8 @@ export const TestFilterStyle = StyleSheet.create({
     borderWidth: 1,
     width: 70,
     borderRadius: 20,
-    marginLeft: '20%',
+    // marginLeft: '20%',
+    elevation: 3,
   },
   searchButtonText: {
     fontSize: 16,
@@ -46,9 +45,52 @@ export const TestFilterStyle = StyleSheet.create({
     color: '#222',
     textAlign: 'center',
   },
-  dateText: {
-    marginVertical: 10,
+  resetButton: {
+    borderWidth: 0.5,
+    borderColor: '#dfdfdf',
+    backgroundColor: '#f2f2f2',
+    height: 25,
+    width: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: -20,
+    marginTop: -10,
+    borderRadius: 10,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    width: '40%',
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 20,
+    alignItems: 'center',
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  modalItem: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+    width: '100%',
+    alignItems: 'center',
+  },
+  modalItemText: {
     fontSize: 16,
-    color: '#333',
+  },
+  modalCloseButton: {
+    marginTop: 10,
+  },
+  modalCloseButtonText: {
+    color: '#222',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });

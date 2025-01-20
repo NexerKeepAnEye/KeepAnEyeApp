@@ -1,6 +1,9 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { NavigatorScreenParams } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigatorScreenParams, useNavigation } from '@react-navigation/native';
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationProp,
+} from '@react-navigation/native-stack';
 import * as React from 'react';
 import { Pressable } from 'react-native';
 import { LogoTitle } from '../Components/Header';
@@ -27,13 +30,14 @@ export type RootStackParamList = {
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 export default function RootStackNavigator() {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   return (
     <RootStack.Navigator
       initialRouteName="StartScreen"
-      // screenOptions={({ navigation }) => ({
       screenOptions={() => ({
         headerRight: () => (
-          <Pressable onPress={() => console.log('navigating')}>
+          <Pressable onPress={() => navigation.navigate('SignInScreen')}>
             <MaterialIcons
               name="exit-to-app"
               size={30}
