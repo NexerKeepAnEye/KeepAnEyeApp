@@ -2,18 +2,34 @@ import DateTimePicker, {
   DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
 import React, { useState } from 'react';
-import { Alert, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Alert,
+  FlatList,
+  Modal,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TestFilterStyle } from '../Style/TestFilterStyle';
 
 type FilterProps = {
-  onFilter: (startDate: string | null, endDate: string | null) => void;
+  onFilter: (
+    startDate: string | null,
+    endDate: string | null,
+    resolution: string | null,
+  ) => void;
 };
 
 export default function TestFilter({ onFilter }: FilterProps) {
   const [startDate, setStartDate] = useState<Date | undefined>(undefined);
   const [endDate, setEndDate] = useState<Date | undefined>(undefined);
+  const [resolution, setResolution] = useState('');
   const [showStartDatePicker, setShowStartDatePicker] = useState(false);
   const [showEndDatePicker, setShowEndDatePicker] = useState(false);
+  const [showResolutionModal, setShowResolutionModal] = useState(false);
+
+  const resolutions: string[] = ['Timma', 'Dag', 'Månad', 'År']; //mockat
 
   const handleStartDateChange = (
     event: DateTimePickerEvent,
@@ -35,20 +51,48 @@ export default function TestFilter({ onFilter }: FilterProps) {
     }
   };
 
+  const handleResolutionChange = (selectedResolution?: string) => {
+    if (selectedResolution) {
+      setResolution(selectedResolution);
+      setShowResolutionModal(false);
+    }
+  };
+
   const handleFilter = () => {
     if (startDate && endDate && endDate <= startDate) {
       Alert.alert('Fel', 'Slutdatum måste vara senare än startdatum.');
       return;
     }
-    if (!startDate && !endDate) {
-      // Fetch the latest 20 posts
-      onFilter(null, null);
+    if ((!startDate && endDate) || (!endDate && startDate)) {
+      Alert.alert('Fel', 'Fyll i start och slutdatum.');
+      return;
+    }
+    if (!startDate && !endDate && !resolution) {
+      onFilter(null, null, null);
+    }
+    if (!startDate && !endDate && resolution) {
+      onFilter(null, null, resolution);
+      // renders everything at the moment- but this will render (after modifications) according to
+      // selected resolution after api-access
     } else {
       onFilter(
         startDate?.toISOString().split('T')[0] || '',
         endDate?.toISOString().split('T')[0] || '',
+        resolution || '',
       );
     }
+  };
+
+  const handleStartReset = () => {
+    setStartDate(undefined);
+  };
+
+  const handleEndReset = () => {
+    setEndDate(undefined);
+  };
+
+  const handleResolutionReset = () => {
+    setResolution('');
   };
 
   return (
@@ -63,6 +107,18 @@ export default function TestFilter({ onFilter }: FilterProps) {
               {startDate ? startDate.toISOString().split('T')[0] : 'Från datum'}
             </Text>
           </TouchableOpacity>
+          {startDate && (
+            <TouchableOpacity
+              onPress={handleStartReset}
+              style={TestFilterStyle.resetButton}
+            >
+              <Icon
+                name="close"
+                size={16}
+                color="#333"
+              />
+            </TouchableOpacity>
+          )}
           {showStartDatePicker && (
             <DateTimePicker
               value={startDate || new Date()}
@@ -71,7 +127,6 @@ export default function TestFilter({ onFilter }: FilterProps) {
               onChange={handleStartDateChange}
             />
           )}
-
           <TouchableOpacity
             style={TestFilterStyle.button}
             onPress={() => setShowEndDatePicker(true)}
@@ -80,6 +135,18 @@ export default function TestFilter({ onFilter }: FilterProps) {
               {endDate ? endDate.toISOString().split('T')[0] : 'Till datum'}
             </Text>
           </TouchableOpacity>
+          {endDate && (
+            <TouchableOpacity
+              onPress={handleEndReset}
+              style={TestFilterStyle.resetButton}
+            >
+              <Icon
+                name="close"
+                size={16}
+                color="#333"
+              />
+            </TouchableOpacity>
+          )}
           {showEndDatePicker && (
             <DateTimePicker
               value={endDate || new Date()}
@@ -87,6 +154,27 @@ export default function TestFilter({ onFilter }: FilterProps) {
               display="default"
               onChange={handleEndDateChange}
             />
+          )}
+
+          <TouchableOpacity
+            style={TestFilterStyle.button}
+            onPress={() => setShowResolutionModal(true)}
+          >
+            <Text style={TestFilterStyle.buttonText}>
+              {resolution ? resolution : 'Upplösning'}
+            </Text>
+          </TouchableOpacity>
+          {resolution && (
+            <TouchableOpacity
+              onPress={handleResolutionReset}
+              style={TestFilterStyle.resetButton}
+            >
+              <Icon
+                name="close"
+                size={16}
+                color="#333"
+              />
+            </TouchableOpacity>
           )}
         </View>
         <TouchableOpacity
@@ -96,6 +184,39 @@ export default function TestFilter({ onFilter }: FilterProps) {
           <Text style={TestFilterStyle.searchButtonText}>Sök</Text>
         </TouchableOpacity>
       </View>
+
+      <Modal
+        visible={showResolutionModal}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setShowResolutionModal(false)}
+      >
+        <View style={TestFilterStyle.modalContainer}>
+          <View style={TestFilterStyle.modalContent}>
+            <Text style={TestFilterStyle.modalTitle}>Välj upplösning</Text>
+            <FlatList
+              data={resolutions}
+              keyExtractor={(item) => item}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={TestFilterStyle.modalItem}
+                  onPress={() => handleResolutionChange(item)}
+                >
+                  <Text style={TestFilterStyle.modalItemText}>
+                    {item.toString()}
+                  </Text>
+                </TouchableOpacity>
+              )}
+            />
+            <TouchableOpacity
+              style={TestFilterStyle.modalCloseButton}
+              onPress={() => setShowResolutionModal(false)}
+            >
+              <Text style={TestFilterStyle.modalCloseButtonText}>Stäng</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }

@@ -5,6 +5,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 //   useNavigation,
 //   useRoute,
 // } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { Dimensions, Pressable, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -12,6 +14,7 @@ import { LogoTitle } from '../Components/Header';
 import ReportScreen from '../Screens/ReportScreen';
 import { BottomTabStyle } from '../Style/BottomTabStyle';
 import PremiseStackNavigator from './PremiseStackNavigator';
+import { RootStackParamList } from './RootStackNavigation';
 
 export type TabParamList = {
   PremiseStackNavigator: { premiseId: number };
@@ -25,6 +28,8 @@ const paddingHorizontal = width * 0.025;
 const Tab = createBottomTabNavigator<TabParamList>();
 
 export default function TabNavigator() {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   // const { state } = usePremiseContext();
   // const navigation = useNavigation<NavigationProp<TabParamList>>();
   // const route = useRoute();
@@ -39,7 +44,7 @@ export default function TabNavigator() {
           backgroundColor: '#f8f8f8',
         },
         headerRight: () => (
-          <Pressable onPress={() => console.log('navigating')}>
+          <Pressable onPress={() => navigation.navigate('SignInScreen')}>
             <MaterialIcons
               name="exit-to-app"
               size={30}

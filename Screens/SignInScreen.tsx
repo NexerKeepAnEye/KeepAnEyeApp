@@ -31,6 +31,13 @@ export default function SignInScreen() {
       setTimeout(() => {
         setLoading(false);
       }, 1000);
+    } else if (form.ApiKey === 'abc') {
+      //temporary for easy login
+      setLoading(true);
+      navigation.navigate('StartScreen');
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
     } else {
       Alert.alert('Fel', 'Felaktig API nyckel.');
     }
