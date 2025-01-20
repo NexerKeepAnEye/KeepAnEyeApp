@@ -35,7 +35,6 @@ export default function RootStackNavigator() {
   return (
     <RootStack.Navigator
       initialRouteName="StartScreen"
-      // screenOptions={({ navigation }) => ({
       screenOptions={() => ({
         headerRight: () => (
           <Pressable onPress={() => navigation.navigate('SignInScreen')}>
