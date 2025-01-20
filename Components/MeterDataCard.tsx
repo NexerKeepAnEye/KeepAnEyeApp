@@ -35,7 +35,7 @@ export default function MeterDataCard({ meterId, navigation }: Props) {
               <Card.Content style={MeterDataCardStyle.content}>
                 <Text style={MeterDataCardStyle.title}>{meter?.Name}</Text>
                 <Text style={MeterDataCardStyle.subtitle}>
-                  Designation: {meter?.ProductCode}
+                  Produktkod: {meter?.ProductCode}
                 </Text>
               </Card.Content>
             </>

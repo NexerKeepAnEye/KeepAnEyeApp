@@ -38,7 +38,7 @@ const PremiseCard = <T extends keyof RootStackParamList>({
                   {state.premise?.Name}
                 </Text>
                 <Text style={premiseCardStyle.subtitle}>
-                  Designation: {state.premise?.Designation}
+                  Beteckning: {state.premise?.Designation}
                 </Text>
               </Card.Content>
             </>

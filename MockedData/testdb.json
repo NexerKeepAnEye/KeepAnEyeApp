@@ -1,5 +1,5 @@
 {
-  "customers": [
+  "Customer": [
     { "id": "1", "apikey": "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6" },
     { "id": "2", "apikey": "b2c3d4e5-f6g7-8h9i-0j1k-l2m3n4o5p6q7" },
     { "id": "3", "apikey": "c3d4e5f6-g7h8-9i0j-1k2l-m3n4o5p6q7r8" },
@@ -11,7 +11,7 @@
     { "id": "9", "apikey": "i9j0k1l2-m3n4-5o6p-7q8r-s9t0u1v2w3x4" },
     { "id": "10", "apikey": "j0k1l2m3-n4o5-6p7q-8r9s-t0u1v2w3x4y5" }
   ],
-  "premises": [
+  "Premise": [
     { "id": "1", "customerId": "1" },
     { "id": "2", "customerId": "2" },
     { "id": "3", "customerId": "3" },
@@ -43,7 +43,7 @@
     { "id": "29", "customerId": "9" },
     { "id": "30", "customerId": "10" }
   ],
-  "meters": [
+  "Meter": [
     { "id": "1", "premiseId": "1", "productId": "1" },
     { "id": "2", "premiseId": "1", "productId": "2" },
     { "id": "3", "premiseId": "1", "productId": "3" },
@@ -95,12 +95,11 @@
     { "id": "49", "premiseId": "10", "productId": "9" },
     { "id": "50", "premiseId": "10", "productId": "10" }
   ],
-  "meterdata": [
+  "MeterData": [
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 1234,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 1,
       "designation": "123",
       "meterId": 1,
@@ -109,9 +108,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 5678,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 1,
       "designation": "abc",
       "meterId": 2,
@@ -120,9 +118,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 9101,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 1,
       "designation": "231",
       "meterId": 3,
@@ -131,9 +128,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 2345,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 1,
       "designation": "fgwe",
       "meterId": 4,
@@ -142,9 +138,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 6789,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 1,
       "designation": "fwew",
       "meterId": 5,
@@ -153,9 +148,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 3456,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 2,
       "designation": "heje",
       "meterId": 6,
@@ -164,9 +158,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 7890,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 2,
       "designation": "esgrg",
       "meterId": 7,
@@ -175,9 +168,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 4567,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 2,
       "designation": "rwfw",
       "meterId": 8,
@@ -186,9 +178,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 8901,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 2,
       "designation": "1234assf",
       "meterId": 9,
@@ -197,9 +188,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 5678,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 2,
       "designation": "a1a2",
       "meterId": 10,
@@ -208,9 +198,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 6789,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 3,
       "designation": "3r3r4t",
       "meterId": 11,
@@ -219,9 +208,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 7890,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 3,
       "designation": "6432",
       "meterId": 12,
@@ -230,9 +218,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 8901,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 3,
       "designation": "3242",
       "meterId": 13,
@@ -241,81 +228,68 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 9012,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 3,
       "designation": "65432",
       "meterId": 14,
       "productId": 4,
       "resolution": "timma"
-
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 1234,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 3,
       "designation": "dfgtf",
       "meterId": 15,
       "productId": 5,
       "resolution": "timma"
-
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 2345,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 4,
       "designation": "ölkjh",
       "meterId": 16,
       "productId": 6,
       "resolution": "timma"
-
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 3456,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 4,
       "designation": "12314",
       "meterId": 17,
       "productId": 7,
       "resolution": "timma"
-
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 4567,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 4,
       "designation": "gr3s",
       "meterId": 18,
       "productId": 8,
       "resolution": "timma"
-
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 5678,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 4,
       "designation": "oink",
       "meterId": 19,
       "productId": 9,
       "resolution": "timma"
-
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 6789,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 4,
       "designation": "fefas",
       "meterId": 20,
@@ -324,153 +298,128 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 7890,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 5,
       "designation": "flggstångsknoppsputspoleringsmedel",
       "meterId": 21,
       "productId": 1,
       "resolution": "timma"
-
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 8901,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 5,
       "designation": "nbvc",
       "meterId": 22,
       "productId": 2,
       "resolution": "timma"
-
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 9012,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 5,
       "designation": "zxcccxa",
       "meterId": 23,
       "productId": 3,
       "resolution": "timma"
-
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 5678,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 5,
       "designation": "5rf",
       "meterId": 24,
       "productId": 4,
       "resolution": "timma"
-
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 7890,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 5,
       "designation": "uhgfr32",
       "meterId": 25,
       "productId": 5,
       "resolution": "timma"
-
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 3456,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 6,
       "designation": "123edsw23",
       "meterId": 26,
       "productId": 6,
       "resolution": "timma"
-
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 6789,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 6,
       "designation": "45tgfd",
       "meterId": 27,
       "productId": 7,
       "resolution": "timma"
-
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 2345,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 6,
       "designation": "23edfghu89",
       "meterId": 28,
       "productId": 8,
       "resolution": "timma"
-
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 4567,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 6,
       "designation": "lshd6n",
       "meterId": 29,
       "productId": 9,
       "resolution": "timma"
-
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 8901,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 6,
       "designation": "äåöåäöå",
       "meterId": 30,
       "productId": 1,
       "resolution": "timma"
-
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 1234,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 7,
       "designation": "äölkjmn",
       "meterId": 31,
       "productId": 1,
       "resolution": "timma"
-
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 5678,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 7,
       "designation": "testtesttest",
       "meterId": 32,
       "productId": 2,
       "resolution": "timma"
-
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 7890,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 7,
       "designation": "121dvbbg",
       "meterId": 33,
@@ -479,9 +428,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 3456,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 7,
       "designation": "apiapiapiapiapiapia",
       "meterId": 34,
@@ -490,9 +438,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 6789,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 7,
       "designation": "beteckning",
       "meterId": 35,
@@ -501,9 +448,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 2345,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 8,
       "designation": "fessdfsfs",
       "meterId": 36,
@@ -512,9 +458,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 4567,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 8,
       "designation": "ueghe23",
       "meterId": 37,
@@ -523,9 +468,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 8901,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 8,
       "designation": "858uh",
       "meterId": 38,
@@ -534,9 +478,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 1234,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 8,
       "designation": "9797897",
       "meterId": 39,
@@ -545,9 +488,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 5678,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 8,
       "designation": "vhy654",
       "meterId": 40,
@@ -556,9 +498,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 7890,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 9,
       "designation": "123edfg",
       "meterId": 41,
@@ -567,9 +508,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 3456,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 9,
       "designation": "234rghjk",
       "meterId": 42,
@@ -578,9 +518,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 6789,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 9,
       "designation": "m6eg76",
       "meterId": 43,
@@ -589,9 +528,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 2345,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 9,
       "designation": "öoihbnjh",
       "meterId": 44,
@@ -600,9 +538,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 4567,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 9,
       "designation": "lenovo",
       "meterId": 45,
@@ -611,9 +548,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 8901,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 10,
       "designation": "bvc123s",
       "meterId": 46,
@@ -622,9 +558,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 1234,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 10,
       "designation": "98uj98uj",
       "meterId": 47,
@@ -633,9 +568,8 @@
     },
     {
       "dateTime": "2023-08-01T00:00:00",
-      "value": 0,
+      "value": 5678,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 10,
       "designation": "124v141",
       "meterId": 48,
@@ -644,9 +578,8 @@
     },
     {
       "dateTime": "2024-08-01T00:00:00",
-      "value": 0,
+      "value": 7890,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 10,
       "designation": "greeefe",
       "meterId": 49,
@@ -654,10 +587,9 @@
       "resolution": "år"
     },
     {
-    "DadeTime": "2025-08-01T00:00:00",
-      "value": 0,
+      "dateTime": "2025-08-01T00:00:00",
+      "value": 3456,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 9,
       "designation": "2t222yhu4e",
       "meterId": 42,
@@ -665,10 +597,9 @@
       "resolution": "år"
     },
     {
-    "DadeTime": "2022-08-01T00:00:00",
-      "value": 0,
+      "dateTime": "2022-08-01T00:00:00",
+      "value": 6789,
       "cost": 2336.75,
-      "code": "FJV",
       "premiseId": 9,
       "designation": "2323",
       "meterId": 42,
@@ -676,10 +607,9 @@
       "resolution": "år"
     },
     {
-    "DadeTime": "2025-08-01T00:00:00",
-      "value": 0,
+      "dateTime": "2025-08-01T00:00:00",
+      "value": 2345,
       "cost": 3323.75,
-      "code": "FJV",
       "premiseId": 9,
       "designation": "1111vvr",
       "meterId": 42,
@@ -687,10 +617,9 @@
       "resolution": "år"
     },
     {
-    "DadeTime": "2025-08-01T00:00:00",
-      "value": 0,
+      "dateTime": "2025-08-01T00:00:00",
+      "value": 4567,
       "cost": 4567.75,
-      "code": "FJV",
       "premiseId": 9,
       "designation": "tytrdb3",
       "meterId": 42,
@@ -698,10 +627,9 @@
       "resolution": "år"
     },
     {
-    "DadeTime": "2021-08-01T00:00:00",
-      "value": 0,
+      "dateTime": "2021-08-01T00:00:00",
+      "value": 8901,
       "cost": 1337.75,
-      "code": "FJV",
       "premiseId": 9,
       "designation": "3y3yw5y",
       "meterId": 42,
@@ -709,16 +637,16 @@
       "resolution": "år"
     }
   ],
-"products": [
-  { "id": "1", "code": "FJV" },
-  { "id": "2", "code": "FJK" },
-  { "id": "3", "code": "EL" },
-  { "id": "4", "code": "VAT" },
-  { "id": "5", "code": "EL-U" },
-  { "id": "6", "code": "VAT-U" },
-  { "id": "7", "code": "VOL" },
-  { "id": "8", "code": "FLÖDE" },
-  { "id": "9", "code": "TMP" },
-  { "id": "10", "code": "OLJA" }
-]
+  "Product": [
+    { "id": "1", "code": "FJV" },
+    { "id": "2", "code": "FJK" },
+    { "id": "3", "code": "EL" },
+    { "id": "4", "code": "VAT" },
+    { "id": "5", "code": "EL-U" },
+    { "id": "6", "code": "VAT-U" },
+    { "id": "7", "code": "VOL" },
+    { "id": "8", "code": "FLÖDE" },
+    { "id": "9", "code": "TMP" },
+    { "id": "10", "code": "OLJA" }
+  ]
 }
