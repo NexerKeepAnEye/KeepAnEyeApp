@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { searchButtonStyle } from '../../Style/SearchButtonStyle';
 import { Meter, MeterData } from '../../Types/Type';
+import { usePremiseContext } from '../../PremiseState/PremiseContext';
 
 interface SearchButtonProps {
   meterData: MeterData[];
@@ -10,6 +11,7 @@ interface SearchButtonProps {
   year?: string;
   fromDate?: Date;
   toDate?: Date;
+  meterId?: number;
 }
 
 export function SearchButton({
@@ -19,7 +21,10 @@ export function SearchButton({
   year,
   fromDate,
   toDate,
+  meterId,
 }: SearchButtonProps) {
+  const { state } = usePremiseContext();
+
   const handleSearch = () => {
     let filteredData = meterData;
 
@@ -33,6 +38,12 @@ export function SearchButton({
       filteredData = filteredData.filter((data) =>
         meter.some((m) => m.Id === data.MeterId),
       );
+    }
+
+    if (meterId !== null || meterId !== undefined) {
+      state.premise?.Meters.forEach((m) => {
+        filteredData = filteredData.filter((data) => meterId === data.MeterId);
+      });
     }
 
     if (fromDate !== undefined && toDate !== undefined) {
