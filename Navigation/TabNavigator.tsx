@@ -1,10 +1,5 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import {
-//   NavigationProp,
-//   useNavigation,
-//   useRoute,
-// } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
@@ -30,14 +25,8 @@ const Tab = createBottomTabNavigator<TabParamList>();
 export default function TabNavigator() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  // const { state } = usePremiseContext();
-  // const navigation = useNavigation<NavigationProp<TabParamList>>();
-  // const route = useRoute();
-  // const id = state.premise?.Id ?? 0;
-  // console.log(state);
   return (
     <Tab.Navigator
-      // screenOptions={({ navigation }) => ({
       screenOptions={() => ({
         headerStyle: {
           height: 120,
@@ -53,16 +42,6 @@ export default function TabNavigator() {
             />
           </Pressable>
         ),
-        // headerLeft: () => (
-        //   <Pressable onPress={handleGoBack}>
-        //     <MaterialIcons
-        //       name="arrow-back"
-        //       size={30}
-        //       color="#000"
-        //       style={{ paddingLeft: paddingHorizontal }}
-        //     />
-        //   </Pressable>
-        // ),
         headerTitle: () => <LogoTitle />,
         headerTitleAlign: 'center',
         tabBarStyle: BottomTabStyle.tabBar,
