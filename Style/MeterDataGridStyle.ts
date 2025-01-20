@@ -24,4 +24,11 @@ export const MeterDataGridStyle = StyleSheet.create({
     borderColor: '#d9d9d9',
     borderBottomWidth: 0.8,
   },
+  text: {
+    fontSize: 18,
+    textAlign: 'left',
+    marginTop: 15,
+    fontStyle: 'italic',
+    color: '#ababab',
+  }
 });
