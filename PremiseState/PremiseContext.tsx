@@ -1,15 +1,19 @@
 import React, { createContext, ReactNode, useContext, useReducer } from 'react';
-// import { MeterData, Premise } from '../Types/Type';
-import { premise, meterData } from '../Types/Types2';
+import { customer, meterData, premise } from '../Types/Types2';
 
 type State = {
-  premise: premise | null;
+  customer: customer | null;
+  premises: premise[];
   meterData: meterData[];
+  selectedPremise: premise | null;
 };
 
 type Action =
+  | { type: 'SET_CUSTOMER'; payload: customer & { premises: premise[] } }
+  | { type: 'RESET_CUSTOMER' }
+  | { type: 'SET_PREMISES'; payload: premise[] }
   | { type: 'SET_PREMISE'; payload: premise }
-  | { type: 'CHANGE_PREMISE'; payload: premise }
+  | { type: 'RESET_PREMISE' }
   | { type: 'SET_METER_DATA'; payload: meterData[] };
 
 type ContextType = {
@@ -20,27 +24,36 @@ type ContextType = {
 const PremiseContext = createContext<ContextType | undefined>(undefined);
 
 const initialState: State = {
-  premise: null,
-  meterData: [
-    {
-      dateTime: '',
-      value: 0,
-      cost: 0,
-      premiseId: 0,
-      designation: '',
-      meterId: 0,
-      productId: 0,
-      resolution: '',
-    },
-  ],
+  customer: null,
+  premises: [],
+  meterData: [],
+  selectedPremise: null,
 };
 
 const premiseReducer = (state: State, action: Action): State => {
   switch (action.type) {
+    case 'SET_CUSTOMER':
+      return {
+        ...state,
+        customer: action.payload,
+        premises: action.payload.premises,
+      };
+    case 'RESET_CUSTOMER':
+      return {
+        ...state,
+        customer: null,
+        premises: [],
+        selectedPremise: null,
+        meterData: [],
+      };
+    case 'SET_PREMISES':
+      return { ...state, premises: action.payload };
     case 'SET_PREMISE':
-    case 'CHANGE_PREMISE':
-      return { premise: action.payload, meterData: state.meterData };
+      return { ...state, selectedPremise: action.payload };
+    case 'RESET_PREMISE':
+      return { ...state, selectedPremise: null };
     case 'SET_METER_DATA':
+      console.log('Setting meterData:', action.payload); // Add this line to debug
       return { ...state, meterData: action.payload };
     default:
       return state;

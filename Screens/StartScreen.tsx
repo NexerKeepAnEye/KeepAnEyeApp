@@ -1,14 +1,12 @@
-import React, { useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { useIsFocused } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import React from 'react';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import NexerLogo from '../assets/NexerLogo.png';
-import data from '../MockedData/testdb.json';
-import { premise } from '../Types/Types2';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
-import { StartScreenStyle } from '../Style/StartScreenStyle';
 import { usePremiseContext } from '../PremiseState/PremiseContext';
+import { StartScreenStyle } from '../Style/StartScreenStyle';
+import { premise } from '../Types/Types2';
 
 type StartScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -20,28 +18,28 @@ type Props = {
 };
 
 export default function StartScreen({ navigation }: Props) {
-  const { dispatch } = usePremiseContext();
-  const isFocused = useIsFocused();
+  const { state, dispatch } = usePremiseContext();
+  // const isFocused = useIsFocused();
 
-  useEffect(() => {
-    if (isFocused) {
-      const state = navigation.getState();
-      const currentRoute = state.routes[state.index];
-      if (currentRoute.name !== 'StartScreen') {
-        resetNavigationStack(navigation, 'StartScreen');
-      }
-    }
-  }, [isFocused, navigation]);
+  // useEffect(() => {
+  //   if (isFocused) {
+  //     const state = navigation.getState();
+  //     const currentRoute = state.routes[state.index];
+  //     if (currentRoute.name !== 'StartScreen') {
+  //       // resetNavigationStack(navigation, 'StartScreen');
+  //     }
+  //   }
+  // }, [isFocused, navigation]);
 
   const renderItem = (item: premise) => (
     <TouchableOpacity
       key={item.id}
       style={StartScreenStyle.listItems}
       onPress={() => {
-        const premise = item;
-        if (premise) {
-          dispatch({ type: 'SET_PREMISE', payload: premise });
-        }
+        dispatch({
+          type: 'SET_PREMISE',
+          payload: item,
+        });
         navigation.navigate('tabs', {
           screen: 'ReportScreen',
           params: { premiseId: item.id },
@@ -74,7 +72,7 @@ export default function StartScreen({ navigation }: Props) {
         <Text style={StartScreenStyle.textHeader}>Mina Fastigheter</Text>
       </View>
       <ScrollView style={StartScreenStyle.itemBox}>
-        {data.Premise.map((item) => renderItem(item))}
+        {state.premises.map((item) => renderItem(item))}
       </ScrollView>
       <Image
         source={NexerLogo}
@@ -82,10 +80,4 @@ export default function StartScreen({ navigation }: Props) {
       />
     </View>
   );
-}
-function resetNavigationStack(
-  navigation: StartScreenNavigationProp,
-  arg1: string,
-) {
-  throw new Error('Function not implemented.');
 }

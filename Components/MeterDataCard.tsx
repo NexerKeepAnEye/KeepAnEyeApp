@@ -5,7 +5,7 @@ import { Card } from 'react-native-paper';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { usePremiseContext } from '../PremiseState/PremiseContext';
 import { MeterDataCardStyle } from '../Style/MeterDataCardStyle';
-import MeterIcon from './MeterIcon';
+// import MeterIcon from './MeterIcon';
 
 type Props = {
   meterId: number;
@@ -15,7 +15,7 @@ type Props = {
 export default function MeterDataCard({ meterId, navigation }: Props) {
   const { state } = usePremiseContext();
 
-  const meter = state.premise?.Meters.find((m) => m.Id === meterId);
+  const meter = state.selectedPremise?.meters.find((m) => m.id === meterId);
 
   return (
     <TouchableHighlight
@@ -27,16 +27,16 @@ export default function MeterDataCard({ meterId, navigation }: Props) {
     >
       <Card style={MeterDataCardStyle.card}>
         <View style={MeterDataCardStyle.row}>
-          {state.premise?.Name ? (
+          {state.selectedPremise?.name ? (
             <>
-              <View style={MeterDataCardStyle.iconContainer}>
+              {/* <View style={MeterDataCardStyle.iconContainer}>
                 <MeterIcon productCode={meter?.ProductCode ?? ''} />
-              </View>
+              </View> */}
               <Card.Content style={MeterDataCardStyle.content}>
-                <Text style={MeterDataCardStyle.title}>{meter?.Name}</Text>
-                <Text style={MeterDataCardStyle.subtitle}>
-                  Produktkod: {meter?.ProductCode}
-                </Text>
+                <Text style={MeterDataCardStyle.title}>{meter?.name}</Text>
+                {/* <Text style={MeterDataCardStyle.subtitle}>
+                  Produktkod: {meter?.productCode}
+                </Text> */}
               </Card.Content>
             </>
           ) : (
