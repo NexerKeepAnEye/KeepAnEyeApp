@@ -3,8 +3,8 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { TouchableHighlight, View } from 'react-native';
 import { Card, Text } from 'react-native-paper';
+import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
-import { usePremiseContext } from '../PremiseState/PremiseContext';
 import { premiseCardStyle } from '../Style/PremiseCardStyle';
 
 type Props<T extends keyof RootStackParamList> = {

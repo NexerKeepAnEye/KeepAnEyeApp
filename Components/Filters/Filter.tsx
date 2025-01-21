@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import { Text } from 'react-native-paper';
+import {
+  Provider as PaperProvider,
+  Portal,
+  Snackbar,
+  Text,
+} from 'react-native-paper';
 import { filterStyle } from '../../Style/FilterStyle';
 import { searchButtonStyle } from '../../Style/SearchButtonStyle';
 import { Meter, MeterData } from '../../Types/Type';
@@ -41,8 +46,22 @@ const Filter: React.FC<FilterProps> = ({
   meterId: meterId,
   buttonText,
 }) => {
+  const [visible, setVisible] = useState(false);
+
+  const showSnackbar = () => setVisible(true);
+  const hideSnackbar = () => setVisible(false);
+
   const handleSearch = () => {
     let filteredData = meterData;
+
+    if (
+      (filters.includes('year') && !year) ||
+      (filters.includes('meter') && !meter) ||
+      (filters.includes('dateRange') && !fromDate && !toDate)
+    ) {
+      showSnackbar();
+      return;
+    }
 
     if (year) {
       filteredData = filteredData.filter((item) => {
@@ -75,7 +94,7 @@ const Filter: React.FC<FilterProps> = ({
   };
 
   return (
-    <>
+    <PaperProvider>
       <View style={filterStyle.container}>
         {filters.includes('year') && setYear && (
           <YearSearch setSelectedYear={setYear} />
@@ -95,7 +114,7 @@ const Filter: React.FC<FilterProps> = ({
           />
         )}
       </View>
-      <View>
+      <View style={filterStyle.buttonContainer}>
         <TouchableOpacity
           onPress={handleSearch}
           style={searchButtonStyle.button}
@@ -103,7 +122,23 @@ const Filter: React.FC<FilterProps> = ({
           <Text style={searchButtonStyle.text}>{buttonText}</Text>
         </TouchableOpacity>
       </View>
-    </>
+      <Portal>
+        <Snackbar
+          visible={visible}
+          onDismiss={hideSnackbar}
+          duration={Snackbar.DURATION_SHORT}
+          action={{
+            label: 'Uppfattat',
+            onPress: hideSnackbar,
+            textColor: 'white',
+          }}
+          elevation={0}
+          style={filterStyle.snackbar}
+        >
+          <Text style={filterStyle.snackBarText}>Fyll i fälten</Text>
+        </Snackbar>
+      </Portal>
+    </PaperProvider>
   );
 };
 

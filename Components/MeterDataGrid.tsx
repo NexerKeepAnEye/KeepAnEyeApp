@@ -1,14 +1,15 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { DataTable } from 'react-native-paper';
-import { meterData } from '../MockedData/MockedMeterDataMonth';
 import {
   FilterAction,
   filterReducer,
   FilterState,
   initialState,
-} from '../PremiseState/FilterReducer';
+} from '../Context/FilterReducer';
+import { meterData } from '../MockedData/MockedMeterDataMonth';
 import { MeterDataGridStyle } from '../Style/MeterDataGridStyle';
+import { ReportGridStyle } from '../Style/ReportGridStyleStyle';
 import { MeterData } from '../Types/Type';
 import Filter from './Filters/Filter';
 
@@ -34,7 +35,7 @@ export default function MeterDataGrid({ meterId }: Props) {
   }, []);
 
   return (
-    <View style={MeterDataGridStyle.root}>
+    <ScrollView style={ReportGridStyle.root}>
       <Filter
         filters={['dateRange']}
         setFromDate={(date) =>
@@ -49,11 +50,11 @@ export default function MeterDataGrid({ meterId }: Props) {
           setFilteredResults(data);
           setFilterApplied(true);
         }}
-        buttonText={'sök'}
+        buttonText={'Sök'}
       />
-      <View style={MeterDataGridStyle.container}>
+      <>
         {filterApplied ? (
-          <ScrollView>
+          <View>
             <DataTable style={MeterDataGridStyle.gridContainer}>
               <DataTable.Header style={MeterDataGridStyle.header}>
                 <DataTable.Title textStyle={MeterDataGridStyle.title}>
@@ -87,9 +88,9 @@ export default function MeterDataGrid({ meterId }: Props) {
                 <Text style={MeterDataGridStyle.text}>Data saknas</Text>
               )}
             </DataTable>
-          </ScrollView>
+          </View>
         ) : null}
-      </View>
-    </View>
+      </>
+    </ScrollView>
   );
 }

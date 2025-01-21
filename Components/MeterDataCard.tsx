@@ -2,8 +2,8 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { Text, TouchableHighlight, View } from 'react-native';
 import { Card } from 'react-native-paper';
+import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
-import { usePremiseContext } from '../PremiseState/PremiseContext';
 import { MeterDataCardStyle } from '../Style/MeterDataCardStyle';
 import MeterIcon from './MeterIcon';
 

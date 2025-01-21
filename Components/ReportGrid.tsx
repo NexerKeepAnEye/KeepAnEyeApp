@@ -1,13 +1,14 @@
 import React, { Reducer, useEffect, useReducer, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { DataTable, Divider } from 'react-native-paper';
-import { meterData } from '../MockedData/MockedMeterDataMonth';
 import {
   FilterAction,
   filterReducer,
   FilterState,
   initialState,
-} from '../PremiseState/FilterReducer';
+} from '../Context/FilterReducer';
+import { meterData } from '../MockedData/MockedMeterDataMonth';
+import { mockedData } from '../MockedData/MockedProduct';
 import { ReportGridStyle } from '../Style/ReportGridStyleStyle';
 import Filter from './Filters/Filter';
 import MeterDataBarChart from './MeterDataBarChart';
@@ -39,6 +40,14 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
     const date = new Date(dateString);
     return date.toLocaleString('default', { month: 'long' });
   };
+
+  const meter = state.meter;
+
+  const productCode = meter && meter.length > 0 ? meter[0].ProductCode : null;
+
+  const productName = productCode
+    ? mockedData.find((item) => item.Code === productCode)?.Unit
+    : null;
 
   return (
     <ScrollView style={ReportGridStyle.root}>
@@ -80,7 +89,9 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
                       <DataTable>
                         <DataTable.Header>
                           <DataTable.Title>Månad</DataTable.Title>
-                          <DataTable.Title>Value</DataTable.Title>
+                          <DataTable.Title>
+                            Förbrukning {productName?.toString() ?? ''}
+                          </DataTable.Title>
                         </DataTable.Header>
                         {filteredResults.map((item, index) => (
                           <DataTable.Row key={index}>
@@ -97,7 +108,7 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
               </>
             ) : (
               <View style={ReportGridStyle.container}>
-                <Text style={ReportGridStyle.noDataText}>Finns ingen data</Text>
+                <Text style={ReportGridStyle.noDataText}>Data saknas</Text>
               </View>
             )
           ) : null}
