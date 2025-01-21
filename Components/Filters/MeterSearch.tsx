@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import { usePremiseContext } from '../../PremiseState/PremiseContext';
+import { usePremiseContext } from '../../Context/PremiseContext';
 import { meterSearch } from '../../Style/MeterSearchStyle';
 import { Meter } from '../../Types/Type';
 import MeterIcon from '../MeterIcon';

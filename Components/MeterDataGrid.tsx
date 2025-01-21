@@ -1,13 +1,13 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { DataTable } from 'react-native-paper';
-import { meterData } from '../MockedData/MockedMeterDataMonth';
 import {
   FilterAction,
   filterReducer,
   FilterState,
   initialState,
-} from '../PremiseState/FilterReducer';
+} from '../Context/FilterReducer';
+import { meterData } from '../MockedData/MockedMeterDataMonth';
 import { MeterDataGridStyle } from '../Style/MeterDataGridStyle';
 import { MeterData } from '../Types/Type';
 import Filter from './Filters/Filter';
