@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { View } from 'react-native';
 import { BarChart } from 'react-native-gifted-charts';
 import { Text } from 'react-native-paper';
@@ -23,15 +23,35 @@ export default function MeterDataBarChart({
 
   filteredResults = filteredResults.filter((item) => item.Value > 0);
 
-  useEffect(() => {
-    console.log('filteredResults in MeterDataBarChart:', filteredResults);
-  }, [filteredResults]);
+  // useEffect(() => {
+  //   console.log('filteredResults in MeterDataBarChart:', filteredResults);
+  // }, [filteredResults]);
 
   const formatMonth = (date: Date) => {
     return date.toLocaleString('default', { month: 'short' });
   };
 
-  const sortedData = filteredResults.sort(
+  const groupAndSumData = (data: MeterData[]) => {
+    const groupedData = new Map();
+
+    data.forEach((item) => {
+      const date = new Date(item.DateTime);
+      const monthYear = `${date.getFullYear()}-${date.getMonth() + 1}`;
+
+      if (!groupedData.has(monthYear)) {
+        groupedData.set(monthYear, { ...item, Value: 0 });
+      }
+
+      const existingItem = groupedData.get(monthYear);
+      existingItem.Value += item.Value;
+    });
+
+    return Array.from(groupedData.values());
+  };
+
+  const groupedData = groupAndSumData(filteredResults);
+
+  const sortedData = groupedData.sort(
     (a, b) => new Date(a.DateTime).getTime() - new Date(b.DateTime).getTime(),
   );
 
@@ -45,8 +65,8 @@ export default function MeterDataBarChart({
   }));
 
   const maxValue =
-    Math.ceil(Math.max(...filteredResults.map((item) => item.Value)) / 10000) *
-    10000;
+    Math.ceil(Math.max(...groupedData.map((item) => item.Value)) / 10000) *
+    20000;
   const stepValue = maxValue / 5;
 
   const handleBarPress = (

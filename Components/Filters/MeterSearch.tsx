@@ -92,7 +92,7 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
             numberOfLines={1}
             ellipsizeMode="tail"
           >
-            {selectedMeter?.toString() || '- Mätare -'}
+            {selectedMeter?.toString() || ' Mätare '}
           </Text>
           {/* <View style={meterSearch.iconContainer}>
             <List.Icon

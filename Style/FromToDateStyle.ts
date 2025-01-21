@@ -15,7 +15,7 @@ export const dateStyles = StyleSheet.create({
   },
   pickerContainer: {
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: '#dddddd',
     borderRadius: 10,
     width: width * 0.28,
     height: height * 0.04,

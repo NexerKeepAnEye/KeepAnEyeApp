@@ -25,23 +25,26 @@ export const Accordion = () => {
       <View>
         <List.Section>
           <View style={AccordionStyle.container}>
-            <View style={AccordionStyle.content}>
-              <Text style={AccordionStyle.header}>
-                {selectedReport || '-- Välj rapport --'}
-              </Text>
-              <TouchableOpacity
-                onPress={handlePress}
-                style={AccordionStyle.dDL}
-              >
-                <List.Icon
-                  icon={expanded ? 'chevron-up' : 'chevron-down'}
-                  style={[
-                    AccordionStyle.listButton,
-                    { borderBottomRightRadius: expanded ? 0 : 10 },
-                  ]}
-                />
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity onPress={handlePress}>
+              <View style={AccordionStyle.content}>
+                <Text style={AccordionStyle.header}>
+                  {selectedReport || '-- Välj rapport --'}
+                </Text>
+                <TouchableOpacity
+                  onPress={handlePress}
+                  style={AccordionStyle.dDL}
+                >
+                  <List.Icon
+                    icon={expanded ? 'chevron-up' : 'chevron-down'}
+                    style={[
+                      AccordionStyle.listButton,
+                      { borderBottomRightRadius: expanded ? 0 : 10 },
+                    ]}
+                  />
+                </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
+
             {expanded && (
               <View style={AccordionStyle.listExpanded}>
                 {filterTypes.rapporter.map((report) => (

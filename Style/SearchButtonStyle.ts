@@ -4,12 +4,14 @@ import { width } from './Dimensions';
 export const searchButtonStyle = StyleSheet.create({
   button: {
     backgroundColor: '#FF7043',
-    borderRadius: 20,
+    borderRadius: 30,
     padding: 10,
     maxWidth: width / 3,
-    minWidth: width / 6,
+    minWidth: width / 7,
     alignSelf: 'flex-end',
+    alignItems: 'center',
     marginTop: 3,
+    height: 39,
   },
   text: {
     color: 'white',

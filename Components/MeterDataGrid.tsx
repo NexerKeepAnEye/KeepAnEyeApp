@@ -34,7 +34,7 @@ export default function MeterDataGrid({ meterId }: Props) {
   }, []);
 
   return (
-    <View style={MeterDataGridStyle.root}>
+    <ScrollView>
       <Filter
         filters={['dateRange']}
         setFromDate={(date) =>
@@ -49,7 +49,7 @@ export default function MeterDataGrid({ meterId }: Props) {
           setFilteredResults(data);
           setFilterApplied(true);
         }}
-        buttonText={'sök'}
+        buttonText={'Sök'}
       />
       <View style={MeterDataGridStyle.container}>
         {filterApplied ? (
@@ -90,6 +90,6 @@ export default function MeterDataGrid({ meterId }: Props) {
           </ScrollView>
         ) : null}
       </View>
-    </View>
+    </ScrollView>
   );
 }

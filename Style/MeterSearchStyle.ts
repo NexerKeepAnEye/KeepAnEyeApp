@@ -8,7 +8,7 @@ export const meterSearch = StyleSheet.create({
   pickerContainer: {
     flexDirection: 'row',
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: '#dddddd',
     borderRadius: 10,
     // width: width * 0.4,
     height: height * 0.04,
