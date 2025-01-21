@@ -1,0 +1,14 @@
+ {
+    "Product": [
+    { "id": 1, "code": "FJV" },
+    { "id": 2, "code": "FJK" },
+    { "id": 3, "code": "EL" },
+    { "id": 4, "code": "VAT" },
+    { "id": 5, "code": "EL-U" },
+    { "id": 6, "code": "VAT-U" },
+    { "id": 7, "code": "VOL" },
+    { "id": 8, "code": "FLÖDE" },
+    { "id": 9, "code": "TMP" },
+    { "id": 10, "code": "OLJA" }
+  ]
+}

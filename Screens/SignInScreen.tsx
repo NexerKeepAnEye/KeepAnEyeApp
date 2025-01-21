@@ -12,60 +12,34 @@ import {
 } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { fetchAPI } from '../Api/fetchAPI';
 import logoKAE from '../assets/logoKAE.png';
 import NexerLogo from '../assets/NexerLogo.png';
-import data from '../MockedData/testdb.json';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { usePremiseContext } from '../PremiseState/PremiseContext';
 import { SignIn } from '../Style/SignInStyle';
-import { meter, meterData, premise } from '../Types/Types2';
 
 export default function SignInScreen() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const { dispatch } = usePremiseContext();
+  const { state } = usePremiseContext();
   const [form, setForm] = useState({ ApiKey: '' });
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = () => {
-    const customer = data.Customer.find((c) => c.apikey === form.ApiKey);
-    if (customer) {
-      const customerPremises: premise[] = data.Premise.filter(
-        (premise) => premise.customerId === customer.id,
-      ).map((premise) => ({
-        ...premise,
-        meters: data.Meter.filter(
-          (meter) => meter.premiseId === premise.id,
-        ) as meter[],
-      }));
-
-      console.log(customerPremises);
-
-      const customerMeterData: meterData[] = data.MeterData.filter(
-        (meterData) =>
-          customerPremises.some((premise) =>
-            premise.meters.some((meter) => meter.id === meterData.meterId),
-          ),
-      );
-
+  const handleLogin = async () => {
+    try {
+      const ok = await fetchAPI('abc');
       setLoading(true);
-      dispatch({
-        type: 'SET_CUSTOMER',
-        payload: {
-          ...customer,
-          premises: customerPremises,
-        },
-      });
-      dispatch({
-        type: 'SET_METER_DATA',
-        payload: customerMeterData,
-      });
-      navigation.navigate('StartScreen');
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
-    } else {
-      Alert.alert('Fel', 'Felaktig API nyckel.');
+      if (ok === 200) {
+        navigation.navigate('StartScreen');
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+      } else {
+        Alert.alert('Fel', 'Felaktig API nyckel.');
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Failed to fetch customers');
     }
   };
 

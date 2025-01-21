@@ -1,0 +1,104 @@
+{
+  "Premise": [
+    {
+      "apikey": "abc",
+      "id": 1,
+      "name": "Empire State",
+      "designation": "123few",
+      "meters": [
+        { "id": 1, "premiseId": 1, "productId": 1, "name": "Meter 1" },
+        { "id": 2, "premiseId": 1, "productId": 2, "name": "Meter 2" }
+      ]
+    },
+    {
+      "apikey": "abc",
+      "id": 2,
+      "name": "Crystal Palace",
+      "designation": "2342tew",
+      "meters": [
+        { "id": 3, "premiseId": 2, "productId": 3, "name": "Meter 3" },
+        { "id": 4, "premiseId": 2, "productId": 4, "name": "Meter 4" }
+      ]
+    },
+    {
+      "apikey": "abc",
+      "id": 3,
+      "name": "Sunset Boulevard",
+      "designation": "asg",
+      "meters": [
+        { "id": 5, "premiseId": 3, "productId": 5, "name": "Meter 5" },
+        { "id": 6, "premiseId": 3, "productId": 6, "name": "Meter 6" }
+      ]
+    },
+    {
+      "apikey": "abc",
+      "id": 4,
+      "name": "123 Main St",
+      "designation": "fds",
+      "meters": [
+        { "id": 7, "premiseId": 4, "productId": 7, "name": "Meter 7" },
+        { "id": 8, "premiseId": 4, "productId": 8, "name": "Meter 8" }
+      ]
+    },
+    {
+      "apikey": "abc",
+      "id": 5,
+      "name": "Quantum Tower",
+      "designation": "fhk",
+      "meters": [
+        { "id": 9, "premiseId": 5, "productId": 9, "name": "Meter 9" },
+        { "id": 10, "premiseId": 5, "productId": 10, "name": "Meter 10" }
+      ]
+    },
+    {
+      "apikey": "abc",
+      "id": 6,
+      "name": "Rivendell",
+      "designation": "öiuhgb",
+      "meters": [
+        { "id": 11, "premiseId": 6, "productId": 11, "name": "Meter 11" },
+        { "id": 12, "premiseId": 6, "productId": 12, "name": "Meter 12" }
+      ]
+        },
+        {
+      "apikey": "abc",
+      "id": 7,
+      "name": "Hogwarts",
+      "designation": "78876yh",
+      "meters": [
+        { "id": 13, "premiseId": 7, "productId": 13, "name": "Meter 13" },
+        { "id": 14, "premiseId": 7, "productId": 14, "name": "Meter 14" }
+      ]
+        },
+        {
+      "apikey": "abc",
+      "id": 8,
+      "name": "Wayne Manor",
+      "designation": "09ijhy65rf",
+      "meters": [
+        { "id": 15, "premiseId": 8, "productId": 15, "name": "Meter 15" },
+        { "id": 16, "premiseId": 8, "productId": 16, "name": "Meter 16" }
+      ]
+        },
+        {
+      "apikey": "abc",
+      "id": 9,
+      "name": "Baker Street",
+      "designation": "1234ef",
+      "meters": [
+        { "id": 17, "premiseId": 9, "productId": 17, "name": "Meter 17" },
+        { "id": 18, "premiseId": 9, "productId": 18, "name": "Meter 18" }
+      ]
+        },
+        {
+      "apikey": "abc",
+      "id": 10,
+      "name": "Shire",
+      "designation": "35erf",
+      "meters": [
+        { "id": 19, "premiseId": 10, "productId": 19, "name": "Meter 19" },
+        { "id": 20, "premiseId": 10, "productId": 20, "name": "Meter 20" }
+      ]
+}
+]
+  }

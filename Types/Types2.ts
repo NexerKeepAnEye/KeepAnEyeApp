@@ -16,8 +16,8 @@ export type product = {
 };
 
 export type premise = {
+  apikey: string
   id: number;
-  customerId: number;
   name: string;
   designation: string;
   meters: meter[];
