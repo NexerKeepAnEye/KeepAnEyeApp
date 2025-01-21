@@ -3,6 +3,18 @@ import { height, width } from './Dimensions';
 
 const window = Dimensions.get('window').height;
 
+const getTopValue = () => {
+  if (window > 900) {
+    return 480;
+  } else if (window > 800) {
+    return 420;
+  } else if (window > 600) {
+    return 285;
+  } else {
+    return 300; // Default value if none of the conditions are met
+  }
+};
+
 export const filterStyle = StyleSheet.create({
   container: {
     flexDirection: 'row',
@@ -14,7 +26,7 @@ export const filterStyle = StyleSheet.create({
     height: height * 0.04,
     borderRadius: 10,
     backgroundColor: 'red',
-    top: window > 800 ? 420 : window > 800 ? 350 : 280,
+    top: getTopValue(),
   },
   snackBarText: {
     fontSize: 16,
