@@ -11,7 +11,7 @@ export const searchButtonStyle = StyleSheet.create({
     alignSelf: 'flex-end',
     alignItems: 'center',
     marginTop: 3,
-    height: 39,
+    height: 40,
   },
   text: {
     color: 'white',

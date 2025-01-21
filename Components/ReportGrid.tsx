@@ -108,7 +108,7 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
               </>
             ) : (
               <View style={ReportGridStyle.container}>
-                <Text style={ReportGridStyle.noDataText}>Finns ingen data</Text>
+                <Text style={ReportGridStyle.noDataText}>Data saknas</Text>
               </View>
             )
           ) : null}
