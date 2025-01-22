@@ -18,7 +18,7 @@ export const dateStyles = StyleSheet.create({
     borderColor: '#dddddd',
     borderRadius: 10,
     width: width * 0.28,
-    height: height * 0.04,
+    height: height * 0.05,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',

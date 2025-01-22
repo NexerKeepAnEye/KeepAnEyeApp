@@ -7,10 +7,12 @@ export interface FilterState {
   year?: string;
   fromDate?: Date;
   toDate?: Date;
+  resolution?: string;
 }
 
 export type FilterAction =
   | { type: 'SET_METER_DATA'; payload: MeterData[] }
+  | { type: 'SET_RESOLUTION'; payload: string }
   | { type: 'SET_FILTERED_RESULTS'; payload: MeterData[] }
   | { type: 'SET_METER'; payload: Meter[] }
   | { type: 'SET_YEAR'; payload: string | undefined }
@@ -24,6 +26,7 @@ export const initialState: FilterState = {
   year: undefined,
   fromDate: undefined,
   toDate: undefined,
+  resolution: undefined,
 };
 
 export const filterReducer = (
@@ -43,6 +46,8 @@ export const filterReducer = (
       return { ...state, fromDate: action.payload };
     case 'SET_TO_DATE':
       return { ...state, toDate: action.payload };
+    case 'SET_RESOLUTION':
+      return { ...state, resolution: action.payload };
     default:
       return state;
   }

@@ -3,6 +3,7 @@ import { height, width } from './Dimensions';
 
 export const AccordionStyle = StyleSheet.create({
   container: {
+    marginTop: 3,
     width: width * 0.9, // 90% of screen width
     borderWidth: 1,
     borderColor: '#d9d9d9',
@@ -57,6 +58,6 @@ export const AccordionStyle = StyleSheet.create({
     textAlign: 'center',
     fontSize: width * 0.05, // 5% of screen width
     fontWeight: 'bold',
-    marginBottom: 10,
+    // marginBottom: 10,
   },
 });

@@ -11,7 +11,7 @@ export const meterSearch = StyleSheet.create({
     borderColor: '#dddddd',
     borderRadius: 10,
     // width: width * 0.4,
-    height: height * 0.04,
+    height: height * 0.05,
     paddingHorizontal: 10,
     backgroundColor: 'white',
     opacity: 0.8,
@@ -77,7 +77,7 @@ export const meterSearch = StyleSheet.create({
   closeButton: {
     marginTop: 10,
     textAlign: 'center',
-    color: 'blue',
+    color: '#056ffd',
     fontSize: width * 0.04,
   },
 });

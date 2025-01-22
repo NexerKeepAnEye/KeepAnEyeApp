@@ -22,6 +22,7 @@ export const MeterDataGridStyle = StyleSheet.create({
   title: {
     fontWeight: 'bold',
   } as TextStyle,
+
   cell: {
     borderColor: '#d9d9d9',
     borderBottomWidth: 0.8,

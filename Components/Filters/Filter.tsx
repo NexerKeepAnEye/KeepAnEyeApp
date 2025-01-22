@@ -6,27 +6,32 @@ import {
   Snackbar,
   Text,
 } from 'react-native-paper';
+// import { usePremiseContext } from '../../Context/PremiseContext';
+import { useNavigationState } from '@react-navigation/native';
 import { filterStyle } from '../../Style/FilterStyle';
 import { searchButtonStyle } from '../../Style/SearchButtonStyle';
 import { Meter, MeterData } from '../../Types/Type';
 import { FromToDate } from './FromToDate';
 import MeterSearch from './MeterSearch';
+import { Resolution } from './Resolution';
 import YearSearch from './YearSearch';
 
 interface FilterProps {
-  filters: string[];
   setYear?: (year: string) => void;
   setMeter?: (meter: Meter[]) => void;
   setFromDate?: (date: Date) => void;
   setToDate?: (date: Date) => void;
   setMeterId?: (meterId: number) => void;
+  setResolution?: (resolution: string) => void;
+  setFilteredResults: (data: MeterData[]) => void;
   year?: string;
   meter?: Meter[];
   fromDate?: Date | null;
   toDate?: Date | null;
   meterData: MeterData[];
-  setFilteredResults: (data: MeterData[]) => void;
   meterId?: number;
+  resolution?: string;
+  filters: string[];
   buttonText: string;
 }
 
@@ -37,27 +42,42 @@ const Filter: React.FC<FilterProps> = ({
   setFromDate,
   setToDate,
   setMeterId,
+  setResolution,
+  setFilteredResults,
   year,
   meter,
   fromDate,
   toDate,
   meterData,
-  setFilteredResults,
   meterId: meterId,
+  resolution,
   buttonText,
 }) => {
   const [visible, setVisible] = useState(false);
 
   const showSnackbar = () => setVisible(true);
   const hideSnackbar = () => setVisible(false);
+  // const { state } = usePremiseContext();
 
   const handleSearch = () => {
+    // const meterData = await fetchMeterData(
+    //   'fc41e3f1-f155-4465-b908-a79991643b0a',
+    //   meterId ?? meter?.map((m) => m.Id) ?? [],
+    //   resolution,
+    //   fromDate?.toISOString(),
+    //   toDate?.toISOString(),
+    //   false,
+    //   state.premise?.Id,
+    //   [], // designations
+    // );
+
     let filteredData = meterData;
 
     if (
       (filters.includes('year') && !year) ||
       (filters.includes('meter') && !meter) ||
-      (filters.includes('dateRange') && !fromDate && !toDate)
+      (filters.includes('dateRange') && !fromDate && !toDate) ||
+      (filters.includes('resolution') && !resolution)
     ) {
       showSnackbar();
       return;
@@ -93,6 +113,20 @@ const Filter: React.FC<FilterProps> = ({
     setFilteredResults(filteredData);
   };
 
+  const routeNames = useNavigationState((state) => state.routeNames);
+  const currentRoute = routeNames[routeNames.length - 1];
+
+  const getSnackbarStyle = () => {
+    switch (currentRoute) {
+      case 'ReportScreen':
+        return filterStyle.snackbar;
+      case 'MeterDataScreen':
+        return filterStyle.snackbar2;
+      default:
+        return filterStyle.snackbar;
+    }
+  };
+
   return (
     <PaperProvider>
       <View style={filterStyle.container}>
@@ -112,6 +146,9 @@ const Filter: React.FC<FilterProps> = ({
             fromDate={fromDate ?? null}
             toDate={toDate ?? null}
           />
+        )}
+        {filters.includes('resolution') && setResolution && (
+          <Resolution setSelectedResolution={setResolution} />
         )}
       </View>
       <View style={filterStyle.buttonContainer}>
@@ -133,7 +170,7 @@ const Filter: React.FC<FilterProps> = ({
             textColor: 'white',
           }}
           elevation={0}
-          style={filterStyle.snackbar}
+          style={getSnackbarStyle()}
         >
           <Text style={filterStyle.snackBarText}>Fyll i fälten</Text>
         </Snackbar>

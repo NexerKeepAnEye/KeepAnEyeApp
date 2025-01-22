@@ -5,7 +5,7 @@ export const searchButtonStyle = StyleSheet.create({
   button: {
     backgroundColor: '#FF7043',
     borderRadius: 30,
-    padding: 10,
+    padding: 8,
     maxWidth: width / 3,
     minWidth: width / 7,
     alignSelf: 'flex-end',
