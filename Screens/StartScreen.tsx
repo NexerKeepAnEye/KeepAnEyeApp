@@ -6,7 +6,7 @@ import NexerLogo from '../assets/NexerLogo.png';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { usePremiseContext } from '../PremiseState/PremiseContext';
 import { StartScreenStyle } from '../Style/StartScreenStyle';
-import { premise } from '../Types/Types2';
+import { Premise } from '../Types/Type';
 
 type StartScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -19,21 +19,13 @@ type Props = {
 
 export default function StartScreen({ navigation }: Props) {
   const { state, dispatch } = usePremiseContext();
-  // const isFocused = useIsFocused();
+  const premises: Premise[] = state.premises;
 
-  // useEffect(() => {
-  //   if (isFocused) {
-  //     const state = navigation.getState();
-  //     const currentRoute = state.routes[state.index];
-  //     if (currentRoute.name !== 'StartScreen') {
-  //       // resetNavigationStack(navigation, 'StartScreen');
-  //     }
-  //   }
-  // }, [isFocused, navigation]);
+  console.log('startscreen Premises:', JSON.stringify(premises));
 
-  const renderItem = (item: premise) => (
+  const renderItem = (item: Premise) => (
     <TouchableOpacity
-      key={item.id}
+      key={item.Id}
       style={StartScreenStyle.listItems}
       onPress={() => {
         dispatch({
@@ -42,11 +34,11 @@ export default function StartScreen({ navigation }: Props) {
         });
         navigation.navigate('tabs', {
           screen: 'ReportScreen',
-          params: { premiseId: item.id },
+          params: { premiseId: item.Id },
         });
         navigation.navigate('tabs', {
           screen: 'PremiseStackNavigator',
-          params: { premiseId: item.id },
+          params: { premiseId: item.Id },
         });
       }}
     >
@@ -56,7 +48,7 @@ export default function StartScreen({ navigation }: Props) {
         color="#949494"
         style={StartScreenStyle.listItemPositionStart}
       />
-      <Text style={StartScreenStyle.textItem}>{item.name}</Text>
+      <Text style={StartScreenStyle.textItem}>{item.Name}</Text>
       <Icon
         name="play-arrow"
         size={30}
@@ -72,7 +64,7 @@ export default function StartScreen({ navigation }: Props) {
         <Text style={StartScreenStyle.textHeader}>Mina Fastigheter</Text>
       </View>
       <ScrollView style={StartScreenStyle.itemBox}>
-        {state.premises.map((item) => renderItem(item))}
+        {Array.isArray(premises) && premises.map((item) => renderItem(item))}
       </ScrollView>
       <Image
         source={NexerLogo}

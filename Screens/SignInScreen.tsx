@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { fetchAPI } from '../Api/fetchAPI';
+import { fetchPremise } from '../Api/fetchAPI';
 import logoKAE from '../assets/logoKAE.png';
 import NexerLogo from '../assets/NexerLogo.png';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
@@ -22,24 +22,31 @@ import { SignIn } from '../Style/SignInStyle';
 export default function SignInScreen() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const { state } = usePremiseContext();
-  const [form, setForm] = useState({ ApiKey: '' });
+  const { dispatch } = usePremiseContext();
+  const [form, setForm] = useState({ apikey: '' });
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
-    try {
-      const ok = await fetchAPI('abc');
-      setLoading(true);
-      if (ok === 200) {
-        navigation.navigate('StartScreen');
-        setTimeout(() => {
-          setLoading(false);
-        }, 1000);
-      } else {
+    const data = await fetchPremise(form.apikey);
+    setLoading(true);
+    if (typeof data === 'number') {
+      if (data === 406) {
+        console.log('Errorcode:', data);
+        setLoading(false);
         Alert.alert('Fel', 'Felaktig API nyckel.');
+        return;
       }
-    } catch (error) {
-      Alert.alert('Error', 'Failed to fetch customers');
+      if (data === 500 || data === 504) {
+        console.log('Errorcode:', data);
+        setLoading(false);
+        Alert.alert('Fel', 'Oväntat fel inträffade.');
+        return;
+      }
+    } else if (Array.isArray(data)) {
+      console.log(data);
+      dispatch({ type: 'SET_PREMISES', payload: data });
+      setLoading(false);
+      navigation.navigate('StartScreen');
     }
   };
 
@@ -61,8 +68,8 @@ export default function SignInScreen() {
                 style={SignIn.input}
                 mode="outlined"
                 label="API-Key"
-                value={form.ApiKey}
-                onChangeText={(e) => setForm({ ...form, ApiKey: e })}
+                value={form.apikey}
+                onChangeText={(e) => setForm({ ...form, apikey: e })}
               />
             </View>
             <Button

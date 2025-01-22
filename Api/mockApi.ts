@@ -1,46 +1,68 @@
 // import meterdata from '../MockedData/API/meterdata.json'; // Importera din JSON-fil
 import premise from '../MockedData/API/premise.json'; // Importera din JSON-fil
-// import product from '../MockedData/API/product.json'; // Importera din JSON-fil
+import product from '../MockedData/API/product.json'; // Importera din JSON-fil
 
+export async function mockApiFetch(url: string, options: { headers: { [key: string]: string }, method?: string, body?: string }) {
+  console.log("Mock API Called:", url, options);
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const mockApiFetch = async (url : string, options: any) => {
-  console.log("Fetching from mock API:", url);
-  console.log("Options:", options);
+  // Simulera en liten fördröjning (som ett riktigt API)
+  await new Promise(resolve => setTimeout(resolve, 500));
 
+  // Kontrollera API-nyckeln
+  if (!options.headers['X-API-Key'] || options.headers['X-API-Key'] !== 'abc') {
+    return {
+      ok: false,
+      status: 406,
+      json: async () => ({ error: "Unauthorized: Invalid API Key" }),
+    };
+  }
 
-  // Simulera headers
-const headers = options?.headers || {};
+if (url === '/premise' && options.method === 'GET') {
+    return {
+      ok: true,
+      status: 200,
+      json: async () => premise.Premise, // Returnerar fastigheter
+    };
+  }
 
-    if (url === '/premise' && headers.apikey === 'abc') {
-    // Simulera delay (som om du anropar ett riktigt API)
-    await new Promise(resolve => setTimeout(resolve, 500));
+  // Hantera olika endpoints
+  if (url === '/product' && options.method === 'GET') {
+    return {
+      ok: true,
+      status: 200,
+      json: async () => product.Product, // Returnerar produkterna
+    };
+  }
 
-    // Simulera olika endpoints baserat på URL
-    if (url === '/premise' && options?.method === 'GET') {
-        return {
-            status: 200,
-            json: async () => premise.Premise,
-        };
-    }
-  
-    // if (url === '/meterdata' && options?.method === 'GET') {
+//   if (url === 'https://test.keepaneye.net/api/v1/MeterData' && options.method === 'POST') {
+//     const requestBody = JSON.parse(options.body);
+
+//     const meterData = mockData.meterData.find(
+//       md =>
+//         md.productId === requestBody.productId &&
+//         md.resolution === requestBody.resolution &&
+//         md.from === requestBody.from &&
+//         md.to === requestBody.to &&
+//         md.correctedValues === requestBody.correctedValues
+//     );
+
+    // if (meterData) {
     //   return {
+    //     ok: true,
     //     status: 200,
-    //     json: async () => meterdata.MeterData,
+    //     json: async () => meterData.data, // Returnerar mätdata
+    //   };
+    // } else {
+    //   return {
+    //     ok: false,
+    //     status: 404,
+    //     json: async () => ({ error: "Meter data not found" }),
     //   };
     // }
-    // if (url === '/product' && options?.method === 'GET') {
-    //     return {
-    //         status: 200,
-    //         json: async () => product.Product,
-    //     };
-    // }
-
-    // Simulera 404
+    // Hantera okända endpoints
     return {
-        status: 404,
-        json: async () => ({ error: "Not found" }),
+      ok: false,
+      status: 404,
+      json: async () => ({ error: "Not Found" }),
     };
-};
-}
+  }

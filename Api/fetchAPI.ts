@@ -1,37 +1,63 @@
-import { useState } from "react";
-import { premise } from '../Types/Types2';
+import { Meter, Premise } from "../Types/Type";
 import { mockApiFetch } from "./mockApi";
 
-  const [premises, setPremise] = useState<premise[]>([]);
-  const [error, setError] = useState<string>('');
+export async function fetchPremise(apiKey: string):Promise<Premise[]> {
+  try {
+    const response = await mockApiFetch('/premise', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'X-API-Key': apiKey,
+      },
+    });
 
-    export const fetchAPI = async (apikey: string) => {
-      try {
-        const response = await mockApiFetch('/premise', {
-          method: 'GET',
-          headers: {
-            // 'Content-Type': 'application/json',
-            apikey: apikey, 
-          },
-        });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
-        if (response?.status === 200) {
-          const result = await response.json();
-          if ('error' in result) {
-            setError(result.error);
-          } else {
-            const data: premise[] = result;
-            setPremise(data);
-            return 200;
-          }
-        } else {
-          setError("error");
-        }
-      } catch (err) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError(String(err));
-        }
-      }
-    };
+    const data = await response.json();
+    if (!Array.isArray(data)) {
+      throw new Error('Unexpected response format');
+    }
+    console.log(JSON.stringify(data));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const premises: Premise[] = data.map((item: any): Premise => ({
+      Id: item.Id,
+      Designation: item.Designation ?? null,
+      Name: item.Name,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      Meters: (item.Meters || []).map((meter: any): Meter => ({
+        Id: meter.Id,
+        Name: meter.Name,
+        ProductId: meter.ProductId,
+        ProductCode: meter.ProductCode,
+      })),
+    }));
+    return premises;
+  } catch (error) {
+    console.error('Error fetching premises:', error);
+    return [];
+  }
+}
+
+export async function fetchProduct(apiKey: string) {
+  try {
+    const response = await mockApiFetch('/product', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'X-API-Key': apiKey,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(JSON.stringify(data));
+    return data;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
+}

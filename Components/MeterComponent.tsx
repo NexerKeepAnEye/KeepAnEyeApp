@@ -4,7 +4,7 @@ import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { usePremiseContext } from '../PremiseState/PremiseContext';
 import { MeterComponentStyle } from '../Style/MeterComponentStyle';
-import { meter, meterData } from '../Types/Types2';
+import { Meter, MeterData } from '../Types/Type';
 // import MeterIcon from './MeterIcon';
 
 type Props = {
@@ -14,13 +14,13 @@ type Props = {
 export default function MeterComponent({ navigation }: Props) {
   const { state, dispatch } = usePremiseContext();
 
-  const renderMeter = (item: meter) => (
+  const renderMeter = (item: Meter) => (
     <TouchableOpacity
       style={MeterComponentStyle.listItem}
-      key={item.id}
+      key={item.Id}
       onPress={() => {
-        const meterData: meterData[] = state.meterData.filter(
-          (data) => data.meterId === item.id,
+        const meterData: MeterData[] = state.meterData.filter(
+          (data) => data.MeterId === item.Id,
         );
         console.log('Filtered meterData:', meterData); // Add this line to debug
         dispatch({
@@ -28,7 +28,7 @@ export default function MeterComponent({ navigation }: Props) {
           payload: meterData,
         });
         navigation.navigate('MeterDataScreen', {
-          meterId: item.id,
+          meterId: item.Id,
         });
       }}
     >
@@ -36,15 +36,15 @@ export default function MeterComponent({ navigation }: Props) {
         <MeterIcon productCode={item.productId} />
       </View> */}
       <View style={MeterComponentStyle.textContainer}>
-        <Text style={MeterComponentStyle.textStyleName}>{item.name}</Text>
-        <Text style={MeterComponentStyle.textStyleProductCode}>{item.id}</Text>
+        <Text style={MeterComponentStyle.textStyleName}>{item?.Name}</Text>
+        <Text style={MeterComponentStyle.textStyleProductCode}>{item?.Id}</Text>
       </View>
     </TouchableOpacity>
   );
 
   return (
     <ScrollView style={MeterComponentStyle.container}>
-      {state.selectedPremise?.meters.map((item) => renderMeter(item))}
+      {state.selectedPremise?.Meters.map((item) => renderMeter(item))}
     </ScrollView>
   );
 }

@@ -38,10 +38,10 @@ const PremiseCard = <T extends keyof RootStackParamList>({
               </View>
               <Card.Content style={premiseCardStyle.content}>
                 <Text style={premiseCardStyle.title}>
-                  {state.selectedPremise.name}
+                  {state.selectedPremise.Name}
                 </Text>
                 <Text style={premiseCardStyle.subtitle}>
-                  Beteckning: {state.selectedPremise.designation}
+                  Beteckning: {state.selectedPremise.Designation}
                 </Text>
               </Card.Content>
             </>

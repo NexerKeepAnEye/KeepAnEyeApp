@@ -9,11 +9,11 @@ import { PremiseProvider } from './PremiseState/PremiseContext';
 export default function App() {
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
-        <PremiseProvider>
+      <PremiseProvider>
+        <NavigationContainer>
           <RootStackNavigator />
-        </PremiseProvider>
-      </NavigationContainer>
+        </NavigationContainer>
+      </PremiseProvider>
     </SafeAreaProvider>
   );
 }

@@ -1,20 +1,19 @@
 import React, { createContext, ReactNode, useContext, useReducer } from 'react';
-import { customer, meterData, premise } from '../Types/Types2';
+import { MeterData, Premise } from '../Types/Type';
 
 type State = {
-  customer: customer | null;
-  premises: premise[];
-  meterData: meterData[];
-  selectedPremise: premise | null;
+  premises: Premise[];
+  meterData: MeterData[];
+  selectedPremise: Premise | null;
+  // currentUser: Premise[];
 };
 
 type Action =
-  | { type: 'SET_CUSTOMER'; payload: customer & { premises: premise[] } }
-  | { type: 'RESET_CUSTOMER' }
-  | { type: 'SET_PREMISES'; payload: premise[] }
-  | { type: 'SET_PREMISE'; payload: premise }
+  | { type: 'SET_PREMISES'; payload: Premise[] }
+  | { type: 'SET_PREMISE'; payload: Premise }
   | { type: 'RESET_PREMISE' }
-  | { type: 'SET_METER_DATA'; payload: meterData[] };
+  | { type: 'SET_METER_DATA'; payload: MeterData[] };
+// | { type: 'SET_CURRENT_USER'; payload: Premise[] };
 
 type ContextType = {
   state: State;
@@ -24,37 +23,26 @@ type ContextType = {
 const PremiseContext = createContext<ContextType | undefined>(undefined);
 
 const initialState: State = {
-  customer: null,
   premises: [],
   meterData: [],
   selectedPremise: null,
+  // currentUser: [],
 };
 
 const premiseReducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case 'SET_CUSTOMER':
-      return {
-        ...state,
-        customer: action.payload,
-        premises: action.payload.premises,
-      };
-    case 'RESET_CUSTOMER':
-      return {
-        ...state,
-        customer: null,
-        premises: [],
-        selectedPremise: null,
-        meterData: [],
-      };
     case 'SET_PREMISES':
+      console.log('reducer premises', action.payload);
       return { ...state, premises: action.payload };
     case 'SET_PREMISE':
       return { ...state, selectedPremise: action.payload };
     case 'RESET_PREMISE':
       return { ...state, selectedPremise: null };
     case 'SET_METER_DATA':
-      console.log('Setting meterData:', action.payload); // Add this line to debug
+      console.log('Setting meterData:', action.payload);
       return { ...state, meterData: action.payload };
+    // case 'SET_CURRENT_USER':
+    //   return { ...state, currentUser: action.payload };
     default:
       return state;
   }
