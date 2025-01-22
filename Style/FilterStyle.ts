@@ -11,7 +11,7 @@ const getTopValue = () => {
   } else if (window > 600) {
     return 285;
   } else {
-    return 300; // Default value if none of the conditions are met
+    return 200; // Default value if none of the conditions are met
   }
 };
 

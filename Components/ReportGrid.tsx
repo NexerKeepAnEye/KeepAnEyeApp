@@ -59,16 +59,8 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
             setMeter={(meter) =>
               dispatch({ type: 'SET_METER', payload: meter })
             }
-            setFromDate={(date) =>
-              dispatch({ type: 'SET_FROM_DATE', payload: date })
-            }
-            setToDate={(date) =>
-              dispatch({ type: 'SET_TO_DATE', payload: date })
-            }
             year={state.year}
             meter={state.meter}
-            fromDate={state.fromDate}
-            toDate={state.toDate}
             meterData={state.meterData}
             setFilteredResults={(data) => {
               dispatch({ type: 'SET_FILTERED_RESULTS', payload: data });

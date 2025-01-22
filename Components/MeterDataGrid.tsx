@@ -37,14 +37,18 @@ export default function MeterDataGrid({ meterId }: Props) {
   return (
     <ScrollView style={ReportGridStyle.root}>
       <Filter
-        filters={['dateRange']}
+        filters={['dateRange', 'resolution']}
         setFromDate={(date) =>
           dispatch({ type: 'SET_FROM_DATE', payload: date })
         }
         setToDate={(date) => dispatch({ type: 'SET_TO_DATE', payload: date })}
+        setResolution={(resolution) =>
+          dispatch({ type: 'SET_RESOLUTION', payload: resolution })
+        }
         fromDate={state.fromDate}
         toDate={state.toDate}
         meterData={state.meterData}
+        resolution={state.resolution}
         meterId={meterId}
         setFilteredResults={(data) => {
           setFilteredResults(data);
