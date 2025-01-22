@@ -7,13 +7,14 @@ import {
   Text,
 } from 'react-native-paper';
 // import { usePremiseContext } from '../../Context/PremiseContext';
+import { useNavigationState } from '@react-navigation/native';
 import { filterStyle } from '../../Style/FilterStyle';
 import { searchButtonStyle } from '../../Style/SearchButtonStyle';
 import { Meter, MeterData } from '../../Types/Type';
 import { FromToDate } from './FromToDate';
 import MeterSearch from './MeterSearch';
-import YearSearch from './YearSearch';
 import { Resolution } from './Resolution';
+import YearSearch from './YearSearch';
 
 interface FilterProps {
   setYear?: (year: string) => void;
@@ -112,6 +113,20 @@ const Filter: React.FC<FilterProps> = ({
     setFilteredResults(filteredData);
   };
 
+  const routeNames = useNavigationState((state) => state.routeNames);
+  const currentRoute = routeNames[routeNames.length - 1];
+
+  const getSnackbarStyle = () => {
+    switch (currentRoute) {
+      case 'ReportScreen':
+        return filterStyle.snackbar;
+      case 'MeterDataScreen':
+        return filterStyle.snackbar2;
+      default:
+        return filterStyle.snackbar;
+    }
+  };
+
   return (
     <PaperProvider>
       <View style={filterStyle.container}>
@@ -155,7 +170,7 @@ const Filter: React.FC<FilterProps> = ({
             textColor: 'white',
           }}
           elevation={0}
-          style={filterStyle.snackbar}
+          style={getSnackbarStyle()}
         >
           <Text style={filterStyle.snackBarText}>Fyll i fälten</Text>
         </Snackbar>

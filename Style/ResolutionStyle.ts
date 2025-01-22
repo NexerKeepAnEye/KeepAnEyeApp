@@ -25,10 +25,11 @@ export const TestFilterStyle = StyleSheet.create({
     height: height * 0.05,
     borderColor: '#ddd',
     borderWidth: 1,
-    marginRight: '2%',
+    // marginRight: '2%',
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    opacity: 0.8,
   },
   // searchButton: {
   //   backgroundColor: '#ff7043',
