@@ -50,45 +50,45 @@
       "Name": "Rivendell",
       "Designation": "öiuhgb",
       "Meters": [
-        { "Id": 11, "PremiseId": 6, "ProductId": 11, "Name": "Meter 11" },
-        { "Id": 12, "PremiseId": 6, "ProductId": 12, "Name": "Meter 12" }
+        { "Id": 11, "PremiseId": 6, "ProductId": 1, "Name": "Meter 11" },
+        { "Id": 12, "PremiseId": 6, "ProductId": 2, "Name": "Meter 12" }
       ]
-        },
-        {
+    },
+    {
       "Id": 7,
       "Name": "Hogwarts",
       "Designation": "78876yh",
       "Meters": [
-        { "Id": 13, "PremiseId": 7, "ProductId": 13, "Name": "Meter 13" },
-        { "Id": 14, "PremiseId": 7, "ProductId": 14, "Name": "Meter 14" }
+        { "Id": 13, "PremiseId": 7, "ProductId": 3, "Name": "Meter 13" },
+        { "Id": 14, "PremiseId": 7, "ProductId": 4, "Name": "Meter 14" }
       ]
-        },
-        {
+    },
+    {
       "Id": 8,
       "Name": "Wayne Manor",
       "Designation": "09ijhy65rf",
       "Meters": [
-        { "Id": 15, "PremiseId": 8, "ProductId": 15, "Name": "Meter 15" },
-        { "Id": 16, "PremiseId": 8, "ProductId": 16, "Name": "Meter 16" }
+        { "Id": 15, "PremiseId": 8, "ProductId": 5, "Name": "Meter 15" },
+        { "Id": 16, "PremiseId": 8, "ProductId": 6, "Name": "Meter 16" }
       ]
-        },
-        {
+    },
+    {
       "Id": 9,
       "Name": "Baker Street",
       "Designation": "1234ef",
       "Meters": [
-        { "Id": 17, "PremiseId": 9, "ProductId": 17, "Name": "Meter 17" },
-        { "Id": 18, "PremiseId": 9, "ProductId": 18, "Name": "Meter 18" }
+        { "Id": 17, "PremiseId": 9, "ProductId": 7, "Name": "Meter 17" },
+        { "Id": 18, "PremiseId": 9, "ProductId": 8, "Name": "Meter 18" }
       ]
-        },
-        {
+    },
+    {
       "Id": 10,
       "Name": "Shire",
       "Designation": "35erf",
       "Meters": [
-        { "Id": 19, "PremiseId": 10, "ProductId": 19, "Name": "Meter 19" },
-        { "Id": 20, "PremiseId": 10, "ProductId": 20, "Name": "Meter 20" }
+        { "Id": 19, "PremiseId": 10, "ProductId": 9, "Name": "Meter 19" },
+        { "Id": 20, "PremiseId": 10, "ProductId": 10, "Name": "Meter 20" }
       ]
+    }
+  ]
 }
-]
-  }

@@ -29,7 +29,8 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
     string[] | undefined
   >();
   const { state } = usePremiseContext();
-  const meters: Meter[] = state.premise?.Meters || [];
+  const meters: Meter[] =
+    state.premises?.flatMap((premise) => premise.Meters) || []; // ändrad
 
   const handlePress = () => setModalVisible(true);
 
@@ -120,7 +121,7 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
                       style={meterSearch.dropdownItem}
                       onPress={() => handleSelectMeter([item])}
                     >
-                      <MeterIcon productCode={item.ProductCode} />
+                      <MeterIcon productId={item.ProductId} />
                       <View style={meterSearch.meterTextContainer}>
                         <Text style={meterSearch.meterText}>{item.Name}</Text>
                         <Text style={meterSearch.meterSubText}>

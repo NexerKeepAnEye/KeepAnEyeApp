@@ -13,9 +13,9 @@ type Props = NativeStackScreenProps<RootStackParamList, 'MeterDataScreen'>;
 export default function MeterDataScreen({ route, navigation }: Props) {
   const { meterId } = route.params;
   const { state } = usePremiseContext();
-  const meter = state.selectedPremise?.meters.find((m) => m.id === meterId);
+  const meter = state.selectedPremise?.Meters.find((m) => m.Id === meterId);
   const meterData = state.meterData
-    ? state.meterData.filter((data) => data.meterId === meterId)
+    ? state.meterData.filter((data) => data.MeterId === meterId)
     : [];
 
   console.log('MeterDataScreen meterData:', meterData);
@@ -26,11 +26,11 @@ export default function MeterDataScreen({ route, navigation }: Props) {
       {meter ? (
         <View style={MeterDataScreenStyle.container2}>
           <MeterDataCard
-            meterId={meter.id}
+            meterId={meter.Id}
             navigation={navigation}
           />
           <MeterDataGrid
-            meterId={meter.id}
+            meterId={meter.Id}
             meterData={meterData}
           />
         </View>

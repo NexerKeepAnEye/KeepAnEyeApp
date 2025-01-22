@@ -7,11 +7,12 @@ import {
   FilterState,
   initialState,
 } from '../Context/FilterReducer';
-import { meterData } from '../MockedData/MockedMeterDataMonth';
 import { MeterDataGridStyle } from '../Style/MeterDataGridStyle';
 import { ReportGridStyle } from '../Style/ReportGridStyleStyle';
 import { MeterData } from '../Types/Type';
 import Filter from './Filters/Filter';
+// import { fetchMeterData } from '../Api/fetchAPI';
+// import { usePremiseContext } from '../Context/PremiseContext';
 
 type Props = {
   meterId: number;
@@ -26,14 +27,30 @@ export default function MeterDataGrid({ meterId }: Props) {
   const [filteredResults, setFilteredResults] = useState<MeterData[]>([]);
 
   const [filterApplied, setFilterApplied] = useState(false);
+  // const meterIds = [meterId];
 
-  useEffect(() => {
-    // Använder mockad data
-    dispatch({
-      type: 'SET_METER_DATA',
-      payload: meterData,
-    });
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const data = await fetchMeterData(
+  //         'your-api-key', // Replace with your actual API key
+  //         1, // Replace with your actual productId
+  //         '', // Replace with your actual resolution
+  //         new Date(), // Replace with your actual from date
+  //         new Date(), // Replace with your actual to date
+  //         [], // Replace with your actual premiseIds
+  //         [], // Replace with your actual designations
+  //         meterIds, // Use the meterId from props
+  //       );
+  //       console.log('Fetched meter data:', JSON.stringify(data)); // Log fetched data
+  //       dispatch({ type: 'SET_METER_DATA', payload: data });
+  //     } catch (error) {
+  //       console.error('Error fetching meter data:', error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [meterId]);
 
   return (
     <ScrollView style={ReportGridStyle.root}>

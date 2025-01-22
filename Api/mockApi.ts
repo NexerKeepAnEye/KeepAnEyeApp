@@ -1,4 +1,4 @@
-// import meterdata from '../MockedData/API/meterdata.json'; // Importera din JSON-fil
+import meterdata from '../MockedData/API/meterdata.json'; // Importera din JSON-fil
 import premise from '../MockedData/API/premise.json'; // Importera din JSON-fil
 import product from '../MockedData/API/product.json'; // Importera din JSON-fil
 
@@ -34,31 +34,30 @@ if (url === '/premise' && options.method === 'GET') {
     };
   }
 
-//   if (url === 'https://test.keepaneye.net/api/v1/MeterData' && options.method === 'POST') {
-//     const requestBody = JSON.parse(options.body);
+  if (url === '/MeterData' && options.method === 'POST') {
+    const requestBody = options.body ? JSON.parse(options.body) : {};
+    const meterData = meterdata.MeterData.find(
+      md =>
+        md.ProductId === requestBody.productId &&
+        md.Resolution === requestBody.resolution &&
+        md.DateTime === requestBody.from &&
+        md.DateTime === requestBody.to
+    );
 
-//     const meterData = mockData.meterData.find(
-//       md =>
-//         md.productId === requestBody.productId &&
-//         md.resolution === requestBody.resolution &&
-//         md.from === requestBody.from &&
-//         md.to === requestBody.to &&
-//         md.correctedValues === requestBody.correctedValues
-//     );
-
-    // if (meterData) {
-    //   return {
-    //     ok: true,
-    //     status: 200,
-    //     json: async () => meterData.data, // Returnerar mätdata
-    //   };
-    // } else {
-    //   return {
-    //     ok: false,
-    //     status: 404,
-    //     json: async () => ({ error: "Meter data not found" }),
-    //   };
-    // }
+    if (meterData) {
+      return {
+        ok: true,
+        status: 200,
+        json: async () => meterData // Returnerar mätdata
+      };
+    } else {
+      return {
+        ok: false,
+        status: 404,
+        json: async () => ({ error: "Meter data not found" }),
+      };
+    }
+  }
     // Hantera okända endpoints
     return {
       ok: false,

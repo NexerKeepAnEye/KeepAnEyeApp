@@ -15,8 +15,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { fetchPremise } from '../Api/fetchAPI';
 import logoKAE from '../assets/logoKAE.png';
 import NexerLogo from '../assets/NexerLogo.png';
+import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
-import { usePremiseContext } from '../PremiseState/PremiseContext';
 import { SignIn } from '../Style/SignInStyle';
 
 export default function SignInScreen() {

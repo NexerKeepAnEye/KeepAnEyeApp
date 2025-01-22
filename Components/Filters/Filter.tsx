@@ -6,7 +6,7 @@ import {
   Snackbar,
   Text,
 } from 'react-native-paper';
-// import { usePremiseContext } from '../../Context/PremiseContext';
+import { usePremiseContext } from '../../Context/PremiseContext';
 import { useNavigationState } from '@react-navigation/native';
 import { filterStyle } from '../../Style/FilterStyle';
 import { searchButtonStyle } from '../../Style/SearchButtonStyle';
@@ -15,6 +15,7 @@ import { FromToDate } from './FromToDate';
 import MeterSearch from './MeterSearch';
 import { Resolution } from './Resolution';
 import YearSearch from './YearSearch';
+import { fetchMeterData } from '../../Api/fetchAPI';
 
 interface FilterProps {
   setYear?: (year: string) => void;
@@ -49,7 +50,7 @@ const Filter: React.FC<FilterProps> = ({
   fromDate,
   toDate,
   meterData,
-  meterId: meterId,
+  meterId,
   resolution,
   buttonText,
 }) => {
@@ -57,19 +58,22 @@ const Filter: React.FC<FilterProps> = ({
 
   const showSnackbar = () => setVisible(true);
   const hideSnackbar = () => setVisible(false);
-  // const { state } = usePremiseContext();
+  const { state } = usePremiseContext();
 
-  const handleSearch = () => {
-    // const meterData = await fetchMeterData(
-    //   'fc41e3f1-f155-4465-b908-a79991643b0a',
-    //   meterId ?? meter?.map((m) => m.Id) ?? [],
-    //   resolution,
-    //   fromDate?.toISOString(),
-    //   toDate?.toISOString(),
-    //   false,
-    //   state.premise?.Id,
-    //   [], // designations
-    // );
+  const handleSearch = async () => {
+    const meterData = await fetchMeterData(
+      'abc',
+      meterId !== undefined &&
+        state.selectedPremise?.Meters[meterId]?.ProductId !== undefined
+        ? state.selectedPremise.Meters[meterId].ProductId
+        : 0,
+      resolution,
+      fromDate?.toISOString(),
+      toDate?.toISOString(),
+      state.selectedPremise?.Id,
+      state.selectedPremise?.Designation,
+      meterId ?? meter?.map((m) => m.Id) ?? [],
+    );
 
     let filteredData = meterData;
 
@@ -84,27 +88,33 @@ const Filter: React.FC<FilterProps> = ({
     }
 
     if (year) {
-      filteredData = filteredData.filter((item) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      filteredData = filteredData.filter((item: any) => {
         const itemYear = new Date(item.DateTime).getFullYear();
         return itemYear === parseInt(year, 10);
       });
     }
 
     if (fromDate && toDate) {
-      filteredData = filteredData.filter((item) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      filteredData = filteredData.filter((item: any) => {
         const itemDate = new Date(item.DateTime);
         return itemDate >= fromDate && itemDate <= toDate;
       });
     }
 
     if (meter && meter.length > 0) {
-      filteredData = filteredData.filter((item) =>
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      filteredData = filteredData.filter((item: any) =>
         meter.some((m) => m.Id === item.MeterId),
       );
     }
 
     if (meterId !== null && meterId !== undefined) {
-      filteredData = filteredData.filter((data) => data.MeterId === meterId);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      filteredData = filteredData.filter(
+        (data: any) => data.MeterId === meterId,
+      );
       if (setMeterId) {
         setMeterId(meterId);
       }

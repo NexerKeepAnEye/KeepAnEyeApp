@@ -1,5 +1,11 @@
 import { Meter, Premise } from "../Types/Type";
 import { mockApiFetch } from "./mockApi";
+// import https from 'https';
+// import fetch from 'node-fetch';
+
+// const agent = new https.Agent({
+//   rejectUnauthorized: false,
+// });
 
 export async function fetchPremise(apiKey: string):Promise<Premise[]> {
   try {
@@ -61,3 +67,61 @@ export async function fetchProduct(apiKey: string) {
     console.error('Error fetching products:', error);
   }
 }
+
+export async function fetchMeterData(
+  apiKey: string,
+  productId: number,
+  resolution: string,
+  from: Date,
+  to: Date,
+  premiseIds = [],
+  designations = [],
+  meterIds: number[] = [],
+) {
+  try {
+    const response = await fetch(
+      '/MeterData',
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'X-API-Key': apiKey,
+        },
+        // agent,
+        body: JSON.stringify({
+          productId,
+          resolution,
+          from,
+          to,
+          premiseIds,
+          designations,
+          meterIds,
+        }),
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    const jsonString = JSON.stringify(data);
+    console.log(jsonString);
+    return data;
+  } catch (error) {
+    console.error('Error fetching meter data:', error);
+    throw error;
+  }
+}
+
+// fetchMeterData(
+//   'fc41e3f1-f155-4465-b908-a79991643b0a', // apiKey
+//   25, // productId
+//   'monthly', // resolution
+//   '2023-01-01T00:00:00Z', // from
+//   '2024-01-01T00:00:00Z', // to
+//   false, // correctedValues
+//   [], // premiseIds
+//   [], // designations
+//   [], // meterIds
+// );
