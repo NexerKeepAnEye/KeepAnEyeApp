@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { Pressable, TouchableOpacity, View } from 'react-native';
 import { List, Text } from 'react-native-paper';
+import { FilterProvider } from '../Context/FilterContext';
 import { AccordionStyle } from '../Style/AccordionStyle';
 import { filterTypes } from '../Types/FilterTypes';
 import { ReportGrid } from './ReportGrid';
@@ -24,23 +25,26 @@ export const Accordion = () => {
       <View>
         <List.Section>
           <View style={AccordionStyle.container}>
-            <View style={AccordionStyle.content}>
-              <Text style={AccordionStyle.header}>
-                {selectedReport || '-- Välj rapport --'}
-              </Text>
-              <TouchableOpacity
-                onPress={handlePress}
-                style={AccordionStyle.dDL}
-              >
-                <List.Icon
-                  icon={expanded ? 'chevron-up' : 'chevron-down'}
-                  style={[
-                    AccordionStyle.listButton,
-                    { borderBottomRightRadius: expanded ? 0 : 10 },
-                  ]}
-                />
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity onPress={handlePress}>
+              <View style={AccordionStyle.content}>
+                <Text style={AccordionStyle.header}>
+                  {selectedReport || '-- Välj rapport --'}
+                </Text>
+                <TouchableOpacity
+                  onPress={handlePress}
+                  style={AccordionStyle.dDL}
+                >
+                  <List.Icon
+                    icon={expanded ? 'chevron-up' : 'chevron-down'}
+                    style={[
+                      AccordionStyle.listButton,
+                      { borderBottomRightRadius: expanded ? 0 : 10 },
+                    ]}
+                  />
+                </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
+
             {expanded && (
               <View style={AccordionStyle.listExpanded}>
                 {filterTypes.rapporter.map((report) => (
@@ -59,10 +63,12 @@ export const Accordion = () => {
             )}
           </View>
         </List.Section>
-        <ReportGrid
-          selectedReport={selectedReport}
-          searchResults={searchResults}
-        />
+        <FilterProvider>
+          <ReportGrid
+            selectedReport={selectedReport}
+            searchResults={searchResults}
+          />
+        </FilterProvider>
       </View>
     </>
   );

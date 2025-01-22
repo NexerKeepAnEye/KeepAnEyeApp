@@ -1,8 +1,8 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
-import { usePremiseContext } from '../PremiseState/PremiseContext';
 import { MeterComponentStyle } from '../Style/MeterComponentStyle';
 import { Meter, MeterData } from '../Types/Type';
 // import MeterIcon from './MeterIcon';

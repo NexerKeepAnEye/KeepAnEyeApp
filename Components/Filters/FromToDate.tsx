@@ -98,7 +98,7 @@ export function FromToDate({
           <Modal
             visible={modalVisible}
             transparent={true}
-            animationType="slide"
+            animationType="fade"
           >
             <View style={dateStyles.modalContainer}>
               <View style={dateStyles.modalContent}>

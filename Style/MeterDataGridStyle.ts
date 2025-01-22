@@ -1,13 +1,15 @@
-import { Dimensions, StyleSheet, TextStyle } from 'react-native';
+import { StyleSheet, TextStyle } from 'react-native';
+import { width } from './Dimensions';
 
 export const MeterDataGridStyle = StyleSheet.create({
+  root: {},
   container: {
-    flex: 1,
-    alignItems: 'center',
+    // flex: 1,
+    // alignItems: 'center',
     // marginBottom: 20,
   },
   gridContainer: {
-    width: Dimensions.get('window').width * 0.95,
+    width: width * 0.95,
     marginTop: 20,
   },
   header: {
@@ -20,6 +22,7 @@ export const MeterDataGridStyle = StyleSheet.create({
   title: {
     fontWeight: 'bold',
   } as TextStyle,
+
   cell: {
     borderColor: '#d9d9d9',
     borderBottomWidth: 0.8,

@@ -3,8 +3,8 @@ import React from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import NexerLogo from '../assets/NexerLogo.png';
+import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
-import { usePremiseContext } from '../PremiseState/PremiseContext';
 import { StartScreenStyle } from '../Style/StartScreenStyle';
 import { Premise } from '../Types/Type';
 

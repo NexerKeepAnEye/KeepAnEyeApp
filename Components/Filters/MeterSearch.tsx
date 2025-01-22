@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import { usePremiseContext } from '../../PremiseState/PremiseContext';
+import { usePremiseContext } from '../../Context/PremiseContext';
 import { meterSearch } from '../../Style/MeterSearchStyle';
 import { Meter } from '../../Types/Type';
 import MeterIcon from '../MeterIcon';
@@ -19,6 +19,8 @@ interface Section {
 
 interface MeterSearchProps {
   setSelectedMeter: (meter: Meter[]) => void;
+
+  meters: Meter[] | undefined;
 }
 
 export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
@@ -90,7 +92,7 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
             numberOfLines={1}
             ellipsizeMode="tail"
           >
-            {selectedMeter?.toString() || '- Mätare -'}
+            {selectedMeter?.toString() || ' Mätare '}
           </Text>
           {/* <View style={meterSearch.iconContainer}>
             <List.Icon
@@ -103,7 +105,7 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
       <Modal
         visible={modalVisible}
         transparent={true}
-        animationType="slide"
+        animationType="fade"
         onRequestClose={() => setModalVisible(false)}
       >
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>

@@ -4,8 +4,8 @@ import { Text, View } from 'react-native';
 import MeterDataCard from '../Components/MeterDataCard';
 import MeterDataGrid from '../Components/MeterDataGrid';
 import PremiseCard from '../Components/PremiseCard';
+import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
-import { usePremiseContext } from '../PremiseState/PremiseContext';
 import { MeterDataScreenStyle } from '../Style/MeterDataScreenStyle';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'MeterDataScreen'>;

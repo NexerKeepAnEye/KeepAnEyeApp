@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const premiseCardStyle = StyleSheet.create({
   card: {
-    margin: 10,
+    marginTop: 10,
     padding: 10,
     borderRadius: 8,
     elevation: 4, // Adds shadow for Android

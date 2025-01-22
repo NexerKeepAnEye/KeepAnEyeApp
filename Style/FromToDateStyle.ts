@@ -7,6 +7,7 @@ export const dateStyles = StyleSheet.create({
     gap: 5,
     marginBottom: 10,
     marginRight: 5,
+    marginLeft: 5,
   },
   dateContainer: {
     alignItems: 'center',
@@ -14,10 +15,10 @@ export const dateStyles = StyleSheet.create({
   },
   pickerContainer: {
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: '#dddddd',
     borderRadius: 10,
     width: width * 0.28,
-    height: height * 0.04,
+    height: height * 0.05,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',

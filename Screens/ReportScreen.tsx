@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import { Accordion } from '../Components/Accordion';
 import PremiseCard from '../Components/PremiseCard';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
+import { ReportScreenStyle } from '../Style/ReportScreenStyle';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'ReportScreen'>;
@@ -11,7 +12,7 @@ type Props = {
 
 export default function ReportScreen({ navigation }: Props) {
   return (
-    <View style={{ flex: 1, alignItems: 'center' }}>
+    <View style={ReportScreenStyle.container}>
       <PremiseCard navigation={navigation} />
       <Accordion />
     </View>

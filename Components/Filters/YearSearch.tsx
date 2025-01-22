@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import { Divider } from 'react-native-paper';
 import { yearSearchStyle } from '../../Style/YearSearchStyle';
 
 interface YearSearchProps {
@@ -14,10 +15,10 @@ interface YearSearchProps {
 }
 
 export function YearSearch({ setSelectedYear }: YearSearchProps) {
-  const [year, setYear] = useState<string>(new Date().getFullYear().toString());
+  const [year, setYear] = useState<string | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
 
-  const years = Array.from({ length: 50 }, (_, i) =>
+  const years = Array.from({ length: 15 }, (_, i) =>
     (new Date().getFullYear() - i).toString(),
   );
 
@@ -34,7 +35,7 @@ export function YearSearch({ setSelectedYear }: YearSearchProps) {
           style={yearSearchStyle.pickerContainer}
           onPress={() => setModalVisible(true)}
         >
-          <Text style={yearSearchStyle.pickerText}>{year}</Text>
+          <Text style={yearSearchStyle.pickerText}>{year ? year : 'År'}</Text>
         </TouchableOpacity>
         <Modal
           visible={modalVisible}
@@ -54,6 +55,7 @@ export function YearSearch({ setSelectedYear }: YearSearchProps) {
                       </TouchableOpacity>
                     )}
                   />
+                  <Divider style={yearSearchStyle.divider} />
                   <TouchableOpacity onPress={() => setModalVisible(false)}>
                     <Text style={yearSearchStyle.closeButton}>Stäng</Text>
                   </TouchableOpacity>

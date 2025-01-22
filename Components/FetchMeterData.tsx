@@ -2,6 +2,9 @@
 // // import { meterData } from '../MockedData/MockedMeterDataMonth';
 // import { usePremiseContext } from '../PremiseState/PremiseContext';
 // import { meterData } from '../MockedData/testdb.json';
+// import { useEffect } from 'react';
+// import { usePremiseContext } from '../Context/PremiseContext';
+// import { meterData } from '../MockedData/MockedMeterDataMonth';
 
 // export const FetchMeterData = () => {
 //   const { dispatch } = usePremiseContext();

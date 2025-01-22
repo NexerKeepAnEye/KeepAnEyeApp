@@ -8,10 +8,10 @@ export const yearSearchStyle = StyleSheet.create({
   },
   pickerContainer: {
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: '#dddddd',
     borderRadius: 10,
     width: width * 0.15,
-    height: height * 0.04,
+    height: height * 0.05,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
@@ -38,9 +38,13 @@ export const yearSearchStyle = StyleSheet.create({
     textAlign: 'center',
   },
   closeButton: {
-    marginTop: 10,
+    padding: 1,
     textAlign: 'center',
-    color: 'blue',
+    color: '#056ffd',
     fontSize: width * 0.04,
+    // fontWeight: 'bold',
+  },
+  divider: {
+    padding: 0.5,
   },
 });
