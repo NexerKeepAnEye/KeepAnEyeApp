@@ -1,6 +1,6 @@
-import meterdata from '../MockedData/API/meterdata.json'; // Importera din JSON-fil
-import premise from '../MockedData/API/premise.json'; // Importera din JSON-fil
-import product from '../MockedData/API/product.json'; // Importera din JSON-fil
+import meterdata from '../MockedData/API/meterdata.json';
+import premise from '../MockedData/API/premise.json';
+import product from '../MockedData/API/product.json';
 
 export async function mockApiFetch(url: string, options: { headers: { [key: string]: string }, method?: string, body?: string }) {
   console.log("Mock API Called:", url, options);
@@ -21,34 +21,51 @@ if (url === '/premise' && options.method === 'GET') {
     return {
       ok: true,
       status: 200,
-      json: async () => premise.Premise, // Returnerar fastigheter
+      json: async () => premise.Premise, 
     };
   }
 
-  // Hantera olika endpoints
   if (url === '/product' && options.method === 'GET') {
     return {
       ok: true,
       status: 200,
-      json: async () => product.Product, // Returnerar produkterna
+      json: async () => product.Product, 
     };
   }
 
-  if (url === '/MeterData' && options.method === 'POST') {
+  if (url === '/meterdata' && options.method === 'POST') {
     const requestBody = options.body ? JSON.parse(options.body) : {};
-    const meterData = meterdata.MeterData.find(
+    const fromDate = new Date(requestBody.from);
+    const toDate = new Date(requestBody.to);
+
+    console.log('Filtering Conditions:');
+    console.log('ProductId:', requestBody.productId,'type:', typeof requestBody.productId);
+    console.log('Resolution:', requestBody.resolution,'type:', typeof requestBody.resolution);
+    console.log('FromDate:', fromDate,'type:', typeof fromDate);
+    console.log('ToDate:', toDate,'type:', typeof toDate);
+    console.log('PremiseIds:', requestBody.premiseIds,'type:', typeof requestBody.premiseIds);
+    console.log('Designations:', requestBody.designations,'type:', typeof requestBody.designations);
+    console.log('MeterIds:', requestBody.meterIds,'type:', typeof requestBody.meterIds);
+
+    const meterData = meterdata.MeterData.filter(
       md =>
         md.ProductId === requestBody.productId &&
-        md.Resolution === requestBody.resolution &&
-        md.DateTime === requestBody.from &&
-        md.DateTime === requestBody.to
+        md.Resolution !== null && //requestBody.resolution &&
+        new Date(md.DateTime) >= fromDate &&
+        new Date(md.DateTime) <= toDate &&
+        // md.DateTime === requestBody.from &&
+        // md.DateTime === requestBody.to &&
+        (requestBody.premiseIds.length === 0 || requestBody.premiseIds.includes(md.PremiseId)) &&
+        (requestBody.designations.length === 0 || requestBody.designations.includes(md.Designation)) &&
+        (requestBody.meterIds.length === 0 || requestBody.meterIds.includes(md.MeterId))
     );
 
     if (meterData) {
+        console.log('data from api:', meterdata);
       return {
         ok: true,
         status: 200,
-        json: async () => meterData // Returnerar mätdata
+        json: async () => meterdata.MeterData,
       };
     } else {
       return {

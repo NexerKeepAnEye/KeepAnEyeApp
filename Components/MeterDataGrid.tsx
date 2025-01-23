@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { DataTable } from 'react-native-paper';
 import {
@@ -73,6 +73,7 @@ export default function MeterDataGrid({ meterId }: Props) {
           setFilterApplied(true);
         }}
         buttonText={'Sök'}
+        productId={0}
       />
       <>
         {filterApplied ? (
@@ -98,9 +99,7 @@ export default function MeterDataGrid({ meterId }: Props) {
                     key={index}
                     style={MeterDataGridStyle.cell}
                   >
-                    <DataTable.Cell>
-                      {data.DateTime.split('T')[0]}
-                    </DataTable.Cell>
+                    <DataTable.Cell>{data.DateTime.toString()}</DataTable.Cell>
                     <DataTable.Cell>{data.Value}</DataTable.Cell>
                     <DataTable.Cell>{data.Cost}</DataTable.Cell>
                     <DataTable.Cell>{data.Code}</DataTable.Cell>

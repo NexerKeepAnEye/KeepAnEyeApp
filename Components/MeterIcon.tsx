@@ -6,6 +6,7 @@ import { MeterIconStyle } from '../Style/MeterIconStyle';
 
 export default function MeterIcon({ productId }: { productId: number }) {
   fetchProduct('abc');
+
   const iconSelector = (productId: number) => {
     if (productId === 1) {
       return 'local-fire-department';

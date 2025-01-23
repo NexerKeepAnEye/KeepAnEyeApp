@@ -5,7 +5,7 @@ import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { MeterComponentStyle } from '../Style/MeterComponentStyle';
 import { Meter, MeterData } from '../Types/Type';
-// import MeterIcon from './MeterIcon';
+import MeterIcon from './MeterIcon';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'MeterDataScreen'>;
@@ -32,9 +32,9 @@ export default function MeterComponent({ navigation }: Props) {
         });
       }}
     >
-      {/* <View style={MeterComponentStyle.iconContainer}>
-        <MeterIcon productCode={item.productId} />
-      </View> */}
+      <View style={MeterComponentStyle.iconContainer}>
+        <MeterIcon productId={item.ProductId} />
+      </View>
       <View style={MeterComponentStyle.textContainer}>
         <Text style={MeterComponentStyle.textStyleName}>{item?.Name}</Text>
         <Text style={MeterComponentStyle.textStyleProductCode}>{item?.Id}</Text>

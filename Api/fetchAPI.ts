@@ -1,4 +1,4 @@
-import { Meter, Premise } from "../Types/Type";
+import { Meter, MeterData, Premise } from "../Types/Type";
 import { mockApiFetch } from "./mockApi";
 // import https from 'https';
 // import fetch from 'node-fetch';
@@ -74,13 +74,13 @@ export async function fetchMeterData(
   resolution: string,
   from: Date,
   to: Date,
-  premiseIds = [],
-  designations = [],
+  premiseIds: number[] = [],
+  designations: string[] = [],
   meterIds: number[] = [],
-) {
+) :Promise<MeterData[]>{
   try {
-    const response = await fetch(
-      '/MeterData',
+    const response = await mockApiFetch(
+      '/meterdata',
       {
         method: 'POST',
         headers: {
@@ -100,14 +100,31 @@ export async function fetchMeterData(
         }),
       },
     );
+    console.log('fetchMeterData: ', response)
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    const jsonString = JSON.stringify(data);
-    console.log(jsonString);
-    return data;
+    if (!Array.isArray(data)) {
+      throw new Error('Unexpected response format');
+    }
+
+    console.log(JSON.stringify(data));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const meterData: MeterData[] = data.map((item: any): MeterData => ({
+      DateTime: new Date(item.DateTime),
+      Value: item.Value,
+      Cost: item.Cost,
+      Code: item.Code,
+      PremiseId: item.PremiseId,
+      Designation: item.Designation ?? null,
+      MeterId: item.MeterId,
+    }));
+    return meterData;
+    // const jsonString = JSON.stringify(data);
+    // console.log('data:',jsonString);
+    // return data;
   } catch (error) {
     console.error('Error fetching meter data:', error);
     throw error;

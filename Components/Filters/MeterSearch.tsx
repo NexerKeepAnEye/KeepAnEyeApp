@@ -53,31 +53,31 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
   const sections: Section[] = [
     {
       title: 'Fjärrvärme',
-      data: meters.filter((meter) => meter.ProductCode.includes('FJV')),
+      data: meters.filter((meter) => meter.ProductId === 1),
     },
     {
       title: 'Vatten',
       data: meters.filter(
-        (meter) =>
-          meter.ProductCode.includes('VAT') ||
-          meter.ProductCode.includes('VOL'),
+        (meter) => meter.ProductId === 4 || meter.ProductId === 7,
       ),
     },
     {
       title: 'Fjärrkyla',
-      data: meters.filter((meter) => meter.ProductCode.includes('FJK')),
+      data: meters.filter((meter) => meter.ProductId === 2),
     },
     {
       title: 'El',
-      data: meters.filter((meter) => meter.ProductCode.includes('El')),
+      data: meters.filter((meter) => meter.ProductId === 3),
     },
     {
       title: 'Olja',
-      data: meters.filter((meter) => meter.ProductCode.includes('OLJA')),
+      data: meters.filter((meter) => meter.ProductId === 10),
     },
     {
       title: 'Temperatur',
-      data: meters.filter((meter) => meter.ProductCode.includes('TMP')),
+      data: meters.filter(
+        (meter) => meter.ProductId === 5 || meter.ProductId === 9,
+      ),
     },
   ].filter((section) => section.data.length > 0);
 

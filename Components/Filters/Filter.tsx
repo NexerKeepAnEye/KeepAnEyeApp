@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useNavigationState } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import {
   Provider as PaperProvider,
@@ -6,16 +7,15 @@ import {
   Snackbar,
   Text,
 } from 'react-native-paper';
+import { fetchMeterData, fetchProduct } from '../../Api/fetchAPI';
 import { usePremiseContext } from '../../Context/PremiseContext';
-import { useNavigationState } from '@react-navigation/native';
 import { filterStyle } from '../../Style/FilterStyle';
 import { searchButtonStyle } from '../../Style/SearchButtonStyle';
-import { Meter, MeterData } from '../../Types/Type';
+import { Meter, MeterData, Product } from '../../Types/Type';
 import { FromToDate } from './FromToDate';
 import MeterSearch from './MeterSearch';
 import { Resolution } from './Resolution';
 import YearSearch from './YearSearch';
-import { fetchMeterData } from '../../Api/fetchAPI';
 
 interface FilterProps {
   setYear?: (year: string) => void;
@@ -27,13 +27,14 @@ interface FilterProps {
   setFilteredResults: (data: MeterData[]) => void;
   year?: string;
   meter?: Meter[];
-  fromDate?: Date | null;
-  toDate?: Date | null;
+  fromDate?: Date; //  |null;
+  toDate?: Date; //  |null;
   meterData: MeterData[];
   meterId?: number;
   resolution?: string;
   filters: string[];
   buttonText: string;
+  productId: number;
 }
 
 const Filter: React.FC<FilterProps> = ({
@@ -55,27 +56,83 @@ const Filter: React.FC<FilterProps> = ({
   buttonText,
 }) => {
   const [visible, setVisible] = useState(false);
+  const [products, setProducts] = useState<Product[]>([]);
+  const { state } = usePremiseContext();
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const products = await fetchProduct('abc');
+      if (
+        products &&
+        typeof products === 'object' &&
+        !('error' in products) &&
+        Array.isArray(products) &&
+        products.every(
+          (product) =>
+            'Id' in product && 'Code' in product && 'Unit' in product,
+        )
+      ) {
+        setProducts(products as Product[]);
+      } else {
+        console.log('Error fetching products:');
+      }
+    };
+    fetchProducts();
+  }, []);
 
   const showSnackbar = () => setVisible(true);
   const hideSnackbar = () => setVisible(false);
-  const { state } = usePremiseContext();
 
   const handleSearch = async () => {
-    const meterData = await fetchMeterData(
-      'abc',
-      meterId !== undefined &&
-        state.selectedPremise?.Meters[meterId]?.ProductId !== undefined
-        ? state.selectedPremise.Meters[meterId].ProductId
-        : 0,
-      resolution,
-      fromDate?.toISOString(),
-      toDate?.toISOString(),
-      state.selectedPremise?.Id,
-      state.selectedPremise?.Designation,
-      meterId ?? meter?.map((m) => m.Id) ?? [],
-    );
+    let meterData;
+    try {
+      const selectedMeter =
+        meterId !== undefined
+          ? state.selectedPremise?.Meters.find((meter) => meter.Id === meterId)
+          : undefined;
 
-    let filteredData = meterData;
+      const selectedProductId = selectedMeter?.ProductId ?? 0;
+
+      console.log('meterid', meterId);
+      console.log('selectedMeter', selectedMeter);
+      console.log('productid', selectedProductId);
+      meterData = await fetchMeterData(
+        'abc',
+        selectedProductId,
+        resolution ?? '',
+        fromDate ?? new Date(),
+        toDate ?? new Date(),
+        state.selectedPremise?.Id ? [state.selectedPremise.Id] : [],
+        state.selectedPremise?.Designation
+          ? [state.selectedPremise.Designation]
+          : [],
+        meterId !== undefined ? [meterId] : (meter?.map((m) => m.Id) ?? []),
+      );
+    } catch (error) {
+      console.log('error fetching meterdata:', error);
+    }
+    // console.log(
+    //   'productId:',
+    //   selectedProductId,
+    //   selectedProductId ? typeof selectedProductId : 'undefined',
+    // );
+    // console.log(
+    //   'resolution',
+    //   resolution,
+    //   resolution ? typeof resolution : 'undefined',
+    // );
+    // console.log('from', fromDate, fromDate ? typeof fromDate : 'undefined');
+    // console.log('to', toDate, toDate ? typeof toDate : 'undefined');
+    // console.log('meterid:', meterId, meterId ? typeof meterId : 'undefined');
+
+    // if (typeof meterData !== 'string' && 'error' in meterData) {
+    //   console.log('Error fetching meter data!!:', meterData.error);
+    //   return;
+    // }
+
+    // let filteredData = meterData as MeterData[];
+
+    let filteredData = meterData ?? [];
 
     if (
       (filters.includes('year') && !year) ||
@@ -89,10 +146,12 @@ const Filter: React.FC<FilterProps> = ({
 
     if (year) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      filteredData = filteredData.filter((item: any) => {
-        const itemYear = new Date(item.DateTime).getFullYear();
-        return itemYear === parseInt(year, 10);
-      });
+      if (Array.isArray(filteredData)) {
+        filteredData = filteredData.filter((item: MeterData) => {
+          const itemYear = new Date(item.DateTime).getFullYear();
+          return itemYear === parseInt(year, 10);
+        });
+      }
     }
 
     if (fromDate && toDate) {
@@ -111,8 +170,8 @@ const Filter: React.FC<FilterProps> = ({
     }
 
     if (meterId !== null && meterId !== undefined) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       filteredData = filteredData.filter(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (data: any) => data.MeterId === meterId,
       );
       if (setMeterId) {
