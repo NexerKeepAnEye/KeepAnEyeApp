@@ -1,5 +1,5 @@
-{ 
- "Meter": [
+{
+  "Meter": [
     { "Id": 1, "PremiseId": 1, "ProductId": 1, "Name": "Meter 1" },
     { "Id": 2, "PremiseId": 1, "ProductId": 2, "Name": "Meter 2" },
     { "Id": 3, "PremiseId": 1, "ProductId": 3, "Name": "Meter 3" },
@@ -150,4 +150,5 @@
     { "Id": 148, "PremiseId": 30, "ProductId": 8, "Name": "Meter 148" },
     { "Id": 149, "PremiseId": 30, "ProductId": 9, "Name": "Meter 149" },
     { "Id": 150, "PremiseId": 30, "ProductId": 10, "Name": "Meter 150" }
-  ] }
+  ]
+}

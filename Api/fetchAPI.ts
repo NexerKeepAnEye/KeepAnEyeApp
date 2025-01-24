@@ -1,5 +1,5 @@
-import { Meter, MeterData, Premise } from "../Types/Type";
-import { mockApiFetch } from "./mockApi";
+import { Meter, MeterData, Premise } from '../Types/Type';
+import { mockApiFetch } from './mockApi';
 // import https from 'https';
 // import fetch from 'node-fetch';
 
@@ -7,7 +7,7 @@ import { mockApiFetch } from "./mockApi";
 //   rejectUnauthorized: false,
 // });
 
-export async function fetchPremise(apiKey: string):Promise<Premise[]> {
+export async function fetchPremise(apiKey: string): Promise<Premise[]> {
   try {
     const response = await mockApiFetch('/premise', {
       method: 'GET',
@@ -27,18 +27,22 @@ export async function fetchPremise(apiKey: string):Promise<Premise[]> {
     }
     console.log(JSON.stringify(data));
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const premises: Premise[] = data.map((item: any): Premise => ({
-      Id: item.Id,
-      Designation: item.Designation ?? null,
-      Name: item.Name,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      Meters: (item.Meters || []).map((meter: any): Meter => ({
-        Id: meter.Id,
-        Name: meter.Name,
-        ProductId: meter.ProductId,
-        ProductCode: meter.ProductCode,
-      })),
-    }));
+    const premises: Premise[] = data.map(
+      (item: any): Premise => ({
+        Id: item.Id,
+        Designation: item.Designation ?? null,
+        Name: item.Name,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Meters: (item.Meters || []).map(
+          (meter: any): Meter => ({
+            Id: meter.Id,
+            Name: meter.Name,
+            ProductId: meter.ProductId,
+            ProductCode: meter.ProductCode,
+          }),
+        ),
+      }),
+    );
     return premises;
   } catch (error) {
     console.error('Error fetching premises:', error);
@@ -77,30 +81,27 @@ export async function fetchMeterData(
   premiseIds: number[] = [],
   designations: string[] = [],
   meterIds: number[] = [],
-) :Promise<MeterData[]>{
+): Promise<MeterData[]> {
   try {
-    const response = await mockApiFetch(
-      '/meterdata',
-      {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'X-API-Key': apiKey,
-        },
-        // agent,
-        body: JSON.stringify({
-          productId,
-          resolution,
-          from,
-          to,
-          premiseIds,
-          designations,
-          meterIds,
-        }),
+    const response = await mockApiFetch('/meterdata', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-API-Key': apiKey,
       },
-    );
-    console.log('fetchMeterData: ', response)
+      // agent,
+      body: JSON.stringify({
+        productId,
+        resolution,
+        from,
+        to,
+        premiseIds,
+        designations,
+        meterIds,
+      }),
+    });
+    console.log('fetchMeterData: ', response);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -112,15 +113,17 @@ export async function fetchMeterData(
 
     console.log(JSON.stringify(data));
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const meterData: MeterData[] = data.map((item: any): MeterData => ({
-      DateTime: new Date(item.DateTime),
-      Value: item.Value,
-      Cost: item.Cost,
-      Code: item.Code,
-      PremiseId: item.PremiseId,
-      Designation: item.Designation ?? null,
-      MeterId: item.MeterId,
-    }));
+    const meterData: MeterData[] = data.map(
+      (item: any): MeterData => ({
+        DateTime: new Date(item.DateTime),
+        Value: item.Value,
+        Cost: item.Cost,
+        Code: item.Code,
+        PremiseId: item.PremiseId,
+        Designation: item.Designation ?? null,
+        MeterId: item.MeterId,
+      }),
+    );
     return meterData;
   } catch (error) {
     console.error('Error fetching meter data:', error);

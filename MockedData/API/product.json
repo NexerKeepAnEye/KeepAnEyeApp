@@ -1,5 +1,5 @@
- {
-    "Product": [
+{
+  "Product": [
     { "Id": 1, "Code": "FJV" },
     { "Id": 2, "Code": "FJK" },
     { "Id": 3, "Code": "EL" },
