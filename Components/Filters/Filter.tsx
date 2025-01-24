@@ -27,14 +27,14 @@ interface FilterProps {
   setFilteredResults: (data: MeterData[]) => void;
   year?: string;
   meter?: Meter[];
-  fromDate?: Date; //  |null;
-  toDate?: Date; //  |null;
+  fromDate?: Date;
+  toDate?: Date;
   meterData: MeterData[];
   meterId?: number;
   resolution?: string;
   filters: string[];
   buttonText: string;
-  productId: number;
+  // productId: number;
 }
 
 const Filter: React.FC<FilterProps> = ({
@@ -50,12 +50,13 @@ const Filter: React.FC<FilterProps> = ({
   meter,
   fromDate,
   toDate,
-  meterData,
+  // meterData,
   meterId,
   resolution,
   buttonText,
 }) => {
   const [visible, setVisible] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [products, setProducts] = useState<Product[]>([]);
   const { state } = usePremiseContext();
 
@@ -111,26 +112,6 @@ const Filter: React.FC<FilterProps> = ({
     } catch (error) {
       console.log('error fetching meterdata:', error);
     }
-    // console.log(
-    //   'productId:',
-    //   selectedProductId,
-    //   selectedProductId ? typeof selectedProductId : 'undefined',
-    // );
-    // console.log(
-    //   'resolution',
-    //   resolution,
-    //   resolution ? typeof resolution : 'undefined',
-    // );
-    // console.log('from', fromDate, fromDate ? typeof fromDate : 'undefined');
-    // console.log('to', toDate, toDate ? typeof toDate : 'undefined');
-    // console.log('meterid:', meterId, meterId ? typeof meterId : 'undefined');
-
-    // if (typeof meterData !== 'string' && 'error' in meterData) {
-    //   console.log('Error fetching meter data!!:', meterData.error);
-    //   return;
-    // }
-
-    // let filteredData = meterData as MeterData[];
 
     let filteredData = meterData ?? [];
 
@@ -145,7 +126,6 @@ const Filter: React.FC<FilterProps> = ({
     }
 
     if (year) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       if (Array.isArray(filteredData)) {
         filteredData = filteredData.filter((item: MeterData) => {
           const itemYear = new Date(item.DateTime).getFullYear();
@@ -155,24 +135,21 @@ const Filter: React.FC<FilterProps> = ({
     }
 
     if (fromDate && toDate) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      filteredData = filteredData.filter((item: any) => {
+      filteredData = filteredData.filter((item: MeterData) => {
         const itemDate = new Date(item.DateTime);
         return itemDate >= fromDate && itemDate <= toDate;
       });
     }
 
     if (meter && meter.length > 0) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      filteredData = filteredData.filter((item: any) =>
+      filteredData = filteredData.filter((item: MeterData) =>
         meter.some((m) => m.Id === item.MeterId),
       );
     }
 
     if (meterId !== null && meterId !== undefined) {
       filteredData = filteredData.filter(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (data: any) => data.MeterId === meterId,
+        (data: MeterData) => data.MeterId === meterId,
       );
       if (setMeterId) {
         setMeterId(meterId);

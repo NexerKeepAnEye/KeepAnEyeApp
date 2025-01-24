@@ -5,7 +5,6 @@ type State = {
   premises: Premise[];
   meterData: MeterData[];
   selectedPremise: Premise | null;
-  // currentUser: Premise[];
 };
 
 type Action =
@@ -13,7 +12,6 @@ type Action =
   | { type: 'SET_PREMISE'; payload: Premise }
   | { type: 'RESET_PREMISE' }
   | { type: 'SET_METER_DATA'; payload: MeterData[] };
-// | { type: 'SET_CURRENT_USER'; payload: Premise[] };
 
 type ContextType = {
   state: State;
@@ -26,7 +24,6 @@ const initialState: State = {
   premises: [],
   meterData: [],
   selectedPremise: null,
-  // currentUser: [],
 };
 
 const premiseReducer = (state: State, action: Action): State => {
@@ -41,8 +38,6 @@ const premiseReducer = (state: State, action: Action): State => {
     case 'SET_METER_DATA':
       console.log('Setting meterData:', action.payload);
       return { ...state, meterData: action.payload };
-    // case 'SET_CURRENT_USER':
-    //   return { ...state, currentUser: action.payload };
     default:
       return state;
   }

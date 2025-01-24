@@ -22,7 +22,6 @@ export default function MeterComponent({ navigation }: Props) {
         const meterData: MeterData[] = state.meterData.filter(
           (data) => data.MeterId === item.Id,
         );
-        console.log('Filtered meterData:', meterData); // Add this line to debug
         dispatch({
           type: 'SET_METER_DATA',
           payload: meterData,

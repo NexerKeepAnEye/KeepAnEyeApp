@@ -30,7 +30,7 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
   >();
   const { state } = usePremiseContext();
   const meters: Meter[] =
-    state.premises?.flatMap((premise) => premise.Meters) || []; // ändrad
+    state.premises?.flatMap((premise) => premise.Meters) || [];
 
   const handlePress = () => setModalVisible(true);
 

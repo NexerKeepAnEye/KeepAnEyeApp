@@ -122,23 +122,8 @@ export async function fetchMeterData(
       MeterId: item.MeterId,
     }));
     return meterData;
-    // const jsonString = JSON.stringify(data);
-    // console.log('data:',jsonString);
-    // return data;
   } catch (error) {
     console.error('Error fetching meter data:', error);
     throw error;
   }
 }
-
-// fetchMeterData(
-//   'fc41e3f1-f155-4465-b908-a79991643b0a', // apiKey
-//   25, // productId
-//   'monthly', // resolution
-//   '2023-01-01T00:00:00Z', // from
-//   '2024-01-01T00:00:00Z', // to
-//   false, // correctedValues
-//   [], // premiseIds
-//   [], // designations
-//   [], // meterIds
-// );

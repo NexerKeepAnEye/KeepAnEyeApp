@@ -67,6 +67,7 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
               setSearchClicked(true);
             }}
             buttonText="Skapa rapport"
+            // productId={0}
           />
           {searchClicked ? (
             filteredResults.length > 0 ? (
@@ -88,7 +89,7 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
                         {filteredResults.map((item, index) => (
                           <DataTable.Row key={index}>
                             <DataTable.Cell>
-                              {formatMonth(item.DateTime)}
+                              {formatMonth(item.DateTime.toDateString())}
                             </DataTable.Cell>
                             <DataTable.Cell>{item.Value}</DataTable.Cell>
                           </DataTable.Row>

@@ -8,7 +8,6 @@ export async function mockApiFetch(url: string, options: { headers: { [key: stri
   // Simulera en liten fördröjning (som ett riktigt API)
   await new Promise(resolve => setTimeout(resolve, 500));
 
-  // Kontrollera API-nyckeln
   if (!options.headers['X-API-Key'] || options.headers['X-API-Key'] !== 'abc') {
     return {
       ok: false,
@@ -37,24 +36,13 @@ if (url === '/premise' && options.method === 'GET') {
     const requestBody = options.body ? JSON.parse(options.body) : {};
     const fromDate = new Date(requestBody.from);
     const toDate = new Date(requestBody.to);
-
-    console.log('Filtering Conditions:');
-    console.log('ProductId:', requestBody.productId,'type:', typeof requestBody.productId);
-    console.log('Resolution:', requestBody.resolution,'type:', typeof requestBody.resolution);
-    console.log('FromDate:', fromDate,'type:', typeof fromDate);
-    console.log('ToDate:', toDate,'type:', typeof toDate);
-    console.log('PremiseIds:', requestBody.premiseIds,'type:', typeof requestBody.premiseIds);
-    console.log('Designations:', requestBody.designations,'type:', typeof requestBody.designations);
-    console.log('MeterIds:', requestBody.meterIds,'type:', typeof requestBody.meterIds);
-
+    
     const meterData = meterdata.MeterData.filter(
       md =>
         md.ProductId === requestBody.productId &&
-        md.Resolution !== null && //requestBody.resolution &&
+        md.Resolution !== null && 
         new Date(md.DateTime) >= fromDate &&
         new Date(md.DateTime) <= toDate &&
-        // md.DateTime === requestBody.from &&
-        // md.DateTime === requestBody.to &&
         (requestBody.premiseIds.length === 0 || requestBody.premiseIds.includes(md.PremiseId)) &&
         (requestBody.designations.length === 0 || requestBody.designations.includes(md.Designation)) &&
         (requestBody.meterIds.length === 0 || requestBody.meterIds.includes(md.MeterId))
