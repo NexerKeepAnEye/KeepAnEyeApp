@@ -25,15 +25,14 @@ export async function fetchPremise(apiKey: string): Promise<Premise[]> {
     if (!Array.isArray(data)) {
       throw new Error('Unexpected response format');
     }
-    console.log(JSON.stringify(data));
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const premises: Premise[] = data.map(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (item: any): Premise => ({
         Id: item.Id,
         Designation: item.Designation ?? null,
         Name: item.Name,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         Meters: (item.Meters || []).map(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (meter: any): Meter => ({
             Id: meter.Id,
             Name: meter.Name,
@@ -112,8 +111,8 @@ export async function fetchMeterData(
     }
 
     console.log(JSON.stringify(data));
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const meterData: MeterData[] = data.map(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (item: any): MeterData => ({
         DateTime: new Date(item.DateTime),
         Value: item.Value,
