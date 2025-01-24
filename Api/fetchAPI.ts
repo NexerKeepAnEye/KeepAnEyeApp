@@ -1,4 +1,4 @@
-import { Meter, MeterData, Premise } from '../Types/Type';
+import { Meter, MeterData, Premise, Product } from '../Types/Type';
 import { mockApiFetch } from './mockApi';
 // import https from 'https';
 // import fetch from 'node-fetch';
@@ -49,7 +49,7 @@ export async function fetchPremise(apiKey: string): Promise<Premise[]> {
   }
 }
 
-export async function fetchProduct(apiKey: string) {
+export async function fetchProduct(apiKey: string): Promise<Product[]> {
   try {
     const response = await mockApiFetch('/product', {
       method: 'GET',
@@ -64,10 +64,21 @@ export async function fetchProduct(apiKey: string) {
     }
 
     const data = await response.json();
-    console.log(JSON.stringify(data));
-    return data;
+    if (!Array.isArray(data)) {
+      throw new Error('Unexpected response format');
+    }
+    const products: Product[] = data.map(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (item: any): Product => ({
+        Id: item.Id,
+        Code: item.Code,
+        Unit: item.Unit,
+      }),
+    );
+    return products;
   } catch (error) {
     console.error('Error fetching products:', error);
+    return [];
   }
 }
 
@@ -100,7 +111,7 @@ export async function fetchMeterData(
         meterIds,
       }),
     });
-    console.log('fetchMeterData: ', response);
+    // console.log('fetchMeterData: ', response);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -110,7 +121,7 @@ export async function fetchMeterData(
       throw new Error('Unexpected response format');
     }
 
-    console.log(JSON.stringify(data));
+    // console.log(JSON.stringify(data));
     const meterData: MeterData[] = data.map(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (item: any): MeterData => ({

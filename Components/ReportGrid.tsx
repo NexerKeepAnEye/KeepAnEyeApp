@@ -1,14 +1,13 @@
 import React, { Reducer, useEffect, useReducer, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { DataTable, Divider } from 'react-native-paper';
+import { fetchProduct } from '../Api/fetchAPI';
 import {
   FilterAction,
   filterReducer,
   FilterState,
   initialState,
 } from '../Context/FilterReducer';
-import { meterData } from '../MockedData/MockedMeterDataMonth';
-import { mockedData } from '../MockedData/MockedProduct';
 import { ReportGridStyle } from '../Style/ReportGridStyleStyle';
 import Filter from './Filters/Filter';
 import MeterDataBarChart from './MeterDataBarChart';
@@ -23,16 +22,9 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
     filterReducer,
     initialState,
   );
+  const [productName, setProductName] = useState<string | null>(null);
 
   const [searchClicked, setSearchClicked] = useState(false);
-
-  useEffect(() => {
-    // Använd mockad data
-    dispatch({
-      type: 'SET_METER_DATA',
-      payload: meterData,
-    });
-  }, []);
 
   const filteredResults = state.filteredResults;
 
@@ -42,12 +34,24 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
   };
 
   const meter = state.meter;
-
+  // console.log(meter);
   const productCode = meter && meter.length > 0 ? meter[0].ProductCode : null;
 
-  const productName = productCode
-    ? mockedData.find((item) => item.Code === productCode)?.Unit
-    : null;
+  useEffect(() => {
+    const fetchProductName = async () => {
+      if (!productCode) return;
+      try {
+        const products = await fetchProduct('abc');
+        const product =
+          products.find((item) => item.Code === productCode)?.Unit || null;
+        setProductName(product);
+        console.log('PRODUCT:', product);
+      } catch (error) {
+        console.error('Error fetching product:', error);
+      }
+    };
+    fetchProductName();
+  }, [productCode]);
 
   return (
     <ScrollView style={ReportGridStyle.root}>
@@ -83,7 +87,7 @@ export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
                         <DataTable.Header>
                           <DataTable.Title>Månad</DataTable.Title>
                           <DataTable.Title>
-                            Förbrukning {productName?.toString() ?? ''}
+                            Förbrukning ({productName})
                           </DataTable.Title>
                         </DataTable.Header>
                         {filteredResults.map((item, index) => (

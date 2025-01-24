@@ -94,9 +94,6 @@ const Filter: React.FC<FilterProps> = ({
 
       const selectedProductId = selectedMeter?.ProductId ?? 0;
 
-      console.log('meterid', meterId);
-      console.log('selectedMeter', selectedMeter);
-      console.log('productid', selectedProductId);
       meterData = await fetchMeterData(
         'abc',
         selectedProductId,

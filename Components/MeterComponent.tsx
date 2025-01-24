@@ -36,7 +36,9 @@ export default function MeterComponent({ navigation }: Props) {
       </View>
       <View style={MeterComponentStyle.textContainer}>
         <Text style={MeterComponentStyle.textStyleName}>{item?.Name}</Text>
-        <Text style={MeterComponentStyle.textStyleProductCode}>{item?.Id}</Text>
+        <Text style={MeterComponentStyle.textStyleProductCode}>
+          {item?.ProductCode}
+        </Text>
       </View>
     </TouchableOpacity>
   );

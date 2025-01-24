@@ -59,7 +59,7 @@ export async function mockApiFetch(
     );
 
     if (meterData) {
-      console.log('data from api:', meterdata);
+      // console.log('data from api:', meterdata);
       return {
         ok: true,
         status: 200,

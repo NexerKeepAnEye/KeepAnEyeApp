@@ -75,9 +75,7 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
     },
     {
       title: 'Temperatur',
-      data: meters.filter(
-        (meter) => meter.ProductId === 5 || meter.ProductId === 9,
-      ),
+      data: meters.filter((meter) => meter.ProductId === 9),
     },
   ].filter((section) => section.data.length > 0);
 

@@ -5,8 +5,8 @@
       "Name": "Empire State",
       "Designation": "123few",
       "Meters": [
-        { "Id": 1, "PremiseId": 1, "ProductId": 1, "Name": "Meter 1" },
-        { "Id": 2, "PremiseId": 1, "ProductId": 2, "Name": "Meter 2" }
+        { "Id": 1, "ProductCode": "FJV", "ProductId": 1, "Name": "Meter 1" },
+        { "Id": 2, "ProductCode": "FJK", "ProductId": 2, "Name": "Meter 2" }
       ]
     },
     {
@@ -14,8 +14,8 @@
       "Name": "Crystal Palace",
       "Designation": "2342tew",
       "Meters": [
-        { "Id": 3, "PremiseId": 2, "ProductId": 3, "Name": "Meter 3" },
-        { "Id": 4, "PremiseId": 2, "ProductId": 4, "Name": "Meter 4" }
+        { "Id": 3, "ProductCode": "EL", "ProductId": 3, "Name": "Meter 3" },
+        { "Id": 4, "ProductCode": "VAT", "ProductId": 4, "Name": "Meter 4" }
       ]
     },
     {
@@ -23,8 +23,8 @@
       "Name": "Sunset Boulevard",
       "Designation": "asg",
       "Meters": [
-        { "Id": 5, "PremiseId": 3, "ProductId": 5, "Name": "Meter 5" },
-        { "Id": 6, "PremiseId": 3, "ProductId": 6, "Name": "Meter 6" }
+        { "Id": 5, "ProductCode": "EL-U", "ProductId": 5, "Name": "Meter 5" },
+        { "Id": 6, "ProductCode": "VAT-U", "ProductId": 6, "Name": "Meter 6" }
       ]
     },
     {
@@ -32,8 +32,8 @@
       "Name": "123 Main St",
       "Designation": "fds",
       "Meters": [
-        { "Id": 7, "PremiseId": 4, "ProductId": 7, "Name": "Meter 7" },
-        { "Id": 8, "PremiseId": 4, "ProductId": 8, "Name": "Meter 8" }
+        { "Id": 7, "ProductCode": "VOL", "ProductId": 7, "Name": "Meter 7" },
+        { "Id": 8, "ProductCode": "FLÖDE", "ProductId": 8, "Name": "Meter 8" }
       ]
     },
     {
@@ -41,8 +41,8 @@
       "Name": "Quantum Tower",
       "Designation": "fhk",
       "Meters": [
-        { "Id": 9, "PremiseId": 5, "ProductId": 9, "Name": "Meter 9" },
-        { "Id": 10, "PremiseId": 5, "ProductId": 10, "Name": "Meter 10" }
+        { "Id": 9, "ProductCode": "TMP", "ProductId": 9, "Name": "Meter 9" },
+        { "Id": 10, "ProductCode": "OLJA", "ProductId": 10, "Name": "Meter 10" }
       ]
     },
     {
@@ -50,8 +50,8 @@
       "Name": "Rivendell",
       "Designation": "öiuhgb",
       "Meters": [
-        { "Id": 11, "PremiseId": 6, "ProductId": 1, "Name": "Meter 11" },
-        { "Id": 12, "PremiseId": 6, "ProductId": 2, "Name": "Meter 12" }
+        { "Id": 11, "ProductCode": "FJV", "ProductId": 1, "Name": "Meter 11" },
+        { "Id": 12, "ProductCode": "FJK", "ProductId": 2, "Name": "Meter 12" }
       ]
     },
     {
@@ -59,8 +59,8 @@
       "Name": "Hogwarts",
       "Designation": "78876yh",
       "Meters": [
-        { "Id": 13, "PremiseId": 7, "ProductId": 3, "Name": "Meter 13" },
-        { "Id": 14, "PremiseId": 7, "ProductId": 4, "Name": "Meter 14" }
+        { "Id": 13, "ProductCode": "EL", "ProductId": 3, "Name": "Meter 13" },
+        { "Id": 14, "ProductCode": "VAT", "ProductId": 4, "Name": "Meter 14" }
       ]
     },
     {
@@ -68,8 +68,8 @@
       "Name": "Wayne Manor",
       "Designation": "09ijhy65rf",
       "Meters": [
-        { "Id": 15, "PremiseId": 8, "ProductId": 5, "Name": "Meter 15" },
-        { "Id": 16, "PremiseId": 8, "ProductId": 6, "Name": "Meter 16" }
+        { "Id": 15, "ProductCode": "EL-U", "ProductId": 5, "Name": "Meter 15" },
+        { "Id": 16, "ProductCode": "VAT-U", "ProductId": 6, "Name": "Meter 16" }
       ]
     },
     {
@@ -77,8 +77,8 @@
       "Name": "Baker Street",
       "Designation": "1234ef",
       "Meters": [
-        { "Id": 17, "PremiseId": 9, "ProductId": 7, "Name": "Meter 17" },
-        { "Id": 18, "PremiseId": 9, "ProductId": 8, "Name": "Meter 18" }
+        { "Id": 17, "ProductCode": "VOL", "ProductId": 7, "Name": "Meter 17" },
+        { "Id": 18, "ProductCode": "FLÖDE", "ProductId": 8, "Name": "Meter 18" }
       ]
     },
     {
@@ -86,8 +86,8 @@
       "Name": "Shire",
       "Designation": "35erf",
       "Meters": [
-        { "Id": 19, "PremiseId": 10, "ProductId": 9, "Name": "Meter 19" },
-        { "Id": 20, "PremiseId": 10, "ProductId": 10, "Name": "Meter 20" }
+        { "Id": 19, "ProductCode": "TMP", "ProductId": 9, "Name": "Meter 19" },
+        { "Id": 20, "ProductCode": "OLJA", "ProductId": 10, "Name": "Meter 20" }
       ]
     }
   ]

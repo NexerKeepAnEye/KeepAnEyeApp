@@ -1,14 +1,14 @@
 {
   "Product": [
-    { "Id": 1, "Code": "FJV" },
-    { "Id": 2, "Code": "FJK" },
-    { "Id": 3, "Code": "EL" },
-    { "Id": 4, "Code": "VAT" },
-    { "Id": 5, "Code": "EL-U" },
-    { "Id": 6, "Code": "VAT-U" },
-    { "Id": 7, "Code": "VOL" },
-    { "Id": 8, "Code": "FLÖDE" },
-    { "Id": 9, "Code": "TMP" },
-    { "Id": 10, "Code": "OLJA" }
+    { "Id": 1, "Code": "FJV", "Unit": "kwh" },
+    { "Id": 2, "Code": "FJK", "Unit": "kwh" },
+    { "Id": 3, "Code": "EL", "Unit": "w" },
+    { "Id": 4, "Code": "VAT", "Unit": "m3" },
+    { "Id": 5, "Code": "EL-U", "Unit": "w" },
+    { "Id": 6, "Code": "VAT-U", "Unit": "m3" },
+    { "Id": 7, "Code": "VOL", "Unit": "m3" },
+    { "Id": 8, "Code": "FLÖDE", "Unit": "m/s" },
+    { "Id": 9, "Code": "TMP", "Unit": "c" },
+    { "Id": 10, "Code": "OLJA", "Unit": "m3" }
   ]
 }
