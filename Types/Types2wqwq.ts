@@ -16,7 +16,7 @@ export type product = {
 };
 
 export type premise = {
-  apikey: string
+  apikey: string;
   id: number;
   name: string;
   designation: string;
