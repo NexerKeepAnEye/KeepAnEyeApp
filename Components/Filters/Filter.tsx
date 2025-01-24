@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useNavigationState } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import {
   Provider as PaperProvider,
@@ -6,11 +7,11 @@ import {
   Snackbar,
   Text,
 } from 'react-native-paper';
-// import { usePremiseContext } from '../../Context/PremiseContext';
-import { useNavigationState } from '@react-navigation/native';
+import { fetchMeterData, fetchProduct } from '../../Api/fetchAPI';
+import { usePremiseContext } from '../../Context/PremiseContext';
 import { filterStyle } from '../../Style/FilterStyle';
 import { searchButtonStyle } from '../../Style/SearchButtonStyle';
-import { Meter, MeterData } from '../../Types/Type';
+import { Meter, MeterData, Product } from '../../Types/Type';
 import { FromToDate } from './FromToDate';
 import MeterSearch from './MeterSearch';
 import { Resolution } from './Resolution';
@@ -26,13 +27,14 @@ interface FilterProps {
   setFilteredResults: (data: MeterData[]) => void;
   year?: string;
   meter?: Meter[];
-  fromDate?: Date | null;
-  toDate?: Date | null;
+  fromDate?: Date;
+  toDate?: Date;
   meterData: MeterData[];
   meterId?: number;
   resolution?: string;
   filters: string[];
   buttonText: string;
+  // productId: number;
 }
 
 const Filter: React.FC<FilterProps> = ({
@@ -48,30 +50,67 @@ const Filter: React.FC<FilterProps> = ({
   meter,
   fromDate,
   toDate,
-  meterData,
-  meterId: meterId,
+  // meterData,
+  meterId,
   resolution,
   buttonText,
 }) => {
   const [visible, setVisible] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [products, setProducts] = useState<Product[]>([]);
+  const { state } = usePremiseContext();
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const products = await fetchProduct('abc');
+      if (
+        products &&
+        typeof products === 'object' &&
+        !('error' in products) &&
+        Array.isArray(products) &&
+        products.every(
+          (product) =>
+            'Id' in product && 'Code' in product && 'Unit' in product,
+        )
+      ) {
+        setProducts(products as Product[]);
+      } else {
+        console.log('Error fetching products:');
+      }
+    };
+    fetchProducts();
+  }, []);
 
   const showSnackbar = () => setVisible(true);
   const hideSnackbar = () => setVisible(false);
-  // const { state } = usePremiseContext();
 
-  const handleSearch = () => {
-    // const meterData = await fetchMeterData(
-    //   'fc41e3f1-f155-4465-b908-a79991643b0a',
-    //   meterId ?? meter?.map((m) => m.Id) ?? [],
-    //   resolution,
-    //   fromDate?.toISOString(),
-    //   toDate?.toISOString(),
-    //   false,
-    //   state.premise?.Id,
-    //   [], // designations
-    // );
+  const handleSearch = async () => {
+    let meterData;
+    try {
+      const selectedMeter =
+        meterId !== undefined
+          ? state.selectedPremise?.Meters.find((meter) => meter.Id === meterId)
+          : undefined;
 
-    let filteredData = meterData;
+      const selectedProductId = selectedMeter?.ProductId ?? 0;
+
+      meterData = await fetchMeterData(
+        'abc',
+        selectedProductId,
+        resolution ?? '',
+        fromDate ?? new Date(),
+        toDate ?? new Date(),
+        state.selectedPremise?.Id ? [state.selectedPremise.Id] : [],
+        state.selectedPremise?.Designation
+          ? [state.selectedPremise.Designation]
+          : [],
+        meterId !== undefined ? [meterId] : (meter?.map((m) => m.Id) ?? []),
+      );
+    } catch (error) {
+      console.log('error fetching meterdata:', error);
+    }
+
+    let filteredData = meterData ?? [];
 
     if (
       (filters.includes('year') && !year) ||
@@ -84,27 +123,31 @@ const Filter: React.FC<FilterProps> = ({
     }
 
     if (year) {
-      filteredData = filteredData.filter((item) => {
-        const itemYear = new Date(item.DateTime).getFullYear();
-        return itemYear === parseInt(year, 10);
-      });
+      if (Array.isArray(filteredData)) {
+        filteredData = filteredData.filter((item: MeterData) => {
+          const itemYear = new Date(item.DateTime).getFullYear();
+          return itemYear === parseInt(year, 10);
+        });
+      }
     }
 
     if (fromDate && toDate) {
-      filteredData = filteredData.filter((item) => {
+      filteredData = filteredData.filter((item: MeterData) => {
         const itemDate = new Date(item.DateTime);
         return itemDate >= fromDate && itemDate <= toDate;
       });
     }
 
     if (meter && meter.length > 0) {
-      filteredData = filteredData.filter((item) =>
+      filteredData = filteredData.filter((item: MeterData) =>
         meter.some((m) => m.Id === item.MeterId),
       );
     }
 
     if (meterId !== null && meterId !== undefined) {
-      filteredData = filteredData.filter((data) => data.MeterId === meterId);
+      filteredData = filteredData.filter(
+        (data: MeterData) => data.MeterId === meterId,
+      );
       if (setMeterId) {
         setMeterId(meterId);
       }

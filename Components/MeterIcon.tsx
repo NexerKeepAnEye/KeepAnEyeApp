@@ -1,21 +1,29 @@
 import React from 'react';
 import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { fetchProduct } from '../Api/fetchAPI';
 import { MeterIconStyle } from '../Style/MeterIconStyle';
 
-export default function MeterIcon({ productCode }: { productCode: string }) {
-  const iconSelector = (productCode: string) => {
-    if (productCode.includes('FJV')) {
+export default function MeterIcon({ productId }: { productId: number }) {
+  fetchProduct('abc');
+
+  const iconSelector = (productId: number) => {
+    if (productId === 1) {
       return 'local-fire-department';
-    } else if (productCode.includes('VAT') || productCode.includes('VOL')) {
+    } else if (
+      productId === 4 ||
+      productId === 6 ||
+      productId === 7 ||
+      productId === 8
+    ) {
       return 'water-drop';
-    } else if (productCode.includes('TMP')) {
+    } else if (productId === 9) {
       return 'thermostat';
-    } else if (productCode.includes('El')) {
+    } else if (productId === 3 || productId === 5) {
       return 'bolt';
-    } else if (productCode.includes('FJK')) {
+    } else if (productId === 2) {
       return 'ac-unit';
-    } else if (productCode.includes('OLJA')) {
+    } else if (productId === 10) {
       return 'local-gas-station';
     }
 
@@ -25,7 +33,7 @@ export default function MeterIcon({ productCode }: { productCode: string }) {
   return (
     <View>
       <Icon
-        name={iconSelector(productCode)}
+        name={iconSelector(productId)}
         style={MeterIconStyle.icon}
       />
     </View>

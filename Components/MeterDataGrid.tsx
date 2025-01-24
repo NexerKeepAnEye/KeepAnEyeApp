@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { DataTable } from 'react-native-paper';
 import {
@@ -7,7 +7,6 @@ import {
   FilterState,
   initialState,
 } from '../Context/FilterReducer';
-import { meterData } from '../MockedData/MockedMeterDataMonth';
 import { MeterDataGridStyle } from '../Style/MeterDataGridStyle';
 import { ReportGridStyle } from '../Style/ReportGridStyleStyle';
 import { MeterData } from '../Types/Type';
@@ -15,6 +14,7 @@ import Filter from './Filters/Filter';
 
 type Props = {
   meterId: number;
+  meterData: MeterData[];
 };
 
 export default function MeterDataGrid({ meterId }: Props) {
@@ -25,14 +25,6 @@ export default function MeterDataGrid({ meterId }: Props) {
   const [filteredResults, setFilteredResults] = useState<MeterData[]>([]);
 
   const [filterApplied, setFilterApplied] = useState(false);
-
-  useEffect(() => {
-    // Använder mockad data
-    dispatch({
-      type: 'SET_METER_DATA',
-      payload: meterData,
-    });
-  }, []);
 
   return (
     <ScrollView style={ReportGridStyle.root}>
@@ -55,6 +47,7 @@ export default function MeterDataGrid({ meterId }: Props) {
           setFilterApplied(true);
         }}
         buttonText={'Sök'}
+        // productId={0}
       />
       <>
         {filterApplied ? (
@@ -80,9 +73,7 @@ export default function MeterDataGrid({ meterId }: Props) {
                     key={index}
                     style={MeterDataGridStyle.cell}
                   >
-                    <DataTable.Cell>
-                      {data.DateTime.split('T')[0]}
-                    </DataTable.Cell>
+                    <DataTable.Cell>{data.DateTime.toString()}</DataTable.Cell>
                     <DataTable.Cell>{data.Value}</DataTable.Cell>
                     <DataTable.Cell>{data.Cost}</DataTable.Cell>
                     <DataTable.Cell>{data.Code}</DataTable.Cell>

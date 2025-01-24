@@ -9,15 +9,15 @@ import RootStackNavigator from './Navigation/RootStackNavigation';
 export default function App() {
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
-        <PremiseProvider>
+      <PremiseProvider>
+        <NavigationContainer>
           <FilterContext.Provider
             value={{ state: initialState, dispatch: () => null }}
           >
             <RootStackNavigator />
           </FilterContext.Provider>
-        </PremiseProvider>
-      </NavigationContainer>
+        </NavigationContainer>
+      </PremiseProvider>
     </SafeAreaProvider>
   );
 }

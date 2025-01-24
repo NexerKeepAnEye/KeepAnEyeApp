@@ -1,35 +1,14 @@
-import {
-  CommonActions,
-  NavigationProp,
-  useIsFocused,
-} from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import * as React from 'react';
-import { useEffect } from 'react';
-import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
-import { Text } from 'react-native-paper';
+import { StackNavigationProp } from '@react-navigation/stack';
+import React from 'react';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import NexerLogo from '../assets/NexerLogo.png';
 import { usePremiseContext } from '../Context/PremiseContext';
-import { mockedPremise } from '../MockedData/MockedPremise';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { StartScreenStyle } from '../Style/StartScreenStyle';
-import { Meter } from '../Types/Type';
-import NexerLogo from '../assets/NexerLogo.png';
+import { Premise } from '../Types/Type';
 
-function resetNavigationStack(
-  navigation: NavigationProp<RootStackParamList>,
-  routeName: string,
-  params?: object,
-) {
-  navigation.dispatch(
-    CommonActions.reset({
-      index: 0,
-      routes: [{ name: routeName, params }],
-    }),
-  );
-}
-
-type StartScreenNavigationProp = NativeStackNavigationProp<
+type StartScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   'StartScreen'
 >;
@@ -39,30 +18,20 @@ type Props = {
 };
 
 export default function StartScreen({ navigation }: Props) {
-  const { dispatch } = usePremiseContext();
-  const isFocused = useIsFocused();
+  const { state, dispatch } = usePremiseContext();
+  const premises: Premise[] = state.premises;
 
-  useEffect(() => {
-    if (isFocused) {
-      const state = navigation.getState();
-      const currentRoute = state.routes[state.index];
-      if (currentRoute.name !== 'StartScreen') {
-        resetNavigationStack(navigation, 'StartScreen');
-      }
-    }
-  }, [isFocused, navigation]);
+  console.log('startscreen Premises:', JSON.stringify(premises));
 
-  const renderItem = (item: {
-    Id: number;
-    Designation: string | null | undefined;
-    Name: string;
-    Meters: Meter[];
-  }) => (
+  const renderItem = (item: Premise) => (
     <TouchableOpacity
       key={item.Id}
       style={StartScreenStyle.listItems}
       onPress={() => {
-        dispatch({ type: 'SET_PREMISE', payload: item });
+        dispatch({
+          type: 'SET_PREMISE',
+          payload: item,
+        });
         navigation.navigate('tabs', {
           screen: 'ReportScreen',
           params: { premiseId: item.Id },
@@ -95,7 +64,7 @@ export default function StartScreen({ navigation }: Props) {
         <Text style={StartScreenStyle.textHeader}>Mina Fastigheter</Text>
       </View>
       <ScrollView style={StartScreenStyle.itemBox}>
-        {mockedPremise.map((item) => renderItem(item))}
+        {Array.isArray(premises) && premises.map((item) => renderItem(item))}
       </ScrollView>
       <Image
         source={NexerLogo}

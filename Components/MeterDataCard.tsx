@@ -15,7 +15,7 @@ type Props = {
 export default function MeterDataCard({ meterId, navigation }: Props) {
   const { state } = usePremiseContext();
 
-  const meter = state.premise?.Meters.find((m) => m.Id === meterId);
+  const meter = state.selectedPremise?.Meters.find((m) => m.Id === meterId);
 
   return (
     <TouchableHighlight
@@ -27,10 +27,10 @@ export default function MeterDataCard({ meterId, navigation }: Props) {
     >
       <Card style={MeterDataCardStyle.card}>
         <View style={MeterDataCardStyle.row}>
-          {state.premise?.Name ? (
+          {state.selectedPremise?.Name ? (
             <>
               <View style={MeterDataCardStyle.iconContainer}>
-                <MeterIcon productCode={meter?.ProductCode ?? ''} />
+                <MeterIcon productId={meter?.ProductId ?? 0} />
               </View>
               <Card.Content style={MeterDataCardStyle.content}>
                 <Text style={MeterDataCardStyle.title}>{meter?.Name}</Text>

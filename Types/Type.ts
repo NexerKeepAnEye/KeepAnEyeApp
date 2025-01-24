@@ -7,7 +7,7 @@ export type Tooltip = {
 };
 
 export type MeterData = {
-  DateTime: string;
+  DateTime: Date;
   Value: number;
   Cost: number;
   Code: string;

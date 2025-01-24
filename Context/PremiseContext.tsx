@@ -2,13 +2,15 @@ import React, { createContext, ReactNode, useContext, useReducer } from 'react';
 import { MeterData, Premise } from '../Types/Type';
 
 type State = {
-  premise: Premise | null;
+  premises: Premise[];
   meterData: MeterData[];
+  selectedPremise: Premise | null;
 };
 
 type Action =
+  | { type: 'SET_PREMISES'; payload: Premise[] }
   | { type: 'SET_PREMISE'; payload: Premise }
-  | { type: 'CHANGE_PREMISE'; payload: Premise }
+  | { type: 'RESET_PREMISE' }
   | { type: 'SET_METER_DATA'; payload: MeterData[] };
 
 type ContextType = {
@@ -18,14 +20,23 @@ type ContextType = {
 
 const PremiseContext = createContext<ContextType | undefined>(undefined);
 
-const initialState: State = { premise: null, meterData: [] };
+const initialState: State = {
+  premises: [],
+  meterData: [],
+  selectedPremise: null,
+};
 
 const premiseReducer = (state: State, action: Action): State => {
   switch (action.type) {
+    case 'SET_PREMISES':
+      console.log('reducer premises', action.payload);
+      return { ...state, premises: action.payload };
     case 'SET_PREMISE':
-    case 'CHANGE_PREMISE':
-      return { premise: action.payload, meterData: state.meterData };
+      return { ...state, selectedPremise: action.payload };
+    case 'RESET_PREMISE':
+      return { ...state, selectedPremise: null };
     case 'SET_METER_DATA':
+      console.log('Setting meterData:', action.payload);
       return { ...state, meterData: action.payload };
     default:
       return state;

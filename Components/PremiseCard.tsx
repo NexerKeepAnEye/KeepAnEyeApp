@@ -14,17 +14,20 @@ type Props<T extends keyof RootStackParamList> = {
 const PremiseCard = <T extends keyof RootStackParamList>({
   navigation,
 }: Props<T>) => {
-  const { state } = usePremiseContext();
+  const { state, dispatch } = usePremiseContext();
 
   return (
     <TouchableHighlight
-      onPress={() => navigation.navigate('StartScreen')}
+      onPress={() => {
+        dispatch({ type: 'RESET_PREMISE' });
+        navigation.navigate('StartScreen');
+      }}
       underlayColor={'#ddd'}
       style={{ borderRadius: 10 }}
     >
       <Card style={premiseCardStyle.card}>
         <View style={premiseCardStyle.row}>
-          {state.premise?.Name ? (
+          {state.selectedPremise ? (
             <>
               <View style={premiseCardStyle.iconContainer}>
                 <SimpleLineIcons
@@ -35,10 +38,10 @@ const PremiseCard = <T extends keyof RootStackParamList>({
               </View>
               <Card.Content style={premiseCardStyle.content}>
                 <Text style={premiseCardStyle.title}>
-                  {state.premise?.Name}
+                  {state.selectedPremise.Name}
                 </Text>
                 <Text style={premiseCardStyle.subtitle}>
-                  Beteckning: {state.premise?.Designation}
+                  Beteckning: {state.selectedPremise.Designation}
                 </Text>
               </Card.Content>
             </>

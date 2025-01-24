@@ -1,0 +1,544 @@
+{
+  "MeterData": [
+    {
+      "DateTime": "2023-08-01",
+      "Value": 1234,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "123",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 5678,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "abc",
+      "MeterId": 2,
+      "ProductId": 2,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 9101,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "231",
+      "MeterId": 3,
+      "ProductId": 3,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 2345,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "fgwe",
+      "MeterId": 4,
+      "ProductId": 4,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 6789,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "fwew",
+      "MeterId": 5,
+      "ProductId": 5,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 3456,
+      "Cost": 2336.75,
+      "PremiseId": 2,
+      "Designation": "heje",
+      "MeterId": 6,
+      "ProductId": 6,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 7890,
+      "Cost": 2336.75,
+      "PremiseId": 2,
+      "Designation": "esgrg",
+      "MeterId": 7,
+      "ProductId": 7,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 4567,
+      "Cost": 2336.75,
+      "PremiseId": 2,
+      "Designation": "rwfw",
+      "MeterId": 8,
+      "ProductId": 8,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 8901,
+      "Cost": 2336.75,
+      "PremiseId": 2,
+      "Designation": "1234assf",
+      "MeterId": 9,
+      "ProductId": 9,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 5678,
+      "Cost": 2336.75,
+      "PremiseId": 2,
+      "Designation": "a1a2",
+      "MeterId": 10,
+      "ProductId": 1,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 6789,
+      "Cost": 2336.75,
+      "PremiseId": 3,
+      "Designation": "3r3r4t",
+      "MeterId": 11,
+      "ProductId": 1,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 7890,
+      "Cost": 2336.75,
+      "PremiseId": 3,
+      "Designation": "6432",
+      "MeterId": 12,
+      "ProductId": 2,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 8901,
+      "Cost": 2336.75,
+      "PremiseId": 3,
+      "Designation": "3242",
+      "MeterId": 13,
+      "ProductId": 3,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 9012,
+      "Cost": 2336.75,
+      "PremiseId": 3,
+      "Designation": "65432",
+      "MeterId": 14,
+      "ProductId": 4,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 1234,
+      "Cost": 2336.75,
+      "PremiseId": 3,
+      "Designation": "dfgtf",
+      "MeterId": 15,
+      "ProductId": 5,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 2345,
+      "Cost": 2336.75,
+      "PremiseId": 4,
+      "Designation": "ölkjh",
+      "MeterId": 16,
+      "ProductId": 6,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 3456,
+      "Cost": 2336.75,
+      "PremiseId": 4,
+      "Designation": "12314",
+      "MeterId": 17,
+      "ProductId": 7,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 4567,
+      "Cost": 2336.75,
+      "PremiseId": 4,
+      "Designation": "gr3s",
+      "MeterId": 18,
+      "ProductId": 8,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 5678,
+      "Cost": 2336.75,
+      "PremiseId": 4,
+      "Designation": "oink",
+      "MeterId": 19,
+      "ProductId": 9,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 6789,
+      "Cost": 2336.75,
+      "PremiseId": 4,
+      "Designation": "fefas",
+      "MeterId": 20,
+      "ProductId": 1,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 7890,
+      "Cost": 2336.75,
+      "PremiseId": 5,
+      "Designation": "flggstångsknoppsputspoleringsmedel",
+      "MeterId": 21,
+      "ProductId": 1,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 8901,
+      "Cost": 2336.75,
+      "PremiseId": 5,
+      "Designation": "nbvc",
+      "MeterId": 22,
+      "ProductId": 2,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 9012,
+      "Cost": 2336.75,
+      "PremiseId": 5,
+      "Designation": "zxcccxa",
+      "MeterId": 23,
+      "ProductId": 3,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 5678,
+      "Cost": 2336.75,
+      "PremiseId": 5,
+      "Designation": "5rf",
+      "MeterId": 24,
+      "ProductId": 4,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 7890,
+      "Cost": 2336.75,
+      "PremiseId": 5,
+      "Designation": "uhgfr32",
+      "MeterId": 25,
+      "ProductId": 5,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 3456,
+      "Cost": 2336.75,
+      "PremiseId": 6,
+      "Designation": "123edsw23",
+      "MeterId": 26,
+      "ProductId": 6,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 6789,
+      "Cost": 2336.75,
+      "PremiseId": 6,
+      "Designation": "45tgfd",
+      "MeterId": 27,
+      "ProductId": 7,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 2345,
+      "Cost": 2336.75,
+      "PremiseId": 6,
+      "Designation": "23edfghu89",
+      "MeterId": 28,
+      "ProductId": 8,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 4567,
+      "Cost": 2336.75,
+      "PremiseId": 6,
+      "Designation": "lshd6n",
+      "MeterId": 29,
+      "ProductId": 9,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 8901,
+      "Cost": 2336.75,
+      "PremiseId": 6,
+      "Designation": "äåöåäöå",
+      "MeterId": 30,
+      "ProductId": 1,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 1234,
+      "Cost": 2336.75,
+      "PremiseId": 7,
+      "Designation": "äölkjmn",
+      "MeterId": 31,
+      "ProductId": 1,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 5678,
+      "Cost": 2336.75,
+      "PremiseId": 7,
+      "Designation": "testtesttest",
+      "MeterId": 32,
+      "ProductId": 2,
+      "Resolution": "timma"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 7890,
+      "Cost": 2336.75,
+      "PremiseId": 7,
+      "Designation": "121dvbbg",
+      "MeterId": 33,
+      "ProductId": 3,
+      "Resolution": "månad"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 3456,
+      "Cost": 2336.75,
+      "PremiseId": 7,
+      "Designation": "apiapi",
+      "MeterId": 34,
+      "ProductId": 4,
+      "Resolution": "månad"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 6789,
+      "Cost": 2336.75,
+      "PremiseId": 7,
+      "Designation": "beteckning",
+      "MeterId": 35,
+      "ProductId": 5,
+      "Resolution": "månad"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 2345,
+      "Cost": 2336.75,
+      "PremiseId": 8,
+      "Designation": "fessdfsfs",
+      "MeterId": 36,
+      "ProductId": 6,
+      "Resolution": "månad"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 4567,
+      "Cost": 2336.75,
+      "PremiseId": 8,
+      "Designation": "ueghe23",
+      "MeterId": 37,
+      "ProductId": 7,
+      "Resolution": "månad"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 8901,
+      "Cost": 2336.75,
+      "PremiseId": 8,
+      "Designation": "858uh",
+      "MeterId": 38,
+      "ProductId": 8,
+      "Resolution": "månad"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 1234,
+      "Cost": 2336.75,
+      "PremiseId": 8,
+      "Designation": "9797897",
+      "MeterId": 39,
+      "ProductId": 9,
+      "Resolution": "månad"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 5678,
+      "Cost": 2336.75,
+      "PremiseId": 8,
+      "Designation": "vhy654",
+      "MeterId": 40,
+      "ProductId": 1,
+      "Resolution": "månad"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 7890,
+      "Cost": 2336.75,
+      "PremiseId": 9,
+      "Designation": "123edfg",
+      "MeterId": 41,
+      "ProductId": 1,
+      "Resolution": "månad"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 3456,
+      "Cost": 2336.75,
+      "PremiseId": 9,
+      "Designation": "234rghjk",
+      "MeterId": 42,
+      "ProductId": 2,
+      "Resolution": "månad"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 6789,
+      "Cost": 2336.75,
+      "PremiseId": 9,
+      "Designation": "m6eg76",
+      "MeterId": 43,
+      "ProductId": 3,
+      "Resolution": "månad"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 2345,
+      "Cost": 2336.75,
+      "PremiseId": 9,
+      "Designation": "öoihbnjh",
+      "MeterId": 44,
+      "ProductId": 4,
+      "Resolution": "månad"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 4567,
+      "Cost": 2336.75,
+      "PremiseId": 9,
+      "Designation": "lenovo",
+      "MeterId": 45,
+      "ProductId": 5,
+      "Resolution": "månad"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 8901,
+      "Cost": 2336.75,
+      "PremiseId": 10,
+      "Designation": "bvc123s",
+      "MeterId": 46,
+      "ProductId": 6,
+      "Resolution": "månad"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 1234,
+      "Cost": 2336.75,
+      "PremiseId": 10,
+      "Designation": "98uj98uj",
+      "MeterId": 47,
+      "ProductId": 7,
+      "Resolution": "månad"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 5678,
+      "Cost": 2336.75,
+      "PremiseId": 10,
+      "Designation": "124v141",
+      "MeterId": 48,
+      "ProductId": 8,
+      "Resolution": "månad"
+    },
+    {
+      "DateTime": "2024-08-01T00:00:00",
+      "Value": 7890,
+      "Cost": 2336.75,
+      "PremiseId": 10,
+      "Designation": "greeefe",
+      "MeterId": 49,
+      "ProductId": 9,
+      "Resolution": "år"
+    },
+    {
+      "DateTime": "2025-08-01T00:00:00",
+      "Value": 3456,
+      "Cost": 2336.75,
+      "PremiseId": 9,
+      "Designation": "2t222yhu4e",
+      "MeterId": 42,
+      "ProductId": 2,
+      "Resolution": "år"
+    },
+    {
+      "DateTime": "2022-08-01T00:00:00",
+      "Value": 6789,
+      "Cost": 2336.75,
+      "PremiseId": 9,
+      "Designation": "2323",
+      "MeterId": 42,
+      "ProductId": 2,
+      "Resolution": "år"
+    },
+    {
+      "DateTime": "2025-08-01T00:00:00",
+      "Value": 2345,
+      "Cost": 3323.75,
+      "PremiseId": 9,
+      "Designation": "1111vvr",
+      "MeterId": 42,
+      "ProductId": 2,
+      "Resolution": "år"
+    },
+    {
+      "DateTime": "2025-08-01T00:00:00",
+      "Value": 4567,
+      "Cost": 4567.75,
+      "PremiseId": 9,
+      "Designation": "tytrdb3",
+      "MeterId": 42,
+      "ProductId": 2,
+      "Resolution": "år"
+    },
+    {
+      "DateTime": "2021-08-01T00:00:00",
+      "Value": 8901,
+      "Cost": 1337.75,
+      "PremiseId": 9,
+      "Designation": "3y3yw5y",
+      "MeterId": 42,
+      "ProductId": 2,
+      "Resolution": "år"
+    }
+  ]
+}

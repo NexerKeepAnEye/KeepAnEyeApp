@@ -12,34 +12,41 @@ import {
 } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { fetchPremise } from '../Api/fetchAPI';
 import logoKAE from '../assets/logoKAE.png';
 import NexerLogo from '../assets/NexerLogo.png';
+import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { SignIn } from '../Style/SignInStyle';
 
 export default function SignInScreen() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const [form, setForm] = useState({ ApiKey: '' });
+  const { dispatch } = usePremiseContext();
+  const [form, setForm] = useState({ apikey: '' });
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = () => {
-    // Simulate login process
-    if (form.ApiKey === 'fc41e3f1-f155-4465-b908-a79991643b0a') {
-      setLoading(true);
-      navigation.navigate('StartScreen');
-      setTimeout(() => {
+  const handleLogin = async () => {
+    const data = await fetchPremise(form.apikey);
+    setLoading(true);
+    if (typeof data === 'number') {
+      if (data === 406) {
+        console.log('Errorcode:', data);
         setLoading(false);
-      }, 1000);
-    } else if (form.ApiKey === 'abc') {
-      //temporary for easy login
-      setLoading(true);
-      navigation.navigate('StartScreen');
-      setTimeout(() => {
+        Alert.alert('Fel', 'Felaktig API nyckel.');
+        return;
+      }
+      if (data === 500 || data === 504) {
+        console.log('Errorcode:', data);
         setLoading(false);
-      }, 1000);
-    } else {
-      Alert.alert('Fel', 'Felaktig API nyckel.');
+        Alert.alert('Fel', 'Oväntat fel inträffade.');
+        return;
+      }
+    } else if (Array.isArray(data)) {
+      console.log(data);
+      dispatch({ type: 'SET_PREMISES', payload: data });
+      setLoading(false);
+      navigation.navigate('StartScreen');
     }
   };
 
@@ -61,8 +68,8 @@ export default function SignInScreen() {
                 style={SignIn.input}
                 mode="outlined"
                 label="API-Key"
-                value={form.ApiKey}
-                onChangeText={(e) => setForm({ ...form, ApiKey: e })}
+                value={form.apikey}
+                onChangeText={(e) => setForm({ ...form, apikey: e })}
               />
             </View>
             <Button
