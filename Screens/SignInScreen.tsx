@@ -15,6 +15,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { fetchPremise } from '../Api/fetchAPI';
 import logoKAE from '../assets/logoKAE.png';
 import NexerLogo from '../assets/NexerLogo.png';
+import StorageService from '../AsyncStorage/AsyncStorage';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { SignIn } from '../Style/SignInStyle';
@@ -45,6 +46,7 @@ export default function SignInScreen() {
     } else if (Array.isArray(data)) {
       console.log(data);
       dispatch({ type: 'SET_PREMISES', payload: data });
+      await StorageService.storeApiKey(form.apikey);
       setLoading(false);
       navigation.navigate('StartScreen');
     }
