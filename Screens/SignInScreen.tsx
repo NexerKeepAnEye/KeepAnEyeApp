@@ -43,12 +43,15 @@ export default function SignInScreen() {
         Alert.alert('Fel', 'Oväntat fel inträffade.');
         return;
       }
-    } else if (Array.isArray(data)) {
-      console.log(data);
-      dispatch({ type: 'SET_PREMISES', payload: data });
-      await StorageService.storeApiKey(form.apikey);
+      if (Array.isArray(data)) {
+        console.log(data);
+        dispatch({ type: 'SET_PREMISES', payload: data });
+        await StorageService.storeApiKey(form.apikey);
+        setLoading(false);
+        navigation.navigate('StartScreen');
+      }
+    } else {
       setLoading(false);
-      navigation.navigate('StartScreen');
     }
   };
 
