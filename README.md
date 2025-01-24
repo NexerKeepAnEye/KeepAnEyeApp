@@ -6,4 +6,4 @@
 
 ## Commands
 
-- npx prettier . --write to format
+- npx prettier . --write

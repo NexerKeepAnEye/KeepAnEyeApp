@@ -10,7 +10,7 @@
 //     const response = await fetch('https://test.keepaneye.net/api/v1/Product', {
 //       method: 'GET',
 //       headers: {
-//         Accept: 'application/json',
+//         Accept: 'application/json; charset=utf-8',
 //         'X-API-Key': apiKey,
 //       },
 //       agent,
@@ -30,6 +30,8 @@
 // }
 
 // fetchProduct('fc41e3f1-f155-4465-b908-a79991643b0a');
+
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 // export async function fetchMeterData(
 //   apiKey,
@@ -52,7 +54,7 @@
 //           'Content-Type': 'application/json',
 //           'X-API-Key': apiKey,
 //         },
-//         agent,
+//         // agent,
 //         body: JSON.stringify({
 //           productId,
 //           resolution,
@@ -80,7 +82,7 @@
 // }
 
 // fetchMeterData(
-//   'fc41e3f1-f155-4465-b908-a79991643b0a', // apiKey
+//   'b49ab053-04b3-4806-9cbd-68ff9adc8d01', // apiKey
 //   25, // productId
 //   'monthly', // resolution
 //   '2023-01-01T00:00:00Z', // from

@@ -1,8 +1,15 @@
-import DateTimePicker, {
+import RNDateTimePicker, {
   DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
 import React, { useState } from 'react';
-import { Alert, Modal, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Alert,
+  Modal,
+  Platform,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { dateStyles } from '../../Style/FromToDateStyle';
 
 interface FromToDateProps {
@@ -102,15 +109,27 @@ export function FromToDate({
           >
             <View style={dateStyles.modalContainer}>
               <View style={dateStyles.modalContent}>
-                <DateTimePicker
+                <RNDateTimePicker
                   value={
                     currentPicker === 'from'
                       ? fromDate || new Date()
                       : toDate || new Date()
                   }
                   mode="date"
-                  display="default"
+                  display={Platform.OS === 'ios' ? 'inline' : 'default'}
                   onChange={handleDateChange}
+                  style={{
+                    backgroundColor: 'white',
+                    borderRadius: 10,
+                  }}
+                  minimumDate={new Date(2015, 0, 1)}
+                  maximumDate={
+                    new Date(
+                      new Date().getFullYear(),
+                      new Date().getMonth(),
+                      new Date().getDate(),
+                    )
+                  }
                 />
               </View>
             </View>
