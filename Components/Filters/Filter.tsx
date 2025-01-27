@@ -70,28 +70,28 @@ const Filter: React.FC<FilterProps> = ({
     fetchApiKey();
   }, []);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      if (apikey) {
-        const products = await fetchProduct(apikey);
-        if (
-          products &&
-          typeof products === 'object' &&
-          !('error' in products) &&
-          Array.isArray(products) &&
-          products.every(
-            (product) =>
-              'Id' in product && 'Code' in product && 'Unit' in product,
-          )
-        ) {
-          setProducts(products as Product[]);
-        } else {
-          console.log('Error fetching products:');
-        }
-      }
-    };
-    fetchProducts();
-  }, [apikey]);
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     if (apikey) {
+  //       const products = await fetchProduct(apikey);
+  //       if (
+  //         products &&
+  //         typeof products === 'object' &&
+  //         !('error' in products) &&
+  //         Array.isArray(products) &&
+  //         products.every(
+  //           (product) =>
+  //             'Id' in product && 'Code' in product && 'Unit' in product,
+  //         )
+  //       ) {
+  //         setProducts(products as Product[]);
+  //       } else {
+  //         console.log('Error fetching products:');
+  //       }
+  //     }
+  //   };
+  //   fetchProducts();
+  // }, [apikey]);
 
   const showSnackbar = () => setVisible(true);
   const hideSnackbar = () => setVisible(false);
