@@ -5,7 +5,7 @@ const window = Dimensions.get('window').height;
 
 const getTopValue = () => {
   if (window > 900) {
-    return 480;
+    return  ;
   } else if (window > 800) {
     return 423;
   } else if (window > 600) {
@@ -42,6 +42,7 @@ export const filterStyle = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: 'red',
     top: getTopValue(),
+    marginBottom: 70,
     // justifyContent: 'flex-end',
   },
   snackbar2: {
