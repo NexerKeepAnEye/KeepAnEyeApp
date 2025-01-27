@@ -16,7 +16,6 @@ export const yearSearchStyle = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     opacity: 0.8,
-    flexDirection: 'row',
     paddingHorizontal: 10,
   },
   pickerText: {
@@ -27,26 +26,27 @@ export const yearSearchStyle = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
+    width: width * 0.3,
+    maxHeight: height * 0.5,
     backgroundColor: 'white',
     borderRadius: 10,
     padding: 20,
-    alignItems: 'center',
   },
   modalItem: {
     padding: 10,
     fontSize: width * 0.045,
-  },
-  divider: {
-    width: '100%',
-    height: 1,
-    backgroundColor: '#dddddd',
-    marginVertical: 10,
+    textAlign: 'center',
   },
   closeButton: {
-    fontSize: width * 0.045,
-    color: 'blue',
-    marginTop: 10,
+    padding: 1,
+    textAlign: 'center',
+    color: '#056ffd',
+    fontSize: width * 0.04,
+  },
+  divider: {
+    padding: 0.5,
   },
 });

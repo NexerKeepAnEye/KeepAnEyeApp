@@ -16,6 +16,7 @@ import { Meter, MeterData, Product } from '../../Types/Type';
 import { FromToDate } from './FromToDate';
 import MeterSearch from './MeterSearch';
 import { Resolution } from './Resolution';
+import StandardYearAdjusted from './StandardYearAdjusted';
 import YearSearch from './YearSearch';
 
 interface FilterProps {
@@ -37,10 +38,9 @@ interface FilterProps {
   resolution?: string;
   filters: string[];
   buttonText: string;
-  // productId: number;
 }
 
-const Filter: React.FC<FilterProps> = ({
+const Filter = ({
   filters,
   setYear,
   setYearTwo,
@@ -58,11 +58,12 @@ const Filter: React.FC<FilterProps> = ({
   meterId,
   resolution,
   buttonText,
-}) => {
+}: FilterProps) => {
   const [visible, setVisible] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const { state } = usePremiseContext();
   const [apikey, setApiKey] = useState<string | null>(null);
+  const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
     const fetchApiKey = async () => {
@@ -106,11 +107,6 @@ const Filter: React.FC<FilterProps> = ({
       toDate = new Date(Date.parse(yearTwo + '-12-31'));
     }
 
-    if (year && !yearTwo) {
-      fromDate = new Date(Date.parse(year + '-01-01'));
-      toDate = new Date(Date.parse(year + '-12-31'));
-    }
-
     const selectedMeterId =
       meterId !== undefined
         ? state.selectedPremise?.Meters.find((meter) => meter.Id === meterId)
@@ -129,6 +125,7 @@ const Filter: React.FC<FilterProps> = ({
         resolution ?? '',
         fromDate ?? new Date(),
         toDate ?? new Date(),
+        isChecked,
         state.selectedPremise?.Id ? [state.selectedPremise.Id] : [],
         state.selectedPremise?.Designation
           ? [state.selectedPremise.Designation]
@@ -239,6 +236,12 @@ const Filter: React.FC<FilterProps> = ({
         )}
         {filters.includes('resolution') && setResolution && (
           <Resolution setSelectedResolution={setResolution} />
+        )}
+        {filters.includes('standardAdjusted') && (
+          <StandardYearAdjusted
+            isChecked={isChecked}
+            setIsChecked={setIsChecked}
+          />
         )}
       </View>
       <View style={filterStyle.buttonContainer}>

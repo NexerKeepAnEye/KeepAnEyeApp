@@ -21,6 +21,7 @@ export const MonthlyReport = () => {
     filterReducer,
     initialState,
   );
+
   const [productName, setProductName] = useState<string | null>(null);
 
   const [searchClicked, setSearchClicked] = useState(false);
@@ -55,7 +56,7 @@ export const MonthlyReport = () => {
   return (
     <>
       <Filter
-        filters={['year', 'meter']}
+        filters={['year', 'meter', 'standardAdjusted']}
         setYear={(year) => dispatch({ type: 'SET_YEAR', payload: year })}
         setMeter={(meter) => dispatch({ type: 'SET_METER', payload: meter })}
         year={state.year}

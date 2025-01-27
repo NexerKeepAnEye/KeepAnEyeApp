@@ -88,6 +88,7 @@ export async function fetchMeterData(
   resolution: string,
   from: Date,
   to: Date,
+  correctedValues?: boolean,
   premiseIds: number[] = [],
   designations: string[] = [],
   meterIds: number[] = [],
