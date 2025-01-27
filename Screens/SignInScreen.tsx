@@ -31,6 +31,8 @@ export default function SignInScreen() {
     const checkApiKey = async () => {
       const storedApiKey = await StorageService.getApiKey();
       if (storedApiKey) {
+        const data = await fetchPremise(storedApiKey);
+        dispatch({ type: 'SET_PREMISES', payload: data });
         navigation.navigate('StartScreen');
       }
     };
