@@ -7,12 +7,12 @@ import {
   Snackbar,
   Text,
 } from 'react-native-paper';
-import { fetchMeterData, fetchProduct } from '../../Api/fetchAPI';
+import { fetchMeterData } from '../../Api/fetchAPI';
 import StorageService from '../../AsyncStorage/AsyncStorage';
 import { usePremiseContext } from '../../Context/PremiseContext';
 import { filterStyle } from '../../Style/FilterStyle';
 import { searchButtonStyle } from '../../Style/SearchButtonStyle';
-import { Meter, MeterData, Product } from '../../Types/Type';
+import { Meter, MeterData } from '../../Types/Type';
 import { FromToDate } from './FromToDate';
 import MeterSearch from './MeterSearch';
 import { Resolution } from './Resolution';
@@ -60,7 +60,7 @@ const Filter: React.FC<FilterProps> = ({
   buttonText,
 }) => {
   const [visible, setVisible] = useState(false);
-  const [products, setProducts] = useState<Product[]>([]);
+  // const [products, setProducts] = useState<Product[]>([]);
   const { state } = usePremiseContext();
   const [apikey, setApiKey] = useState<string | null>(null);
 
@@ -74,29 +74,6 @@ const Filter: React.FC<FilterProps> = ({
 
   const showSnackbar = () => setVisible(true);
   const hideSnackbar = () => setVisible(false);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      if (apikey) {
-        await fetchProduct(apikey);
-        if (
-          products &&
-          typeof products === 'object' &&
-          !('error' in products) &&
-          Array.isArray(products) &&
-          products.every(
-            (product) =>
-              'Id' in product && 'Code' in product && 'Unit' in product,
-          )
-        ) {
-          setProducts(products as Product[]);
-        } else {
-          console.log('Error fetching products:');
-        }
-      }
-    };
-    fetchProducts();
-  }, [apikey]);
 
   const handleSearch = async () => {
     let meterData;
