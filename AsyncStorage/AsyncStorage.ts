@@ -27,7 +27,7 @@ export default class StorageService {
     }
   }
 
-  static storeApiKey = async (apiKey: string) => {
+  static storeApiKey = async (apiKey: string): Promise<void> => {
     await StorageService.set('API_KEY', apiKey);
   };
 
