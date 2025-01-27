@@ -15,7 +15,7 @@ export default function StandardYearAdjusted({
     <View>
       <Checkbox.Item
         label="Normalårskorrigerat"
-        status={isChecked ? 'checked' : 'unchecked'}
+        status={!isChecked ? 'checked' : 'unchecked'}
         onPress={() => setIsChecked(!isChecked)}
         color="#0060df"
       />
