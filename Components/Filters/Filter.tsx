@@ -20,6 +20,7 @@ import YearSearch from './YearSearch';
 
 interface FilterProps {
   setYear?: (year: string) => void;
+  setYearTwo?: (yearTwo: string) => void;
   setMeter?: (meter: Meter[]) => void;
   setFromDate?: (date: Date) => void;
   setToDate?: (date: Date) => void;
@@ -27,6 +28,7 @@ interface FilterProps {
   setResolution?: (resolution: string) => void;
   setFilteredResults: (data: MeterData[]) => void;
   year?: string;
+  yearTwo?: string;
   meter?: Meter[];
   fromDate?: Date;
   toDate?: Date;
@@ -41,6 +43,7 @@ interface FilterProps {
 const Filter: React.FC<FilterProps> = ({
   filters,
   setYear,
+  setYearTwo,
   setMeter,
   setFromDate,
   setToDate,
@@ -48,16 +51,15 @@ const Filter: React.FC<FilterProps> = ({
   setResolution,
   setFilteredResults,
   year,
+  yearTwo,
   meter,
   fromDate,
   toDate,
-  // meterData,
   meterId,
   resolution,
   buttonText,
 }) => {
   const [visible, setVisible] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [products, setProducts] = useState<Product[]>([]);
   const { state } = usePremiseContext();
   const [apikey, setApiKey] = useState<string | null>(null);
@@ -70,72 +72,87 @@ const Filter: React.FC<FilterProps> = ({
     fetchApiKey();
   }, []);
 
-  // useEffect(() => {
-  //   const fetchProducts = async () => {
-  //     if (apikey) {
-  //       const products = await fetchProduct(apikey);
-  //       if (
-  //         products &&
-  //         typeof products === 'object' &&
-  //         !('error' in products) &&
-  //         Array.isArray(products) &&
-  //         products.every(
-  //           (product) =>
-  //             'Id' in product && 'Code' in product && 'Unit' in product,
-  //         )
-  //       ) {
-  //         setProducts(products as Product[]);
-  //       } else {
-  //         console.log('Error fetching products:');
-  //       }
-  //     }
-  //   };
-  //   fetchProducts();
-  // }, [apikey]);
-
   const showSnackbar = () => setVisible(true);
   const hideSnackbar = () => setVisible(false);
 
+  useEffect(() => {
+    const fetchProducts = async () => {
+      if (apikey) {
+        await fetchProduct(apikey);
+        if (
+          products &&
+          typeof products === 'object' &&
+          !('error' in products) &&
+          Array.isArray(products) &&
+          products.every(
+            (product) =>
+              'Id' in product && 'Code' in product && 'Unit' in product,
+          )
+        ) {
+          setProducts(products as Product[]);
+        } else {
+          console.log('Error fetching products:');
+        }
+      }
+    };
+    fetchProducts();
+  }, [apikey]);
+
   const handleSearch = async () => {
     let meterData;
+
+    if (year && yearTwo) {
+      fromDate = new Date(Date.parse(year + '-01-01'));
+      toDate = new Date(Date.parse(yearTwo + '-12-31'));
+    }
+
+    if (year && !yearTwo) {
+      fromDate = new Date(Date.parse(year + '-01-01'));
+      toDate = new Date(Date.parse(year + '-12-31'));
+    }
+
+    const selectedMeterId =
+      meterId !== undefined
+        ? state.selectedPremise?.Meters.find((meter) => meter.Id === meterId)
+        : undefined;
+
+    const selectedMeter: Meter =
+      (meter ?? []).find((m) => m.ProductId) ?? ({} as Meter);
+
+    const selectedProductId: number =
+      selectedMeterId?.ProductId ?? selectedMeter.ProductId;
+
     try {
-      const selectedMeter =
-        meterId !== undefined
-          ? state.selectedPremise?.Meters.find((meter) => meter.Id === meterId)
-          : undefined;
-
-      const selectedProductId = selectedMeter?.ProductId ?? 0;
-
-      if (apikey) {
-        meterData = await fetchMeterData(
-          apikey,
-          selectedProductId,
-          resolution ?? '',
-          fromDate ?? new Date(),
-          toDate ?? new Date(),
-          state.selectedPremise?.Id ? [state.selectedPremise.Id] : [],
-          state.selectedPremise?.Designation
-            ? [state.selectedPremise.Designation]
-            : [],
-          meterId !== undefined ? [meterId] : (meter?.map((m) => m.Id) ?? []),
-        );
-      }
+      meterData = await fetchMeterData(
+        apikey ?? '',
+        selectedProductId,
+        resolution ?? '',
+        fromDate ?? new Date(),
+        toDate ?? new Date(),
+        state.selectedPremise?.Id ? [state.selectedPremise.Id] : [],
+        state.selectedPremise?.Designation
+          ? [state.selectedPremise.Designation]
+          : [],
+        meterId !== undefined ? [meterId] : (meter?.map((m) => m.Id) ?? []),
+      );
     } catch (error) {
       console.log('error fetching meterdata:', error);
     }
     let filteredData = meterData ?? [];
 
     if (
+      (filters.includes('resolution') && !resolution) ||
       (filters.includes('year') && !year) ||
+      (filters.includes('fromToYear') && !year && !yearTwo) ||
       (filters.includes('meter') && !meter) ||
       (filters.includes('dateRange') && !fromDate && !toDate) ||
-      (filters.includes('resolution') && !resolution)
+      (filters.includes('meter') && !meter)
     ) {
       showSnackbar();
       return;
     }
 
-    if (year) {
+    if (year && !yearTwo) {
       if (Array.isArray(filteredData)) {
         filteredData = filteredData.filter((item: MeterData) => {
           const itemYear = new Date(item.DateTime).getFullYear();
@@ -147,7 +164,9 @@ const Filter: React.FC<FilterProps> = ({
     if (fromDate && toDate) {
       filteredData = filteredData.filter((item: MeterData) => {
         const itemDate = new Date(item.DateTime);
-        return itemDate >= fromDate && itemDate <= toDate;
+        return fromDate && toDate
+          ? itemDate >= fromDate && itemDate <= toDate
+          : false;
       });
     }
 
@@ -187,7 +206,22 @@ const Filter: React.FC<FilterProps> = ({
     <PaperProvider>
       <View style={filterStyle.container}>
         {filters.includes('year') && setYear && (
-          <YearSearch setSelectedYear={setYear} />
+          <YearSearch
+            setSelectedYear={setYear}
+            label="År"
+          />
+        )}
+        {filters.includes('fromToYear') && setYear && setYearTwo && (
+          <>
+            <YearSearch
+              setSelectedYear={setYear}
+              label="Från år"
+            />
+            <YearSearch
+              setSelectedYear={setYearTwo}
+              label="Till år"
+            />
+          </>
         )}
         {filters.includes('meter') && setMeter && (
           <MeterSearch

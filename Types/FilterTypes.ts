@@ -6,7 +6,7 @@ export const filterTypes = {
     },
     {
       id: 2,
-      type: 'Kvartalsrapport',
+      type: 'Jämför år',
     },
     {
       id: 3,
@@ -14,15 +14,11 @@ export const filterTypes = {
     },
     {
       id: 4,
-      type: 'Veckorapport',
+      type: 'Glidande årsförbrukning',
     },
     {
       id: 5,
-      type: 'Dagsrapport',
-    },
-    {
-      id: 6,
-      type: 'Miljörapport',
+      type: 'Analysrapport',
     },
   ],
 };
