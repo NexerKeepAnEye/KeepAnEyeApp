@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Alert,
   Image,
@@ -15,6 +15,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { fetchPremise } from '../Api/fetchAPI';
 import logoKAE from '../assets/logoKAE.png';
 import NexerLogo from '../assets/NexerLogo.png';
+import StorageService from '../AsyncStorage/AsyncStorage';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { SignIn } from '../Style/SignInStyle';
@@ -25,6 +26,19 @@ export default function SignInScreen() {
   const { dispatch } = usePremiseContext();
   const [form, setForm] = useState({ apikey: '' });
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const checkApiKey = async () => {
+      const storedApiKey = await StorageService.getApiKey();
+      if (storedApiKey) {
+        const data = await fetchPremise(storedApiKey);
+        dispatch({ type: 'SET_PREMISES', payload: data });
+        navigation.navigate('StartScreen');
+      }
+    };
+
+    checkApiKey();
+  }, []);
 
   const handleLogin = async () => {
     const data = await fetchPremise(form.apikey);
@@ -45,6 +59,7 @@ export default function SignInScreen() {
     } else if (Array.isArray(data)) {
       console.log(data);
       dispatch({ type: 'SET_PREMISES', payload: data });
+      await StorageService.storeApiKey(form.apikey);
       setLoading(false);
       navigation.navigate('StartScreen');
     }

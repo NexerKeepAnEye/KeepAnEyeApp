@@ -29,14 +29,12 @@ const initialState: State = {
 const premiseReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'SET_PREMISES':
-      console.log('reducer premises', action.payload);
       return { ...state, premises: action.payload };
     case 'SET_PREMISE':
       return { ...state, selectedPremise: action.payload };
     case 'RESET_PREMISE':
       return { ...state, selectedPremise: null };
     case 'SET_METER_DATA':
-      console.log('Setting meterData:', action.payload);
       return { ...state, meterData: action.payload };
     default:
       return state;

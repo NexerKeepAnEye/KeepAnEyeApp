@@ -21,8 +21,6 @@ export default function StartScreen({ navigation }: Props) {
   const { state, dispatch } = usePremiseContext();
   const premises: Premise[] = state.premises;
 
-  console.log('startscreen Premises:', JSON.stringify(premises));
-
   const renderItem = (item: Premise) => (
     <TouchableOpacity
       key={item.Id}

@@ -8,6 +8,7 @@ import * as React from 'react';
 import { Pressable } from 'react-native';
 import { LogoTitle } from '../Components/Header';
 // import MeterDataScreen from '../Screens/MeterDataScreen';
+import StorageService from '../AsyncStorage/AsyncStorage';
 import PremiseScreen from '../Screens/PremiseScreen';
 import ReportScreen from '../Screens/ReportScreen';
 import SignInScreen from '../Screens/SignInScreen';
@@ -32,12 +33,18 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 export default function RootStackNavigator() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const handleLogout = async () => {
+    await StorageService.clearApiKey();
+    navigation.navigate('SignInScreen');
+  };
+
   return (
     <RootStack.Navigator
       initialRouteName="SignInScreen"
       screenOptions={() => ({
         headerRight: () => (
-          <Pressable onPress={() => navigation.navigate('SignInScreen')}>
+          <Pressable onPress={handleLogout}>
             <MaterialIcons
               name="exit-to-app"
               size={30}
