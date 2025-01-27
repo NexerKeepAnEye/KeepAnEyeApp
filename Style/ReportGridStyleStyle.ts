@@ -6,6 +6,7 @@ export const ReportGridStyle = StyleSheet.create({
     width: width * 0.9,
   },
   container: {
+    marginBottom: 90,
     // alignItems: 'center',
   },
   header: {

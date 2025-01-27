@@ -158,7 +158,7 @@ const Filter = ({
         setMeterId(meterId);
       }
     }
-    console.log(filteredData);
+    // console.log(filteredData);
     setFilteredResults(filteredData);
   };
 

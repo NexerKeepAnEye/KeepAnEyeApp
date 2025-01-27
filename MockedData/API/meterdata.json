@@ -11,6 +11,216 @@
       "Resolution": "Monthly"
     },
     {
+      "DateTime": "2019-07-01T00:00:00",
+      "Value": 999,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "oink",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
+      "DateTime": "2023-03-01T00:00:00",
+      "Value": 2345,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "new1",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
+      "DateTime": "2023-04-01T00:00:00",
+      "Value": 3456,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "new2",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
+      "DateTime": "2023-05-01T00:00:00",
+      "Value": 4567,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "new3",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
+      "DateTime": "2023-06-01T00:00:00",
+      "Value": 5678,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "new4",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
+      "DateTime": "2023-07-01T00:00:00",
+      "Value": 6789,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "new5",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
+      "DateTime": "2023-08-01T00:00:00",
+      "Value": 7890,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "new6",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
+      "DateTime": "2023-09-01T00:00:00",
+      "Value": 8901,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "new7",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
+      "DateTime": "2023-10-01T00:00:00",
+      "Value": 9012,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "new8",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
+      "DateTime": "2023-11-01T00:00:00",
+      "Value": 1234,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "new9",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
+      "DateTime": "2023-12-01T00:00:00",
+      "Value": 2345,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "new10",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
+      "DateTime": "2024-01-01T00:00:00",
+      "Value": 3456,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "new11",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
+      "DateTime": "2024-02-01T00:00:00",
+      "Value": 4567,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "new12",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
+      "DateTime": "2024-03-01T00:00:00",
+      "Value": 5678,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "new13",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
+      "DateTime": "2024-04-01T00:00:00",
+      "Value": 6789,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "new14",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
+      "DateTime": "2024-05-01T00:00:00",
+      "Value": 7890,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "new15",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
+      "DateTime": "2024-06-01T00:00:00",
+      "Value": 8901,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "new16",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
+      "DateTime": "2024-07-01T00:00:00",
+      "Value": 9012,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "new17",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
+      "DateTime": "2024-08-01T00:00:00",
+      "Value": 1234,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "new18",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
+      "DateTime": "2024-09-01T00:00:00",
+      "Value": 2345,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "new19",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
+      "DateTime": "2024-10-01T00:00:00",
+      "Value": 3456,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "new20",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
       "DateTime": "2023-02-01T00:00:00",
       "Value": 5678,
       "Cost": 2336.75,
