@@ -123,7 +123,6 @@ const Filter: React.FC<FilterProps> = ({
     } catch (error) {
       console.log('error fetching meterdata:', error);
     }
-    console.log('APIKEY:', apikey);
     let filteredData = meterData ?? [];
 
     if (
