@@ -21,6 +21,7 @@ export const MonthlyReport = () => {
     filterReducer,
     initialState,
   );
+
   const [productName, setProductName] = useState<string | null>(null);
 
   const [searchClicked, setSearchClicked] = useState(false);
