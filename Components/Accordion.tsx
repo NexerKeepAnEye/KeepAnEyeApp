@@ -5,7 +5,7 @@ import { List, Text } from 'react-native-paper';
 import { FilterProvider } from '../Context/FilterContext';
 import { AccordionStyle } from '../Style/AccordionStyle';
 import { filterTypes } from '../Types/FilterTypes';
-import { ReportGrid } from './ReportGrid';
+import { ReportGrid } from './Report/ReportGrid';
 
 export const Accordion = () => {
   const [expanded, setExpanded] = useState(false);
