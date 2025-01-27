@@ -1,13 +1,13 @@
 import React, { Reducer, useEffect, useReducer, useState } from 'react';
 import { Text, View } from 'react-native';
 import { DataTable, Divider } from 'react-native-paper';
-import { fetchProduct } from '../../Api/fetchAPI';
 import {
   FilterAction,
   filterReducer,
   FilterState,
   initialState,
 } from '../../Context/FilterReducer';
+import { usePremiseContext } from '../../Context/PremiseContext';
 import { ReportGridStyle } from '../../Style/ReportGridStyleStyle';
 import Filter from '../Filters/Filter';
 
@@ -26,6 +26,8 @@ export const YearlyReport = () => {
 
   const filteredResults = state.filteredResults;
 
+  const { state: premiseState } = usePremiseContext();
+
   //   const formatMonth = (dateString: string) => {
   //     const date = new Date(dateString);
   //     return date.toLocaleString('default', { month: 'long' });
@@ -39,7 +41,7 @@ export const YearlyReport = () => {
     const fetchProductName = async () => {
       if (!productCode) return;
       try {
-        const products = await fetchProduct('abc');
+        const products = premiseState.products;
         const product =
           products.find((item) => item.Code === productCode)?.Unit || null;
         setProductName(product);

@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { fetchPremise } from '../Api/fetchAPI';
+import { fetchPremise, fetchProduct } from '../Api/fetchAPI';
 import logoKAE from '../assets/logoKAE.png';
 import NexerLogo from '../assets/NexerLogo.png';
 import StorageService from '../AsyncStorage/AsyncStorage';
@@ -31,6 +31,8 @@ export default function SignInScreen() {
     const checkApiKey = async () => {
       const storedApiKey = await StorageService.getApiKey();
       if (storedApiKey) {
+        const products = await fetchProduct(storedApiKey);
+        dispatch({ type: 'SET_PRODUCT', payload: products });
         const data = await fetchPremise(storedApiKey);
         dispatch({ type: 'SET_PREMISES', payload: data });
         navigation.navigate('StartScreen');
@@ -41,27 +43,33 @@ export default function SignInScreen() {
   }, []);
 
   const handleLogin = async () => {
-    const data = await fetchPremise(form.apikey);
     setLoading(true);
-    if (typeof data === 'number') {
-      if (data === 406) {
-        console.log('Errorcode:', data);
-        setLoading(false);
-        Alert.alert('Fel', 'Felaktig API nyckel.');
-        return;
+    try {
+      const data = await fetchPremise(form.apikey);
+      if (Array.isArray(data)) {
+        const products = await fetchProduct(form.apikey);
+        dispatch({ type: 'SET_PRODUCT', payload: products });
+        dispatch({ type: 'SET_PREMISES', payload: data });
+        await StorageService.storeApiKey(form.apikey);
+        navigation.navigate('StartScreen');
       }
-      if (data === 500 || data === 504) {
-        console.log('Errorcode:', data);
-        setLoading(false);
-        Alert.alert('Fel', 'Oväntat fel inträffade.');
-        return;
-      }
-    } else if (Array.isArray(data)) {
-      console.log(data);
-      dispatch({ type: 'SET_PREMISES', payload: data });
-      await StorageService.storeApiKey(form.apikey);
+    } catch (error) {
+      console.log('Error:', error);
       setLoading(false);
-      navigation.navigate('StartScreen');
+      if (error instanceof Error) {
+        if (error.message.includes('status: 406')) {
+          Alert.alert('Fel', 'Felaktig API nyckel.');
+        } else if (
+          error.message.includes('status: 500') ||
+          error.message.includes('status: 504')
+        ) {
+          Alert.alert('Fel', 'Oväntat fel inträffade.');
+        } else {
+          Alert.alert('Fel', 'Ett fel inträffade.');
+        }
+      } else {
+        Alert.alert('Fel', 'Ett okänt fel inträffade.');
+      }
     }
   };
 

@@ -12,7 +12,6 @@ export async function mockApiFetch(
 ) {
   // console.log('Mock API Called:', url, options);
 
-  // Simulera en liten fördröjning (som ett riktigt API)
   await new Promise((resolve) => setTimeout(resolve, 500));
 
   if (!options.headers['X-API-Key'] || options.headers['X-API-Key'] !== 'abc') {
