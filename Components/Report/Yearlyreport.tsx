@@ -90,7 +90,7 @@ export const YearlyReport = () => {
                   {filteredResults.map((item, index) => (
                     <DataTable.Row key={index}>
                       <DataTable.Cell>
-                        {item.DateTime.toDateString()}
+                        {item.DateTime.toISOString().split('T')[0]}
                       </DataTable.Cell>
                       <DataTable.Cell>{item.Value}</DataTable.Cell>
                     </DataTable.Row>

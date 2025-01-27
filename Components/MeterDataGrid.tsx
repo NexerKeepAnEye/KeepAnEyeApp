@@ -73,7 +73,9 @@ export default function MeterDataGrid({ meterId }: Props) {
                     key={index}
                     style={MeterDataGridStyle.cell}
                   >
-                    <DataTable.Cell>{data.DateTime.toString()}</DataTable.Cell>
+                    <DataTable.Cell>
+                      {data.DateTime.toISOString().split('T')[0]}
+                    </DataTable.Cell>
                     <DataTable.Cell>{data.Value}</DataTable.Cell>
                     <DataTable.Cell>{data.Cost}</DataTable.Cell>
                     <DataTable.Cell>{data.Code}</DataTable.Cell>
