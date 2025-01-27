@@ -8,6 +8,7 @@ import {
   Text,
 } from 'react-native-paper';
 import { fetchMeterData, fetchProduct } from '../../Api/fetchAPI';
+import StorageService from '../../AsyncStorage/AsyncStorage';
 import { usePremiseContext } from '../../Context/PremiseContext';
 import { filterStyle } from '../../Style/FilterStyle';
 import { searchButtonStyle } from '../../Style/SearchButtonStyle';
@@ -61,30 +62,41 @@ const Filter: React.FC<FilterProps> = ({
   const [visible, setVisible] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const { state } = usePremiseContext();
+  const [apikey, setApiKey] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchApiKey = async () => {
+      const key = await StorageService.getApiKey();
+      setApiKey(key);
+    };
+    fetchApiKey();
+  }, []);
 
   const showSnackbar = () => setVisible(true);
   const hideSnackbar = () => setVisible(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
-      await fetchProduct('abc');
-      if (
-        products &&
-        typeof products === 'object' &&
-        !('error' in products) &&
-        Array.isArray(products) &&
-        products.every(
-          (product) =>
-            'Id' in product && 'Code' in product && 'Unit' in product,
-        )
-      ) {
-        setProducts(products as Product[]);
-      } else {
-        console.log('Error fetching products:');
+      if (apikey) {
+        await fetchProduct(apikey);
+        if (
+          products &&
+          typeof products === 'object' &&
+          !('error' in products) &&
+          Array.isArray(products) &&
+          products.every(
+            (product) =>
+              'Id' in product && 'Code' in product && 'Unit' in product,
+          )
+        ) {
+          setProducts(products as Product[]);
+        } else {
+          console.log('Error fetching products:');
+        }
       }
     };
     fetchProducts();
-  }, []);
+  }, [apikey]);
 
   const handleSearch = async () => {
     let meterData;
@@ -112,7 +124,7 @@ const Filter: React.FC<FilterProps> = ({
 
     try {
       meterData = await fetchMeterData(
-        'abc',
+        apikey ?? '',
         selectedProductId,
         resolution ?? '',
         fromDate ?? new Date(),
@@ -126,7 +138,6 @@ const Filter: React.FC<FilterProps> = ({
     } catch (error) {
       console.log('error fetching meterdata:', error);
     }
-
     let filteredData = meterData ?? [];
 
     if (
