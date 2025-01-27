@@ -33,6 +33,8 @@ export default function SignInScreen() {
       if (storedApiKey) {
         const products = await fetchProduct(storedApiKey);
         dispatch({ type: 'SET_PRODUCT', payload: products });
+        console.log('products', products);
+
         const data = await fetchPremise(storedApiKey);
         dispatch({ type: 'SET_PREMISES', payload: data });
         navigation.navigate('StartScreen');
@@ -59,7 +61,9 @@ export default function SignInScreen() {
         return;
       }
     } else if (Array.isArray(data)) {
-      console.log(data);
+      const products = await fetchProduct(form.apikey);
+      dispatch({ type: 'SET_PRODUCT', payload: products });
+      console.log('products', products);
       dispatch({ type: 'SET_PREMISES', payload: data });
       await StorageService.storeApiKey(form.apikey);
       setLoading(false);
