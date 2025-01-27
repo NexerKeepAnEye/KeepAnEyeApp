@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { fetchPremise } from '../Api/fetchAPI';
+import { fetchPremise, fetchProduct } from '../Api/fetchAPI';
 import logoKAE from '../assets/logoKAE.png';
 import NexerLogo from '../assets/NexerLogo.png';
 import StorageService from '../AsyncStorage/AsyncStorage';
@@ -31,6 +31,8 @@ export default function SignInScreen() {
     const checkApiKey = async () => {
       const storedApiKey = await StorageService.getApiKey();
       if (storedApiKey) {
+        const products = await fetchProduct(storedApiKey);
+        dispatch({ type: 'SET_PRODUCT', payload: products });
         const data = await fetchPremise(storedApiKey);
         dispatch({ type: 'SET_PREMISES', payload: data });
         navigation.navigate('StartScreen');
