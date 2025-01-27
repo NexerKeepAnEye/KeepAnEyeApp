@@ -11,6 +11,16 @@
       "Resolution": "Monthly"
     },
     {
+      "DateTime": "2019-07-01T00:00:00",
+      "Value": 999,
+      "Cost": 2336.75,
+      "PremiseId": 1,
+      "Designation": "oink",
+      "MeterId": 1,
+      "ProductId": 1,
+      "Resolution": "Monthly"
+    },
+    {
       "DateTime": "2023-03-01T00:00:00",
       "Value": 2345,
       "Cost": 2336.75,
