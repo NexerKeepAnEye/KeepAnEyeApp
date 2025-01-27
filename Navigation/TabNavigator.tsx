@@ -5,6 +5,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { Dimensions, Pressable, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import StorageService from '../AsyncStorage/AsyncStorage';
 import { LogoTitle } from '../Components/Header';
 import ReportScreen from '../Screens/ReportScreen';
 import { BottomTabStyle } from '../Style/BottomTabStyle';
@@ -25,6 +26,12 @@ const Tab = createBottomTabNavigator<TabParamList>();
 export default function TabNavigator() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const handleLogout = async () => {
+    await StorageService.clearApiKey();
+    navigation.navigate('SignInScreen');
+  };
+
   return (
     <Tab.Navigator
       screenOptions={() => ({
@@ -33,7 +40,7 @@ export default function TabNavigator() {
           backgroundColor: '#f8f8f8',
         },
         headerRight: () => (
-          <Pressable onPress={() => navigation.navigate('SignInScreen')}>
+          <Pressable onPress={handleLogout}>
             <MaterialIcons
               name="exit-to-app"
               size={30}

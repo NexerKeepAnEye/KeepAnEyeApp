@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Alert,
   Image,
@@ -27,6 +27,17 @@ export default function SignInScreen() {
   const [form, setForm] = useState({ apikey: '' });
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    const checkApiKey = async () => {
+      const storedApiKey = await StorageService.getApiKey();
+      if (storedApiKey) {
+        navigation.navigate('StartScreen');
+      }
+    };
+
+    checkApiKey();
+  }, []);
+
   const handleLogin = async () => {
     const data = await fetchPremise(form.apikey);
     setLoading(true);
@@ -47,7 +58,6 @@ export default function SignInScreen() {
       console.log(data);
       dispatch({ type: 'SET_PREMISES', payload: data });
       await StorageService.storeApiKey(form.apikey);
-      console.log(form.apikey);
       setLoading(false);
       navigation.navigate('StartScreen');
     }
