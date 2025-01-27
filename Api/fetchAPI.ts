@@ -45,7 +45,7 @@ export async function fetchPremise(apiKey: string): Promise<Premise[]> {
     return premises;
   } catch (error) {
     console.error('Error fetching premises:', error);
-    return [];
+    throw error;
   }
 }
 
