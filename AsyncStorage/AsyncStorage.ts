@@ -6,7 +6,7 @@ export default class StorageService {
       await AsyncStorage.setItem(key, value);
     } catch (error) {
       console.error('Error setting value in AsyncStorage', error);
-    }
+    };
   };
 
   static async get(key: string): Promise<string | null> {
@@ -16,7 +16,7 @@ export default class StorageService {
     } catch (error) {
       console.error('Error getting value from AsyncStorage', error);
       return null;
-    }
+    };
   };
 
   static async remove(key: string): Promise<void> {
@@ -24,7 +24,7 @@ export default class StorageService {
       await AsyncStorage.removeItem(key);
     } catch (error) {
       console.error('Error removing value from AsyncStorage', error);
-    }
+    };
   };
 
   static storeApiKey = async (apiKey: string): Promise<void> => {
@@ -38,4 +38,4 @@ export default class StorageService {
   static clearApiKey = async (): Promise<void> => {
     await StorageService.remove('API_KEY');
   };
-}
+};
