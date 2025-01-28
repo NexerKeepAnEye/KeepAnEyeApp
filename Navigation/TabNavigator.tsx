@@ -3,12 +3,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { Dimensions, Pressable, View } from 'react-native';
+import { Dimensions, Pressable, Text, View } from 'react-native';
+import { Portal, Snackbar } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import StorageService from '../AsyncStorage/AsyncStorage';
 import { LogoTitle } from '../Components/Header';
+import { useSnackbar } from '../Context/SnackbarContext';
 import ReportScreen from '../Screens/ReportScreen';
 import { BottomTabStyle } from '../Style/BottomTabStyle';
+import { filterStyle } from '../Style/FilterStyle';
 import PremiseStackNavigator from './PremiseStackNavigator';
 import { RootStackParamList } from './RootStackNavigation';
 
@@ -26,6 +29,7 @@ const Tab = createBottomTabNavigator<TabParamList>();
 export default function TabNavigator() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const { visible, message, hideSnackbar } = useSnackbar();
 
   const handleLogout = async () => {
     await StorageService.clearApiKey();
@@ -33,72 +37,91 @@ export default function TabNavigator() {
   };
 
   return (
-    <Tab.Navigator
-      screenOptions={() => ({
-        headerStyle: {
-          height: 120,
-          backgroundColor: '#f8f8f8',
-        },
-        headerRight: () => (
-          <Pressable onPress={handleLogout}>
-            <MaterialIcons
-              name="exit-to-app"
-              size={30}
-              color="#D32F2F"
-              style={{ paddingRight: paddingHorizontal }}
-            />
-          </Pressable>
-        ),
-        headerTitle: () => <LogoTitle />,
-        headerTitleAlign: 'center',
-        tabBarStyle: BottomTabStyle.tabBar,
-        tabBarLabelStyle: BottomTabStyle.tabBarText,
-        tabBarActiveTintColor: '#222',
-        tabBarInactiveTintColor: '#d9d9d9',
-      })}
-    >
-      <Tab.Screen
-        name="PremiseStackNavigator"
-        component={PremiseStackNavigator}
-        options={{
-          tabBarLabel: 'Fastighet',
-          tabBarIcon: ({ color, focused }) => (
-            <View
-              style={[
-                BottomTabStyle.iconContainer,
-                focused && BottomTabStyle.selectedTab,
-              ]}
-            >
-              <Icon
-                name="home"
-                color={color}
+    <>
+      <Portal>
+        <Snackbar
+          style={filterStyle.snackbar}
+          visible={visible}
+          onDismiss={hideSnackbar}
+          duration={Snackbar.DURATION_SHORT}
+          action={{
+            label: 'Uppfattat',
+            onPress: hideSnackbar,
+            textColor: 'white',
+          }}
+          elevation={0}
+        >
+          <Text style={filterStyle.snackBarText}>{message}</Text>
+        </Snackbar>
+      </Portal>
+
+      <Tab.Navigator
+        screenOptions={() => ({
+          headerStyle: {
+            height: 120,
+            backgroundColor: '#f8f8f8',
+          },
+          headerRight: () => (
+            <Pressable onPress={handleLogout}>
+              <MaterialIcons
+                name="exit-to-app"
                 size={30}
+                color="#D32F2F"
+                style={{ paddingRight: paddingHorizontal }}
               />
-            </View>
+            </Pressable>
           ),
-        }}
-      />
-      <Tab.Screen
-        name="ReportScreen"
-        component={ReportScreen}
-        options={{
-          tabBarLabel: 'Rapporter',
-          tabBarIcon: ({ color, focused }) => (
-            <View
-              style={[
-                BottomTabStyle.iconContainer,
-                focused && BottomTabStyle.selectedTab,
-              ]}
-            >
-              <Icon
-                name="assessment"
-                color={color}
-                size={30}
-              />
-            </View>
-          ),
-        }}
-      />
-    </Tab.Navigator>
+          headerTitle: () => <LogoTitle />,
+          headerTitleAlign: 'center',
+          tabBarStyle: BottomTabStyle.tabBar,
+          tabBarLabelStyle: BottomTabStyle.tabBarText,
+          tabBarActiveTintColor: '#222',
+          tabBarInactiveTintColor: '#d9d9d9',
+        })}
+      >
+        <Tab.Screen
+          name="PremiseStackNavigator"
+          component={PremiseStackNavigator}
+          options={{
+            tabBarLabel: 'Fastighet',
+            tabBarIcon: ({ color, focused }) => (
+              <View
+                style={[
+                  BottomTabStyle.iconContainer,
+                  focused && BottomTabStyle.selectedTab,
+                ]}
+              >
+                <Icon
+                  name="home"
+                  color={color}
+                  size={30}
+                />
+              </View>
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="ReportScreen"
+          component={ReportScreen}
+          options={{
+            tabBarLabel: 'Rapporter',
+            tabBarIcon: ({ color, focused }) => (
+              <View
+                style={[
+                  BottomTabStyle.iconContainer,
+                  focused && BottomTabStyle.selectedTab,
+                ]}
+              >
+                <Icon
+                  name="assessment"
+                  color={color}
+                  size={30}
+                />
+              </View>
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    </>
   );
 }
