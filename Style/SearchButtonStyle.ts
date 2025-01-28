@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { width } from './Dimensions';
+import { height, width } from './Dimensions';
 
 export const searchButtonStyle = StyleSheet.create({
   button: {
@@ -17,5 +17,31 @@ export const searchButtonStyle = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     textAlign: 'center',
+  },
+  resetButton: {
+    borderWidth: 0.5,
+    borderColor: '#dfdfdf',
+    backgroundColor: '#f2f2f2',
+    height: height * 0.023,
+    width: width * 0.052,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    marginLeft: -17,
+    marginTop: -12,
+    overflow: 'visible',
+  },
+  resolutionButtonReset: {
+    borderWidth: 0.5,
+    borderColor: '#dfdfdf',
+    backgroundColor: '#f2f2f2',
+    height: height * 0.023,
+    width: width * 0.052,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    marginLeft: width * 0.27,
+    marginTop: -height * 0.062,
+    overflow: 'visible',
   },
 });

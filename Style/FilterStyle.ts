@@ -34,7 +34,7 @@ export const filterStyle = StyleSheet.create({
     flexWrap: 'wrap',
     width: width * 0.9,
     overflow: 'visible',
-    marginHorizontal: 3,
+    // marginHorizontal: 3,
   },
   snackbar: {
     height: height * 0.04,

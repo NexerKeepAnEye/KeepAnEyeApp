@@ -30,10 +30,16 @@ export default function MeterDataGrid({ meterId }: Props) {
     <ScrollView style={ReportGridStyle.root}>
       <Filter
         filters={['dateRange', 'resolution']}
-        setFromDate={(date) =>
-          dispatch({ type: 'SET_FROM_DATE', payload: date })
-        }
-        setToDate={(date) => dispatch({ type: 'SET_TO_DATE', payload: date })}
+        setFromDate={(date) => {
+          if (date !== null) {
+            dispatch({ type: 'SET_FROM_DATE', payload: date });
+          }
+        }}
+        setToDate={(date) => {
+          if (date !== null) {
+            dispatch({ type: 'SET_TO_DATE', payload: date });
+          }
+        }}
         setResolution={(resolution) =>
           dispatch({ type: 'SET_RESOLUTION', payload: resolution })
         }

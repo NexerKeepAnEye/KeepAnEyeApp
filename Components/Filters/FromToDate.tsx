@@ -10,13 +10,16 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { width } from '../../Style/Dimensions';
 import { dateStyles } from '../../Style/FromToDateStyle';
+import { searchButtonStyle } from '../../Style/SearchButtonStyle';
 
 interface FromToDateProps {
   fromDate: Date | null;
   toDate: Date | null;
-  setFromDate: (date: Date) => void;
-  setToDate: (date: Date) => void;
+  setFromDate: (date: Date | undefined) => void;
+  setToDate: (date: Date | undefined) => void;
 }
 
 export function FromToDate({
@@ -88,6 +91,21 @@ export function FromToDate({
             </Text>
           </TouchableOpacity>
         </View>
+        {fromDate && (
+          <TouchableOpacity
+            style={searchButtonStyle.resetButton}
+            onPress={() => {
+              setFromDate(undefined);
+              console.log(fromDate);
+            }}
+          >
+            <Icon
+              name="close"
+              size={width * 0.03}
+              color="#333"
+            />
+          </TouchableOpacity>
+        )}
         <View style={dateStyles.dateContainer}>
           <TouchableOpacity
             style={dateStyles.pickerContainer}
@@ -101,6 +119,18 @@ export function FromToDate({
             </Text>
           </TouchableOpacity>
         </View>
+        {toDate && (
+          <TouchableOpacity
+            style={searchButtonStyle.resetButton}
+            onPress={() => setToDate(undefined)}
+          >
+            <Icon
+              name="close"
+              size={width * 0.03}
+              color="#333"
+            />
+          </TouchableOpacity>
+        )}
         {modalVisible && (
           <Modal
             visible={modalVisible}

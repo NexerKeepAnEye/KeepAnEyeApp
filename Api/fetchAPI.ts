@@ -122,7 +122,6 @@ export async function fetchMeterData(
       throw new Error('Unexpected response format');
     }
 
-    // console.log(JSON.stringify(data));
     const meterData: MeterData[] = data.map(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (item: any): MeterData => ({
