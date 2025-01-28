@@ -43,5 +43,5 @@ export const searchButtonStyle = StyleSheet.create({
     marginLeft: width * 0.27,
     marginTop: -height * 0.062,
     overflow: 'visible',
-  }
+  },
 });
