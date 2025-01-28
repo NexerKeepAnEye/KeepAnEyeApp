@@ -1,15 +1,10 @@
-import { useNavigationState } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
-import {
-  Provider as PaperProvider,
-  Portal,
-  Snackbar,
-  Text,
-} from 'react-native-paper';
+import { Provider as PaperProvider, Text } from 'react-native-paper';
 import { fetchMeterData } from '../../Api/fetchAPI';
 import StorageService from '../../AsyncStorage/AsyncStorage';
 import { usePremiseContext } from '../../Context/PremiseContext';
+import { useSnackbar } from '../../Context/SnackbarContext';
 import { filterStyle } from '../../Style/FilterStyle';
 import { searchButtonStyle } from '../../Style/SearchButtonStyle';
 import { Meter, MeterData } from '../../Types/Type';
@@ -59,8 +54,7 @@ const Filter = ({
   resolution,
   buttonText,
 }: FilterProps) => {
-  const [visible, setVisible] = useState(false);
-  // const [products, setProducts] = useState<Product[]>([]);
+  const { showSnackbar } = useSnackbar();
   const { state } = usePremiseContext();
   const [apikey, setApiKey] = useState<string | null>(null);
   const [isChecked, setIsChecked] = useState(false);
@@ -72,9 +66,6 @@ const Filter = ({
     };
     fetchApiKey();
   }, []);
-
-  const showSnackbar = () => setVisible(true);
-  const hideSnackbar = () => setVisible(false);
 
   const handleSearch = async () => {
     let meterData;
@@ -122,7 +113,7 @@ const Filter = ({
       (filters.includes('dateRange') && !fromDate && !toDate) ||
       (filters.includes('meter') && !meter)
     ) {
-      showSnackbar();
+      showSnackbar('Fyll i fälten');
       return;
     }
 
@@ -158,97 +149,68 @@ const Filter = ({
         setMeterId(meterId);
       }
     }
-    // console.log(filteredData);
     setFilteredResults(filteredData);
-  };
-
-  const routeNames = useNavigationState((state) => state.routeNames);
-  const currentRoute = routeNames[routeNames.length - 1];
-
-  const getSnackbarStyle = () => {
-    switch (currentRoute) {
-      case 'ReportScreen':
-        return filterStyle.snackbar;
-      case 'MeterDataScreen':
-        return filterStyle.snackbar2;
-      default:
-        return filterStyle.snackbar;
-    }
   };
 
   return (
     <PaperProvider>
-      <View style={filterStyle.scrolViewParent}>
-        <ScrollView horizontal>
-          <View style={filterStyle.container}>
-            {filters.includes('year') && setYear && (
-              <YearSearch
-                setSelectedYear={setYear}
-                label="År"
-              />
-            )}
-            {filters.includes('fromToYear') && setYear && setYearTwo && (
-              <>
+      <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
+          <ScrollView horizontal>
+            <View style={filterStyle.container}>
+              {filters.includes('year') && setYear && (
                 <YearSearch
                   setSelectedYear={setYear}
-                  label="Från år"
+                  label="År"
                 />
-                <YearSearch
-                  setSelectedYear={setYearTwo}
-                  label="Till år"
+              )}
+              {filters.includes('fromToYear') && setYear && setYearTwo && (
+                <>
+                  <YearSearch
+                    setSelectedYear={setYear}
+                    label="Från år"
+                  />
+                  <YearSearch
+                    setSelectedYear={setYearTwo}
+                    label="Till år"
+                  />
+                </>
+              )}
+              {filters.includes('meter') && setMeter && (
+                <MeterSearch
+                  setSelectedMeter={setMeter}
+                  meters={meter}
                 />
-              </>
-            )}
-            {filters.includes('meter') && setMeter && (
-              <MeterSearch
-                setSelectedMeter={setMeter}
-                meters={meter}
-              />
-            )}
-            {filters.includes('dateRange') && setFromDate && setToDate && (
-              <FromToDate
-                setFromDate={setFromDate}
-                setToDate={setToDate}
-                fromDate={fromDate ?? null}
-                toDate={toDate ?? null}
-              />
-            )}
-            {filters.includes('resolution') && setResolution && (
-              <Resolution setSelectedResolution={setResolution} />
-            )}
-            {filters.includes('standardAdjusted') && (
-              <StandardYearAdjusted
-                isChecked={isChecked}
-                setIsChecked={setIsChecked}
-              />
-            )}
-          </View>
-        </ScrollView>
+              )}
+              {filters.includes('dateRange') && setFromDate && setToDate && (
+                <FromToDate
+                  setFromDate={setFromDate}
+                  setToDate={setToDate}
+                  fromDate={fromDate ?? null}
+                  toDate={toDate ?? null}
+                />
+              )}
+              {filters.includes('resolution') && setResolution && (
+                <Resolution setSelectedResolution={setResolution} />
+              )}
+              {filters.includes('standardAdjusted') && (
+                <StandardYearAdjusted
+                  isChecked={isChecked}
+                  setIsChecked={setIsChecked}
+                />
+              )}
+            </View>
+          </ScrollView>
+        </View>
+        <View style={filterStyle.buttonContainer}>
+          <TouchableOpacity
+            onPress={handleSearch}
+            style={searchButtonStyle.button}
+          >
+            <Text style={searchButtonStyle.text}>{buttonText}</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <View style={filterStyle.buttonContainer}>
-        <TouchableOpacity
-          onPress={handleSearch}
-          style={searchButtonStyle.button}
-        >
-          <Text style={searchButtonStyle.text}>{buttonText}</Text>
-        </TouchableOpacity>
-      </View>
-      <Portal>
-        <Snackbar
-          visible={visible}
-          onDismiss={hideSnackbar}
-          duration={Snackbar.DURATION_SHORT}
-          action={{
-            label: 'Uppfattat',
-            onPress: hideSnackbar,
-            textColor: 'white',
-          }}
-          elevation={0}
-          style={getSnackbarStyle()}
-        >
-          <Text style={filterStyle.snackBarText}>Fyll i fälten</Text>
-        </Snackbar>
-      </Portal>
     </PaperProvider>
   );
 };
