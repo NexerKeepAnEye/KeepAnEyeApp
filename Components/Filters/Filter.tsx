@@ -1,6 +1,6 @@
 import { useNavigationState } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import {
   Provider as PaperProvider,
   Portal,
@@ -178,48 +178,52 @@ const Filter = ({
 
   return (
     <PaperProvider>
-      <View style={filterStyle.container}>
-        {filters.includes('year') && setYear && (
-          <YearSearch
-            setSelectedYear={setYear}
-            label="År"
-          />
-        )}
-        {filters.includes('fromToYear') && setYear && setYearTwo && (
-          <>
-            <YearSearch
-              setSelectedYear={setYear}
-              label="Från år"
-            />
-            <YearSearch
-              setSelectedYear={setYearTwo}
-              label="Till år"
-            />
-          </>
-        )}
-        {filters.includes('meter') && setMeter && (
-          <MeterSearch
-            setSelectedMeter={setMeter}
-            meters={meter}
-          />
-        )}
-        {filters.includes('dateRange') && setFromDate && setToDate && (
-          <FromToDate
-            setFromDate={setFromDate}
-            setToDate={setToDate}
-            fromDate={fromDate ?? null}
-            toDate={toDate ?? null}
-          />
-        )}
-        {filters.includes('resolution') && setResolution && (
-          <Resolution setSelectedResolution={setResolution} />
-        )}
-        {filters.includes('standardAdjusted') && (
-          <StandardYearAdjusted
-            isChecked={isChecked}
-            setIsChecked={setIsChecked}
-          />
-        )}
+      <View style={filterStyle.scrolViewParent}>
+        <ScrollView horizontal>
+          <View style={filterStyle.container}>
+            {filters.includes('year') && setYear && (
+              <YearSearch
+                setSelectedYear={setYear}
+                label="År"
+              />
+            )}
+            {filters.includes('fromToYear') && setYear && setYearTwo && (
+              <>
+                <YearSearch
+                  setSelectedYear={setYear}
+                  label="Från år"
+                />
+                <YearSearch
+                  setSelectedYear={setYearTwo}
+                  label="Till år"
+                />
+              </>
+            )}
+            {filters.includes('meter') && setMeter && (
+              <MeterSearch
+                setSelectedMeter={setMeter}
+                meters={meter}
+              />
+            )}
+            {filters.includes('dateRange') && setFromDate && setToDate && (
+              <FromToDate
+                setFromDate={setFromDate}
+                setToDate={setToDate}
+                fromDate={fromDate ?? null}
+                toDate={toDate ?? null}
+              />
+            )}
+            {filters.includes('resolution') && setResolution && (
+              <Resolution setSelectedResolution={setResolution} />
+            )}
+            {filters.includes('standardAdjusted') && (
+              <StandardYearAdjusted
+                isChecked={isChecked}
+                setIsChecked={setIsChecked}
+              />
+            )}
+          </View>
+        </ScrollView>
       </View>
       <View style={filterStyle.buttonContainer}>
         <TouchableOpacity

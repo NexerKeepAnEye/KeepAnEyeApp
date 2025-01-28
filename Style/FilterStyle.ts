@@ -29,12 +29,8 @@ const getTopValue2 = () => {
 
 export const filterStyle = StyleSheet.create({
   container: {
-    // marginTop: 10,
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    width: width * 0.9,
     overflow: 'visible',
-    // marginHorizontal: 3,
   },
   snackbar: {
     height: height * 0.04,
@@ -43,7 +39,6 @@ export const filterStyle = StyleSheet.create({
     backgroundColor: 'red',
     top: getTopValue(),
     marginBottom: 70,
-    // justifyContent: 'flex-end',
   },
   snackbar2: {
     height: height * 0.04,
@@ -51,7 +46,6 @@ export const filterStyle = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: 'red',
     top: getTopValue2(),
-    // justifyContent: 'flex-end',
   },
   snackBarText: {
     fontSize: 16,
@@ -60,5 +54,8 @@ export const filterStyle = StyleSheet.create({
   },
   buttonContainer: {
     justifyContent: 'space-between',
+  },
+  scrolViewParent: {
+    flex: 1,
   },
 });
