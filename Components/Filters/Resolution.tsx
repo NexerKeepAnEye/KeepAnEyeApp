@@ -14,10 +14,6 @@ export function Resolution({ setSelectedResolution }: ResolutionProps) {
   const [showResolutionModal, setShowResolutionModal] = useState(false);
   const resolutions: string[] = ['Timma', 'Dag', 'Månad', 'År'];
 
-  // function handleResolutionReset() {
-  //   setResolution('');
-  // }
-
   function handleResolutionChange(selectedResolution: string) {
     setResolution(selectedResolution);
     setSelectedResolution(selectedResolution);

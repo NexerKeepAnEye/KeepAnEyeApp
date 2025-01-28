@@ -7,7 +7,6 @@ import {
 import * as React from 'react';
 import { Pressable } from 'react-native';
 import { LogoTitle } from '../Components/Header';
-// import MeterDataScreen from '../Screens/MeterDataScreen';
 import StorageService from '../AsyncStorage/AsyncStorage';
 import PremiseScreen from '../Screens/PremiseScreen';
 import ReportScreen from '../Screens/ReportScreen';
