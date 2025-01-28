@@ -1,68 +1,30 @@
 import { StyleSheet } from 'react-native';
 import { height, width } from './Dimensions';
 
-export const TestFilterStyle = StyleSheet.create({
-  // container: {
-  //   padding: 10,
-  //   backgroundColor: '#f5f5f5',
-  //   borderRadius: 10,
-  //   justifyContent: 'space-around',
-  //   width: '100%',
-  // },
-  // row: {
-  //   flexDirection: 'row',
-  //   alignItems: 'center',
-  // },
-  // filterBtnContainer: {
-  //   flexDirection: 'row',
-  //   // marginRight: '3%',
-  // },
+export const ResolutionStyle = StyleSheet.create({
+  container: {
+    marginTop: 12,
+  },
+  resolutionContainer: {
+    alignItems: 'center',
+  },
   button: {
-    // marginHorizontal: 5,
     backgroundColor: '#fff',
     padding: 5,
     width: width * 0.28,
     height: height * 0.05,
     borderColor: '#ddd',
     borderWidth: 1,
-    // marginRight: '2%',
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
     opacity: 0.8,
   },
-  // searchButton: {
-  //   backgroundColor: '#ff7043',
-  //   padding: 10,
-  //   borderColor: '#ddd',
-  //   borderWidth: 1,
-  //   width: 70,
-  //   borderRadius: 20,
-  //   // marginLeft: '20%',
-  //   elevation: 3,
-  // },
-  // searchButtonText: {
-  //   fontSize: 16,
-  //   color: '#fff',
-  //   textAlign: 'center',
-  // },
   buttonText: {
     fontSize: width * 0.045,
     color: '#222',
     textAlign: 'center',
   },
-  // resetButton: {
-  //   borderWidth: 0.5,
-  //   borderColor: '#dfdfdf',
-  //   backgroundColor: '#f2f2f2',
-  //   height: 25,
-  //   width: 25,
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   marginLeft: -20,
-  //   marginTop: -10,
-  //   borderRadius: 10,
-  // },
   modalContainer: {
     flex: 1,
     justifyContent: 'center',

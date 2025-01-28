@@ -8,6 +8,7 @@ export const dateStyles = StyleSheet.create({
     marginBottom: 10,
     marginRight: 5,
     marginLeft: 5,
+    marginTop: 12,
   },
   dateContainer: {
     alignItems: 'center',

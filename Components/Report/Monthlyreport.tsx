@@ -60,12 +60,16 @@ export const MonthlyReport = () => {
         filters={['year', 'meter', 'dateRange']}
         setYear={(year) => dispatch({ type: 'SET_YEAR', payload: year })}
         setMeter={(meter) => dispatch({ type: 'SET_METER', payload: meter })}
-        setFromDate={(fromDate) =>
-          dispatch({ type: 'SET_FROM_DATE', payload: fromDate })
-        }
-        setToDate={(toDate) =>
-          dispatch({ type: 'SET_TO_DATE', payload: toDate })
-        }
+        setFromDate={(fromDate) => {
+          if (fromDate !== null) {
+            dispatch({ type: 'SET_FROM_DATE', payload: fromDate });
+          }
+        }}
+        setToDate={(toDate) => {
+          if (toDate !== null) {
+            dispatch({ type: 'SET_TO_DATE', payload: toDate });
+          }
+        }}
         year={state.year}
         meter={state.meter}
         meterData={state.meterData}

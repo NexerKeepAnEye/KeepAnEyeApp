@@ -23,8 +23,8 @@ interface FilterProps {
   setYear?: (year: string) => void;
   setYearTwo?: (yearTwo: string) => void;
   setMeter?: (meter: Meter[]) => void;
-  setFromDate?: (date: Date) => void;
-  setToDate?: (date: Date) => void;
+  setFromDate?: (date: Date | undefined) => void;
+  setToDate?: (date: Date | undefined) => void;
   setMeterId?: (meterId: number) => void;
   setResolution?: (resolution: string) => void;
   setFilteredResults: (data: MeterData[]) => void;

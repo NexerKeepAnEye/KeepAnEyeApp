@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { FlatList, Modal, Text, TouchableOpacity, View } from 'react-native';
-import { TestFilterStyle } from '../../Style/ResolutionStyle';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { width } from '../../Style/Dimensions';
+import { ResolutionStyle } from '../../Style/ResolutionStyle';
+import { searchButtonStyle } from '../../Style/SearchButtonStyle';
 
 interface ResolutionProps {
   setSelectedResolution: (resolution: string) => void;
@@ -22,27 +25,29 @@ export function Resolution({ setSelectedResolution }: ResolutionProps) {
   }
 
   return (
-    <View>
-      <TouchableOpacity
-        style={TestFilterStyle.button}
-        onPress={() => setShowResolutionModal(true)}
-      >
-        <Text style={TestFilterStyle.buttonText}>
-          {resolution ? resolution : 'Upplösning'}
-        </Text>
-      </TouchableOpacity>
-      {/* {resolution && (
+    <View style={ResolutionStyle.container}>
+      <View style={ResolutionStyle.resolutionContainer}>
         <TouchableOpacity
-          onPress={() => handleResolutionReset()}
-          style={TestFilterStyle.resetButton}
+          style={ResolutionStyle.button}
+          onPress={() => setShowResolutionModal(true)}
+        >
+          <Text style={ResolutionStyle.buttonText}>
+            {resolution ? resolution : 'Upplösning'}
+          </Text>
+        </TouchableOpacity>
+      </View>
+      {resolution && (
+        <TouchableOpacity
+          onPress={() => setResolution('')}
+          style={searchButtonStyle.resolutionButtonReset}
         >
           <Icon
             name="close"
-            size={16}
+            size={width * 0.03}
             color="#333"
           />
         </TouchableOpacity>
-      )} */}
+      )}
       {showResolutionModal && (
         <Modal
           visible={showResolutionModal}
@@ -50,28 +55,28 @@ export function Resolution({ setSelectedResolution }: ResolutionProps) {
           animationType="fade"
           onRequestClose={() => setShowResolutionModal(false)}
         >
-          <View style={TestFilterStyle.modalContainer}>
-            <View style={TestFilterStyle.modalContent}>
+          <View style={ResolutionStyle.modalContainer}>
+            <View style={ResolutionStyle.modalContent}>
               {/* <Text style={TestFilterStyle.modalTitle}>Upplösning</Text> */}
               <FlatList
                 data={resolutions}
                 keyExtractor={(item) => item}
                 renderItem={({ item }) => (
                   <TouchableOpacity
-                    style={TestFilterStyle.modalItem}
+                    style={ResolutionStyle.modalItem}
                     onPress={() => handleResolutionChange(item)}
                   >
-                    <Text style={TestFilterStyle.modalItemText}>
+                    <Text style={ResolutionStyle.modalItemText}>
                       {item.toString()}
                     </Text>
                   </TouchableOpacity>
                 )}
               />
               <TouchableOpacity
-                style={TestFilterStyle.modalCloseButton}
+                style={ResolutionStyle.modalCloseButton}
                 onPress={() => setShowResolutionModal(false)}
               >
-                <Text style={TestFilterStyle.modalCloseButtonText}>Stäng</Text>
+                <Text style={ResolutionStyle.modalCloseButtonText}>Stäng</Text>
               </TouchableOpacity>
             </View>
           </View>
