@@ -5,7 +5,7 @@ const window = Dimensions.get('window').height;
 
 const getTopValue = () => {
   if (window > 900) {
-    return  ;
+    return 480;
   } else if (window > 800) {
     return 423;
   } else if (window > 600) {
