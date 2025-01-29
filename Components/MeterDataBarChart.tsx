@@ -66,8 +66,8 @@ export default function MeterDataBarChart({
 
   const maxValue =
     Math.ceil(Math.max(...groupedData.map((item) => item.Value)) / 10000) *
-    20000;
-  const stepValue = maxValue / 5;
+    10000;
+  const stepValue = maxValue / 10;
 
   const handleBarPress = (
     value: number,

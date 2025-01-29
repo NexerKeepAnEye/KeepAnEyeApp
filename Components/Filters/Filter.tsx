@@ -83,6 +83,10 @@ const Filter = ({
       fromDate = new Date(Date.parse(year + '-01-01'));
       toDate = new Date(Date.parse(yearTwo + '-12-31'));
     }
+    if (year && !yearTwo) {
+      fromDate = new Date(Date.parse(year + '-01-01'));
+      toDate = new Date(Date.parse(year + '-12-31'));
+    }
 
     const selectedMeterId =
       meterId !== undefined

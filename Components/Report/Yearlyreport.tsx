@@ -64,7 +64,7 @@ export const YearlyReport = () => {
         yearTwo={state.yearTwo}
         meter={state.meter}
         meterData={state.meterData}
-        resolution="Månad"
+        resolution="Yearly"
         setFilteredResults={(data) => {
           dispatch({ type: 'SET_FILTERED_RESULTS', payload: data });
           setSearchClicked(true);
