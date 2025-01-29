@@ -18,8 +18,6 @@ export default function MeterDataScreen({ route, navigation }: Props) {
     ? state.meterData.filter((data) => data.MeterId === meterId)
     : [];
 
-  console.log('MeterDataScreen meterData:', meterData);
-
   return (
     <View style={MeterDataScreenStyle.container}>
       <PremiseCard navigation={navigation} />

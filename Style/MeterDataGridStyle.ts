@@ -11,13 +11,14 @@ export const MeterDataGridStyle = StyleSheet.create({
   gridContainer: {
     width: width * 0.95,
     marginTop: 20,
+    marginBottom: 10,
   },
   header: {
     backgroundColor: '#d9d9d9',
     justifyContent: 'space-evenly',
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    width: '100%',
+    width: width * 0.9,
   },
   title: {
     fontWeight: 'bold',
