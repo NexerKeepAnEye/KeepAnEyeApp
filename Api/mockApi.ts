@@ -10,7 +10,7 @@ export async function mockApiFetch(
     body?: string;
   },
 ) {
-  // console.log('Mock API Called:', url, options);
+  console.log('Mock API Called:', url, options);
 
   await new Promise((resolve) => setTimeout(resolve, 500));
 
