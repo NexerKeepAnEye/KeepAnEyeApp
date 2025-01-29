@@ -10,7 +10,7 @@ export async function mockApiFetch(
     body?: string;
   },
 ) {
-  // console.log('Mock API Called:', url, options);
+  console.log('Mock API Called:', url, options);
 
   await new Promise((resolve) => setTimeout(resolve, 500));
 
@@ -42,6 +42,8 @@ export async function mockApiFetch(
     const requestBody = options.body ? JSON.parse(options.body) : {};
     const fromDate = new Date(requestBody.from);
     const toDate = new Date(requestBody.to);
+
+    console.log('REQUESTBODY:',requestBody);
 
     const meterData = meterdata.MeterData.filter(
       (md) =>
