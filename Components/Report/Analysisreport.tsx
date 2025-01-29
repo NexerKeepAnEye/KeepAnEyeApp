@@ -9,6 +9,7 @@ import {
   initialState,
 } from '../../Context/FilterReducer';
 import { usePremiseContext } from '../../Context/PremiseContext';
+import { MeterDataGridStyle } from '../../Style/MeterDataGridStyle';
 import { ReportGridStyle } from '../../Style/ReportGridStyleStyle';
 import Filter from '../Filters/Filter';
 
@@ -109,7 +110,7 @@ export default function Analysisreport() {
   }, [filteredResults]);
 
   return (
-    <View style={{ marginBottom: 100 }}>
+    <View>
       <View>
         <Filter
           filters={['dateRange', 'meter', 'resolution']}
@@ -213,28 +214,34 @@ export default function Analysisreport() {
             </ScrollView>
             <View style={ReportGridStyle.container}>
               <Divider style={ReportGridStyle.header} />
-              <DataTable>
-                <DataTable.Header>
-                  <DataTable.Title>{state.meter[0].Name}</DataTable.Title>
-                  <DataTable.Title>Value</DataTable.Title>
-                  <DataTable.Title>Date</DataTable.Title>
+              <DataTable style={MeterDataGridStyle.gridContainer}>
+                <DataTable.Header style={MeterDataGridStyle.header}>
+                  <DataTable.Title style={{ flex: 2 }}>
+                    {state.meter[0].Name}
+                  </DataTable.Title>
+                  <DataTable.Title style={{ flex: 2 }}>Value</DataTable.Title>
+                  <DataTable.Title style={{ flex: 1 }}>Date</DataTable.Title>
                 </DataTable.Header>
                 <DataTable.Row>
-                  <DataTable.Cell>Min</DataTable.Cell>
-                  <DataTable.Cell>
+                  <DataTable.Cell style={{ flex: 1 }}>Min</DataTable.Cell>
+                  <DataTable.Cell style={{ flex: 1.1 }}>
                     {minValue} {productName}
                   </DataTable.Cell>
-                  <DataTable.Cell>
-                    {minDate ? new Date(minDate).toLocaleString() : ''}
+                  <DataTable.Cell style={{ flex: 0.9 }}>
+                    {minDate
+                      ? new Date(minDate).toLocaleDateString().split('T')[0]
+                      : ''}
                   </DataTable.Cell>
                 </DataTable.Row>
                 <DataTable.Row>
-                  <DataTable.Cell>Max</DataTable.Cell>
-                  <DataTable.Cell>
+                  <DataTable.Cell style={{ flex: 1 }}>Max</DataTable.Cell>
+                  <DataTable.Cell style={{ flex: 1.1 }}>
                     {max} {productName}
                   </DataTable.Cell>
-                  <DataTable.Cell>
-                    {maxDate ? new Date(maxDate).toLocaleString() : ''}
+                  <DataTable.Cell style={{ flex: 0.9 }}>
+                    {maxDate
+                      ? new Date(maxDate).toLocaleDateString().split('T')[0]
+                      : ''}
                   </DataTable.Cell>
                 </DataTable.Row>
               </DataTable>
