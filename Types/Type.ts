@@ -28,6 +28,7 @@ export type Premise = {
   Name: string;
   Meters: Meter[];
 };
+
 export type Meter = {
   Id: number;
   Name: string;

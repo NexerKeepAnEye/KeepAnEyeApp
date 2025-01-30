@@ -8,10 +8,12 @@ import { MeterData, Tooltip } from '../Types/Type';
 
 interface MeterDataBarChartProps {
   filteredResults: MeterData[];
+  resolution: string;
 }
 
 export default function MeterDataBarChart({
   filteredResults,
+  resolution,
 }: MeterDataBarChartProps) {
   const [tooltip, setTooltip] = useState<Tooltip>({
     originalValue: 0,
@@ -28,7 +30,14 @@ export default function MeterDataBarChart({
   // }, [filteredResults]);
 
   const formatMonth = (date: Date) => {
-    return date.toLocaleString('default', { month: 'short' });
+    if (resolution === 'Yearly') {
+      return date.getFullYear().toString();
+    }
+    if (resolution === 'Monthly') {
+      return date.toLocaleString('default', { month: 'short' });
+    } else {
+      return date.toLocaleString('se-SV', { month: 'short' });
+    }
   };
 
   const groupAndSumData = (data: MeterData[]) => {

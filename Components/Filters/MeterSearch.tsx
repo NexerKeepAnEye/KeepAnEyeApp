@@ -36,7 +36,6 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
 
   const handleSelectMeter = (meter: Meter[]) => {
     setSelectedMeter(meter);
-
     setSelectedMeterState(meter.map((m) => m.Name));
     setModalVisible(false);
     console.log(meter);
