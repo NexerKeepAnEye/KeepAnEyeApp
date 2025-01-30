@@ -46,7 +46,7 @@ export async function mockApiFetch(
     const meterData = meterdata.MeterData.filter(
       (md) =>
         md.ProductId === requestBody.productId &&
-        md.Resolution !== null &&
+        md.Resolution !== requestBody.resolution &&
         new Date(md.DateTime) >= fromDate &&
         new Date(md.DateTime) <= toDate &&
         (requestBody.premiseIds.length === 0 ||

@@ -14,7 +14,7 @@ export const filterTypes = {
     },
     {
       id: 4,
-      type: 'Glidande årsförbrukning',
+      type: 'Kostnadsrapport',
     },
     {
       id: 5,

@@ -70,6 +70,21 @@ const Filter = ({
   const handleSearch = async () => {
     let meterData;
 
+    const translateResolution = (resolution: string) => {
+      switch (resolution) {
+        case 'Timma':
+          return 'Hourly';
+        case 'Dag':
+          return 'Daily';
+        case 'Månad':
+          return 'Monthly';
+        case 'År':
+          return 'Yearly';
+        default:
+          return resolution;
+      }
+    };
+
     if (year && yearTwo) {
       fromDate = new Date(Date.parse(year + '-01-01'));
       toDate = new Date(Date.parse(yearTwo + '-12-31'));
@@ -94,7 +109,7 @@ const Filter = ({
       meterData = await fetchMeterData(
         apikey ?? '',
         selectedProductId,
-        resolution ?? '',
+        translateResolution(resolution ?? ''),
         fromDate ?? new Date(),
         toDate ?? new Date(),
         isChecked,
