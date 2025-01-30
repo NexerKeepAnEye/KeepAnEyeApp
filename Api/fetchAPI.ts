@@ -90,7 +90,6 @@ export async function fetchMeterData(
   to: Date,
   correctedValues?: boolean,
   premiseIds: number[] = [],
-  designations: string[] = [],
   meterIds: number[] = [],
 ): Promise<MeterData[]> {
   try {
@@ -108,7 +107,6 @@ export async function fetchMeterData(
         from,
         to,
         premiseIds,
-        designations,
         meterIds,
       }),
     });
@@ -130,10 +128,10 @@ export async function fetchMeterData(
         Cost: item.Cost,
         Code: item.Code,
         PremiseId: item.PremiseId,
-        Designation: item.Designation ?? null,
         MeterId: item.MeterId,
       }),
     );
+    console.log('meterData:', meterData);
     return meterData;
   } catch (error) {
     console.error('Error fetching meter data:', error);

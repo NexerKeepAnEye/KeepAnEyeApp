@@ -75,6 +75,11 @@ const Filter = ({
       toDate = new Date(Date.parse(yearTwo + '-12-31'));
     }
 
+    if (year && !yearTwo) {
+      fromDate = new Date(Date.parse(year + '-01-01'));
+      toDate = new Date(Date.parse(year + '-12-31'));
+    }
+
     const selectedMeterId =
       meterId !== undefined
         ? state.selectedPremise?.Meters.find((meter) => meter.Id === meterId)
@@ -95,9 +100,6 @@ const Filter = ({
         toDate ?? new Date(),
         isChecked,
         state.selectedPremise?.Id ? [state.selectedPremise.Id] : [],
-        state.selectedPremise?.Designation
-          ? [state.selectedPremise.Designation]
-          : [],
         meterId !== undefined ? [meterId] : (meter?.map((m) => m.Id) ?? []),
       );
     } catch (error) {
