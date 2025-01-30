@@ -77,8 +77,6 @@ export async function mockApiFetch(
       );
     });
 
-    console.log('meterData1:', meterData);
-
     if (meterData.length > 0) {
       const responseData: MeterData[] = meterData.map((md) => ({
         DateTime: new Date(md.DateTime),
