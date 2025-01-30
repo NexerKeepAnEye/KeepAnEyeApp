@@ -35,6 +35,8 @@ export default function MeterDataBarChart({
     }
     if (resolution === 'Monthly') {
       return date.toLocaleString('default', { month: 'short' });
+    } else {
+      return date.toLocaleString('se-SV', { month: 'short' });
     }
   };
 

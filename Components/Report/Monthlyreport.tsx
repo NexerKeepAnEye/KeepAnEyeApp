@@ -74,7 +74,10 @@ export const MonthlyReport = () => {
         filteredResults.length > 0 ? (
           <>
             <View>
-              <MeterDataBarChart filteredResults={filteredResults} />
+              <MeterDataBarChart
+                filteredResults={filteredResults}
+                resolution="Monthly"
+              />
             </View>
             <View style={ReportGridStyle.container}>
               {/* {selectedReport && ( */}
