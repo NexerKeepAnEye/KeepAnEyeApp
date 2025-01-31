@@ -10,6 +10,7 @@ import {
 import { usePremiseContext } from '../../Context/PremiseContext';
 import { ReportGridStyle } from '../../Style/ReportGridStyleStyle';
 import Filter from '../Filters/Filter';
+import MeterDataComparisonChart from '../MeterDataComparisonChart';
 
 export const YearComparison = () => {
   const [state, dispatch] = useReducer<Reducer<FilterState, FilterAction>>(
@@ -60,6 +61,12 @@ export const YearComparison = () => {
       {searchClicked ? (
         filteredResults.length > 0 ? (
           <>
+            <MeterDataComparisonChart
+              filteredResults={filteredResults}
+              resolution="Monthly"
+              year={state.year}
+              yearTwo={state.yearTwo}
+            />
             <View style={ReportGridStyle.container}>
               <>
                 <Divider style={ReportGridStyle.header} />
