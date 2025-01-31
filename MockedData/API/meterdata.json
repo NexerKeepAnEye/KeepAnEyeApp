@@ -2,7 +2,7 @@
   "MeterData": [
     {
       "DateTime": "2020-01-01T00:00:00",
-      "Value": 1234,
+      "Value": 123,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2020-01",
@@ -13,7 +13,7 @@
     },
     {
       "DateTime": "2020-02-01T00:00:00",
-      "Value": 2345,
+      "Value": 321,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2020-02",
@@ -24,7 +24,7 @@
     },
     {
       "DateTime": "2020-03-01T00:00:00",
-      "Value": 3456,
+      "Value": 234,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2020-03",
@@ -35,7 +35,7 @@
     },
     {
       "DateTime": "2020-04-01T00:00:00",
-      "Value": 4567,
+      "Value": 432,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2020-04",
@@ -46,7 +46,7 @@
     },
     {
       "DateTime": "2020-05-01T00:00:00",
-      "Value": 5678,
+      "Value": 345,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2020-05",
@@ -57,7 +57,7 @@
     },
     {
       "DateTime": "2020-06-01T00:00:00",
-      "Value": 6789,
+      "Value": 456,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2020-06",
@@ -68,7 +68,7 @@
     },
     {
       "DateTime": "2020-07-01T00:00:00",
-      "Value": 7890,
+      "Value": 234,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2020-07",
@@ -79,7 +79,7 @@
     },
     {
       "DateTime": "2020-08-01T00:00:00",
-      "Value": 8901,
+      "Value": 345,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2020-08",
@@ -90,7 +90,7 @@
     },
     {
       "DateTime": "2020-09-01T00:00:00",
-      "Value": 9012,
+      "Value": 456,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2020-09",
@@ -101,7 +101,7 @@
     },
     {
       "DateTime": "2020-10-01T00:00:00",
-      "Value": 1234,
+      "Value": 123,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2020-10",
@@ -112,7 +112,7 @@
     },
     {
       "DateTime": "2020-11-01T00:00:00",
-      "Value": 2345,
+      "Value": 234,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2020-11",
@@ -123,7 +123,7 @@
     },
     {
       "DateTime": "2020-12-01T00:00:00",
-      "Value": 3456,
+      "Value": 345,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2020-12",
@@ -134,7 +134,7 @@
     },
     {
       "DateTime": "2021-01-01T00:00:00",
-      "Value": 4567,
+      "Value": 456,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2021-01",
@@ -145,7 +145,7 @@
     },
     {
       "DateTime": "2021-02-01T00:00:00",
-      "Value": 5678,
+      "Value": 123,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2021-02",
@@ -156,7 +156,7 @@
     },
     {
       "DateTime": "2021-03-01T00:00:00",
-      "Value": 6789,
+      "Value": 234,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2021-03",
@@ -167,7 +167,7 @@
     },
     {
       "DateTime": "2021-04-01T00:00:00",
-      "Value": 7890,
+      "Value": 345,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2021-04",
@@ -178,7 +178,7 @@
     },
     {
       "DateTime": "2021-05-01T00:00:00",
-      "Value": 8901,
+      "Value": 456,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2021-05",
@@ -189,7 +189,7 @@
     },
     {
       "DateTime": "2021-06-01T00:00:00",
-      "Value": 9012,
+      "Value": 123,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2021-06",
@@ -200,7 +200,7 @@
     },
     {
       "DateTime": "2021-07-01T00:00:00",
-      "Value": 1234,
+      "Value": 234,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2021-07",
@@ -211,7 +211,7 @@
     },
     {
       "DateTime": "2021-08-01T00:00:00",
-      "Value": 2345,
+      "Value": 345,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2021-08",
@@ -222,7 +222,7 @@
     },
     {
       "DateTime": "2021-09-01T00:00:00",
-      "Value": 3456,
+      "Value": 456,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2021-09",
@@ -233,7 +233,7 @@
     },
     {
       "DateTime": "2021-10-01T00:00:00",
-      "Value": 4567,
+      "Value": 123,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2021-10",
@@ -244,7 +244,7 @@
     },
     {
       "DateTime": "2021-11-01T00:00:00",
-      "Value": 5678,
+      "Value": 234,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2021-11",
@@ -255,7 +255,7 @@
     },
     {
       "DateTime": "2021-12-01T00:00:00",
-      "Value": 6789,
+      "Value": 345,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2021-12",
@@ -266,7 +266,7 @@
     },
     {
       "DateTime": "2022-01-01T00:00:00",
-      "Value": 7890,
+      "Value": 456,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2022-01",
@@ -277,7 +277,7 @@
     },
     {
       "DateTime": "2022-02-01T00:00:00",
-      "Value": 8901,
+      "Value": 123,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2022-02",
@@ -288,7 +288,7 @@
     },
     {
       "DateTime": "2022-03-01T00:00:00",
-      "Value": 9012,
+      "Value": 75,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2022-03",
@@ -299,7 +299,7 @@
     },
     {
       "DateTime": "2022-04-01T00:00:00",
-      "Value": 1234,
+      "Value": 85,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2022-04",
@@ -310,7 +310,7 @@
     },
     {
       "DateTime": "2022-05-01T00:00:00",
-      "Value": 2345,
+      "Value": 95,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2022-05",
@@ -321,7 +321,7 @@
     },
     {
       "DateTime": "2022-06-01T00:00:00",
-      "Value": 3456,
+      "Value": 105,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2022-06",
@@ -332,7 +332,7 @@
     },
     {
       "DateTime": "2022-07-01T00:00:00",
-      "Value": 4567,
+      "Value": 115,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2022-07",
@@ -343,7 +343,7 @@
     },
     {
       "DateTime": "2022-08-01T00:00:00",
-      "Value": 5678,
+      "Value": 125,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2022-08",
@@ -354,7 +354,7 @@
     },
     {
       "DateTime": "2022-09-01T00:00:00",
-      "Value": 6789,
+      "Value": 135,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2022-09",
@@ -365,7 +365,7 @@
     },
     {
       "DateTime": "2022-10-01T00:00:00",
-      "Value": 7890,
+      "Value": 145,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2022-10",
@@ -376,7 +376,7 @@
     },
     {
       "DateTime": "2022-11-01T00:00:00",
-      "Value": 8901,
+      "Value": 55,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2022-11",
@@ -387,7 +387,7 @@
     },
     {
       "DateTime": "2022-12-01T00:00:00",
-      "Value": 9012,
+      "Value": 65,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2022-12",
@@ -398,7 +398,7 @@
     },
     {
       "DateTime": "2023-01-01T00:00:00",
-      "Value": 1234,
+      "Value": 75,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2023-01",
@@ -409,7 +409,7 @@
     },
     {
       "DateTime": "2023-02-01T00:00:00",
-      "Value": 2345,
+      "Value": 85,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2023-02",
@@ -420,7 +420,7 @@
     },
     {
       "DateTime": "2023-03-01T00:00:00",
-      "Value": 3456,
+      "Value": 95,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2023-03",
@@ -431,7 +431,7 @@
     },
     {
       "DateTime": "2023-04-01T00:00:00",
-      "Value": 4567,
+      "Value": 105,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2023-04",
@@ -442,7 +442,7 @@
     },
     {
       "DateTime": "2023-05-01T00:00:00",
-      "Value": 5678,
+      "Value": 115,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2023-05",
@@ -453,7 +453,7 @@
     },
     {
       "DateTime": "2023-06-01T00:00:00",
-      "Value": 6789,
+      "Value": 125,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2023-06",
@@ -464,7 +464,7 @@
     },
     {
       "DateTime": "2023-07-01T00:00:00",
-      "Value": 7890,
+      "Value": 135,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2023-07",
@@ -475,7 +475,7 @@
     },
     {
       "DateTime": "2023-08-01T00:00:00",
-      "Value": 8901,
+      "Value": 145,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2023-08",
@@ -486,7 +486,7 @@
     },
     {
       "DateTime": "2023-09-01T00:00:00",
-      "Value": 9012,
+      "Value": 55,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2023-09",
@@ -497,7 +497,7 @@
     },
     {
       "DateTime": "2023-10-01T00:00:00",
-      "Value": 1234,
+      "Value": 65,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2023-10",
@@ -508,7 +508,7 @@
     },
     {
       "DateTime": "2023-11-01T00:00:00",
-      "Value": 2345,
+      "Value": 75,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2023-11",
@@ -519,7 +519,7 @@
     },
     {
       "DateTime": "2023-12-01T00:00:00",
-      "Value": 3456,
+      "Value": 85,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2023-12",
@@ -530,7 +530,7 @@
     },
     {
       "DateTime": "2025-01-01T00:00:00",
-      "Value": 1234,
+      "Value": 200,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2025-01",
@@ -541,7 +541,7 @@
     },
     {
       "DateTime": "2025-02-01T00:00:00",
-      "Value": 2345,
+      "Value": 300,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2025-02",
@@ -552,7 +552,7 @@
     },
     {
       "DateTime": "2025-03-01T00:00:00",
-      "Value": 3456,
+      "Value": 400,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2025-03",
@@ -563,7 +563,7 @@
     },
     {
       "DateTime": "2025-04-01T00:00:00",
-      "Value": 4567,
+      "Value": 500,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2025-04",
@@ -574,7 +574,7 @@
     },
     {
       "DateTime": "2025-05-01T00:00:00",
-      "Value": 5678,
+      "Value": 600,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2025-05",
@@ -585,7 +585,7 @@
     },
     {
       "DateTime": "2025-06-01T00:00:00",
-      "Value": 6789,
+      "Value": 700,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2025-06",
@@ -596,7 +596,7 @@
     },
     {
       "DateTime": "2025-07-01T00:00:00",
-      "Value": 7890,
+      "Value": 200,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2025-07",
@@ -607,7 +607,7 @@
     },
     {
       "DateTime": "2025-08-01T00:00:00",
-      "Value": 8901,
+      "Value": 300,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2025-08",
@@ -618,7 +618,7 @@
     },
     {
       "DateTime": "2025-09-01T00:00:00",
-      "Value": 9012,
+      "Value": 400,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2025-09",
@@ -629,7 +629,7 @@
     },
     {
       "DateTime": "2025-10-01T00:00:00",
-      "Value": 1234,
+      "Value": 500,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2025-10",
@@ -640,7 +640,7 @@
     },
     {
       "DateTime": "2025-11-01T00:00:00",
-      "Value": 2345,
+      "Value": 600,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2025-11",
@@ -651,7 +651,7 @@
     },
     {
       "DateTime": "2025-12-01T00:00:00",
-      "Value": 3456,
+      "Value": 700,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2025-12",
@@ -662,7 +662,7 @@
     },
     {
       "DateTime": "2024-01-01T00:00:00",
-      "Value": 1234,
+      "Value": 200,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2024-01",
@@ -673,7 +673,7 @@
     },
     {
       "DateTime": "2024-02-01T00:00:00",
-      "Value": 2345,
+      "Value": 300,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2024-02",
@@ -684,7 +684,7 @@
     },
     {
       "DateTime": "2024-03-01T00:00:00",
-      "Value": 3456,
+      "Value": 400,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2024-03",
@@ -695,7 +695,7 @@
     },
     {
       "DateTime": "2024-04-01T00:00:00",
-      "Value": 4567,
+      "Value": 500,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2024-04",
@@ -706,7 +706,7 @@
     },
     {
       "DateTime": "2024-05-01T00:00:00",
-      "Value": 5678,
+      "Value": 600,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2024-05",
@@ -717,7 +717,7 @@
     },
     {
       "DateTime": "2024-06-01T00:00:00",
-      "Value": 6789,
+      "Value": 1700,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2024-06",
@@ -728,7 +728,7 @@
     },
     {
       "DateTime": "2024-07-01T00:00:00",
-      "Value": 7890,
+      "Value": 200,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2024-07",
@@ -739,7 +739,7 @@
     },
     {
       "DateTime": "2024-08-01T00:00:00",
-      "Value": 8901,
+      "Value": 300,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2024-08",
@@ -750,7 +750,7 @@
     },
     {
       "DateTime": "2024-09-01T00:00:00",
-      "Value": 9012,
+      "Value": 400,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2024-09",
@@ -761,7 +761,7 @@
     },
     {
       "DateTime": "2024-10-01T00:00:00",
-      "Value": 1234,
+      "Value": 500,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2024-10",
@@ -772,7 +772,7 @@
     },
     {
       "DateTime": "2024-11-01T00:00:00",
-      "Value": 2345,
+      "Value": 600,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2024-11",
@@ -783,7 +783,7 @@
     },
     {
       "DateTime": "2024-12-01T00:00:00",
-      "Value": 3456,
+      "Value": 700,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2024-12",
