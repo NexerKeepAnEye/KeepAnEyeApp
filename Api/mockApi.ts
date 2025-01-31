@@ -1,6 +1,7 @@
 import meterdata from '../MockedData/API/meterdata.json';
 import premise from '../MockedData/API/premise.json';
 import product from '../MockedData/API/product.json';
+import { MeterData } from '../Types/Type';
 
 export async function mockApiFetch(
   url: string,
@@ -10,6 +11,7 @@ export async function mockApiFetch(
     body?: string;
   },
 ) {
+  console.log('Mock API Called:', url, options);
   console.log('Mock API Called:', url, options);
 
   await new Promise((resolve) => setTimeout(resolve, 500));
@@ -43,26 +45,61 @@ export async function mockApiFetch(
     const fromDate = new Date(requestBody.from);
     const toDate = new Date(requestBody.to);
 
-    const meterData = meterdata.MeterData.filter(
-      (md) =>
-        md.ProductId === requestBody.productId &&
-        md.Resolution !== requestBody.resolution &&
-        new Date(md.DateTime) >= fromDate &&
-        new Date(md.DateTime) <= toDate &&
-        (requestBody.premiseIds.length === 0 ||
-          requestBody.premiseIds.includes(md.PremiseId)) &&
-        (requestBody.designations.length === 0 ||
-          requestBody.designations.includes(md.Designation)) &&
-        (requestBody.meterIds.length === 0 ||
-          requestBody.meterIds.includes(md.MeterId)),
-    );
+    console.log('REQUESTBODY:', requestBody);
 
-    if (meterData) {
-      // console.log('data from api:', meterdata);
+    const meterData = meterdata.MeterData.filter((md) => {
+      const mdDateTime = new Date(md.DateTime);
+      const isProductIdMatch = md.ProductId === requestBody.productId;
+      const isResolutionNotNull = md.Resolution !== null;
+      const isDateInRange = mdDateTime >= fromDate && mdDateTime <= toDate;
+      const isPremiseIdMatch =
+        requestBody.premiseIds.length === 0 ||
+        requestBody.premiseIds.includes(md.PremiseId);
+      const isMeterIdMatch =
+        requestBody.meterIds.length === 0 ||
+        requestBody.meterIds.includes(md.MeterId);
+
+      // console.log('Filter Check:', {
+      //   isProductIdMatch,
+      //   isResolutionNotNull,
+      //   isDateInRange,
+      //   isPremiseIdMatch,
+      //   isMeterIdMatch,
+      // });
+
+      // console.log('Values:', {
+      //   mdDateTime,
+      //   fromDate,
+      //   toDate,
+      // });
+
+      return (
+        isProductIdMatch &&
+        isResolutionNotNull &&
+        isDateInRange &&
+        isPremiseIdMatch &&
+        isMeterIdMatch
+      );
+    });
+
+    if (meterData.length > 0) {
+      const responseData: MeterData[] = meterData.map((md) => ({
+        DateTime: new Date(md.DateTime),
+        Value: md.Value,
+        Cost: md.Cost,
+        Code: md.Code,
+        PremiseId: md.PremiseId,
+        MeterId: md.MeterId,
+        ProductId: md.ProductId,
+        Resolution: md.Resolution,
+      }));
+
+      console.log('responseData:', responseData);
+
       return {
         ok: true,
         status: 200,
-        json: async () => meterdata.MeterData,
+        json: async () => responseData,
       };
     } else {
       return {
@@ -72,7 +109,7 @@ export async function mockApiFetch(
       };
     }
   }
-  // Hantera okända endpoints
+
   return {
     ok: false,
     status: 404,

@@ -12,7 +12,7 @@ export type MeterData = {
   Cost: number;
   Code: string;
   PremiseId: number;
-  Designation: string | null | undefined;
+  Designation?: string | null | undefined;
   MeterId: number;
 };
 
