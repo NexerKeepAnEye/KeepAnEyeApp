@@ -6,18 +6,19 @@ import {
 } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { Pressable } from 'react-native';
-import { LogoTitle } from '../Components/Header';
 import StorageService from '../AsyncStorage/AsyncStorage';
+import { LogoTitle } from '../Components/Header';
 import PremiseScreen from '../Screens/PremiseScreen';
 import ReportScreen from '../Screens/ReportScreen';
 import SignInScreen from '../Screens/SignInScreen';
+import Splash from '../Screens/Splashscreen';
 import StartScreen from '../Screens/StartScreen';
 import TabNavigator, { TabParamList } from './TabNavigator';
 
 export type RootStackParamList = {
   SignInScreen: undefined;
   StartScreen: undefined;
-  SplashScreen: undefined;
+  Splash: undefined;
   PremiseScreen: {
     navigation: NavigatorScreenParams<TabParamList>;
     premiseId: number;
@@ -40,7 +41,7 @@ export default function RootStackNavigator() {
 
   return (
     <RootStack.Navigator
-      initialRouteName="SignInScreen"
+      initialRouteName="Splash"
       screenOptions={() => ({
         headerRight: () => (
           <Pressable onPress={handleLogout}>
@@ -55,6 +56,11 @@ export default function RootStackNavigator() {
         headerTitleAlign: 'center',
       })}
     >
+      <RootStack.Screen
+        name="Splash"
+        component={Splash}
+        options={{ headerShadowVisible: false, headerShown: false }}
+      />
       <RootStack.Screen
         name="StartScreen"
         component={StartScreen}
