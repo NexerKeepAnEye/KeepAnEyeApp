@@ -7,14 +7,17 @@
 
 // export async function fetchProduct(apiKey) {
 //   try {
-//     const response = await fetch('https://www.keepaneye.net/api/v1/Product', {
-//       method: 'GET',
-//       headers: {
-//         Accept: 'application/json; charset=utf-8',
-//         'X-API-Key': apiKey,
+//     const response = await fetch(
+//       'https://keeptest.uddevallaenergi.se//api/v1/Product',
+//       {
+//         method: 'GET',
+//         headers: {
+//           Accept: 'application/json; charset=utf-8',
+//           'X-API-Key': apiKey,
+//         },
+//         agent,
 //       },
-//     //   agent,
-//     });
+//     );
 
 //     if (!response.ok) {
 //       throw new Error(`HTTP error! status: ${response.status}`);
@@ -29,7 +32,7 @@
 //   }
 // }
 
-// fetchProduct('fc41e3f1-f155-4465-b908-a79991643b0a');
+// fetchProduct('b49ab053-04b3-4806-9cbd-68ff9adc8d01');
 
 // process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 

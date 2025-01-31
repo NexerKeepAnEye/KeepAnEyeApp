@@ -1,39 +1,29 @@
 import React from 'react';
 import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { usePremiseContext } from '../Context/PremiseContext';
 import { MeterIconStyle } from '../Style/MeterIconStyle';
 
 export default function MeterIcon({ productId }: { productId: number }) {
-  const { state } = usePremiseContext();
+  const isProductId = (productId: number, ids: number[]) =>
+    ids.includes(productId);
 
   const iconSelector = (productId: number) => {
-    if (state.products.find((product) => product.Id === productId)?.Id === 1) {
+    if (isProductId(productId, [22, 36, 32, 68, 305])) {
       return 'local-fire-department';
-    } else if (
-      state.products.find((product) => product.Id === productId)?.Id === 4 ||
-      state.products.find((product) => product.Id === productId)?.Id === 6 ||
-      state.products.find((product) => product.Id === productId)?.Id === 7 ||
-      state.products.find((product) => product.Id === productId)?.Id === 8
-    ) {
+    } else if (isProductId(productId, [25, 35, 39, 70, 30])) {
       return 'water-drop';
-    } else if (
-      state.products.find((product) => product.Id === productId)?.Id === 9
-    ) {
+    } else if (isProductId(productId, [28, 29, 72])) {
       return 'thermostat';
-    } else if (
-      state.products.find((product) => product.Id === productId)?.Id === 3 ||
-      state.products.find((product) => product.Id === productId)?.Id === 5
-    ) {
+    } else if (isProductId(productId, [23, 33, 37, 69, 306])) {
       return 'bolt';
-    } else if (
-      state.products.find((product) => product.Id === productId)?.Id === 2
-    ) {
+    } else if (isProductId(productId, [24, 34, 38, 67])) {
       return 'ac-unit';
-    } else if (
-      state.products.find((product) => product.Id === productId)?.Id === 10
-    ) {
+    } else if (isProductId(productId, [31])) {
       return 'local-gas-station';
+    } else if (isProductId(productId, [26])) {
+      return 'electrical-services';
+    } else if (isProductId(productId, [27])) {
+      return 'double-arrow';
     }
 
     return 'help-outline';

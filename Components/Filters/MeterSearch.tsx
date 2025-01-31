@@ -10,16 +10,16 @@ import {
 import { usePremiseContext } from '../../Context/PremiseContext';
 import { meterSearch } from '../../Style/MeterSearchStyle';
 import { Meter } from '../../Types/Type';
+import { groupMeters, Section } from '../GroupMeter';
 import MeterIcon from '../MeterIcon';
 
-interface Section {
-  title: string;
-  data: Meter[];
-}
+// interface Section {
+//   title: string;
+//   data: Meter[];
+// }
 
 interface MeterSearchProps {
   setSelectedMeter: (meter: Meter[]) => void;
-
   meters: Meter[] | undefined;
 }
 
@@ -29,8 +29,9 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
     string[] | undefined
   >();
   const { state } = usePremiseContext();
-  const meters: Meter[] =
-    state.premises?.flatMap((premise) => premise.Meters) || [];
+  const meters: Meter[] = state.selectedPremise?.Meters || [];
+
+  console.log(meters);
 
   const handlePress = () => setModalVisible(true);
 
@@ -49,34 +50,7 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
     console.log(selectedMeters);
   };
 
-  const sections: Section[] = [
-    {
-      title: 'Fjärrvärme',
-      data: meters.filter((meter) => meter.ProductId === 1),
-    },
-    {
-      title: 'Vatten',
-      data: meters.filter(
-        (meter) => meter.ProductId === 4 || meter.ProductId === 7,
-      ),
-    },
-    {
-      title: 'Fjärrkyla',
-      data: meters.filter((meter) => meter.ProductId === 2),
-    },
-    {
-      title: 'El',
-      data: meters.filter((meter) => meter.ProductId === 3),
-    },
-    {
-      title: 'Olja',
-      data: meters.filter((meter) => meter.ProductId === 10),
-    },
-    {
-      title: 'Temperatur',
-      data: meters.filter((meter) => meter.ProductId === 9),
-    },
-  ].filter((section) => section.data.length > 0);
+  const sections = groupMeters(meters);
 
   return (
     <View style={meterSearch.container}>
@@ -92,12 +66,6 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
           >
             {selectedMeter?.toString() || ' Mätare '}
           </Text>
-          {/* <View style={meterSearch.iconContainer}>
-            <List.Icon
-              icon="chevron-down"
-              style={meterSearch.icon}
-            />
-          </View> */}
         </TouchableOpacity>
       </View>
       <Modal

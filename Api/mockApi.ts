@@ -72,7 +72,7 @@ export async function mockApiFetch(
         DateTime: new Date(md.DateTime),
         Value: md.Value,
         Cost: md.Cost,
-        Code: md.Code,
+        Code: md.Code || '',
         PremiseId: md.PremiseId,
         MeterId: md.MeterId,
         ProductId: md.ProductId,
