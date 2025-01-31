@@ -11,8 +11,7 @@ export async function mockApiFetch(
     body?: string;
   },
 ) {
-  console.log('Mock API Called:', url, options);
-  console.log('Mock API Called:', url, options);
+  // console.log('Mock API Called:', url, options);
 
   await new Promise((resolve) => setTimeout(resolve, 500));
 
@@ -45,7 +44,7 @@ export async function mockApiFetch(
     const fromDate = new Date(requestBody.from);
     const toDate = new Date(requestBody.to);
 
-    console.log('REQUESTBODY:', requestBody);
+    // console.log('REQUESTBODY:', requestBody);
 
     const meterData = meterdata.MeterData.filter((md) => {
       const mdDateTime = new Date(md.DateTime);
@@ -58,20 +57,6 @@ export async function mockApiFetch(
       const isMeterIdMatch =
         requestBody.meterIds.length === 0 ||
         requestBody.meterIds.includes(md.MeterId);
-
-      // console.log('Filter Check:', {
-      //   isProductIdMatch,
-      //   isResolutionNotNull,
-      //   isDateInRange,
-      //   isPremiseIdMatch,
-      //   isMeterIdMatch,
-      // });
-
-      // console.log('Values:', {
-      //   mdDateTime,
-      //   fromDate,
-      //   toDate,
-      // });
 
       return (
         isProductIdMatch &&
@@ -94,7 +79,7 @@ export async function mockApiFetch(
         Resolution: md.Resolution,
       }));
 
-      console.log('responseData:', responseData);
+      // console.log('responseData:', responseData);
 
       return {
         ok: true,

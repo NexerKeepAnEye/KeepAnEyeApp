@@ -279,7 +279,6 @@ const Filter = ({
         setMeterId(meterId);
       }
     }
-    console.log('filteredData:', filteredData);
     setFilteredResults(filteredData);
   };
 

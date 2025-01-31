@@ -9,6 +9,7 @@ import {
 } from '../../Context/FilterReducer';
 import { usePremiseContext } from '../../Context/PremiseContext';
 import { ReportGridStyle } from '../../Style/ReportGridStyleStyle';
+import { MeterData } from '../../Types/Type';
 import Filter from '../Filters/Filter';
 import MeterDataComparisonChart from '../MeterDataComparisonChart';
 
@@ -17,6 +18,7 @@ export const YearComparison = () => {
     filterReducer,
     initialState,
   );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [productName, setProductName] = useState<string | null>(null);
   const [searchClicked, setSearchClicked] = useState(false);
   const filteredResults = state.filteredResults;
@@ -39,6 +41,44 @@ export const YearComparison = () => {
     };
     fetchProductName();
   }, [productCode]);
+
+  const dataForYear = filteredResults.filter(
+    (item) =>
+      state.year &&
+      new Date(item.DateTime).getFullYear() === parseInt(state.year),
+  );
+
+  const dataForYearTwo = filteredResults.filter(
+    (item) =>
+      state.yearTwo &&
+      new Date(item.DateTime).getFullYear() === parseInt(state.yearTwo),
+  );
+
+  const getMonthName = (monthIndex: number) => {
+    const date = new Date(2000, monthIndex, 1);
+    date.setMonth(monthIndex);
+    return date.toLocaleString('default', { month: 'long' });
+  };
+
+  const months = Array.from({ length: 12 }, (_, index) => getMonthName(index));
+
+  const calculatePercentageChange = (value1: number, value2: number) => {
+    if (value1 === 0) return value2 === 0 ? 0 : 100;
+    return ((value2 - value1) / value1) * 100;
+  };
+
+  const aggregateDataByMonth = (data: MeterData[]) => {
+    const aggregatedData = Array(12).fill(0);
+    data.forEach((item) => {
+      const date = new Date(item.DateTime);
+      const month = date.getMonth();
+      aggregatedData[month] += item.Value;
+    });
+    return aggregatedData;
+  };
+
+  const aggregatedDataForYear = aggregateDataByMonth(dataForYear);
+  const aggregatedDataForYearTwo = aggregateDataByMonth(dataForYearTwo);
 
   return (
     <>
@@ -72,19 +112,29 @@ export const YearComparison = () => {
                 <Divider style={ReportGridStyle.header} />
                 <DataTable>
                   <DataTable.Header>
-                    <DataTable.Title>År</DataTable.Title>
-                    <DataTable.Title>
-                      Förbrukning ({productName})
-                    </DataTable.Title>
+                    <DataTable.Title>Månad</DataTable.Title>
+                    <DataTable.Title>{state.year}</DataTable.Title>
+                    <DataTable.Title>{state.yearTwo}</DataTable.Title>
+                    <DataTable.Title>Föränding %</DataTable.Title>
                   </DataTable.Header>
-                  {filteredResults.map((item, index) => (
-                    <DataTable.Row key={index}>
-                      <DataTable.Cell>
-                        {item.DateTime.toLocaleDateString()}
-                      </DataTable.Cell>
-                      <DataTable.Cell>{item.Value}</DataTable.Cell>
-                    </DataTable.Row>
-                  ))}
+                  {months.map((month, index) => {
+                    const valueYear = aggregatedDataForYear[index];
+                    const valueYearTwo = aggregatedDataForYearTwo[index];
+                    const percentageChange = calculatePercentageChange(
+                      valueYear,
+                      valueYearTwo,
+                    );
+                    return (
+                      <DataTable.Row key={index}>
+                        <DataTable.Cell>{month}</DataTable.Cell>
+                        <DataTable.Cell>{valueYear}</DataTable.Cell>
+                        <DataTable.Cell>{valueYearTwo}</DataTable.Cell>
+                        <DataTable.Cell>
+                          {percentageChange.toFixed(2)}%
+                        </DataTable.Cell>
+                      </DataTable.Row>
+                    );
+                  })}
                 </DataTable>
               </>
             </View>

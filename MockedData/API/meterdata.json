@@ -1,7 +1,7 @@
 {
   "MeterData": [
     {
-      "DateTime": "2020-01-01T00:00:00",
+      "DateTime": "2020-01-01T10:00:00",
       "Value": 123,
       "Cost": 2336.75,
       "PremiseId": 1,
@@ -133,7 +133,7 @@
       "Code": "FJV"
     },
     {
-      "DateTime": "2021-01-01T00:00:00",
+      "DateTime": "2021-01-01T10:00:00",
       "Value": 456,
       "Cost": 2336.75,
       "PremiseId": 1,
@@ -265,7 +265,7 @@
       "Code": "FJV"
     },
     {
-      "DateTime": "2022-01-01T00:00:00",
+      "DateTime": "2022-01-01T10:00:00",
       "Value": 456,
       "Cost": 2336.75,
       "PremiseId": 1,
@@ -397,8 +397,8 @@
       "Code": "FJV"
     },
     {
-      "DateTime": "2023-01-01T00:00:00",
-      "Value": 75,
+      "DateTime": "2023-01-01T10:00:00",
+      "Value": 500,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2023-01",
@@ -529,8 +529,8 @@
       "Code": "FJV"
     },
     {
-      "DateTime": "2025-01-01T00:00:00",
-      "Value": 200,
+      "DateTime": "2025-01-01T11:00:00",
+      "Value": 640,
       "Cost": 2336.75,
       "PremiseId": 1,
       "Designation": "2025-01",
@@ -661,7 +661,7 @@
       "Code": "FJV"
     },
     {
-      "DateTime": "2024-01-01T00:00:00",
+      "DateTime": "2024-01-01T10:00:00",
       "Value": 200,
       "Cost": 2336.75,
       "PremiseId": 1,
