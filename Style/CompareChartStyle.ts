@@ -1,4 +1,4 @@
-  import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 export const CompareChartStyle = StyleSheet.create({
   chartContainer: {
     marginTop: 10,
