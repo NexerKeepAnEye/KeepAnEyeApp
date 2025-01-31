@@ -5,6 +5,8 @@
 //   rejectUnauthorized: false,
 // });
 
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 // export async function fetchProduct(apiKey) {
 //   try {
 //     const response = await fetch(
@@ -33,8 +35,6 @@
 // }
 
 // fetchProduct('b49ab053-04b3-4806-9cbd-68ff9adc8d01');
-
-// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 // export async function fetchMeterData(
 //   apiKey,
@@ -86,7 +86,7 @@
 
 // fetchMeterData(
 //   'b49ab053-04b3-4806-9cbd-68ff9adc8d01', // apiKey
-//   25, // productId
+//   22, // productId
 //   'monthly', // resolution
 //   '2023-01-01T00:00:00Z', // from
 //   '2024-01-01T00:00:00Z', // to
