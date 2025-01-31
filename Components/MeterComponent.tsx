@@ -70,6 +70,7 @@ export default function MeterComponent({ navigation }: Props) {
         renderItem={renderMeter}
         renderSectionHeader={renderSectionHeader}
         style={MeterComponentStyle.container}
+        bounces={false}
       />
     </>
   );

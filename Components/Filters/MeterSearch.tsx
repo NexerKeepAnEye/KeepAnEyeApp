@@ -29,8 +29,9 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
     string[] | undefined
   >();
   const { state } = usePremiseContext();
-  const meters: Meter[] =
-    state.premises?.flatMap((premise) => premise.Meters) || [];
+  const meters: Meter[] = state.selectedPremise?.Meters || [];
+
+  console.log(meters);
 
   const handlePress = () => setModalVisible(true);
 
