@@ -6,7 +6,117 @@
       "Designation": "123few",
       "Meters": [
         { "Id": 1, "ProductCode": "FJV", "ProductId": 22, "Name": "Meter 1" },
-        { "Id": 2, "ProductCode": "FJK", "ProductId": 24, "Name": "Meter 2" }
+        { "Id": 2, "ProductCode": "FJK", "ProductId": 24, "Name": "Meter 2" },
+        { "Id": 13, "ProductCode": "EL", "ProductId": 23, "Name": "Meter 13" },
+        { "Id": 14, "ProductCode": "VAT", "ProductId": 25, "Name": "Meter 14" },
+        {
+          "Id": 15,
+          "ProductCode": "Effekt",
+          "ProductId": 26,
+          "Name": "Meter 15"
+        },
+        {
+          "Id": 16,
+          "ProductCode": "Flöde",
+          "ProductId": 27,
+          "Name": "Meter 16"
+        },
+        { "Id": 17, "ProductCode": "TMP", "ProductId": 28, "Name": "Meter 17" },
+        { "Id": 18, "ProductCode": "TMP", "ProductId": 29, "Name": "Meter 18" },
+        { "Id": 19, "ProductCode": "VOL", "ProductId": 30, "Name": "Meter 19" },
+        {
+          "Id": 20,
+          "ProductCode": "Olja",
+          "ProductId": 31,
+          "Name": "Meter 20"
+        },
+        {
+          "Id": 21,
+          "ProductCode": "FJV sek",
+          "ProductId": 32,
+          "Name": "Meter 21"
+        },
+        {
+          "Id": 22,
+          "ProductCode": "El sek",
+          "ProductId": 33,
+          "Name": "Meter 22"
+        },
+        {
+          "Id": 23,
+          "ProductCode": "FJK sek",
+          "ProductId": 34,
+          "Name": "Meter 23"
+        },
+        {
+          "Id": 24,
+          "ProductCode": "VAT sek",
+          "ProductId": 35,
+          "Name": "Meter 24"
+        },
+        {
+          "Id": 25,
+          "ProductCode": "FJV under",
+          "ProductId": 36,
+          "Name": "Meter 25"
+        },
+        {
+          "Id": 26,
+          "ProductCode": "El under",
+          "ProductId": 37,
+          "Name": "Meter 26"
+        },
+        {
+          "Id": 27,
+          "ProductCode": "FJK under",
+          "ProductId": 38,
+          "Name": "Meter 27"
+        },
+        {
+          "Id": 28,
+          "ProductCode": "VAT under",
+          "ProductId": 39,
+          "Name": "Meter 28"
+        },
+        { "Id": 29, "ProductCode": "NN", "ProductId": 66, "Name": "Meter 29" },
+        { "Id": 30, "ProductCode": "FJK", "ProductId": 67, "Name": "Meter 30" },
+        {
+          "Id": 31,
+          "ProductCode": "FJV-Virt",
+          "ProductId": 68,
+          "Name": "Meter 31"
+        },
+        {
+          "Id": 32,
+          "ProductCode": "EL-Virt",
+          "ProductId": 69,
+          "Name": "Meter 32"
+        },
+        {
+          "Id": 33,
+          "ProductCode": "Indvat",
+          "ProductId": 70,
+          "Name": "Meter 33"
+        },
+        { "Id": 34, "ProductCode": "BSK", "ProductId": 71, "Name": "Meter 34" },
+        {
+          "Id": 35,
+          "ProductCode": "Utetemp",
+          "ProductId": 72,
+          "Name": "Meter 35"
+        },
+        {
+          "Id": 36,
+          "ProductCode": "FJV Effekt",
+          "ProductId": 305,
+          "Name": "Meter 36"
+        },
+        {
+          "Id": 37,
+          "ProductCode": "El Effekt",
+          "ProductId": 306,
+          "Name": "Meter 37"
+        }
       ]
     },
     {
@@ -23,13 +133,8 @@
       "Name": "Sunset Boulevard",
       "Designation": "asg",
       "Meters": [
-        {
-          "Id": 5,
-          "ProductCode": "Effekt",
-          "ProductId": 26,
-          "Name": "Meter 5"
-        },
-        { "Id": 6, "ProductCode": "Flöde", "ProductId": 27, "Name": "Meter 6" }
+        { "Id": 5, "ProductCode": "FJV", "ProductId": 22, "Name": "Meter 5" },
+        { "Id": 6, "ProductCode": "FJK", "ProductId": 24, "Name": "Meter 6" }
       ]
     },
     {
@@ -55,84 +160,8 @@
       "Name": "Rivendell",
       "Designation": "öiuhgb",
       "Meters": [
-        {
-          "Id": 11,
-          "ProductCode": "FJV sek",
-          "ProductId": 32,
-          "Name": "Meter 11"
-        },
-        {
-          "Id": 12,
-          "ProductCode": "El sek",
-          "ProductId": 33,
-          "Name": "Meter 12"
-        }
-      ]
-    },
-    {
-      "Id": 7,
-      "Name": "Hogwarts",
-      "Designation": "78876yh",
-      "Meters": [
-        {
-          "Id": 13,
-          "ProductCode": "FJK sek",
-          "ProductId": 34,
-          "Name": "Meter 13"
-        },
-        {
-          "Id": 14,
-          "ProductCode": "VAT sek",
-          "ProductId": 35,
-          "Name": "Meter 14"
-        }
-      ]
-    },
-    {
-      "Id": 8,
-      "Name": "Wayne Manor",
-      "Designation": "09ijhy65rf",
-      "Meters": [
-        {
-          "Id": 15,
-          "ProductCode": "FJV under",
-          "ProductId": 36,
-          "Name": "Meter 15"
-        },
-        {
-          "Id": 16,
-          "ProductCode": "El under",
-          "ProductId": 37,
-          "Name": "Meter 16"
-        }
-      ]
-    },
-    {
-      "Id": 9,
-      "Name": "Baker Street",
-      "Designation": "1234ef",
-      "Meters": [
-        {
-          "Id": 17,
-          "ProductCode": "FJK under",
-          "ProductId": 38,
-          "Name": "Meter 17"
-        },
-        {
-          "Id": 18,
-          "ProductCode": "VAT under",
-          "ProductId": 39,
-          "Name": "Meter 18"
-        }
-      ]
-    },
-    {
-      "Id": 10,
-      "Name": "Shire",
-      "Designation": "35erf",
-      "Meters": [
-        { "Id": 19, "ProductCode": "TMP", "ProductId": 28, "Name": "Meter 19" },
-        { "Id": 20, "ProductCode": "OLJA", "ProductId": 31, "Name": "Meter 20" }
+        { "Id": 11, "ProductCode": "FJV", "ProductId": 22, "Name": "Meter 11" },
+        { "Id": 12, "ProductCode": "FJK", "ProductId": 24, "Name": "Meter 12" }
       ]
     }
   ]
