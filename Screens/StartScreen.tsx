@@ -48,8 +48,8 @@ export default function StartScreen({ navigation }: Props) {
       />
       <Text style={StartScreenStyle.textItem}>{item.Name}</Text>
       <Icon
-        name="play-arrow"
-        size={30}
+        name="keyboard-arrow-right"
+        size={35}
         color="black"
         style={StartScreenStyle.listItemPositionEnd}
       />
