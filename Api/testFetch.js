@@ -36,7 +36,6 @@
 
 // fetchProduct('b49ab053-04b3-4806-9cbd-68ff9adc8d01');
 
-
 // export async function fetchMeterData(
 //   apiKey,
 //   productId,
