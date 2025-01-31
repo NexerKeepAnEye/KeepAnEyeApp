@@ -10,10 +10,7 @@ import {
 import { usePremiseContext } from '../../Context/PremiseContext';
 import { ReportGridStyle } from '../../Style/ReportGridStyleStyle';
 import Filter from '../Filters/Filter';
-
-// interface YearlyReportProps {
-//   selectedReport: string;
-// }
+import MeterDataBarChart from '../MeterDataBarChart';
 
 export const YearlyReport = () => {
   const [state, dispatch] = useReducer<Reducer<FilterState, FilterAction>>(
@@ -27,14 +24,12 @@ export const YearlyReport = () => {
   const filteredResults = state.filteredResults;
 
   const { state: premiseState } = usePremiseContext();
-
-  //   const formatMonth = (dateString: string) => {
-  //     const date = new Date(dateString);
-  //     return date.toLocaleString('default', { month: 'long' });
-  //   };
+  const [minValue, setMinValue] = useState<number | null>(null);
+  const [maxValue, setMaxValue] = useState<number | null>(null);
+  const [averageValue, setAverageValue] = useState<number | null>(null);
+  const [sumValue, setSumValue] = useState<number | null>(null);
 
   const meter = state.meter;
-  // console.log(meter);
   const productCode = meter && meter.length > 0 ? meter[0].ProductCode : null;
 
   useEffect(() => {
@@ -53,6 +48,21 @@ export const YearlyReport = () => {
     fetchProductName();
   }, [productCode]);
 
+  useEffect(() => {
+    if (filteredResults.length > 0) {
+      const values = filteredResults.map((item) => item.Value);
+      const min = Math.min(...values);
+      const max = Math.max(...values);
+      const sum = values.reduce((acc, val) => acc + val, 0);
+      const average = sum / values.length;
+
+      setMinValue(min);
+      setMaxValue(max);
+      setAverageValue(average);
+      setSumValue(sum);
+    }
+  }, [filteredResults]);
+
   return (
     <>
       <Filter
@@ -64,7 +74,7 @@ export const YearlyReport = () => {
         yearTwo={state.yearTwo}
         meter={state.meter}
         meterData={state.meterData}
-        resolution="Månad"
+        resolution="Yearly"
         setFilteredResults={(data) => {
           dispatch({ type: 'SET_FILTERED_RESULTS', payload: data });
           setSearchClicked(true);
@@ -74,15 +84,18 @@ export const YearlyReport = () => {
       {searchClicked ? (
         filteredResults.length > 0 ? (
           <>
-            {/* <View>
-              <MeterDataBarChart filteredResults={filteredResults} />
-            </View> */}
+            <View>
+              <MeterDataBarChart
+                filteredResults={filteredResults}
+                resolution="Yearly"
+              />
+            </View>
             <View style={ReportGridStyle.container}>
               <>
                 <Divider style={ReportGridStyle.header} />
                 <DataTable>
                   <DataTable.Header>
-                    <DataTable.Title>Månad</DataTable.Title>
+                    <DataTable.Title>Year</DataTable.Title>
                     <DataTable.Title>
                       Förbrukning ({productName})
                     </DataTable.Title>
@@ -90,11 +103,31 @@ export const YearlyReport = () => {
                   {filteredResults.map((item, index) => (
                     <DataTable.Row key={index}>
                       <DataTable.Cell>
-                        {item.DateTime.toISOString().split('T')[0]}
+                        {
+                          item.DateTime.toLocaleDateString('sv-SE').split(
+                            '-',
+                          )[0]
+                        }
                       </DataTable.Cell>
                       <DataTable.Cell>{item.Value}</DataTable.Cell>
                     </DataTable.Row>
                   ))}
+                  <DataTable.Row>
+                    <DataTable.Cell>Min</DataTable.Cell>
+                    <DataTable.Cell>{minValue}</DataTable.Cell>
+                  </DataTable.Row>
+                  <DataTable.Row>
+                    <DataTable.Cell>Max</DataTable.Cell>
+                    <DataTable.Cell>{maxValue}</DataTable.Cell>
+                  </DataTable.Row>
+                  <DataTable.Row>
+                    <DataTable.Cell>Medel</DataTable.Cell>
+                    <DataTable.Cell>{averageValue}</DataTable.Cell>
+                  </DataTable.Row>
+                  <DataTable.Row>
+                    <DataTable.Cell>Summa</DataTable.Cell>
+                    <DataTable.Cell>{sumValue}</DataTable.Cell>
+                  </DataTable.Row>
                 </DataTable>
               </>
             </View>

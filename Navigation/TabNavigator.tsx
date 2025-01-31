@@ -59,7 +59,7 @@ export default function TabNavigator() {
         screenOptions={() => ({
           headerStyle: {
             height: 120,
-            backgroundColor: '#f8f8f8',
+            // backgroundColor: '#f8f8f8',
           },
           headerRight: () => (
             <Pressable onPress={handleLogout}>

@@ -7,13 +7,13 @@
 
 // export async function fetchProduct(apiKey) {
 //   try {
-//     const response = await fetch('https://test.keepaneye.net/api/v1/Product', {
+//     const response = await fetch('https://www.keepaneye.net/api/v1/Product', {
 //       method: 'GET',
 //       headers: {
 //         Accept: 'application/json; charset=utf-8',
 //         'X-API-Key': apiKey,
 //       },
-//       agent,
+//     //   agent,
 //     });
 
 //     if (!response.ok) {

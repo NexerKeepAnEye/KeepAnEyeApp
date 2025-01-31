@@ -4,11 +4,11 @@
     "slug": "KeepAnEyeApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/UpscaleLogo.jpg",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/UpscaleLogo.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,14 +19,20 @@
       }
     },
     "android": {
+      "icon": "./assets/UpscaleIcon.jpg",
+      "splash": {
+        "image": "./assets/UpscaleLogo.jpg",
+        "resizeMode": "contain",
+        "backgroundColor": "#ffffff"
+      },
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/UpscaleIcon.jpg",
         "backgroundColor": "#ffffff"
       },
       "package": "com.NexerKAE.KeepAnEyeApp"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/splash-icon.png"
     },
     "plugins": [
       [
@@ -35,6 +41,16 @@
           "android": {
             "usesCleartextTraffic": true
           }
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/UpscaleLogo.jpg",
+          "dark": {
+            "image": "./assets/UpscaleLogo.jpg"
+          }
+          // "imageWidth": 200
         }
       ]
     ]

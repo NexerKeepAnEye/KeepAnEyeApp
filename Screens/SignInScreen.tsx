@@ -13,8 +13,8 @@ import {
 import { Button, Text, TextInput } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { fetchPremise, fetchProduct } from '../Api/fetchAPI';
-import logoKAE from '../assets/logoKAE.png';
 import NexerLogo from '../assets/NexerLogo.png';
+import logoKAE from '../assets/UpscaleLogo.png';
 import StorageService from '../AsyncStorage/AsyncStorage';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
