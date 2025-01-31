@@ -96,7 +96,7 @@ export function FromToDate({
             style={searchButtonStyle.resetButton}
             onPress={() => {
               setFromDate(undefined);
-              console.log(fromDate);
+              // console.log(fromDate);
             }}
           >
             <Icon

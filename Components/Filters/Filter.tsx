@@ -143,7 +143,7 @@ const Filter = ({
         fromDate && toDate
           ? Math.floor((toDate.getTime() - fromDate.getTime()) / 86400000)
           : 0;
-      console.log('dayDiff:', dayDiff);
+      // console.log('dayDiff:', dayDiff);
       if (dayDiff > 31) {
         showSnackbar('För stor tidsperiod, max 31 dagar');
         return;
@@ -189,7 +189,7 @@ const Filter = ({
         fromDate && toDate
           ? Math.floor((toDate.getTime() - fromDate.getTime()) / 86400000)
           : 0;
-      console.log('dayDiff:', dayDiff);
+      // console.log('dayDiff:', dayDiff);
       if (dayDiff > 31) {
         showSnackbar('För stor tidsperiod, max 31 dagar');
         return;
