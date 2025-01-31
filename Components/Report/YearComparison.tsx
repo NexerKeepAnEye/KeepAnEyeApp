@@ -73,7 +73,7 @@ export const YearComparison = () => {
                   {filteredResults.map((item, index) => (
                     <DataTable.Row key={index}>
                       <DataTable.Cell>
-                        {new Date(item.DateTime).getFullYear()}
+                        {item.DateTime.toLocaleDateString()}
                       </DataTable.Cell>
                       <DataTable.Cell>{item.Value}</DataTable.Cell>
                     </DataTable.Row>

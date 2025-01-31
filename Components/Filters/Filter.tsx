@@ -71,7 +71,7 @@ const Filter = ({
     let meterData: MeterData[] | null = null;
 
     const fetchDataForDateRange = async (fromDate: Date, toDate: Date) => {
-      meterData = await fetchMeterData(
+      const data = await fetchMeterData(
         apikey ?? '',
         selectedProductId,
         translateResolution(resolution ?? ''),
@@ -81,7 +81,7 @@ const Filter = ({
         state.selectedPremise?.Id ? [state.selectedPremise.Id] : [],
         meterId !== undefined ? [meterId] : (meter?.map((m) => m.Id) ?? []),
       );
-      return meterData;
+      return data;
     };
 
     const translateResolution = (resolution: string) => {
@@ -165,11 +165,13 @@ const Filter = ({
       if (year && yearTwo && filters.includes('compareYears')) {
         const fromDate1 = new Date(Date.parse(year + '-01-01'));
         const toDate1 = new Date(Date.parse(year + '-12-31'));
-        await fetchDataForDateRange(fromDate1, toDate1);
+        const data1 = await fetchDataForDateRange(fromDate1, toDate1);
+        meterData = [...(meterData ?? []), ...data1];
 
         const fromDate2 = new Date(Date.parse(yearTwo + '-01-01'));
         const toDate2 = new Date(Date.parse(yearTwo + '-12-31'));
-        await fetchDataForDateRange(fromDate2, toDate2);
+        const data2 = await fetchDataForDateRange(fromDate2, toDate2);
+        meterData = [...(meterData ?? []), ...data2];
       } else if (year && !yearTwo) {
         const fromDate = new Date(Date.parse(year + '-01-01'));
         const toDate = new Date(Date.parse(year + '-12-31'));
@@ -232,7 +234,7 @@ const Filter = ({
       }
     }
     console.log('filteredData:', filteredData);
-    setFilteredResults([...filteredData]);
+    setFilteredResults(filteredData);
   };
 
   return (

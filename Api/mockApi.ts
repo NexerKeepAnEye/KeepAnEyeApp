@@ -51,8 +51,12 @@ export async function mockApiFetch(
       const isProductIdMatch = md.ProductId === requestBody.productId;
       const isResolutionNotNull = md.Resolution !== null;
       const isDateInRange = mdDateTime >= fromDate && mdDateTime <= toDate;
-      const isPremiseIdMatch = requestBody.premiseIds.length === 0 || requestBody.premiseIds.includes(md.PremiseId);
-      const isMeterIdMatch = requestBody.meterIds.length === 0 || requestBody.meterIds.includes(md.MeterId);
+      const isPremiseIdMatch =
+        requestBody.premiseIds.length === 0 ||
+        requestBody.premiseIds.includes(md.PremiseId);
+      const isMeterIdMatch =
+        requestBody.meterIds.length === 0 ||
+        requestBody.meterIds.includes(md.MeterId);
 
       // console.log('Filter Check:', {
       //   isProductIdMatch,
