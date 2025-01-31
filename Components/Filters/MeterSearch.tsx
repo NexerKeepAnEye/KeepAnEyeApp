@@ -31,7 +31,7 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
   const { state } = usePremiseContext();
   const meters: Meter[] = state.selectedPremise?.Meters || [];
 
-  console.log(meters);
+  // console.log(meters);
 
   const handlePress = () => setModalVisible(true);
 
@@ -39,7 +39,7 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
     setSelectedMeter(meter);
     setSelectedMeterState(meter.map((m) => m.Name));
     setModalVisible(false);
-    console.log(meter);
+    // console.log(meter);
   };
 
   const handleSelectCategory = (category: Section) => {
@@ -47,7 +47,7 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
     setSelectedMeter(selectedMeters);
     setSelectedMeterState([category.title]);
     setModalVisible(false);
-    console.log(selectedMeters);
+    // console.log(selectedMeters);
   };
 
   const sections = groupMeters(meters);

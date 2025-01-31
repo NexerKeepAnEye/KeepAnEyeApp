@@ -35,12 +35,13 @@ export default function MeterDataBarChart({
     return date.toLocaleString('default', { month: 'short' }).split('.')[0];
   };
 
-  const groupDataByMonth = (data: MeterData[], year: string) => {
+  const groupDataByMonthAndYear = (data: MeterData[]) => {
     const groupedData = new Map();
 
     data.forEach((item) => {
       const date = new Date(item.DateTime);
       const month = date.getMonth();
+      const year = date.getFullYear();
       const key = `${month}-${year}`;
 
       if (!groupedData.has(key)) {
@@ -54,12 +55,7 @@ export default function MeterDataBarChart({
     return groupedData;
   };
 
-  const groupedDataYearOne = year
-    ? groupDataByMonth(filteredResults, year)
-    : new Map();
-  const groupedDataYearTwo = yearTwo
-    ? groupDataByMonth(filteredResults, yearTwo)
-    : new Map();
+  const groupedData = groupDataByMonthAndYear(filteredResults);
 
   const combinedData = [];
   const labels = [];
@@ -67,8 +63,8 @@ export default function MeterDataBarChart({
     const keyYearOne = `${month}-${year}`;
     const keyYearTwo = `${month}-${yearTwo}`;
 
-    const dataYearOne = groupedDataYearOne.get(keyYearOne) || { Value: 0 };
-    const dataYearTwo = groupedDataYearTwo.get(keyYearTwo) || { Value: 0 };
+    const dataYearOne = groupedData.get(keyYearOne) || { Value: 0 };
+    const dataYearTwo = groupedData.get(keyYearTwo) || { Value: 0 };
 
     combinedData.push({
       value: dataYearOne.Value,
@@ -90,13 +86,18 @@ export default function MeterDataBarChart({
       dataPointText: dataYearTwo.Value.toString(),
     });
 
-    labels.push(`${formatMonth(new Date(parseInt(year || '0'), month))}`);
+    labels.push(
+      `${formatMonth(new Date(parseInt(year || '0'), month))} ${year}`,
+    );
+    labels.push(
+      `${formatMonth(new Date(parseInt(yearTwo || '0'), month))} ${yearTwo}`,
+    );
   }
 
   const maxValue =
-    Math.ceil(Math.max(...combinedData.map((item) => item.value)) / 10000) *
-    10000;
-  const stepValue = maxValue / 10;
+    Math.ceil(Math.max(...combinedData.map((item) => item.value)) / 1000) *
+    1000;
+  const stepValue = maxValue / 5;
 
   const handleBarPress = (
     value: number,

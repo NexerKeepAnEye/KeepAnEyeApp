@@ -131,7 +131,7 @@ export async function fetchMeterData(
         MeterId: item.MeterId,
       }),
     );
-    console.log('meterData:', meterData);
+    // console.log('meterData:', meterData);
     return meterData;
   } catch (error) {
     console.error('Error fetching meter data:', error);
