@@ -48,7 +48,7 @@ export const meterSearch = StyleSheet.create({
   },
   sectionHeader: {
     backgroundColor: '#f4f4f4',
-    padding: 10,
+    padding: 9,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
