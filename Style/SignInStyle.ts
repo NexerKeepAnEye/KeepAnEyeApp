@@ -1,6 +1,5 @@
-import { Dimensions, StyleSheet } from 'react-native';
-
-const { width, height } = Dimensions.get('window');
+import { StyleSheet } from 'react-native';
+import { deviceHeight, deviceWidth } from './Dimensions';
 
 export const SignIn = StyleSheet.create({
   SafeAreaContainer: {
@@ -8,8 +7,8 @@ export const SignIn = StyleSheet.create({
     backgroundColor: '#f4f5f7',
   },
   logo: {
-    marginBottom: height * -0.05,
-    width: width * 0.8,
+    marginBottom: deviceHeight * -0.05,
+    width: deviceWidth * 0.8,
     height: undefined,
     aspectRatio: 1,
     backgroundColor: '#f4f5f7',
@@ -21,42 +20,42 @@ export const SignIn = StyleSheet.create({
     backgroundColor: '#f4f5f7',
   },
   container: {
-    width: width * 0.9,
+    width: deviceWidth * 0.9,
     alignItems: 'center',
   },
   title: {
-    fontSize: width * 0.05,
-    marginBottom: height * 0.01,
+    fontSize: deviceWidth * 0.05,
+    marginBottom: deviceHeight * 0.01,
   },
   input: {
-    width: width * 0.8,
-    marginBottom: height * 0.01,
+    width: deviceWidth * 0.8,
+    marginBottom: deviceHeight * 0.01,
   },
   button: {
-    marginTop: height * 0.01,
-    width: width * 0.7,
-    height: height * 0.07,
+    marginTop: deviceHeight * 0.01,
+    width: deviceWidth * 0.7,
+    height: deviceHeight * 0.07,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 30,
     backgroundColor: '#ff7043',
   },
   buttonText: {
-    fontSize: width * 0.045,
+    fontSize: deviceWidth * 0.045,
     color: '#fff',
     fontWeight: 'bold',
   },
   footerLogo: {
-    top: height * 0.3,
+    top: deviceHeight * 0.3,
     alignSelf: 'center',
-    width: width * 0.4,
+    width: deviceWidth * 0.4,
     height: undefined,
     aspectRatio: 1,
   },
   buttonDisabled: {
-    marginTop: height * 0.01,
-    width: width * 0.7,
-    height: height * 0.07,
+    marginTop: deviceHeight * 0.01,
+    width: deviceWidth * 0.7,
+    height: deviceHeight * 0.07,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 30,

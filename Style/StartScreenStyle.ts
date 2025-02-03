@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { deviceHeight, deviceWidth } from './Dimensions';
 
 export const StartScreenStyle = StyleSheet.create({
   container: {
@@ -8,24 +9,23 @@ export const StartScreenStyle = StyleSheet.create({
     overflow: 'visible',
   },
   headerBox: {
-    width: '100%',
-    height: '10%',
+    width: deviceWidth * 1,
+    height: deviceHeight * 0.1,
     backgroundColor: '#f4f5f7',
     alignItems: 'center',
     flex: 1,
   },
   textHeader: {
-    marginTop: '8%',
-    fontSize: 30,
+    marginTop: deviceHeight * 0.03,
+    fontSize: deviceHeight * 0.04,
     fontWeight: 'bold',
     justifyContent: 'center',
     alignItems: 'center',
   },
   itemBox: {
-    width: '100%',
-    height: '65%',
+    width: deviceWidth * 1,
+    height: deviceHeight * 0.6,
     backgroundColor: 'white',
-    // marginBottom: '1%',
   },
   listItems: {
     flex: 1,
@@ -33,13 +33,13 @@ export const StartScreenStyle = StyleSheet.create({
     borderBottomColor: '#d9d9d9',
     flexDirection: 'row',
     alignItems: 'center',
-    height: 50,
-    marginLeft: '5%',
-    marginRight: '5%',
+    height: deviceHeight * 0.065,
+    marginLeft: deviceWidth * 0.05,
+    marginRight: deviceWidth * 0.05,
   },
   textItem: {
-    fontSize: 17,
-    marginLeft: '5%',
+    fontSize: deviceHeight * 0.018,
+    marginLeft: deviceWidth * 0.05,
     color: 'black',
     flex: 1,
   },
@@ -48,11 +48,11 @@ export const StartScreenStyle = StyleSheet.create({
   },
   listItemPositionEnd: {
     justifyContent: 'flex-end',
-    marginRight: '1%',
+    marginRight: deviceWidth * 0.01,
   },
   footer: {
-    width: '30%',
-    height: '10%',
+    width: deviceWidth * 0.35,
+    height: deviceHeight * 0.09,
     resizeMode: 'contain',
   },
 });
