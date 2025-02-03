@@ -25,10 +25,6 @@ export default function MeterDataBarChart({
 
   filteredResults = filteredResults.filter((item) => item.Value > 0);
 
-  // useEffect(() => {
-  //   console.log('filteredResults in MeterDataBarChart:', filteredResults);
-  // }, [filteredResults]);
-
   const formatMonth = (date: Date) => {
     if (resolution === 'Yearly') {
       return date.getFullYear().toString();
