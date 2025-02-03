@@ -4,6 +4,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import {
   Alert,
+  BackHandler,
   Image,
   KeyboardAvoidingView,
   Platform,
@@ -40,6 +41,33 @@ export default function SignInScreen() {
     };
 
     checkApiKey();
+  }, []);
+
+  useEffect(() => {
+    const onBackPress = () => {
+      Alert.alert(
+        '',
+        'Vill du stänga av appen?',
+        [
+          {
+            text: 'Nej',
+            onPress: () => {},
+            // style: 'cancel',
+          },
+          { text: 'Ja', onPress: () => BackHandler.exitApp() },
+        ],
+        { cancelable: false },
+      );
+
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      onBackPress,
+    );
+
+    return () => backHandler.remove();
   }, []);
 
   const handleLogin = async () => {
