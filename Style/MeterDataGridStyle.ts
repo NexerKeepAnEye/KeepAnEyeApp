@@ -1,8 +1,6 @@
 import { StyleSheet, TextStyle } from 'react-native';
 import { deviceHeight, deviceWidth } from './Dimensions';
 
-
-
 export const MeterDataGridStyle = StyleSheet.create({
   gridContainer: {
     width: deviceWidth * 0.95,

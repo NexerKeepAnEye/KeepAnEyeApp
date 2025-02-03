@@ -7,11 +7,11 @@ export const MeterDataCardStyle = StyleSheet.create({
     marginTop: deviceHeight * 0.01,
     padding: 10,
     borderRadius: 8,
-    elevation: 4, 
-    shadowColor: '#000', 
-    shadowOffset: { width: deviceWidth * 0, height: deviceHeight * 0.01 }, 
-    shadowOpacity: 0.2, 
-    shadowRadius: 4, 
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: deviceWidth * 0, height: deviceHeight * 0.01 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
     backgroundColor: '#ffffff',
     minWidth: deviceWidth * 0.9,
     minHeight: deviceHeight * 0.08,
@@ -29,12 +29,12 @@ export const MeterDataCardStyle = StyleSheet.create({
   },
   title: {
     color: '#000000',
-    fontSize: deviceHeight * 0.020,
+    fontSize: deviceHeight * 0.02,
     fontWeight: 'bold',
   },
   noTitle: {
     color: 'red',
-    fontSize: deviceHeight * 0.020,
+    fontSize: deviceHeight * 0.02,
     fontWeight: 'bold',
     marginLeft: deviceWidth * 0.05,
     marginTop: deviceHeight * 0.02,
@@ -43,7 +43,7 @@ export const MeterDataCardStyle = StyleSheet.create({
     fontSize: deviceHeight * 0.018,
     color: '#666',
   },
-  cardButton:{
-    borderRadius: 10,    
-  }
+  cardButton: {
+    borderRadius: 10,
+  },
 });
