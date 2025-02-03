@@ -8,7 +8,7 @@ import UpscaleLogo from '../assets/UpscaleLogo.png';
 import StorageService from '../AsyncStorage/AsyncStorage';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
-import { SplashScreenStyle } from '../Style/SplashSCreenStyle';
+import { SplashScreenStyle } from '../Style/SplashScreenStyle';
 
 // Keep the splash screen visible while we fetch resources
 preventAutoHideAsync();
