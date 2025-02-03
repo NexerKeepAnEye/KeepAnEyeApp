@@ -36,7 +36,6 @@ export const MonthlyReport = () => {
   const { state: premiseState } = usePremiseContext();
 
   const meter = state.meter;
-  // console.log(meter);
   const productCode = meter && meter.length > 0 ? meter[0].ProductCode : null;
 
   useEffect(() => {

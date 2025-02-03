@@ -107,52 +107,7 @@ const Filter = ({
       fromDate = new Date(Date.parse(year + '-01-01'));
       toDate = new Date(Date.parse(year + '-12-31'));
     }
-    // if (translateResolution(resolution ?? '') === 'Yearly') {
-    //   const yearDiff =
-    //     fromDate && toDate ? toDate.getFullYear() - fromDate.getFullYear() : 0;
-    //   if (yearDiff > 5) {
-    //     showSnackbar('För stor tidsperiod, max 5 år');
-    //     return;
-    //   }
-    // }
-    // if (translateResolution(resolution ?? '') === 'Monthly') {
-    //   const monthDiff =
-    //     fromDate && toDate
-    //       ? toDate.getMonth() -
-    //         fromDate.getMonth() +
-    //         12 * (toDate.getFullYear() - fromDate.getFullYear())
-    //       : 0;
-    //   if (monthDiff > 12) {
-    //     showSnackbar('För stor tidsperiod, max 12 månader');
-    //     return;
-    //   }
-    // }
-    // if (translateResolution(resolution ?? '') === 'Daily') {
-    //   const dayDiff =
-    //     fromDate && toDate
-    //       ? Math.floor((toDate.getTime() - fromDate.getTime()) / 86400000)
-    //       : 0;
-    //   if (dayDiff > 90) {
-    //     showSnackbar('För stor tidsperiod, max 90 dagar');
-    //     return;
-    //   }
-    // }
 
-    // if (translateResolution(resolution ?? '') === 'Hourly') {
-    //   const dayDiff =
-    //     fromDate && toDate
-    //       ? Math.floor((toDate.getTime() - fromDate.getTime()) / 86400000)
-    //       : 0;
-    //   // console.log('dayDiff:', dayDiff);
-    //   if (dayDiff > 31) {
-    //     showSnackbar('För stor tidsperiod, max 31 dagar');
-    //     return;
-    //   }
-    // }
-    if (year && !yearTwo) {
-      fromDate = new Date(Date.parse(year + '-01-01'));
-      toDate = new Date(Date.parse(year + '-12-31'));
-    }
     if (translateResolution(resolution ?? '') === 'Yearly') {
       const yearDiff =
         fromDate && toDate ? toDate.getFullYear() - fromDate.getFullYear() : 0;
@@ -161,7 +116,10 @@ const Filter = ({
         return;
       }
     }
-    if (translateResolution(resolution ?? '') === 'Monthly') {
+    if (
+      translateResolution(resolution ?? '') === 'Monthly' &&
+      !filters.includes('compareYears')
+    ) {
       const monthDiff =
         fromDate && toDate
           ? toDate.getMonth() -
@@ -227,6 +185,10 @@ const Filter = ({
       } else if (year && yearTwo && filters.includes('fromToYear')) {
         const fromDate = new Date(Date.parse(year + '-01-01'));
         const toDate = new Date(Date.parse(yearTwo + '-12-31'));
+        meterData = await fetchDataForDateRange(fromDate, toDate);
+      } else {
+        const fromDate = new Date();
+        const toDate = new Date();
         meterData = await fetchDataForDateRange(fromDate, toDate);
       }
     } catch (error) {
