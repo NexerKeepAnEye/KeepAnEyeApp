@@ -103,7 +103,6 @@ export const YearComparison = () => {
           <>
             <MeterDataComparisonChart
               filteredResults={filteredResults}
-              resolution="Monthly"
               year={state.year}
               yearTwo={state.yearTwo}
             />

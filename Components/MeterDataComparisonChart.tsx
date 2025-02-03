@@ -9,14 +9,12 @@ import { MeterData, Tooltip } from '../Types/Type';
 
 interface MeterDataBarChartProps {
   filteredResults: MeterData[];
-  resolution: string;
   year: string | undefined;
   yearTwo: string | undefined;
 }
 
 export default function MeterDataBarChart({
   filteredResults,
-  resolution,
   year,
   yearTwo,
 }: MeterDataBarChartProps) {
@@ -27,6 +25,7 @@ export default function MeterDataBarChart({
     x: 0,
     y: 0,
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedBarIndex, setSelectedBarIndex] = useState<number | null>(null);
   const [selectedBarColor, setSelectedBarColor] = useState<string | null>(null);
 
@@ -58,7 +57,18 @@ export default function MeterDataBarChart({
 
   const groupedData = groupDataByMonthAndYear(filteredResults);
 
-  const combinedData = [];
+  interface CombinedData {
+    value: number;
+    spacing?: number;
+    label: string;
+    labelWidth?: number;
+    frontColor: string;
+    originalValue: number;
+    dataPointText: string;
+    focus: string;
+  }
+
+  const combinedData: CombinedData[] = [];
   const labels = [];
   for (let month = 0; month < 12; month++) {
     const keyYearOne = `${month}-${year}`;

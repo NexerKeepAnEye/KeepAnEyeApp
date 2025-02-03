@@ -1,19 +1,20 @@
 import { StyleSheet } from 'react-native';
+import { deviceHeight, deviceWidth } from './Dimensions';
 
 export const MeterDataCardStyle = StyleSheet.create({
   card: {
-    marginBottom: 10,
-    marginTop: 10,
+    marginBottom: deviceHeight * 0.01,
+    marginTop: deviceHeight * 0.01,
     padding: 10,
     borderRadius: 8,
-    elevation: 4, // Adds shadow for Android
-    shadowColor: '#000', // Adds shadow for iOS
-    shadowOffset: { width: 0, height: 2 }, // Adds shadow for iOS
-    shadowOpacity: 0.2, // Adds shadow for iOS
-    shadowRadius: 4, // Adds shadow for iOS
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: deviceWidth * 0, height: deviceHeight * 0.01 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
     backgroundColor: '#ffffff',
-    minWidth: '90%',
-    minHeight: '10%',
+    minWidth: deviceWidth * 0.9,
+    minHeight: deviceHeight * 0.08,
   },
   row: {
     flexDirection: 'row',
@@ -28,18 +29,21 @@ export const MeterDataCardStyle = StyleSheet.create({
   },
   title: {
     color: '#000000',
-    fontSize: 18,
+    fontSize: deviceHeight * 0.02,
     fontWeight: 'bold',
   },
   noTitle: {
     color: 'red',
-    fontSize: 20,
+    fontSize: deviceHeight * 0.02,
     fontWeight: 'bold',
-    marginLeft: '22%',
-    marginTop: '4%',
+    marginLeft: deviceWidth * 0.05,
+    marginTop: deviceHeight * 0.02,
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: deviceHeight * 0.018,
     color: '#666',
+  },
+  cardButton: {
+    borderRadius: 10,
   },
 });

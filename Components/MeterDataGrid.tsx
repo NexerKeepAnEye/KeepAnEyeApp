@@ -8,7 +8,6 @@ import {
   initialState,
 } from '../Context/FilterReducer';
 import { MeterDataGridStyle } from '../Style/MeterDataGridStyle';
-import { ReportGridStyle } from '../Style/ReportGridStyleStyle';
 import { MeterData } from '../Types/Type';
 import Filter from './Filters/Filter';
 
@@ -27,7 +26,7 @@ export default function MeterDataGrid({ meterId }: Props) {
   const [filterApplied, setFilterApplied] = useState(false);
 
   return (
-    <ScrollView style={ReportGridStyle.root}>
+    <ScrollView>
       <Filter
         filters={['dateRange', 'resolution']}
         setFromDate={(date) => {
