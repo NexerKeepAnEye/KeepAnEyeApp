@@ -6,7 +6,7 @@ import {
 } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { useEffect } from 'react';
-import { Pressable } from 'react-native';
+import { Alert, Pressable } from 'react-native';
 import StorageService from '../AsyncStorage/AsyncStorage';
 import { LogoTitle } from '../Components/Header';
 import { usePremiseContext } from '../Context/PremiseContext';
@@ -37,11 +37,27 @@ export default function RootStackNavigator() {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { state } = usePremiseContext();
   const handleLogout = async () => {
-    await StorageService.clearApiKey();
-    state.products = [];
-    state.premises = [];
-    state.meterData = [];
-    navigation.navigate('SignInScreen');
+    Alert.alert(
+      '',
+      'Är du säker på att du vill logga ut?',
+      [
+        {
+          text: 'Nej',
+          onPress: () => {},
+        },
+        {
+          text: 'Ja',
+          onPress: async () => {
+            await StorageService.clearApiKey();
+            state.products = [];
+            state.premises = [];
+            state.meterData = [];
+            navigation.navigate('SignInScreen');
+          },
+        },
+      ],
+      { cancelable: false },
+    );
   };
 
   useEffect(() => {

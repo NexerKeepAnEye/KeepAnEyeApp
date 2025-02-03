@@ -3,18 +3,19 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { Dimensions, Pressable, Text, View } from 'react-native';
+import { useEffect } from 'react';
+import { Alert, Dimensions, Pressable, Text, View } from 'react-native';
 import { Portal, Snackbar } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import StorageService from '../AsyncStorage/AsyncStorage';
 import { LogoTitle } from '../Components/Header';
+import { usePremiseContext } from '../Context/PremiseContext';
 import { useSnackbar } from '../Context/SnackbarContext';
 import ReportScreen from '../Screens/ReportScreen';
 import { BottomTabStyle } from '../Style/BottomTabStyle';
 import { filterStyle } from '../Style/FilterStyle';
 import PremiseStackNavigator from './PremiseStackNavigator';
 import { RootStackParamList } from './RootStackNavigation';
-import { useEffect } from 'react';
 
 export type TabParamList = {
   PremiseStackNavigator: { premiseId: number };
@@ -31,6 +32,7 @@ export default function TabNavigator() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { visible, message, hideSnackbar } = useSnackbar();
+  const { state } = usePremiseContext();
 
   useEffect(() => {
     const apiKey = StorageService.getApiKey();
@@ -40,8 +42,27 @@ export default function TabNavigator() {
   }, [navigation]);
 
   const handleLogout = async () => {
-    await StorageService.clearApiKey();
-    navigation.navigate('SignInScreen');
+    Alert.alert(
+      '',
+      'Är du säker på att du vill logga ut?',
+      [
+        {
+          text: 'Nej',
+          onPress: () => {},
+        },
+        {
+          text: 'Ja',
+          onPress: async () => {
+            await StorageService.clearApiKey();
+            state.products = [];
+            state.premises = [];
+            state.meterData = [];
+            navigation.navigate('SignInScreen');
+          },
+        },
+      ],
+      { cancelable: false },
+    );
   };
 
   return (
