@@ -143,7 +143,7 @@ export default function SignInScreen() {
                 </>
               ) : (
                 <Text style={SignIn.buttonText}>Logga In</Text>
-              )}{' '}
+              )}
             </TouchableOpacity>
           </View>
           <Image
