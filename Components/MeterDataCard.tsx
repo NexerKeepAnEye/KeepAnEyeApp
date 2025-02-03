@@ -23,7 +23,7 @@ export default function MeterDataCard({ meterId, navigation }: Props) {
         navigation?.goBack();
       }}
       underlayColor={'#ddd'}
-      style={{ borderRadius: 10 }}
+      style={MeterDataCardStyle.cardButton}
     >
       <Card style={MeterDataCardStyle.card}>
         <View style={MeterDataCardStyle.row}>
