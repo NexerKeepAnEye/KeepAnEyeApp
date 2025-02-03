@@ -76,7 +76,7 @@ export default function MeterDataBarChart({
   const maxValue =
     Math.ceil(Math.max(...groupedData.map((item) => item.Value)) / 10000) *
     10000;
-  const stepValue = maxValue / 10;
+  const stepValue = maxValue / 5;
 
   const handleBarPress = (
     value: number,
@@ -92,13 +92,22 @@ export default function MeterDataBarChart({
       <BarChart
         overflowTop={50}
         data={chartData}
-        focusBarOnPress
+        focusBarOnPress={true}
+        focusedBarConfig={{
+          color: '#f5a25d',
+        }}
         isAnimated
+        adjustToWidth
         height={250}
         barWidth={30}
+        spacing={20}
         barBorderTopLeftRadius={4}
         barBorderTopRightRadius={4}
-        frontColor="#6a1b9a"
+        // frontColor="#ea5b0c"
+        // showGradient={true}
+        // gradientColor=" #ea5b0c"
+        yAxisColor={'#2222'}
+        xAxisColor={'#2222'}
         stepValue={stepValue}
         maxValue={maxValue}
         yAxisLabelWidth={50}
