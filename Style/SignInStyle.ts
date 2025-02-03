@@ -37,11 +37,12 @@ export const SignIn = StyleSheet.create({
     height: deviceHeight * 0.07,
     justifyContent: 'center',
     alignItems: 'center',
+    alignContent: 'center',
     borderRadius: 30,
     backgroundColor: '#ff7043',
   },
   buttonText: {
-    fontSize: deviceWidth * 0.045,
+    fontSize: deviceWidth * 0.042,
     color: '#fff',
     fontWeight: 'bold',
   },
@@ -61,5 +62,9 @@ export const SignIn = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: '#ff7043',
     opacity: 0.8,
+    fontSize: deviceWidth * 0.042,
+    color: '#fff',
+    fontWeight: 'bold',
+    flexDirection: 'row',
   },
 });

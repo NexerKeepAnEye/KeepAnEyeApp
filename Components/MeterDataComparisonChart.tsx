@@ -9,15 +9,12 @@ import { MeterData, Tooltip } from '../Types/Type';
 
 interface MeterDataBarChartProps {
   filteredResults: MeterData[];
-  resolution: string;
   year: string | undefined;
   yearTwo: string | undefined;
 }
 
 export default function MeterDataBarChart({
   filteredResults,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  resolution,
   year,
   yearTwo,
 }: MeterDataBarChartProps) {
@@ -28,6 +25,9 @@ export default function MeterDataBarChart({
     x: 0,
     y: 0,
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [selectedBarIndex, setSelectedBarIndex] = useState<number | null>(null);
+  const [selectedBarColor, setSelectedBarColor] = useState<string | null>(null);
 
   filteredResults = filteredResults.filter((item) => item.Value > 0);
 
@@ -57,7 +57,18 @@ export default function MeterDataBarChart({
 
   const groupedData = groupDataByMonthAndYear(filteredResults);
 
-  const combinedData = [];
+  interface CombinedData {
+    value: number;
+    spacing?: number;
+    label: string;
+    labelWidth?: number;
+    frontColor: string;
+    originalValue: number;
+    dataPointText: string;
+    focus: string;
+  }
+
+  const combinedData: CombinedData[] = [];
   const labels = [];
   for (let month = 0; month < 12; month++) {
     const keyYearOne = `${month}-${year}`;
@@ -72,18 +83,18 @@ export default function MeterDataBarChart({
       label: `${formatMonth(new Date(parseInt(year || '0'), month))}`,
       labelWidth: 55,
       frontColor: '#ea5b0c',
-      gradientColor: '#ea5b0c',
       originalValue: dataYearOne.Value,
       dataPointText: dataYearOne.Value.toString(),
+      focus: '#FFB072',
     });
 
     combinedData.push({
       value: dataYearTwo.Value,
       label: '',
       frontColor: '#AF220A',
-      gradientColor: '#6a1b9a',
       originalValue: dataYearTwo.Value,
       dataPointText: dataYearTwo.Value.toString(),
+      focus: 'red',
     });
 
     labels.push(
@@ -104,30 +115,37 @@ export default function MeterDataBarChart({
     x: number,
     y: number,
     originalValue: number,
+    index: number,
   ) => {
     setTooltip({ originalValue, visible: true, value: originalValue, x, y });
+    setSelectedBarIndex(index);
+    setSelectedBarColor(combinedData[index].focus);
   };
 
   return (
     <View style={CompareChartStyle.chartContainer}>
       <BarChart
+        focusBarOnPress={true}
+        focusedBarConfig={{
+          color: selectedBarColor || '#0000',
+        }}
+        isAnimated
         overflowTop={50}
         spacing={20}
         data={combinedData}
-        focusBarOnPress
-        isAnimated
         height={250}
         barWidth={25}
         barBorderTopLeftRadius={4}
         barBorderTopRightRadius={4}
-        frontColor="#6a1b9a"
+        yAxisColor={'#2222'}
+        xAxisColor={'#2222'}
         stepValue={stepValue}
         maxValue={maxValue}
         yAxisLabelWidth={50}
         xAxisLabelTexts={labels}
         xAxisLabelTextStyle={{ flex: 1 }}
         onPress={(item: Tooltip, index: number, x: number, y: number) =>
-          handleBarPress(item.value, x, y, item.originalValue)
+          handleBarPress(item.value, x, y, item.originalValue, index)
         }
         renderTooltip={() => {
           return (

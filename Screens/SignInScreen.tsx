@@ -3,15 +3,17 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import {
+  ActivityIndicator,
   Alert,
   BackHandler,
   Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  TouchableOpacity,
   View,
 } from 'react-native';
-import { Button, Text, TextInput } from 'react-native-paper';
+import { MD2Colors, Text, TextInput } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { fetchPremise, fetchProduct } from '../Api/fetchAPI';
 import NexerLogo from '../assets/NexerLogo.png';
@@ -123,15 +125,26 @@ export default function SignInScreen() {
                 onChangeText={(e) => setForm({ ...form, apikey: e })}
               />
             </View>
-            <Button
+            <TouchableOpacity
               style={loading ? SignIn.buttonDisabled : SignIn.button}
-              icon="login"
-              mode="contained"
+              // mode="contained"
               onPress={handleLogin}
               disabled={loading}
             >
-              {loading ? 'Loggar in...' : 'Logga in'}
-            </Button>
+              {loading ? (
+                <>
+                  <Text style={SignIn.buttonText}>Loggar In...</Text>
+                  <ActivityIndicator
+                    animating={true}
+                    color={MD2Colors.white}
+                    size="large"
+                    style={{ paddingLeft: 19 }}
+                  />
+                </>
+              ) : (
+                <Text style={SignIn.buttonText}>Logga In</Text>
+              )}
+            </TouchableOpacity>
           </View>
           <Image
             source={NexerLogo}

@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
-import { Provider as PaperProvider, Text } from 'react-native-paper';
+import {
+  ActivityIndicator,
+  MD2Colors,
+  Provider as PaperProvider,
+  Text,
+} from 'react-native-paper';
 import { fetchMeterData } from '../../Api/fetchAPI';
 import StorageService from '../../AsyncStorage/AsyncStorage';
 import { usePremiseContext } from '../../Context/PremiseContext';
@@ -58,6 +63,7 @@ const Filter = ({
   const { state } = usePremiseContext();
   const [apikey, setApiKey] = useState<string | null>(null);
   const [isChecked, setIsChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchApiKey = async () => {
@@ -68,6 +74,7 @@ const Filter = ({
   }, []);
 
   const handleSearch = async () => {
+    setLoading(true);
     let meterData: MeterData[] | null = null;
 
     const fetchDataForDateRange = async (fromDate: Date, toDate: Date) => {
@@ -83,6 +90,20 @@ const Filter = ({
       );
       return data;
     };
+
+    if (
+      (filters.includes('resolution') && !resolution) ||
+      (filters.includes('year') && !year) ||
+      (filters.includes('fromToYear') && !year && !yearTwo) ||
+      (filters.includes('meter') && !meter) ||
+      (filters.includes('dateRange') && !fromDate && !toDate) ||
+      (filters.includes('meter') && !meter) ||
+      (filters.includes('compareYears') && !year && !yearTwo)
+    ) {
+      showSnackbar('Fyll i fälten');
+      setLoading(false);
+      return;
+    }
 
     const translateResolution = (resolution: string) => {
       switch (resolution) {
@@ -113,6 +134,8 @@ const Filter = ({
         fromDate && toDate ? toDate.getFullYear() - fromDate.getFullYear() : 0;
       if (yearDiff > 5) {
         showSnackbar('För stor tidsperiod, max 5 år');
+        setLoading(false);
+
         return;
       }
     }
@@ -128,6 +151,8 @@ const Filter = ({
           : 0;
       if (monthDiff > 12) {
         showSnackbar('För stor tidsperiod, max 12 månader');
+        setLoading(false);
+
         return;
       }
     }
@@ -138,6 +163,8 @@ const Filter = ({
           : 0;
       if (dayDiff > 90) {
         showSnackbar('För stor tidsperiod, max 90 dagar');
+        setLoading(false);
+
         return;
       }
     }
@@ -150,6 +177,7 @@ const Filter = ({
       // console.log('dayDiff:', dayDiff);
       if (dayDiff > 31) {
         showSnackbar('För stor tidsperiod, max 31 dagar');
+        setLoading(false);
         return;
       }
     }
@@ -192,22 +220,12 @@ const Filter = ({
         meterData = await fetchDataForDateRange(fromDate, toDate);
       }
     } catch (error) {
+      setLoading(false);
       console.log('error fetching meterdata:', error);
+      showSnackbar('Ett fel inträffade');
     }
 
     let filteredData = meterData ?? [];
-
-    if (
-      (filters.includes('resolution') && !resolution) ||
-      (filters.includes('year') && !year) ||
-      (filters.includes('fromToYear') && !year && !yearTwo) ||
-      (filters.includes('meter') && !meter) ||
-      (filters.includes('dateRange') && !fromDate && !toDate) ||
-      (filters.includes('meter') && !meter)
-    ) {
-      showSnackbar('Fyll i fälten');
-      return;
-    }
 
     if (year && !yearTwo) {
       if (Array.isArray(filteredData)) {
@@ -241,6 +259,7 @@ const Filter = ({
         setMeterId(meterId);
       }
     }
+    setLoading(false);
     setFilteredResults(filteredData);
   };
 
@@ -310,8 +329,21 @@ const Filter = ({
           <TouchableOpacity
             onPress={handleSearch}
             style={searchButtonStyle.button}
+            disabled={loading}
           >
-            <Text style={searchButtonStyle.text}>{buttonText}</Text>
+            {loading ? (
+              <>
+                <Text style={searchButtonStyle.text}>Loading</Text>
+                <ActivityIndicator
+                  animating={true}
+                  color={MD2Colors.white}
+                  size="small"
+                  style={{ paddingLeft: 19 }}
+                />
+              </>
+            ) : (
+              <Text style={searchButtonStyle.text}>{buttonText}</Text>
+            )}
           </TouchableOpacity>
         </View>
       </View>
