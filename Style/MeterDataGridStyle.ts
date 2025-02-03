@@ -1,24 +1,20 @@
 import { StyleSheet, TextStyle } from 'react-native';
-import { width } from './Dimensions';
+import { deviceHeight, deviceWidth } from './Dimensions';
+
+
 
 export const MeterDataGridStyle = StyleSheet.create({
-  root: {},
-  container: {
-    // flex: 1,
-    // alignItems: 'center',
-    // marginBottom: 20,
-  },
   gridContainer: {
-    width: width * 0.95,
-    marginTop: 20,
-    marginBottom: 10,
+    width: deviceWidth * 0.95,
+    marginTop: deviceHeight * 0.02,
+    marginBottom: deviceHeight * 0.02,
   },
   header: {
     backgroundColor: '#d9d9d9',
     justifyContent: 'space-evenly',
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    width: width * 0.9,
+    width: deviceWidth * 0.9,
   },
   title: {
     fontWeight: 'bold',
@@ -29,9 +25,9 @@ export const MeterDataGridStyle = StyleSheet.create({
     borderBottomWidth: 0.8,
   },
   text: {
-    fontSize: 18,
+    fontSize: deviceHeight * 0.018,
     textAlign: 'left',
-    marginTop: '50%',
+    marginTop: deviceHeight * 0.01,
     fontStyle: 'italic',
     color: '#ababab',
   },

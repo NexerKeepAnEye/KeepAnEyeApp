@@ -1,52 +1,52 @@
-import { Dimensions, StyleSheet } from 'react-native';
-
-const { width, height } = Dimensions.get('window');
+import { StyleSheet } from 'react-native';
+import { deviceHeight, deviceWidth } from './Dimensions';
 
 export const MeterComponentStyle = StyleSheet.create({
   container: {
-    width: '100%',
-    // marginTop: height * 0.02,
+    width: deviceWidth * 1,
     backgroundColor: '#fff',
   },
   listItem: {
-    height: height * 0.08,
+    height: deviceHeight * 0.08,
     borderBottomWidth: 1,
     borderBottomColor: '#d9d9d9',
     alignContent: 'center',
     flexDirection: 'row',
-    paddingHorizontal: width * 0.03,
+    paddingHorizontal: deviceWidth * 0.03,
   },
   iconContainer: {
-    width: width * 0.1,
-    height: '100%',
+    width: deviceWidth * 0.1,
+    height: deviceHeight * 1,
+    alignItems: 'center',
+    marginTop: deviceHeight * 0.005,
   },
   textContainer: {
     flexDirection: 'column',
     justifyContent: 'center',
-    marginLeft: width * 0.03,
+    marginLeft: deviceWidth * 0.03,
   },
   textStyleName: {
-    fontSize: width * 0.045,
+    fontSize: deviceWidth * 0.045,
     color: '#222',
   },
   textStyleProductCode: {
-    fontSize: width * 0.04,
+    fontSize: deviceWidth * 0.04,
     color: '#d3d3d3',
   },
   title: {
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
-    fontSize: 15,
+    fontSize: deviceHeight * 0.02,
     fontWeight: 'semibold',
     opacity: 0.7,
-    marginTop: 8,
+    marginTop: deviceHeight * 0.01,
     paddingBottom: 4,
-    width: '100%',
+    width: deviceWidth * 1,
   },
   arrow: {
     position: 'absolute',
-    right: width * 0.03,
+    right: deviceWidth * 0.03,
     alignSelf: 'center',
   },
 });
