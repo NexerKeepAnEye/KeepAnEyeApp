@@ -23,7 +23,7 @@ const PremiseCard = <T extends keyof RootStackParamList>({
         navigation.navigate('StartScreen');
       }}
       underlayColor={'#ddd'}
-      style={{ borderRadius: 10 }}
+      style={premiseCardStyle.cardButton}
     >
       <Card style={premiseCardStyle.card}>
         <View style={premiseCardStyle.row}>
