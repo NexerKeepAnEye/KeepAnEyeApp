@@ -91,7 +91,7 @@ export const YearComparison = () => {
         yearTwo={state.yearTwo}
         meter={state.meter}
         meterData={state.meterData}
-        resolution="År"
+        resolution="Månad"
         setFilteredResults={(data) => {
           dispatch({ type: 'SET_FILTERED_RESULTS', payload: data });
           setSearchClicked(true);
