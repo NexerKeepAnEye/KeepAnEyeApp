@@ -114,11 +114,11 @@ export default function SignInScreen() {
               style={SignIn.logo}
             />
             <View style={SignIn.container}>
-              <Text style={SignIn.title}>Skiv in din Api-Nyckel:</Text>
+              <Text style={SignIn.title}>Ange Api-Nyckel:</Text>
               <TextInput
                 style={SignIn.input}
                 mode="outlined"
-                label="API-Key"
+                label="API-nyckel"
                 value={form.apikey}
                 onChangeText={(e) => setForm({ ...form, apikey: e })}
               />
