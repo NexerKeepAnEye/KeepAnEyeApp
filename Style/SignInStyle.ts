@@ -38,11 +38,12 @@ export const SignIn = StyleSheet.create({
     height: height * 0.07,
     justifyContent: 'center',
     alignItems: 'center',
+    alignContent: 'center',
     borderRadius: 30,
     backgroundColor: '#ff7043',
   },
   buttonText: {
-    fontSize: width * 0.045,
+    fontSize: width * 0.042,
     color: '#fff',
     fontWeight: 'bold',
   },
@@ -62,5 +63,9 @@ export const SignIn = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: '#ff7043',
     opacity: 0.8,
+    fontSize: width * 0.042,
+    color: '#fff',
+    fontWeight: 'bold',
+    flexDirection: 'row',
   },
 });
