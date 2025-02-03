@@ -8,6 +8,7 @@ import UpscaleLogo from '../assets/UpscaleLogo.png';
 import StorageService from '../AsyncStorage/AsyncStorage';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
+import { SplashScreenStyle } from '../Style/SplashSCreenStyle';
 
 // Keep the splash screen visible while we fetch resources
 preventAutoHideAsync();
@@ -58,7 +59,7 @@ export default function Splash() {
 
   return (
     <View
-      style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+      style={SplashScreenStyle.container}
       onLayout={onLayoutRootView}
     >
       <Image
