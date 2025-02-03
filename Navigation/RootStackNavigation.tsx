@@ -5,9 +5,11 @@ import {
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
 import * as React from 'react';
+import { useEffect } from 'react';
 import { Pressable } from 'react-native';
 import StorageService from '../AsyncStorage/AsyncStorage';
 import { LogoTitle } from '../Components/Header';
+import { usePremiseContext } from '../Context/PremiseContext';
 import PremiseScreen from '../Screens/PremiseScreen';
 import ReportScreen from '../Screens/ReportScreen';
 import SignInScreen from '../Screens/SignInScreen';
@@ -33,11 +35,21 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 export default function RootStackNavigator() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
+  const { state } = usePremiseContext();
   const handleLogout = async () => {
     await StorageService.clearApiKey();
+    state.products = [];
+    state.premises = [];
+    state.meterData = [];
     navigation.navigate('SignInScreen');
   };
+
+  useEffect(() => {
+    const apiKey = StorageService.getApiKey();
+    if (!apiKey) {
+      navigation.navigate('SignInScreen');
+    }
+  }, [navigation]);
 
   return (
     <RootStack.Navigator

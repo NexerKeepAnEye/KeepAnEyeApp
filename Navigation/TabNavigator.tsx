@@ -14,6 +14,7 @@ import { BottomTabStyle } from '../Style/BottomTabStyle';
 import { filterStyle } from '../Style/FilterStyle';
 import PremiseStackNavigator from './PremiseStackNavigator';
 import { RootStackParamList } from './RootStackNavigation';
+import { useEffect } from 'react';
 
 export type TabParamList = {
   PremiseStackNavigator: { premiseId: number };
@@ -30,6 +31,13 @@ export default function TabNavigator() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { visible, message, hideSnackbar } = useSnackbar();
+
+  useEffect(() => {
+    const apiKey = StorageService.getApiKey();
+    if (!apiKey) {
+      navigation.navigate('SignInScreen');
+    }
+  }, [navigation]);
 
   const handleLogout = async () => {
     await StorageService.clearApiKey();
