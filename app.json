@@ -16,6 +16,14 @@
       "supportsTablet": true,
       "infoPlist": {
         "NsAppTransportSecurity": "NSAllowArbitraryLoads"
+      },
+      "icon": "./assets/UpscaleIcon.jpg",
+      "bundleIdentifier": "info.plist",
+      "buildNumber": "1.0.0",
+      "splash": {
+        "image": "./assets/UpscaleLogo.jpg",
+        "resizeMode": "contain",
+        "backgroundColor": "#ffffff"
       }
     },
     "android": {
@@ -29,7 +37,8 @@
         "foregroundImage": "./assets/UpscaleIcon.jpg",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.NexerKAE.KeepAnEyeApp"
+      "package": "com.NexerKAE.KeepAnEyeApp",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/splash-icon.png"
@@ -50,7 +59,6 @@
           "dark": {
             "image": "./assets/UpscaleLogo.jpg"
           }
-          // "imageWidth": 200
         }
       ]
     ]

@@ -1,8 +1,6 @@
-import Entypo from '@expo/vector-icons/Entypo';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import * as Font from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
+import { hide, preventAutoHideAsync, setOptions } from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Image, View } from 'react-native';
 import { fetchPremise, fetchProduct } from '../Api/fetchAPI';
@@ -12,13 +10,7 @@ import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 
 // Keep the splash screen visible while we fetch resources
-SplashScreen.preventAutoHideAsync();
-
-// Set the animation options. This is optional.
-SplashScreen.setOptions({
-  duration: 1000,
-  fade: true,
-});
+preventAutoHideAsync();
 
 export default function Splash() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -41,25 +33,8 @@ export default function Splash() {
     };
 
     checkApiKey();
-  }, []);
 
-  useEffect(() => {
-    async function prepare() {
-      try {
-        // Pre-load fonts, make any API calls you need to do here
-        await Font.loadAsync(Entypo.font);
-        // Artificially delay for two seconds to simulate a slow loading
-        // experience. Remove this if you copy and paste the code!
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        // Tell the application to render
-        setAppIsReady(true);
-      }
-    }
-
-    prepare();
+    setAppIsReady(true);
   }, []);
 
   const onLayoutRootView = useCallback(() => {
@@ -69,7 +44,11 @@ export default function Splash() {
       // loading its initial state and rendering its first pixels. So instead,
       // we hide the splash screen once we know the root view has already
       // performed layout.
-      SplashScreen.hide();
+      // Set the animation options. This is optional.
+      setOptions({
+        fade: true,
+      });
+      hide();
     }
   }, [appIsReady]);
 
