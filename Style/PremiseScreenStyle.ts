@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { deviceHeight, deviceWidth } from './Dimensions';
 
-
 export const PremiseScreenStyle = StyleSheet.create({
   container: {
     flex: 1,
