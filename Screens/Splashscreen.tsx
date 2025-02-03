@@ -56,7 +56,7 @@ export default function Splash() {
   //   return null;
   // }
 
-  // return (
+  return null;
   //   <View
   //     style={SplashScreenStyle.container}
   //     onLayout={onLayoutRootView}
@@ -67,5 +67,4 @@ export default function Splash() {
   //       style={{ width: 200, height: 200 }}
   //     />
   //   </View>
-  // );
 }
