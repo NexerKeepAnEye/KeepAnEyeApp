@@ -60,4 +60,17 @@ export const searchButtonStyle = StyleSheet.create({
     marginTop: -height * 0.062,
     overflow: 'visible',
   },
+  meterResetButton: {
+    borderWidth: 0.5,
+    borderColor: '#dfdfdf',
+    backgroundColor: '#f2f2f2',
+    height: height * 0.023,
+    width: width * 0.052,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    marginLeft: width * 0.17,
+    marginTop: -height * 0.062,
+    overflow: 'visible',
+  },
 });
