@@ -27,9 +27,6 @@ export const meterSearch = StyleSheet.create({
   },
   touchArea: {
     maxWidth: width * 0.4,
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    
   },
   iconContainer: {
     paddingLeft: 0,
