@@ -4,7 +4,7 @@ import { deviceHeight, height, width } from './Dimensions';
 export const meterSearch = StyleSheet.create({
   container: {
     maxWidth: width * 0.45,
-    maxHeight: height * 0.049,
+    maxHeight: height * 0.06,
   },
   pickerContainer: {
     // flexDirection: 'row',
