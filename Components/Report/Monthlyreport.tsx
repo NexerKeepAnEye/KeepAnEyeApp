@@ -23,8 +23,11 @@ export const MonthlyReport = () => {
   );
 
   const [productName, setProductName] = useState<string | null>(null);
-
   const [searchClicked, setSearchClicked] = useState(false);
+  const [minValue, setMinValue] = useState<number | null>(null);
+  const [maxValue, setMaxValue] = useState<number | null>(null);
+  const [averageValue, setAverageValue] = useState<number | null>(null);
+  const [sumValue, setSumValue] = useState<number | null>(null);
 
   const filteredResults = state.filteredResults;
 
@@ -52,6 +55,21 @@ export const MonthlyReport = () => {
     };
     fetchProductName();
   }, [productCode]);
+
+  useEffect(() => {
+    if (filteredResults.length > 0) {
+      const values = filteredResults.map((item) => item.Value);
+      const min = Math.min(...values);
+      const max = Math.max(...values);
+      const sum = values.reduce((acc, val) => acc + val, 0);
+      const average = sum / values.length;
+
+      setMinValue(min);
+      setMaxValue(max);
+      setAverageValue(average);
+      setSumValue(sum);
+    }
+  }, [filteredResults]);
 
   return (
     <>
@@ -97,6 +115,22 @@ export const MonthlyReport = () => {
                       <DataTable.Cell>{item.Value}</DataTable.Cell>
                     </DataTable.Row>
                   ))}
+                  <DataTable.Row>
+                    <DataTable.Cell>Min</DataTable.Cell>
+                    <DataTable.Cell>{minValue}</DataTable.Cell>
+                  </DataTable.Row>
+                  <DataTable.Row>
+                    <DataTable.Cell>Max</DataTable.Cell>
+                    <DataTable.Cell>{maxValue}</DataTable.Cell>
+                  </DataTable.Row>
+                  <DataTable.Row>
+                    <DataTable.Cell>Medel</DataTable.Cell>
+                    <DataTable.Cell>{Math.round(averageValue!)}</DataTable.Cell>
+                  </DataTable.Row>
+                  <DataTable.Row>
+                    <DataTable.Cell>Summa</DataTable.Cell>
+                    <DataTable.Cell>{sumValue}</DataTable.Cell>
+                  </DataTable.Row>
                 </DataTable>
               </>
               {/* )} */}

@@ -328,7 +328,11 @@ const Filter = ({
         <View style={filterStyle.buttonContainer}>
           <TouchableOpacity
             onPress={handleSearch}
-            style={searchButtonStyle.button}
+            style={
+              loading
+                ? searchButtonStyle.disableButton
+                : searchButtonStyle.button
+            }
             disabled={loading}
           >
             {loading ? (
