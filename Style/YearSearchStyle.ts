@@ -5,6 +5,7 @@ export const yearSearchStyle = StyleSheet.create({
   container: {
     alignItems: 'center',
     marginRight: 5,
+    minHeight: height * 0.065,
   },
   pickerContainer: {
     borderWidth: 1,
@@ -17,6 +18,7 @@ export const yearSearchStyle = StyleSheet.create({
     backgroundColor: 'white',
     opacity: 0.8,
     paddingHorizontal: 10,
+    marginTop: 12,
   },
   pickerText: {
     fontSize: width * 0.045,

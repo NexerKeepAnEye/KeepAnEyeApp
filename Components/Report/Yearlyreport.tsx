@@ -40,7 +40,6 @@ export const YearlyReport = () => {
         const product =
           products.find((item) => item.Code === productCode)?.Unit || null;
         setProductName(product);
-        // console.log('PRODUCT:', product);
       } catch (error) {
         console.error('Error fetching product:', error);
       }

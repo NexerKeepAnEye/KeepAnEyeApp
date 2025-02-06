@@ -9,6 +9,7 @@ import {
   initialState,
 } from '../../Context/FilterReducer';
 import { usePremiseContext } from '../../Context/PremiseContext';
+import { deviceHeight, deviceWidth } from '../../Style/Dimensions';
 import { MeterDataGridStyle } from '../../Style/MeterDataGridStyle';
 import { ReportGridStyle } from '../../Style/ReportGridStyleStyle';
 import Filter from '../Filters/Filter';
@@ -49,8 +50,8 @@ export default function Analysisreport() {
       <View style={{ alignItems: 'center' }}>
         <View
           style={{
-            height: 6,
-            width: 6,
+            height: deviceHeight * 0.05,
+            width: deviceWidth * 0.06,
             borderRadius: 5,
             backgroundColor: '#ea5b0c',
           }}
@@ -146,38 +147,38 @@ export default function Analysisreport() {
                 data={formattedData}
                 startFillColor="#ea5b0c"
                 startOpacity={0.3}
-                height={250}
+                height={deviceHeight * 0.27}
                 noOfSections={4}
                 maxValue={roundMaxValue}
                 focusEnabled
                 adjustToWidth={true}
                 showDataPointLabelOnFocus
                 xAxisType="dashed"
-                yAxisLabelWidth={45}
+                yAxisLabelWidth={deviceWidth * 0.1}
                 rotateLabel
-                labelsExtraHeight={40}
-                xAxisLabelsHeight={15}
+                labelsExtraHeight={deviceHeight * 0.055}
+                xAxisLabelsHeight={deviceHeight * 0.018}
                 xAxisLabelsVerticalShift={10}
                 showTextOnFocus={true}
                 showVerticalLines
-                spacing={20}
-                initialSpacing={10}
-                endSpacing={30}
+                spacing={deviceWidth * 0.05}
+                initialSpacing={deviceWidth * 0.04}
+                endSpacing={deviceWidth * 0.12}
                 color1="#ea5b0c"
                 textColor1="#222"
-                textFontSize1={15}
-                dataPointsHeight={12}
-                dataPointsWidth={12}
+                textFontSize1={deviceHeight * 0.02}
+                dataPointsHeight={deviceHeight * 0.01}
+                dataPointsWidth={deviceWidth * 0.01}
                 dataPointsColor1="#ea5b0c"
                 overflowTop={1}
                 pointerConfig={{
-                  pointerStripHeight: 100,
+                  pointerStripHeight: deviceHeight * 0.2,
                   pointerStripColor: 'transparent',
                   pointerStripWidth: 2,
                   pointerColor: '#ea5b0c',
                   radius: 6,
-                  pointerLabelWidth: 100,
-                  pointerLabelHeight: 60,
+                  pointerLabelWidth: deviceWidth * 0.15,
+                  pointerLabelHeight: deviceHeight * 0.07,
                   pointerStripUptoDataPoint: true,
                   autoAdjustPointerLabelPosition: true,
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -187,18 +188,20 @@ export default function Analysisreport() {
                     return (
                       <View
                         style={{
-                          width: 70,
-                          height: 60,
+                          width: deviceWidth * 0.165,
+                          height: deviceHeight * 0.06,
                           justifyContent: 'center',
                           alignItems: 'center',
                           backgroundColor: 'white',
                           borderRadius: 4,
                           shadowColor: '#000',
-                          shadowOffset: { width: 0, height: 2 },
+                          shadowOffset: {
+                            width: deviceWidth * 0,
+                            height: deviceHeight * 0.01,
+                          },
                           shadowOpacity: 0.8,
                           shadowRadius: 2,
                           elevation: 5,
-                          // left: 5,
                           overflow: 'visible',
                         }}
                       >
@@ -216,29 +219,37 @@ export default function Analysisreport() {
               <Divider style={ReportGridStyle.header} />
               <DataTable style={MeterDataGridStyle.gridContainer}>
                 <DataTable.Header style={MeterDataGridStyle.header}>
-                  <DataTable.Title style={{ flex: 2 }}>
+                  <DataTable.Title style={ReportGridStyle.flex2}>
                     {state.meter[0].Name}
                   </DataTable.Title>
-                  <DataTable.Title style={{ flex: 2 }}>Value</DataTable.Title>
-                  <DataTable.Title style={{ flex: 1 }}>Date</DataTable.Title>
+                  <DataTable.Title style={ReportGridStyle.flex2}>
+                    Value
+                  </DataTable.Title>
+                  <DataTable.Title style={ReportGridStyle.flex1}>
+                    Date
+                  </DataTable.Title>
                 </DataTable.Header>
                 <DataTable.Row>
-                  <DataTable.Cell style={{ flex: 1 }}>Min</DataTable.Cell>
-                  <DataTable.Cell style={{ flex: 1.1 }}>
+                  <DataTable.Cell style={ReportGridStyle.flex1}>
+                    Min
+                  </DataTable.Cell>
+                  <DataTable.Cell style={ReportGridStyle.flex11}>
                     {minValue} {productName}
                   </DataTable.Cell>
-                  <DataTable.Cell style={{ flex: 0.9 }}>
+                  <DataTable.Cell style={ReportGridStyle.flex09}>
                     {minDate
                       ? new Date(minDate).toLocaleDateString().split('T')[0]
                       : ''}
                   </DataTable.Cell>
                 </DataTable.Row>
                 <DataTable.Row>
-                  <DataTable.Cell style={{ flex: 1 }}>Max</DataTable.Cell>
-                  <DataTable.Cell style={{ flex: 1.1 }}>
+                  <DataTable.Cell style={ReportGridStyle.flex1}>
+                    Max
+                  </DataTable.Cell>
+                  <DataTable.Cell style={ReportGridStyle.flex11}>
                     {max} {productName}
                   </DataTable.Cell>
-                  <DataTable.Cell style={{ flex: 0.9 }}>
+                  <DataTable.Cell style={ReportGridStyle.flex09}>
                     {maxDate
                       ? new Date(maxDate).toLocaleDateString().split('T')[0]
                       : ''}

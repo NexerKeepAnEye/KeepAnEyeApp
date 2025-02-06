@@ -1,32 +1,38 @@
 import { StyleSheet } from 'react-native';
-import { width } from './Dimensions';
+import { deviceHeight, deviceWidth } from './Dimensions';
 
 export const ReportGridStyle = StyleSheet.create({
   root: {
-    width: width * 0.9,
+    width: deviceWidth * 0.9,
   },
   container: {
     marginBottom: 90,
-    // alignItems: 'center',
   },
   header: {
     backgroundColor: '#d9d9d9',
-    height: 4,
+    height: deviceHeight * 0.001,
   },
   filtersContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 10,
+    marginBottom: deviceHeight * 0.02,
   },
   noDataText: {
-    fontSize: 16,
+    fontSize: deviceHeight * 0.02,
     color: 'gray',
     textAlign: 'center',
-    marginTop: 20,
+    marginTop: deviceHeight * 0.02,
   },
-  //   header: {
-  //     fontSize: 18,
-  //     fontWeight: 'bold',
-  //     marginBottom: 10,
-  //   },
+  flex1: {
+    flex: 1,
+  },
+  flex2: {
+    flex: 2,
+  },
+  flex11: {
+    flex: 1.1,
+  },
+  flex09: {
+    flex: 0.9,
+  },
 });
