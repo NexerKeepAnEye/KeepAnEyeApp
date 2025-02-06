@@ -1,11 +1,10 @@
 import { StyleSheet } from 'react-native';
 import { deviceHeight, deviceWidth } from './Dimensions';
 
-
 export const AccordionStyle = StyleSheet.create({
   container: {
     marginTop: deviceHeight * 0.01,
-    width: deviceWidth * 0.9, 
+    width: deviceWidth * 0.9,
     minHeight: deviceHeight * 0.08,
     borderWidth: 1,
     borderColor: '#d9d9d9',
@@ -35,7 +34,7 @@ export const AccordionStyle = StyleSheet.create({
     right: -1,
   },
   listButton: {
-    width: deviceWidth * 0.15, 
+    width: deviceWidth * 0.15,
     height: deviceHeight * 0.08,
     backgroundColor: '#d9d9d9',
     borderTopRightRadius: 10,
@@ -51,14 +50,14 @@ export const AccordionStyle = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#d9d9d9',
     fontWeight: 'bold',
-    justifyContent: 'center', 
+    justifyContent: 'center',
   },
   listText: {
     textAlign: 'center',
   },
   headerChanged: {
     textAlign: 'center',
-    fontSize: deviceWidth * 0.05, 
+    fontSize: deviceWidth * 0.05,
     fontWeight: 'bold',
   },
 });
