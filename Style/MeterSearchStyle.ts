@@ -4,6 +4,8 @@ import { height, width } from './Dimensions';
 export const meterSearch = StyleSheet.create({
   container: {
     maxWidth: width * 0.45,
+    minHeight: height * 0.06,
+    marginTop: 12,
   },
   pickerContainer: {
     flexDirection: 'row',

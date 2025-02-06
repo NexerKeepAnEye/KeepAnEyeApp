@@ -56,7 +56,7 @@ export const searchButtonStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    marginLeft: width * 0.27,
+    // marginLeft: width * 0.27,
     marginTop: -height * 0.062,
     overflow: 'visible',
   },
