@@ -95,7 +95,7 @@ export const YearlyReport = () => {
                 <Divider style={ReportGridStyle.header} />
                 <DataTable>
                   <DataTable.Header>
-                    <DataTable.Title>Year</DataTable.Title>
+                    <DataTable.Title>År</DataTable.Title>
                     <DataTable.Title>
                       Förbrukning ({productName})
                     </DataTable.Title>
@@ -122,7 +122,7 @@ export const YearlyReport = () => {
                   </DataTable.Row>
                   <DataTable.Row>
                     <DataTable.Cell>Medel</DataTable.Cell>
-                    <DataTable.Cell>{averageValue}</DataTable.Cell>
+                    <DataTable.Cell>{Math.round(averageValue!)}</DataTable.Cell>
                   </DataTable.Row>
                   <DataTable.Row>
                     <DataTable.Cell>Summa</DataTable.Cell>
