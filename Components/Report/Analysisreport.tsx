@@ -29,16 +29,16 @@ export default function Analysisreport() {
     const date = new Date(dateString);
     switch (resolution) {
       case 'Dag':
-        return `${date.getDate()}/${date.getMonth() + 1}`; // Dag och månad
+        return `${date.getDate()}/${date.getMonth() + 1}`;
 
       case 'Timma':
-        return `${date.getDate()}/${date.getMonth() + 1}`; // Dag och månad
+        return `${date.getDate()}/${date.getMonth() + 1} ${date.getHours().toLocaleString('sv-SE') + ':00'}`;
       case 'Månad':
-        return `${date.getMonth() + 1}/${date.getFullYear()}`; // Dag och månad
+        return `${date.getMonth() + 1}/${date.getFullYear()}`;
       case 'År':
-        return `${date.getFullYear()}`; // Endast år
+        return `${date.getFullYear()}`;
       default:
-        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear().toString().split('20')[1]}`; // Dag och månad
+        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear().toString().split('20')[1]}`;
     }
   };
 
