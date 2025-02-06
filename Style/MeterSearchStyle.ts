@@ -15,6 +15,8 @@ export const meterSearch = StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: 'white',
     opacity: 0.8,
+    marginTop: 12,
+    marginRight: 8,
   },
   pickerText: {
     fontSize: width * 0.045,
@@ -23,6 +25,7 @@ export const meterSearch = StyleSheet.create({
     maxWidth: width * 0.4,
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
   iconContainer: {
     paddingLeft: 0,
