@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { deviceHeight, deviceWidth, height, width } from './Dimensions';
+import { height, width } from './Dimensions';
 
 export const searchButtonStyle = StyleSheet.create({
   button: {
@@ -10,9 +10,9 @@ export const searchButtonStyle = StyleSheet.create({
     minWidth: width / 7,
     alignSelf: 'flex-end',
     alignItems: 'center',
-    marginTop: 14,
+    marginTop: 3,
     height: 40,
-    // flexDirection: 'row',
+    flexDirection: 'row',
     justifyContent: 'center',
   },
   disableButton: {
@@ -58,32 +58,6 @@ export const searchButtonStyle = StyleSheet.create({
     borderRadius: 10,
     marginLeft: width * 0.27,
     marginTop: -height * 0.062,
-    overflow: 'visible',
-  },
-  meterResetButton: {
-    borderWidth: 0.5,
-    borderColor: '#dfdfdf',
-    backgroundColor: '#f2f2f2',
-    height: deviceHeight * 0.023,
-    width: deviceWidth * 0.047,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-    marginLeft: deviceWidth * 0.18,
-    marginTop: -deviceHeight * 0.162,
-    overflow: 'visible',
-  },
-  yearResetButton: {
-    borderWidth: 0.5,
-    borderColor: '#dfdfdf',
-    backgroundColor: '#f2f2f2',
-    height: deviceHeight * 0.023,
-    width: deviceWidth * 0.047,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-    marginLeft: deviceWidth * 0.12,
-    marginTop: -deviceHeight * 0.062,
     overflow: 'visible',
   },
 });
