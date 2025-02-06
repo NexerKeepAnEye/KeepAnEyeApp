@@ -65,7 +65,7 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
           <Text
             style={meterSearch.pickerText}
             numberOfLines={1}
-            ellipsizeMode="tail"
+            // ellipsizeMode="tail"
           >
             {selectedMeter?.toString() || ' Mätare '}
           </Text>

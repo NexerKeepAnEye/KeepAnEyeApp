@@ -1,12 +1,15 @@
 import { StyleSheet } from 'react-native';
-import { height, width } from './Dimensions';
+import { deviceHeight, height, width } from './Dimensions';
 
 export const meterSearch = StyleSheet.create({
   container: {
     maxWidth: width * 0.45,
+    maxHeight: height * 0.049,
   },
   pickerContainer: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     borderWidth: 1,
     borderColor: '#dddddd',
     borderRadius: 10,
@@ -17,14 +20,15 @@ export const meterSearch = StyleSheet.create({
     opacity: 0.8,
     marginTop: 12,
     marginRight: 8,
+    marginBottom: deviceHeight * 0.1,
   },
   pickerText: {
     fontSize: width * 0.045,
   },
   touchArea: {
     maxWidth: width * 0.4,
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
     
   },
   iconContainer: {
