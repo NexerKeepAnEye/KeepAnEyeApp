@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Modal,
   SectionList,
@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import { FilterContext } from '../../Context/FilterContext';
 import { usePremiseContext } from '../../Context/PremiseContext';
 import { meterSearch } from '../../Style/MeterSearchStyle';
 import { Meter } from '../../Types/Type';
@@ -24,30 +25,32 @@ interface MeterSearchProps {
 }
 
 export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
+  const { state: filterstate, dispatch } = useContext(FilterContext);
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedMeter, setSelectedMeterState] = useState<
-    string[] | undefined
-  >();
+  const [selectedMeter, setSelectedMeterState] = useState<string[] | undefined>(
+    filterstate.meter.length > 0 && filterstate.meter.length < 2
+      ? filterstate.meter.map((m) => m.Name)
+      : groupMeters(filterstate.meter).map((m) => m.title),
+  );
+
   const { state } = usePremiseContext();
   const meters: Meter[] = state.selectedPremise?.Meters || [];
-
-  // console.log(meters);
 
   const handlePress = () => setModalVisible(true);
 
   const handleSelectMeter = (meter: Meter[]) => {
     setSelectedMeter(meter);
     setSelectedMeterState(meter.map((m) => m.Name));
+    dispatch({ type: 'SET_METER', payload: meter });
     setModalVisible(false);
-    // console.log(meter);
   };
 
   const handleSelectCategory = (category: Section) => {
     const selectedMeters = category.data;
     setSelectedMeter(selectedMeters);
     setSelectedMeterState([category.title]);
+    dispatch({ type: 'SET_METER', payload: selectedMeters });
     setModalVisible(false);
-    // console.log(selectedMeters);
   };
 
   const sections = groupMeters(meters);
