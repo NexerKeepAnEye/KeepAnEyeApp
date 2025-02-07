@@ -6,6 +6,7 @@ import { Text } from 'react-native-paper';
 import { useFilterContext } from '../Context/FilterContext';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { BarChartStyle } from '../Style/ChartStyle';
+import { deviceHeight } from '../Style/Dimensions';
 import { MeterData, Tooltip } from '../Types/Type';
 
 interface MeterDataBarChartProps {
@@ -94,7 +95,7 @@ export default function MeterDataBarChart({
   return (
     <View style={BarChartStyle.chartContainer}>
       <BarChart
-        overflowTop={50}
+        overflowTop={deviceHeight * 0.01}
         data={chartData}
         focusBarOnPress={true}
         focusedBarConfig={{
@@ -102,19 +103,16 @@ export default function MeterDataBarChart({
         }}
         isAnimated
         adjustToWidth
-        height={250}
+        height={deviceHeight * 0.27}
         barWidth={30}
         spacing={20}
         barBorderTopLeftRadius={4}
         barBorderTopRightRadius={4}
-        // frontColor="#ea5b0c"
-        // showGradient={true}
-        // gradientColor=" #ea5b0c"
         yAxisColor={'#2222'}
         xAxisColor={'#2222'}
         stepValue={stepValue}
         maxValue={maxValue}
-        yAxisLabelWidth={50}
+        yAxisLabelWidth={deviceHeight * 0.05}
         onPress={(item: Tooltip, index: number, x: number, y: number) =>
           handleBarPress(item.value, x, y, item.originalValue)
         }
