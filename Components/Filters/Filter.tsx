@@ -8,6 +8,7 @@ import {
 } from 'react-native-paper';
 import { fetchMeterData } from '../../Api/fetchAPI';
 import StorageService from '../../AsyncStorage/AsyncStorage';
+import { useFilterContext } from '../../Context/FilterContext';
 import { usePremiseContext } from '../../Context/PremiseContext';
 import { useSnackbar } from '../../Context/SnackbarContext';
 import { filterStyle } from '../../Style/FilterStyle';
@@ -72,15 +73,21 @@ const Filter = ({
     };
     fetchApiKey();
   }, []);
-
+  const { state: filterstate } = useFilterContext();
   const handleSearch = async () => {
     setLoading(true);
     let meterData: MeterData[] | null = null;
 
+    if (meterId !== undefined) {
+      [meterId] = filterstate.meter.map((m) => m.Id);
+    } else {
+      meterId = filterstate.meter[0].Id;
+    }
+
     const fetchDataForDateRange = async (fromDate: Date, toDate: Date) => {
       const data = await fetchMeterData(
         apikey ?? '',
-        selectedProductId,
+        selectedProductId ?? filterstate.meter[0].ProductId,
         translateResolution(resolution ?? ''),
         fromDate,
         toDate,
