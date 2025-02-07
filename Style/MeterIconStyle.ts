@@ -4,7 +4,7 @@ import { deviceHeight } from './Dimensions';
 export const MeterIconStyle = StyleSheet.create({
   icon: {
     fontSize: deviceHeight * 0.035,
-    top: deviceHeight * 0.017,
+    top: deviceHeight * 0.001,
     justifyContent: 'center',
   },
 });
