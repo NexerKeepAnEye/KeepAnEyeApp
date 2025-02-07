@@ -10,6 +10,7 @@ import {
 import { Divider } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { width } from '../../Style/Dimensions';
+import { meterSearch } from '../../Style/MeterSearchStyle';
 import { searchButtonStyle } from '../../Style/SearchButtonStyle';
 import { yearSearchStyle } from '../../Style/YearSearchStyle';
 
@@ -41,20 +42,22 @@ export function YearSearch({ setSelectedYear, label }: YearSearchProps) {
         >
           <Text style={yearSearchStyle.pickerText}>{year ? year : label}</Text>
         </TouchableOpacity>
-        {year && (
-          <TouchableOpacity
-            style={searchButtonStyle.meterResetButton}
-            onPress={() => {
-              setYear(null);
-            }}
-          >
-            <Icon
-              name="close"
-              size={width * 0.03}
-              color="#333"
-            />
-          </TouchableOpacity>
-        )}
+        <View style={meterSearch.iconResetContainer}>
+          {year && (
+            <TouchableOpacity
+              style={searchButtonStyle.yearResetButton}
+              onPress={() => {
+                setYear(null);
+              }}
+            >
+              <Icon
+                name="close"
+                size={width * 0.03}
+                color="#333"
+              />
+            </TouchableOpacity>
+          )}
+        </View>
         <Modal
           visible={modalVisible}
           transparent={true}

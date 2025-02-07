@@ -17,7 +17,17 @@ export const meterSearch = StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: 'white',
     opacity: 0.8,
-    marginRight: 10,
+    marginRight: 1,
+  },
+  iconResetContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#dddddd',
+    width: width * 0,
+    height: height * 0,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
   },
   pickerText: {
     fontSize: width * 0.045,
