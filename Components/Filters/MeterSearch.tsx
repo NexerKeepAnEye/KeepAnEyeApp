@@ -77,25 +77,27 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
             numberOfLines={1}
             ellipsizeMode="tail"
           >
-            {selectedMeter?.toString() || ' Mätare '}
+            {selectedMeter?.toString() || 'Mätare'}
           </Text>
         </TouchableOpacity>
+        <View style={meterSearch.iconResetContainer}>
+          {selectedMeter && (
+            <TouchableOpacity
+              style={searchButtonStyle.meterResetButton}
+              onPress={() => {
+                setSelectedMeterState(undefined);
+                dispatch({ type: 'SET_METER', payload: initialState.meter });
+              }}
+            >
+              <Icon
+                name="close"
+                size={width * 0.03}
+                color="black"
+              />
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
-      {selectedMeter && (
-        <TouchableOpacity
-          style={searchButtonStyle.meterResetButton}
-          onPress={() => {
-            setSelectedMeterState(undefined);
-            dispatch({ type: 'SET_METER', payload: initialState.meter });
-          }}
-        >
-          <Icon
-            name="close"
-            size={width * 0.03}
-            color="#333"
-          />
-        </TouchableOpacity>
-      )}
       <Modal
         visible={modalVisible}
         transparent={true}

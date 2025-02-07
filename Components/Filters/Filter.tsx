@@ -287,6 +287,18 @@ const Filter = ({
                   />
                 </>
               )}
+              {filters.includes('compareYears') && setYear && setYearTwo && (
+                <>
+                  <YearSearch
+                    setSelectedYear={setYear}
+                    label="År"
+                  />
+                  <YearSearch
+                    setSelectedYear={setYearTwo}
+                    label="År"
+                  />
+                </>
+              )}
               {filters.includes('meter') && setMeter && (
                 <MeterSearch
                   setSelectedMeter={setMeter}
@@ -309,18 +321,6 @@ const Filter = ({
                   isChecked={isChecked}
                   setIsChecked={setIsChecked}
                 />
-              )}
-              {filters.includes('compareYears') && setYear && setYearTwo && (
-                <>
-                  <YearSearch
-                    setSelectedYear={setYear}
-                    label="År"
-                  />
-                  <YearSearch
-                    setSelectedYear={setYearTwo}
-                    label="År"
-                  />
-                </>
               )}
             </View>
           </ScrollView>
