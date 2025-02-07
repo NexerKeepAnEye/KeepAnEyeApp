@@ -1,13 +1,12 @@
 import { StyleSheet } from 'react-native';
-import { height, width } from './Dimensions';
+import { deviceHeight, deviceWidth } from './Dimensions';
 
 export const dateStyles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     gap: 5,
-    marginBottom: 10,
+    marginBottom: deviceHeight * 0.01,
     marginHorizontal: 5,
-    // marginTop: 12,
   },
   dateContainer: {
     alignItems: 'center',
@@ -17,16 +16,16 @@ export const dateStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#dddddd',
     borderRadius: 10,
-    maxWidth: width * 0.3,
-    minWidth: width * 0.2,
+    maxWidth: deviceWidth * 0.3,
+    minWidth: deviceWidth * 0.2,
     paddingHorizontal: 10,
-    height: height * 0.05,
+    height: deviceHeight * 0.053,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
   },
   pickerText: {
-    fontSize: width * 0.045,
+    fontSize: deviceWidth * 0.045,
   },
   modalContainer: {
     flex: 1,
@@ -35,7 +34,7 @@ export const dateStyles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
-    width: width * 0.8,
+    width: deviceWidth * 0.8,
     backgroundColor: 'white',
     borderRadius: 10,
     alignItems: 'center',
