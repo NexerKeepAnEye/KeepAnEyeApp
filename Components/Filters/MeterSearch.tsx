@@ -31,7 +31,9 @@ interface MeterSearchProps {
 export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
   const { state: filterstate, dispatch } = useContext(FilterContext);
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedMeter, setSelectedMeterState] = useState<string[] | undefined>(
+  const [selectedMeter, setSelectedMeterState] = useState<
+    Meter[] | string[] | undefined
+  >(
     filterstate.meter.length > 0 && filterstate.meter.length < 2
       ? filterstate.meter.map((m) => m.Name)
       : groupMeters(filterstate.meter).map((m) => m.title),
