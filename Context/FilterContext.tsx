@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, ReactNode } from 'react';
+import React, { createContext, useReducer, ReactNode, useContext } from 'react';
 import {
   filterReducer,
   initialState,
@@ -27,5 +27,7 @@ const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
     </FilterContext.Provider>
   );
 };
+
+export const useFilterContext = () => useContext(FilterContext);
 
 export { FilterContext, FilterProvider };
