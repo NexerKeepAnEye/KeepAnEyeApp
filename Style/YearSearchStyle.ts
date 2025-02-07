@@ -18,7 +18,7 @@ export const yearSearchStyle = StyleSheet.create({
     backgroundColor: 'white',
     opacity: 0.8,
     paddingHorizontal: 10,
-    marginTop: 12,
+    // marginTop: 12,
   },
   pickerText: {
     fontSize: width * 0.045,

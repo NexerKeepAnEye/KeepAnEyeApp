@@ -3,6 +3,7 @@ import { deviceHeight, deviceWidth } from './Dimensions';
 
 export const filterStyle = StyleSheet.create({
   container: {
+    marginTop: deviceHeight * 0.007,
     flexDirection: 'row',
     overflow: 'visible',
   },
