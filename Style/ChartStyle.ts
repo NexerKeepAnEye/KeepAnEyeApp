@@ -16,8 +16,6 @@ export const BarChartStyle = StyleSheet.create({
     borderColor: '#ccc',
     marginLeft: -deviceWidth * 0.015,
     marginBottom: -40, //unavaibale to use deviceprops, since max value exceeds amount needed
-    zIndex: 1,
-    top: 50,
   },
   tooltipText: {
     color: '#222',
