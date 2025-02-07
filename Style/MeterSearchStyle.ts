@@ -5,10 +5,12 @@ export const meterSearch = StyleSheet.create({
   container: {
     maxWidth: width * 0.45,
     minHeight: height * 0.06,
-    marginTop: 12,
+    // marginTop: 12,
   },
   pickerContainer: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     borderWidth: 1,
     borderColor: '#dddddd',
     borderRadius: 10,
@@ -17,7 +19,17 @@ export const meterSearch = StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: 'white',
     opacity: 0.8,
-    marginRight: 10,
+    marginRight: 3,
+  },
+  iconResetContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#dddddd',
+    width: width * 0,
+    height: height * 0,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
   },
   pickerText: {
     fontSize: width * 0.045,
