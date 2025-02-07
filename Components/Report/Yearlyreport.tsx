@@ -18,38 +18,19 @@ export const YearlyReport = () => {
     filterReducer,
     initialState,
   );
-  const { state: filterstate } = useFilterContext();
-  const [productName, setProductName] = useState<string | null>(
-    filterstate.meter.map((m) => m.ProductCode).toString(),
-  );
-
-  const [searchClicked, setSearchClicked] = useState(false);
-
-  const filteredResults = state.filteredResults;
-
-  const { state: premiseState } = usePremiseContext();
   const [minValue, setMinValue] = useState<number | null>(null);
   const [maxValue, setMaxValue] = useState<number | null>(null);
   const [averageValue, setAverageValue] = useState<number | null>(null);
   const [sumValue, setSumValue] = useState<number | null>(null);
+  const [searchClicked, setSearchClicked] = useState(false);
 
-  const meter = state.meter;
-  const productCode = meter && meter.length > 0 ? meter[0].ProductCode : null;
-
-  useEffect(() => {
-    const fetchProductName = async () => {
-      if (!productCode) return;
-      try {
-        const products = premiseState.products;
-        const product =
-          products.find((item) => item.Code === productCode)?.Unit || null;
-        setProductName(product);
-      } catch (error) {
-        console.error('Error fetching product:', error);
-      }
-    };
-    fetchProductName();
-  }, [productCode]);
+  const { state: filterstate } = useFilterContext();
+  const { state: premiseState } = usePremiseContext();
+  const productCodes = filterstate.meter.map((m) => m.ProductCode).toString();
+  const productName =
+    premiseState.products.find((item) => item.Code === productCodes)?.Unit ||
+    '';
+  const filteredResults = state.filteredResults;
 
   useEffect(() => {
     if (filteredResults.length > 0) {
@@ -116,19 +97,27 @@ export const YearlyReport = () => {
                     </DataTable.Row>
                   ))}
                   <DataTable.Row>
-                    <DataTable.Cell>Min</DataTable.Cell>
+                    <DataTable.Cell textStyle={ReportGridStyle.columntext}>
+                      Min
+                    </DataTable.Cell>
                     <DataTable.Cell>{minValue}</DataTable.Cell>
                   </DataTable.Row>
                   <DataTable.Row>
-                    <DataTable.Cell>Max</DataTable.Cell>
+                    <DataTable.Cell textStyle={ReportGridStyle.columntext}>
+                      Max
+                    </DataTable.Cell>
                     <DataTable.Cell>{maxValue}</DataTable.Cell>
                   </DataTable.Row>
                   <DataTable.Row>
-                    <DataTable.Cell>Medel</DataTable.Cell>
+                    <DataTable.Cell textStyle={ReportGridStyle.columntext}>
+                      Medel
+                    </DataTable.Cell>
                     <DataTable.Cell>{Math.round(averageValue!)}</DataTable.Cell>
                   </DataTable.Row>
                   <DataTable.Row>
-                    <DataTable.Cell>Summa</DataTable.Cell>
+                    <DataTable.Cell textStyle={ReportGridStyle.columntext}>
+                      Summa
+                    </DataTable.Cell>
                     <DataTable.Cell>{sumValue}</DataTable.Cell>
                   </DataTable.Row>
                 </DataTable>
