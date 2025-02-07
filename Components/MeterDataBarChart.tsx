@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { View } from 'react-native';
 import { BarChart } from 'react-native-gifted-charts';
 import { Text } from 'react-native-paper';
+import { useFilterContext } from '../Context/FilterContext';
+import { usePremiseContext } from '../Context/PremiseContext';
 import { BarChartStyle } from '../Style/ChartStyle';
 import { MeterData, Tooltip } from '../Types/Type';
 
@@ -83,6 +85,12 @@ export default function MeterDataBarChart({
     setTooltip({ originalValue, visible: true, value: originalValue, x, y });
   };
 
+  const { state: filterstate } = useFilterContext();
+  const { state: premiseState } = usePremiseContext();
+  const productCode = filterstate.meter.map((m) => m.ProductCode).toString();
+  const productName =
+    premiseState.products.find((item) => item.Code === productCode)?.Unit || '';
+
   return (
     <View style={BarChartStyle.chartContainer}>
       <BarChart
@@ -118,7 +126,9 @@ export default function MeterDataBarChart({
                 { top: tooltip.y, left: tooltip.x },
               ]}
             >
-              <Text style={BarChartStyle.tooltipText}>{tooltip.value}</Text>
+              <Text style={BarChartStyle.tooltipText}>
+                {tooltip.value + ' ' + productName}
+              </Text>
             </View>
           );
         }}

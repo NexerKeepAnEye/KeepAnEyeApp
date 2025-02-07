@@ -1,6 +1,7 @@
 import React, { Reducer, useEffect, useReducer, useState } from 'react';
 import { Text, View } from 'react-native';
 import { DataTable, Divider } from 'react-native-paper';
+import { useFilterContext } from '../../Context/FilterContext';
 import {
   FilterAction,
   filterReducer,
@@ -17,7 +18,10 @@ export const YearlyReport = () => {
     filterReducer,
     initialState,
   );
-  const [productName, setProductName] = useState<string | null>(null);
+  const { state: filterstate } = useFilterContext();
+  const [productName, setProductName] = useState<string | null>(
+    filterstate.meter.map((m) => m.ProductCode).toString(),
+  );
 
   const [searchClicked, setSearchClicked] = useState(false);
 

@@ -26,6 +26,7 @@ export const BarChartStyle = StyleSheet.create({
     marginBottom: -40,
     zIndex: 1,
     top: 50,
+    right: 15,
   },
   tooltipText: {
     color: '#000',
