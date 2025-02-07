@@ -43,24 +43,6 @@ export const MonthlyReport = () => {
     return date.toLocaleString('default', { month: 'long' });
   };
 
-  const meter = state.meter;
-  const productCode = meter && meter.length > 0 ? meter[0].ProductCode : null;
-
-  useEffect(() => {
-    const fetchProductName = async () => {
-      if (!productCode) return;
-      try {
-        const products = premiseState.products;
-        const product =
-          products.find((item) => item.Code === productCode)?.Unit || null;
-        setProductName(product);
-      } catch (error) {
-        console.error('Error fetching product:', error);
-      }
-    };
-    fetchProductName();
-  }, [productCode]);
-
   useEffect(() => {
     if (filteredResults.length > 0) {
       const values = filteredResults.map((item) => item.Value);

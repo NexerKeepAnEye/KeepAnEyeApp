@@ -18,6 +18,11 @@ export const YearlyReport = () => {
     filterReducer,
     initialState,
   );
+  const [minValue, setMinValue] = useState<number | null>(null);
+  const [maxValue, setMaxValue] = useState<number | null>(null);
+  const [averageValue, setAverageValue] = useState<number | null>(null);
+  const [sumValue, setSumValue] = useState<number | null>(null);
+  const [searchClicked, setSearchClicked] = useState(false);
 
   const { state: filterstate } = useFilterContext();
   const { state: premiseState } = usePremiseContext();
@@ -25,33 +30,7 @@ export const YearlyReport = () => {
   const productName =
     premiseState.products.find((item) => item.Code === productCodes)?.Unit ||
     '';
-
-  const [searchClicked, setSearchClicked] = useState(false);
-
   const filteredResults = state.filteredResults;
-
-  const [minValue, setMinValue] = useState<number | null>(null);
-  const [maxValue, setMaxValue] = useState<number | null>(null);
-  const [averageValue, setAverageValue] = useState<number | null>(null);
-  const [sumValue, setSumValue] = useState<number | null>(null);
-
-  const meter = state.meter;
-  const productCode = meter && meter.length > 0 ? meter[0].ProductCode : null;
-
-  useEffect(() => {
-    const fetchProductName = async () => {
-      if (!productCode) return;
-      try {
-        const products = premiseState.products;
-        const product =
-          products.find((item) => item.Code === productCode)?.Unit || null;
-        setProductName(product);
-      } catch (error) {
-        console.error('Error fetching product:', error);
-      }
-    };
-    fetchProductName();
-  }, [productCode]);
 
   useEffect(() => {
     if (filteredResults.length > 0) {
