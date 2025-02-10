@@ -5,7 +5,7 @@ import {
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Alert, TouchableOpacity, View } from 'react-native';
 import StorageService from '../AsyncStorage/AsyncStorage';
 import { LogoTitle } from '../Components/Header';
@@ -36,7 +36,7 @@ export default function RootStackNavigator() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { state } = usePremiseContext();
-  const handleLogout = async () => {
+  const handleLogout = useCallback(async () => {
     console.log('PRESSED');
     Alert.alert(
       '',
@@ -59,7 +59,7 @@ export default function RootStackNavigator() {
       ],
       { cancelable: false },
     );
-  };
+  }, [navigation, state]);
 
   useEffect(() => {
     const apiKey = StorageService.getApiKey();
