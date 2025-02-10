@@ -18,9 +18,10 @@ export const StartScreenStyle = StyleSheet.create({
   textHeader: {
     marginTop: deviceHeight * 0.03,
     fontSize: deviceHeight * 0.04,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     justifyContent: 'center',
     alignItems: 'center',
+    fontFamily: 'inter_SemiBoldItalic',
   },
   itemBox: {
     width: deviceWidth * 1,
@@ -38,10 +39,11 @@ export const StartScreenStyle = StyleSheet.create({
     marginRight: deviceWidth * 0.05,
   },
   textItem: {
-    fontSize: deviceHeight * 0.018,
+    fontSize: deviceHeight * 0.02,
     marginLeft: deviceWidth * 0.05,
-    color: 'black',
+    // color: 'black',
     flex: 1,
+    fontFamily: 'inter_Regular',
   },
   listItemPositionStart: {
     justifyContent: 'flex-start',

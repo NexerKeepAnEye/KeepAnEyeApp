@@ -28,10 +28,12 @@ export const MeterComponentStyle = StyleSheet.create({
   textStyleName: {
     fontSize: deviceWidth * 0.045,
     color: '#222',
+    fontFamily: 'inter_Regular',
   },
   textStyleProductCode: {
     fontSize: deviceWidth * 0.04,
     color: '#d3d3d3',
+    fontFamily: 'inter_Regular',
   },
   title: {
     alignItems: 'center',

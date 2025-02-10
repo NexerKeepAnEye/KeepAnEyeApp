@@ -10,14 +10,14 @@
 // export async function fetchProduct(apiKey) {
 //   try {
 //     const response = await fetch(
-//       'https://keeptest.uddevallaenergi.se//api/v1/Product',
+//       'https://www.keepaneye.net/api/v1/Product',
 //       {
 //         method: 'GET',
 //         headers: {
 //           Accept: 'application/json; charset=utf-8',
 //           'X-API-Key': apiKey,
 //         },
-//         agent,
+//         // agent,
 //       },
 //     );
 
@@ -34,7 +34,7 @@
 //   }
 // }
 
-// fetchProduct('b49ab053-04b3-4806-9cbd-68ff9adc8d01');
+// fetchProduct('193c3553-494a-4d0f-a019-eb8cffe3c45d');
 
 // export async function fetchMeterData(
 //   apiKey,

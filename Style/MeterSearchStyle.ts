@@ -69,7 +69,8 @@ export const meterSearch = StyleSheet.create({
   },
   sectionHeaderText: {
     fontSize: width * 0.045,
-    fontWeight: 'bold',
+    marginLeft: 8,
+    fontFamily: 'inter_Bold',
   },
   dropdownItem: {
     flexDirection: 'row',
