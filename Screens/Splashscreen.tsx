@@ -1,70 +1,59 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import AppLoading from 'expo-app-loading';
 import { hide, preventAutoHideAsync, setOptions } from 'expo-splash-screen';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { fetchPremise, fetchProduct } from '../Api/fetchAPI';
 import StorageService from '../AsyncStorage/AsyncStorage';
 import { usePremiseContext } from '../Context/PremiseContext';
+import useFonts from '../Hooks/UseFonts';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 
 // Keep the splash screen visible while we fetch resources
 preventAutoHideAsync();
 
 export default function Splash() {
-  const [, setAppIsReady] = useState(false);
+  const [appIsReady, setAppIsReady] = useState(false);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   const { dispatch } = usePremiseContext();
   setOptions({
     fade: true,
   });
 
   useEffect(() => {
-    const checkApiKey = async () => {
-      const storedApiKey = await StorageService.getApiKey();
-      if (storedApiKey) {
-        const products = await fetchProduct(storedApiKey);
-        dispatch({ type: 'SET_PRODUCT', payload: products });
-        const data = await fetchPremise(storedApiKey);
-        dispatch({ type: 'SET_PREMISES', payload: data });
-        navigation.navigate('StartScreen');
-        hide();
-      } else {
-        navigation.navigate('SignInScreen');
+    const prepareApp = async () => {
+      try {
+        await LoadFonts();
+        const storedApiKey = await StorageService.getApiKey();
+        if (storedApiKey) {
+          const products = await fetchProduct(storedApiKey);
+          dispatch({ type: 'SET_PRODUCT', payload: products });
+          const data = await fetchPremise(storedApiKey);
+          dispatch({ type: 'SET_PREMISES', payload: data });
+          navigation.navigate('StartScreen');
+        } else {
+          navigation.navigate('SignInScreen');
+        }
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setAppIsReady(true);
         hide();
       }
     };
 
-    checkApiKey();
-
-    setAppIsReady(true);
+    prepareApp();
   }, []);
 
-  // const onLayoutRootView = useCallback(() => {
-  //   if (appIsReady) {
-  //     // This tells the splash screen to hide immediately! If we call this after
-  //     // `setAppIsReady`, then we may see a blank screen while the app is
-  //     // loading its initial state and rendering its first pixels. So instead,
-  //     // we hide the splash screen once we know the root view has already
-  //     // performed layout.
-  //     // Set the animation options. This is optional.
-  //     // hide();
-  //   }
-  // }, [appIsReady]);
+  const LoadFonts = async () => {
+    await useFonts();
+  };
 
-  // if (!appIsReady) {
-  //   return null;
-  // }
+  if (!appIsReady) {
+    return <AppLoading />;
+  }
 
   return null;
-  //   <View
-  //     style={SplashScreenStyle.container}
-  //     onLayout={onLayoutRootView}
-  //   >
-  //     <Image
-  //       source={UpscaleLogo}
-  //       resizeMode="center"
-  //       style={{ width: 200, height: 200 }}
-  //     />
-  //   </View>
 }
