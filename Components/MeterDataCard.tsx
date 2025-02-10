@@ -4,7 +4,7 @@ import { Text, TouchableHighlight, View } from 'react-native';
 import { Card } from 'react-native-paper';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
-import { MeterDataCardStyle } from '../Style/MeterDataCardStyle';
+import { CardStyle } from '../Style/MeterDataCardStyle';
 import MeterIcon from './MeterIcon';
 
 type Props = {
@@ -23,27 +23,25 @@ export default function MeterDataCard({ meterId, navigation }: Props) {
         navigation?.goBack();
       }}
       underlayColor={'#ddd'}
-      style={MeterDataCardStyle.cardButton}
+      style={CardStyle.cardButton}
     >
-      <Card style={MeterDataCardStyle.card}>
-        <View style={MeterDataCardStyle.row}>
+      <Card style={CardStyle.card}>
+        <View style={CardStyle.row}>
           {state.selectedPremise?.Name ? (
             <>
-              <View style={MeterDataCardStyle.iconContainer}>
-                <MeterIcon productId={meter?.ProductId ?? 0} />
+              <View style={CardStyle.iconContainer}>
+                <MeterIcon productCode={meter?.ProductCode ?? ''} />
               </View>
-              <Card.Content style={MeterDataCardStyle.content}>
-                <Text style={MeterDataCardStyle.title}>{meter?.Name}</Text>
-                <Text style={MeterDataCardStyle.subtitle}>
+              <Card.Content style={CardStyle.content}>
+                <Text style={CardStyle.title}>{meter?.Name}</Text>
+                <Text style={CardStyle.subtitle}>
                   Produktkod: {meter?.ProductCode}
                 </Text>
               </Card.Content>
             </>
           ) : (
-            <Card.Content style={MeterDataCardStyle.content}>
-              <Text style={MeterDataCardStyle.noTitle}>
-                No premise provided!
-              </Text>
+            <Card.Content style={CardStyle.content}>
+              <Text style={CardStyle.noTitle}>No premise provided!</Text>
             </Card.Content>
           )}
         </View>

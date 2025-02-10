@@ -1,5 +1,4 @@
 import { Meter, MeterData, Premise, Product } from '../Types/Type';
-import { mockApiFetch } from './mockApi';
 // import https from 'https';
 // import fetch from 'node-fetch';
 
@@ -7,9 +6,11 @@ import { mockApiFetch } from './mockApi';
 //   rejectUnauthorized: false,
 // });
 
+const baseUrl = process.env.EXPO_PUBLIC_API_URL;
+
 export async function fetchPremise(apiKey: string): Promise<Premise[]> {
   try {
-    const response = await mockApiFetch('/premise', {
+    const response = await fetch(`${baseUrl}/Premise`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -51,7 +52,7 @@ export async function fetchPremise(apiKey: string): Promise<Premise[]> {
 
 export async function fetchProduct(apiKey: string): Promise<Product[]> {
   try {
-    const response = await mockApiFetch('/product', {
+    const response = await fetch(`${baseUrl}/product`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -93,7 +94,7 @@ export async function fetchMeterData(
   meterIds: number[] = [],
 ): Promise<MeterData[]> {
   try {
-    const response = await mockApiFetch('/meterdata', {
+    const response = await fetch(`${baseUrl}/meterdata`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

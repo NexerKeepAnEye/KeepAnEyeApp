@@ -23,6 +23,7 @@ export const yearSearchStyle = StyleSheet.create({
   pickerText: {
     fontSize: width * 0.045,
     flexShrink: 1,
+    fontFamily: 'inter_Regular',
   },
   modalContainer: {
     flex: 1,

@@ -29,7 +29,7 @@ export const premiseCardStyle = StyleSheet.create({
   title: {
     color: '#000000',
     fontSize: deviceHeight * 0.02,
-    fontWeight: 'bold',
+    fontFamily: 'inter_SemiBold',
   },
   noTitle: {
     color: 'red',
@@ -41,6 +41,7 @@ export const premiseCardStyle = StyleSheet.create({
   subtitle: {
     fontSize: deviceHeight * 0.018,
     color: '#666',
+    fontFamily: 'inter_Regular',
   },
   cardButton: {
     borderRadius: 10,

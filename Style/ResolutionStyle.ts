@@ -24,6 +24,7 @@ export const ResolutionStyle = StyleSheet.create({
     fontSize: deviceWidth * 0.045,
     color: '#222',
     textAlign: 'center',
+    fontFamily: 'inter_Regular',
   },
   modalContainer: {
     flex: 1,
@@ -39,9 +40,9 @@ export const ResolutionStyle = StyleSheet.create({
     alignItems: 'center',
   },
   modalTitle: {
-    fontSize: deviceHeight * 0.02,
-    fontWeight: 'bold',
+    fontSize: deviceHeight * 0.03,
     marginBottom: deviceHeight * 0.02,
+    fontFamily: 'inter_Bold',
   },
   modalItem: {
     padding: 10,
@@ -51,10 +52,11 @@ export const ResolutionStyle = StyleSheet.create({
     alignItems: 'center',
   },
   modalItemText: {
-    fontSize: deviceHeight * 0.017,
+    fontSize: deviceHeight * 0.02,
+    fontFamily: 'inter_Regular',
   },
   modalCloseButton: {
-    marginTop: deviceHeight * 0.01,
+    marginTop: deviceHeight * 0.015,
   },
   modalCloseButtonText: {
     color: '#056ffd',

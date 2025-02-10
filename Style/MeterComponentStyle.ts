@@ -34,17 +34,19 @@ export const MeterComponentStyle = StyleSheet.create({
   textStyleName: {
     fontSize: deviceWidth * 0.045,
     color: '#222',
+    fontFamily: 'inter_Regular',
   },
   textStyleProductCode: {
     fontSize: deviceWidth * 0.04,
     color: '#d3d3d3',
+    fontFamily: 'inter_Regular',
   },
   title: {
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
     fontSize: deviceHeight * 0.02,
-    fontWeight: 'semibold',
+    fontFamily: 'inter_Bold',
     opacity: 0.7,
     marginTop: deviceHeight * 0.01,
     paddingBottom: 4,

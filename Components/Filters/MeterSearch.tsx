@@ -82,7 +82,7 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
             {selectedMeter?.toString() || 'Mätare'}
           </Text>
         </TouchableOpacity>
-        <View style={meterSearch.iconResetContainer}>
+        <View style={meterSearch.iconMeterResetContainer}>
           {selectedMeter && (
             <TouchableOpacity
               style={searchButtonStyle.meterResetButton}
@@ -118,7 +118,7 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
                       style={meterSearch.dropdownItem}
                       onPress={() => handleSelectMeter([item])}
                     >
-                      <MeterIcon productId={item.ProductId} />
+                      <MeterIcon productCode={item.ProductCode} />
                       <View style={meterSearch.meterTextContainer}>
                         <Text style={meterSearch.meterText}>{item.Name}</Text>
                         <Text style={meterSearch.meterSubText}>

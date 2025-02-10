@@ -33,6 +33,7 @@ export const searchButtonStyle = StyleSheet.create({
     color: 'white',
     fontSize: deviceHeight * 0.017,
     textAlign: 'center',
+    fontFamily: 'inter_Regular',
   },
   resetButton: {
     position: 'absolute',
@@ -45,7 +46,7 @@ export const searchButtonStyle = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     marginTop: -deviceHeight * 0.01,
-    left: deviceWidth * 0.255,
+    left: deviceWidth * 0.27,
     overflow: 'visible',
   },
   resolutionButtonReset: {
@@ -76,8 +77,9 @@ export const searchButtonStyle = StyleSheet.create({
     // marginTop: -height * 0.062,
     // top: -height * 0.0025,
     // left: width * 0.025,
-    top: -deviceHeight * 0.04,
-    left: deviceWidth * 0.1,
+    // top: -deviceHeight * 0.04,
+    // left: deviceWidth * 0.1,
+
     overflow: 'visible',
   },
   yearResetButton: {

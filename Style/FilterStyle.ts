@@ -18,8 +18,8 @@ export const filterStyle = StyleSheet.create({
 
   snackBarText: {
     fontSize: 16,
-    fontWeight: 'bold',
     color: 'white',
+    fontFamily: 'inter_Bold',
   },
   buttonContainer: {
     justifyContent: 'space-between',

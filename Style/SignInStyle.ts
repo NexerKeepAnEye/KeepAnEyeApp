@@ -26,10 +26,12 @@ export const SignIn = StyleSheet.create({
   title: {
     fontSize: deviceWidth * 0.05,
     marginBottom: deviceHeight * 0.01,
+    fontFamily: 'inter_Bold',
   },
   input: {
     width: deviceWidth * 0.8,
     marginBottom: deviceHeight * 0.01,
+    fontFamily: 'inter_Regular',
   },
   button: {
     marginTop: deviceHeight * 0.01,
@@ -44,7 +46,7 @@ export const SignIn = StyleSheet.create({
   buttonText: {
     fontSize: deviceWidth * 0.042,
     color: '#fff',
-    fontWeight: 'bold',
+    fontFamily: 'inter_SemiBold',
   },
   footerLogo: {
     top: deviceHeight * 0.27,
@@ -64,7 +66,7 @@ export const SignIn = StyleSheet.create({
     opacity: 0.8,
     fontSize: deviceWidth * 0.042,
     color: '#fff',
-    fontWeight: 'bold',
     flexDirection: 'row',
+    fontFamily: 'inter_SemiBold',
   },
 });

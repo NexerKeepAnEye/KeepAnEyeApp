@@ -24,7 +24,7 @@ export const ReportGridStyle = StyleSheet.create({
     marginTop: deviceHeight * 0.02,
   },
   columntext: {
-    fontWeight: 'bold',
+    fontFamily: 'inter_Bold',
   },
   flex1: {
     flex: 1,

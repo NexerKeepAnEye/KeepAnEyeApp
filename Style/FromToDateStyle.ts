@@ -14,6 +14,7 @@ export const dateStyles = StyleSheet.create({
     position: 'relative',
   },
   pickerContainer: {
+    flexDirection: 'row',
     borderWidth: 1,
     borderColor: '#dddddd',
     borderRadius: 10,
@@ -27,6 +28,7 @@ export const dateStyles = StyleSheet.create({
   },
   pickerText: {
     fontSize: deviceHeight * 0.021,
+    fontFamily: 'inter_Regular',
   },
   modalContainer: {
     flex: 1,

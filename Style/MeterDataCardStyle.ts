@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { deviceHeight, deviceWidth } from './Dimensions';
 
-export const MeterDataCardStyle = StyleSheet.create({
+export const CardStyle = StyleSheet.create({
   card: {
     marginBottom: deviceHeight * 0.01,
     marginTop: deviceHeight * 0.01,
@@ -30,18 +30,19 @@ export const MeterDataCardStyle = StyleSheet.create({
   title: {
     color: '#000000',
     fontSize: deviceHeight * 0.02,
-    fontWeight: 'bold',
+    fontFamily: 'inter_SemiBold',
   },
   noTitle: {
     color: 'red',
     fontSize: deviceHeight * 0.02,
-    fontWeight: 'bold',
+    fontFamily: 'inter_SemiBold',
     marginLeft: deviceWidth * 0.05,
     marginTop: deviceHeight * 0.02,
   },
   subtitle: {
     fontSize: deviceHeight * 0.018,
     color: '#666',
+    fontFamily: 'inter_Regular',
   },
   cardButton: {
     borderRadius: 10,
