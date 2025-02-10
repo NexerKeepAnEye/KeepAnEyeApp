@@ -6,7 +6,7 @@ import {
 } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { useEffect } from 'react';
-import { Alert, Pressable } from 'react-native';
+import { Alert, TouchableOpacity, View } from 'react-native';
 import StorageService from '../AsyncStorage/AsyncStorage';
 import { LogoTitle } from '../Components/Header';
 import { usePremiseContext } from '../Context/PremiseContext';
@@ -37,6 +37,7 @@ export default function RootStackNavigator() {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { state } = usePremiseContext();
   const handleLogout = async () => {
+    console.log('PRESSED');
     Alert.alert(
       '',
       'Är du säker på att du vill logga ut?',
@@ -72,13 +73,15 @@ export default function RootStackNavigator() {
       initialRouteName="Splash"
       screenOptions={() => ({
         headerRight: () => (
-          <Pressable onPress={handleLogout}>
-            <MaterialIcons
-              name="exit-to-app"
-              size={30}
-              color="#D32F2F"
-            />
-          </Pressable>
+          <TouchableOpacity onPress={handleLogout}>
+            <View style={{ padding: 10 }}>
+              <MaterialIcons
+                name="exit-to-app"
+                size={30}
+                color="#D32F2F"
+              />
+            </View>
+          </TouchableOpacity>
         ),
         headerTitle: () => <LogoTitle />,
         headerTitleAlign: 'center',
