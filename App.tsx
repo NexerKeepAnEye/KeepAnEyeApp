@@ -10,8 +10,6 @@ import { SnackbarProvider } from './Context/SnackbarContext';
 import RootStackNavigator from './Navigation/RootStackNavigation';
 
 export default function App() {
-  // const [state, dispatch] = useReducer(filterReducer, initialState);
-
   return (
     <SafeAreaProvider>
       <PaperProvider>
