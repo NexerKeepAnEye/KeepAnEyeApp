@@ -6,117 +6,152 @@ export interface Section {
 }
 
 export const groupMeters = (meters: Meter[]): Section[] => {
-  const filterProductIds = (meters: Meter[], ids: number[]) =>
-    meters.filter((meter) => ids.includes(meter.ProductId));
+  const filterProductIds = (meters: Meter[], ids: string[]) =>
+    meters.filter((meter) => ids.includes(meter.ProductCode));
 
   return [
     {
       title: 'Fjärrvärme',
-      data: filterProductIds(meters, [25]),
+      data: filterProductIds(meters, ['FJV','fjv']),
     },
     {
       title: 'El',
-      data: filterProductIds(meters, [26]),
+      data: filterProductIds(meters, ['EL','El']),
     },
     {
       title: 'Fjärrkyla',
-      data: filterProductIds(meters, [27]),
+      data: filterProductIds(meters, ['FJK','fjk']),
     },
     {
       title: 'Vatten',
-      data: filterProductIds(meters, [28, 426]),
+      data: filterProductIds(meters, ['VAT','vat']),
     },
     {
       title: 'Effekt',
-      data: filterProductIds(meters, [29]),
+      data: filterProductIds(meters, ['Effekt','effekt']),  
     },
     {
       title: 'Flöde',
-      data: filterProductIds(meters, [30]),
+      data: filterProductIds(meters, ['Flöde','flöde']),
     },
     {
       title: 'Temperatur',
-      data: filterProductIds(meters, [31, 32]),
+      data: filterProductIds(meters, ['TMP','tmp']),
     },
     {
       title: 'Volym',
-      data: filterProductIds(meters, [33]),
+      data: filterProductIds(meters, ['VOL','vol']),
     },
     {
       title: 'Olja',
-      data: filterProductIds(meters, []),
+      data: filterProductIds(meters, ['Olja, olja']),
     },
     {
       title: 'Fjärrvärme sek',
-      data: filterProductIds(meters, [63]),
+      data: filterProductIds(meters, ['FJV sek','fjv sek']),
     },
     {
       title: 'El sek',
-      data: filterProductIds(meters, [64]),
+      data: filterProductIds(meters, ['EL sek','El sek','el sek']),
     },
     {
       title: 'Fjärrkyla sek',
-      data: filterProductIds(meters, [65]),
+      data: filterProductIds(meters, ['FJK sek','fjk sek']),
     },
     {
       title: 'Vatten sek',
-      data: filterProductIds(meters, [66]),
+      data: filterProductIds(meters, ['VAT sek','vat sek']),
     },
     {
       title: 'Fjärrvärme under',
-      data: filterProductIds(meters, [67]),
+      data: filterProductIds(meters, ['FJV under','fjv under']),
     },
     {
       title: 'El under',
-      data: filterProductIds(meters, [68]),
+      data: filterProductIds(meters, ['EL under','el under']),
     },
     {
       title: 'Fjärrkyla under',
-      data: filterProductIds(meters, [69]),
+      data: filterProductIds(meters, ['FJK under','fjk under']),
     },
     {
       title: 'Vatten under',
-      data: filterProductIds(meters, [70]),
+      data: filterProductIds(meters, ['VAT under','vat under']),
     },
     {
       title: 'NN',
-      data: filterProductIds(meters, []),
+      data: filterProductIds(meters, ['NN','nn']),
     },
     {
       title: 'Fjärrvärme Virtuell',
-      data: filterProductIds(meters, []),
+      data: filterProductIds(meters, ['FJV virtuell','fjv virtuell']),
     },
     {
       title: 'El Virtuell',
-      data: filterProductIds(meters, []),
+      data: filterProductIds(meters, ['EL virtuell','el virtuell']),
     },
     {
       title: 'Industriellt Vatten',
-      data: filterProductIds(meters, [426]),
+      data: filterProductIds(meters, ['VAT ind','industriellt vatten']),
     },
     {
       title: 'BSK',
-      data: filterProductIds(meters, []),
+      data: filterProductIds(meters, ['bsk']),
     },
     {
       title: 'Utetemperatur',
-      data: filterProductIds(meters, []),
+      data: filterProductIds(meters, ['utetemperatur']),
     },
     {
       title: 'Fjärrvärme Effekt',
-      data: filterProductIds(meters, [505]),
+      data: filterProductIds(meters, ['FJV Effekt','fjv effekt']),
     },
     {
       title: 'El Effekt',
-      data: filterProductIds(meters, [506]),
+      data: filterProductIds(meters, ['EL Effekt','el effekt']),
     },
     {
       title: 'Övrigt',
       data: meters.filter(
         (meter) =>
           ![
-            22, 23, 24, 34, 35, 36, 37, 38, 39, 71, 72, 305, 306, 449, 476,
-          ].includes(meter.ProductId),
+            'FJV',
+            'fjv',
+            'EL',
+            'el',
+            'FJK',
+            'fjk',
+            'VAT',
+            'vat',
+            'Effekt',
+            'effekt',
+            'Flöde',
+            'flöde',
+            'TMP',
+            'tmp',
+            'VOL',
+            'vol',
+            'Olja',
+            'olja',
+            'FJV sek',
+            'fjv sek',
+            'EL sek',
+            'el sek',
+            'FJK sek',
+            'fjk sek',
+            'VAT sek',
+            'vat sek',
+            'FJV under',
+            'fjv under',
+            'EL under',
+            'el under',
+            'FJK under',
+            'fjk under',
+            'VAT under',
+            'vat under',
+            'NN',
+            'nn',
+          ].includes(meter.ProductCode),
       ),
     },
   ].filter((section) => section.data.length > 0);

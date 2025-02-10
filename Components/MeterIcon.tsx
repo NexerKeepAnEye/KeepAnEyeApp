@@ -3,26 +3,45 @@ import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { MeterIconStyle } from '../Style/MeterIconStyle';
 
-export default function MeterIcon({ productId }: { productId: number }) {
-  const isProductId = (productId: number, ids: number[]) =>
-    ids.includes(productId);
+export default function MeterIcon({ productCode }: { productCode: string }) {
+  const isProductId = (productCode: string, ids: string[]) =>
+    ids.includes(productCode);
 
-  const iconSelector = (productId: number) => {
-    if (isProductId(productId, [22, 25, 36, 63, 67, 305, 505])) {
+  const iconSelector = (productCode: string) => {
+    if (
+      isProductId(productCode, ['FJV', 'FJV sek', 'FJV under', 'FJV Effekt'])
+    ) {
+      // Uddevalla =  22, 36, 305
       return 'local-fire-department';
-    } else if (isProductId(productId, [28, 30, 33, 35, 39, 66, 70, 426])) {
+    } else if (
+      isProductId(productCode, [
+        'VAT',
+        'Flöde',
+        'VOL',
+        'VAT sek',
+        'VAT under',
+        'VAT ind',
+      ])
+    ) {
+      // Uddevalla = 35, 39
       return 'water-drop';
-    } else if (isProductId(productId, [31, 32, 72])) {
+    } else if (isProductId(productCode, ['TMP'])) {
+      // Uddevalla = 72
       return 'thermostat';
-    } else if (isProductId(productId, [23, 37, 64, 68, 306, 506])) {
+    } else if (
+      isProductId(productCode, ['EL', 'El', 'EL sek', 'EL under', 'EL Effekt'])
+    ) {
+      // Uddevalla = 23, 36, 306
       return 'bolt';
-    } else if (isProductId(productId, [24, 27, 34, 38, 65, 69])) {
+    } else if (isProductId(productCode, ['FJK', 'FJK sek', 'FJK under'])) {
+      // Uddevalla = 24, 34, 38
       return 'ac-unit';
-    } else if (isProductId(productId, [])) {
+    } else if (isProductId(productCode, [])) {
       return 'local-gas-station';
-    } else if (isProductId(productId, [26, 29])) {
+    } else if (isProductId(productCode, ['Effekt'])) {
+      //Uddevalla = 26,
       return 'electrical-services';
-    } else if (isProductId(productId, [0])) {
+    } else if (isProductId(productCode, [''])) {
       return 'double-arrow';
     }
 
@@ -32,7 +51,7 @@ export default function MeterIcon({ productId }: { productId: number }) {
   return (
     <View>
       <Icon
-        name={iconSelector(productId)}
+        name={iconSelector(productCode)}
         style={MeterIconStyle.icon}
       />
     </View>

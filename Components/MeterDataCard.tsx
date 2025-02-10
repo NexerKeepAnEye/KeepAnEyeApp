@@ -30,7 +30,7 @@ export default function MeterDataCard({ meterId, navigation }: Props) {
           {state.selectedPremise?.Name ? (
             <>
               <View style={CardStyle.iconContainer}>
-                <MeterIcon productId={meter?.ProductId ?? 0} />
+                <MeterIcon productCode={meter?.ProductCode ?? ''} />
               </View>
               <Card.Content style={CardStyle.content}>
                 <Text style={CardStyle.title}>{meter?.Name}</Text>
