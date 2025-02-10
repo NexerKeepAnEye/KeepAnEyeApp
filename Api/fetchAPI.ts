@@ -92,9 +92,32 @@ export async function fetchMeterData(
   to: Date,
   correctedValues?: boolean,
   premiseIds: number[] = [],
+  designations: string[] = [],
   meterIds: number[] = [],
 ): Promise<MeterData[]> {
   try {
+    // console.log(
+    //   'apikey: ',
+    //   apiKey,
+    //   'productId: ',
+    //   productId,
+    //   'resolution: ',
+    //   resolution,
+    //   'from: ',
+    //   new Date(from).toISOString().split('T')[0],
+    //   'to: ',
+    //   new Date(to).toISOString().split('T')[0],
+    //   'correctedValues: ',
+    //   correctedValues,
+    //   'premiseIds: ',
+    //   premiseIds,
+    //   'designations: ',
+    //   designations,
+    //   'meterIds: ',
+    //   meterIds,
+    // );
+    correctedValues = correctedValues ?? false;
+
     const response = await fetch(`${baseUrl}/meterdata`, {
       method: 'POST',
       headers: {
@@ -104,15 +127,19 @@ export async function fetchMeterData(
       },
       // agent,
       body: JSON.stringify({
-        productId,
-        resolution,
-        from,
-        to,
-        premiseIds,
-        meterIds,
+        ProductId: productId,
+        Resolution: resolution,
+        CorrectedValues: correctedValues,
+        From: new Date(from).toISOString().split('T')[0],
+        To: new Date(to).toISOString().split('T')[0],
+        PremiseIds: premiseIds,
+        Designation: designations,
+        MeterIds: meterIds,
       }),
     });
-    // console.log('fetchMeterData: ', JSON.stringify(response.json()));
+
+    // console.log('fetchMeterData: ', response);
+    // console.log('fetchMeterData: ', response);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -130,6 +157,7 @@ export async function fetchMeterData(
         Cost: item.Cost,
         Code: item.Code,
         PremiseId: item.PremiseId,
+        Designation: item.Designation,
         MeterId: item.MeterId,
       }),
     );

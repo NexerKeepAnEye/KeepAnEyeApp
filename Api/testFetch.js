@@ -49,7 +49,7 @@
 // ) {
 //   try {
 //     const response = await fetch(
-//       'https://test.keepaneye.net/api/v1/MeterData',
+//       'https://www.keepaneye.net/api/v1/MeterData',
 //       {
 //         method: 'POST',
 //         headers: {
@@ -85,13 +85,13 @@
 // }
 
 // fetchMeterData(
-//   'b49ab053-04b3-4806-9cbd-68ff9adc8d01', // apiKey
-//   22, // productId
-//   'monthly', // resolution
-//   '2023-01-01T00:00:00Z', // from
-//   '2024-01-01T00:00:00Z', // to
+//   '193c3553-494a-4d0f-a019-eb8cffe3c45d', // apiKey
+//   25, // productId
+//   'Monthly', // resolution
+//   '2023-01-01', // from
+//   '2024-01-01', // to
 //   false, // correctedValues
 //   [], // premiseIds
 //   [], // designations
-//   [], // meterIds
+//   [2303], // meterIds
 // );
