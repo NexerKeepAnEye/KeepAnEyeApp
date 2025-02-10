@@ -20,5 +20,6 @@ export const BarChartStyle = StyleSheet.create({
   },
   tooltipText: {
     color: '#222',
+    fontFamily: 'inter_Regular',
   },
 });

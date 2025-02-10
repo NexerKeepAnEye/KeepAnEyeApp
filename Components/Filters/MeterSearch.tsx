@@ -82,7 +82,7 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
             {selectedMeter?.toString() || 'Mätare'}
           </Text>
         </TouchableOpacity>
-        <View style={meterSearch.iconResetContainer}>
+        <View style={meterSearch.iconMeterResetContainer}>
           {selectedMeter && (
             <TouchableOpacity
               style={searchButtonStyle.meterResetButton}

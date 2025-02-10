@@ -46,7 +46,7 @@ export const MeterComponentStyle = StyleSheet.create({
     justifyContent: 'center',
     textAlign: 'center',
     fontSize: deviceHeight * 0.02,
-    fontWeight: 'semibold',
+    fontFamily: 'inter_Bold',
     opacity: 0.7,
     marginTop: deviceHeight * 0.01,
     paddingBottom: 4,

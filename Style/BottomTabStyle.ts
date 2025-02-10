@@ -19,7 +19,7 @@ export const BottomTabStyle = StyleSheet.create({
   },
   tabBarText: {
     fontSize: deviceHeight * 0.015,
-    fontWeight: 'bold',
+    fontFamily: 'inter_Bold',
     padding: 25,
   },
   selectedTab: {

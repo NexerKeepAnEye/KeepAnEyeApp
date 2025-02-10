@@ -35,7 +35,7 @@ export const CardStyle = StyleSheet.create({
   noTitle: {
     color: 'red',
     fontSize: deviceHeight * 0.02,
-    fontWeight: 'bold',
+    fontFamily: 'inter_SemiBold',
     marginLeft: deviceWidth * 0.05,
     marginTop: deviceHeight * 0.02,
   },
