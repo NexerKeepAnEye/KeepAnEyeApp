@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { deviceHeight, deviceWidth, width } from './Dimensions';
+import { deviceHeight, deviceWidth } from './Dimensions';
 
 export const searchButtonStyle = StyleSheet.create({
   button: {
@@ -35,17 +35,17 @@ export const searchButtonStyle = StyleSheet.create({
     textAlign: 'center',
   },
   resetButton: {
+    position: 'absolute',
     borderWidth: 0.5,
     borderColor: '#dfdfdf',
     backgroundColor: '#f2f2f2',
     height: deviceHeight * 0.023,
-    width: deviceWidth * 0.052,
+    width: deviceWidth * 0.042,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    marginLeft: deviceWidth * 0.001,
     marginTop: -deviceHeight * 0.01,
-    right: width * 0.0351,
+    left: deviceWidth * 0.255,
     overflow: 'visible',
   },
   resolutionButtonReset: {
