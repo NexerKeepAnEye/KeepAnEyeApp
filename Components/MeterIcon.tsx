@@ -9,7 +9,13 @@ export default function MeterIcon({ productCode }: { productCode: string }) {
 
   const iconSelector = (productCode: string) => {
     if (
-      isProductId(productCode, ['FJV', 'FJV sek', 'FJV under', 'FJV Effekt'])
+      isProductId(productCode, [
+        'FJV',
+        'FJV sek',
+        'FJV under',
+        'FJV Effekt',
+        'FJV Energi',
+      ])
     ) {
       // Uddevalla =  22, 36, 305
       return 'local-fire-department';
