@@ -12,111 +12,111 @@ export const groupMeters = (meters: Meter[]): Section[] => {
   return [
     {
       title: 'Fjärrvärme',
-      data: filterProductIds(meters, [22]),
+      data: filterProductIds(meters, [25,]),
     },
     {
       title: 'El',
-      data: filterProductIds(meters, [23]),
+      data: filterProductIds(meters, [26,]),
     },
     {
       title: 'Fjärrkyla',
-      data: filterProductIds(meters, [24, 67]),
+      data: filterProductIds(meters, [27, ]),
     },
     {
       title: 'Vatten',
-      data: filterProductIds(meters, [25]),
+      data: filterProductIds(meters, [28, 426, ]),
     },
     {
       title: 'Effekt',
-      data: filterProductIds(meters, [26]),
+      data: filterProductIds(meters, [29, ]),
     },
     {
       title: 'Flöde',
-      data: filterProductIds(meters, [27]),
+      data: filterProductIds(meters, [30, ]),
     },
     {
       title: 'Temperatur',
-      data: filterProductIds(meters, [28, 29]),
+      data: filterProductIds(meters, [31, 32]),
     },
     {
       title: 'Volym',
-      data: filterProductIds(meters, [30]),
+      data: filterProductIds(meters, [33, ]),
     },
     {
       title: 'Olja',
-      data: filterProductIds(meters, [31]),
+      data: filterProductIds(meters, []),
     },
     {
       title: 'Fjärrvärme sek',
-      data: filterProductIds(meters, [32]),
+      data: filterProductIds(meters, [63]),
     },
     {
       title: 'El sek',
-      data: filterProductIds(meters, [33]),
+      data: filterProductIds(meters, [64]),
     },
     {
       title: 'Fjärrkyla sek',
-      data: filterProductIds(meters, [34]),
+      data: filterProductIds(meters, [65]),
     },
     {
       title: 'Vatten sek',
-      data: filterProductIds(meters, [35]),
-    },
-    {
-      title: 'Fjärrvärme under',
-      data: filterProductIds(meters, [36]),
-    },
-    {
-      title: 'El under',
-      data: filterProductIds(meters, [37]),
-    },
-    {
-      title: 'Fjärrkyla under',
-      data: filterProductIds(meters, [38]),
-    },
-    {
-      title: 'Vatten under',
-      data: filterProductIds(meters, [39]),
-    },
-    {
-      title: 'NN',
       data: filterProductIds(meters, [66]),
     },
     {
+      title: 'Fjärrvärme under',
+      data: filterProductIds(meters, [67, ]),
+    },
+    {
+      title: 'El under',
+      data: filterProductIds(meters, [68, ]),
+    },
+    {
+      title: 'Fjärrkyla under',
+      data: filterProductIds(meters, [69, ]),
+    },
+    {
+      title: 'Vatten under',
+      data: filterProductIds(meters, [70, ]),
+    },
+    {
+      title: 'NN',
+      data: filterProductIds(meters, []),
+    },
+    {
       title: 'Fjärrvärme Virtuell',
-      data: filterProductIds(meters, [68]),
+      data: filterProductIds(meters, []),
     },
     {
       title: 'El Virtuell',
-      data: filterProductIds(meters, [69]),
+      data: filterProductIds(meters, []),
     },
     {
       title: 'Industriellt Vatten',
-      data: filterProductIds(meters, [70]),
+      data: filterProductIds(meters, [426]),
     },
     {
       title: 'BSK',
-      data: filterProductIds(meters, [71]),
+      data: filterProductIds(meters, []),
     },
     {
       title: 'Utetemperatur',
-      data: filterProductIds(meters, [72]),
+      data: filterProductIds(meters, []),
     },
     {
       title: 'Fjärrvärme Effekt',
-      data: filterProductIds(meters, [305]),
+      data: filterProductIds(meters, [505]),
     },
     {
       title: 'El Effekt',
-      data: filterProductIds(meters, [306]),
+      data: filterProductIds(meters, [506]),
     },
     {
       title: 'Övrigt',
       data: meters.filter(
         (meter) =>
           ![
-            22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38,
-            39, 66, 67, 68, 69, 70, 71, 72, 305, 306,
+            22, 23, 24, 34, 35, 36, 37, 38,
+            39, 71, 72, 305, 306,449, 476
           ].includes(meter.ProductId),
       ),
     },

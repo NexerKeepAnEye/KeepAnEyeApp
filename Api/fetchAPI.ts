@@ -1,5 +1,4 @@
 import { Meter, MeterData, Premise, Product } from '../Types/Type';
-// import { fetch } from './mockApi';
 // import https from 'https';
 // import fetch from 'node-fetch';
 
