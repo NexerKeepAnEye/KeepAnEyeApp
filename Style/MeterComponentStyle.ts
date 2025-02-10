@@ -20,6 +20,12 @@ export const MeterComponentStyle = StyleSheet.create({
     alignItems: 'center',
     marginTop: deviceHeight * 0.005,
   },
+  meterIconList: {
+    width: deviceWidth * 0.1,
+    height: deviceHeight * 1,
+    alignItems: 'center',
+    marginTop: deviceHeight * 0.02,
+  },
   textContainer: {
     flexDirection: 'column',
     justifyContent: 'center',

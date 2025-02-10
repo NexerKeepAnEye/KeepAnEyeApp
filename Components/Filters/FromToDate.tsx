@@ -76,27 +76,24 @@ export function FromToDate({
   };
 
   return (
-    <View>
-      <View style={dateStyles.container}>
-        <View style={dateStyles.dateContainer}>
-          <TouchableOpacity
-            style={dateStyles.pickerContainer}
-            onPress={() => {
-              setCurrentPicker('from');
-              setModalVisible(true);
-            }}
-          >
-            <Text style={dateStyles.pickerText}>
-              {formatDate(fromDate) || 'Från datum'}
-            </Text>
-          </TouchableOpacity>
-        </View>
+    <View style={dateStyles.container}>
+      <View style={dateStyles.dateContainer}>
+        <TouchableOpacity
+          style={dateStyles.pickerContainer}
+          onPress={() => {
+            setCurrentPicker('from');
+            setModalVisible(true);
+          }}
+        >
+          <Text style={dateStyles.pickerText}>
+            {formatDate(fromDate) || 'Från datum'}
+          </Text>
+        </TouchableOpacity>
         {fromDate && (
           <TouchableOpacity
             style={searchButtonStyle.resetButton}
             onPress={() => {
               setFromDate(undefined);
-              // console.log(fromDate);
             }}
           >
             <Icon
@@ -106,19 +103,19 @@ export function FromToDate({
             />
           </TouchableOpacity>
         )}
-        <View style={dateStyles.dateContainer}>
-          <TouchableOpacity
-            style={dateStyles.pickerContainer}
-            onPress={() => {
-              setCurrentPicker('to');
-              setModalVisible(true);
-            }}
-          >
-            <Text style={dateStyles.pickerText}>
-              {formatDate(toDate) || 'Till datum'}
-            </Text>
-          </TouchableOpacity>
-        </View>
+      </View>
+      <View style={dateStyles.dateContainer}>
+        <TouchableOpacity
+          style={dateStyles.pickerContainer}
+          onPress={() => {
+            setCurrentPicker('to');
+            setModalVisible(true);
+          }}
+        >
+          <Text style={dateStyles.pickerText}>
+            {formatDate(toDate) || 'Till datum'}
+          </Text>
+        </TouchableOpacity>
         {toDate && (
           <TouchableOpacity
             style={searchButtonStyle.resetButton}
@@ -131,41 +128,41 @@ export function FromToDate({
             />
           </TouchableOpacity>
         )}
-        {modalVisible && (
-          <Modal
-            visible={modalVisible}
-            transparent={true}
-            animationType="fade"
-          >
-            <View style={dateStyles.modalContainer}>
-              <View style={dateStyles.modalContent}>
-                <RNDateTimePicker
-                  value={
-                    currentPicker === 'from'
-                      ? fromDate || new Date()
-                      : toDate || new Date()
-                  }
-                  mode="date"
-                  display={Platform.OS === 'ios' ? 'inline' : 'default'}
-                  onChange={handleDateChange}
-                  style={{
-                    backgroundColor: 'white',
-                    borderRadius: 10,
-                  }}
-                  minimumDate={new Date(2015, 0, 1)}
-                  maximumDate={
-                    new Date(
-                      new Date().getFullYear(),
-                      new Date().getMonth(),
-                      new Date().getDate(),
-                    )
-                  }
-                />
-              </View>
-            </View>
-          </Modal>
-        )}
       </View>
+      {modalVisible && (
+        <Modal
+          visible={modalVisible}
+          transparent={true}
+          animationType="fade"
+        >
+          <View style={dateStyles.modalContainer}>
+            <View style={dateStyles.modalContent}>
+              <RNDateTimePicker
+                value={
+                  currentPicker === 'from'
+                    ? fromDate || new Date()
+                    : toDate || new Date()
+                }
+                mode="date"
+                display={Platform.OS === 'ios' ? 'inline' : 'default'}
+                onChange={handleDateChange}
+                style={{
+                  backgroundColor: 'white',
+                  borderRadius: 10,
+                }}
+                minimumDate={new Date(2015, 0, 1)}
+                maximumDate={
+                  new Date(
+                    new Date().getFullYear(),
+                    new Date().getMonth(),
+                    new Date().getDate(),
+                  )
+                }
+              />
+            </View>
+          </View>
+        </Modal>
+      )}
     </View>
   );
 }

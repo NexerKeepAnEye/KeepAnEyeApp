@@ -47,7 +47,7 @@ export const SignIn = StyleSheet.create({
     fontWeight: 'bold',
   },
   footerLogo: {
-    top: deviceHeight * 0.3,
+    top: deviceHeight * 0.27,
     alignSelf: 'center',
     width: deviceWidth * 0.4,
     height: undefined,

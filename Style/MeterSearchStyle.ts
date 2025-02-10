@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { height, width } from './Dimensions';
+import { deviceHeight, deviceWidth } from './Dimensions';
 
 export const meterSearch = StyleSheet.create({
   container: {
-    maxWidth: width * 0.45,
-    minHeight: height * 0.06,
+    maxWidth: deviceWidth * 0.45,
+    minHeight: deviceHeight * 0.06,
     // marginTop: 12,
   },
   pickerContainer: {
@@ -15,7 +15,7 @@ export const meterSearch = StyleSheet.create({
     borderColor: '#dddddd',
     borderRadius: 10,
     // width: width * 0.4,
-    height: height * 0.05,
+    height: deviceHeight * 0.055,
     paddingHorizontal: 10,
     backgroundColor: 'white',
     opacity: 0.8,
@@ -26,16 +26,16 @@ export const meterSearch = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: '#dddddd',
-    width: width * 0,
-    height: height * 0,
+    width: deviceWidth * 0,
+    height: deviceHeight * 0,
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
   },
   pickerText: {
-    fontSize: width * 0.045,
+    fontSize: deviceWidth * 0.045,
   },
   touchArea: {
-    maxWidth: width * 0.4,
+    maxWidth: deviceWidth * 0.4,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -52,14 +52,14 @@ export const meterSearch = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
-    width: width * 0.8,
-    maxHeight: height * 0.5,
+    width: deviceWidth * 0.8,
+    maxHeight: deviceHeight * 0.55,
     backgroundColor: 'white',
     borderRadius: 10,
     padding: 20,
   },
   sectionList: {
-    width: '100%',
+    width: deviceWidth * 0.7,
   },
   sectionHeader: {
     backgroundColor: '#f4f4f4',
@@ -68,7 +68,7 @@ export const meterSearch = StyleSheet.create({
     borderBottomColor: '#ccc',
   },
   sectionHeaderText: {
-    fontSize: width * 0.045,
+    fontSize: deviceWidth * 0.045,
     fontWeight: 'bold',
   },
   dropdownItem: {
@@ -80,19 +80,19 @@ export const meterSearch = StyleSheet.create({
   },
   meterTextContainer: {
     flex: 1,
-    marginLeft: 10,
+    marginLeft: deviceWidth * 0.025,
   },
   meterText: {
-    fontSize: width * 0.04,
+    fontSize: deviceWidth * 0.04,
   },
   meterSubText: {
-    fontSize: width * 0.035,
+    fontSize: deviceWidth * 0.035,
     color: 'gray',
   },
   closeButton: {
-    marginTop: 10,
+    marginTop: deviceHeight * 0.01,
     textAlign: 'center',
     color: '#056ffd',
-    fontSize: width * 0.04,
+    fontSize: deviceHeight * 0.018,
   },
 });

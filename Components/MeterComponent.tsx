@@ -38,7 +38,7 @@ export default function MeterComponent({ navigation }: Props) {
       key={item.Id}
       onPress={() => handleSelectMeter(item)}
     >
-      <View style={MeterComponentStyle.iconContainer}>
+      <View style={MeterComponentStyle.meterIconList}>
         <MeterIcon productId={item.ProductId} />
       </View>
       <View style={MeterComponentStyle.textContainer}>
