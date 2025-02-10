@@ -15,7 +15,7 @@ export const MeterDataGridStyle = StyleSheet.create({
     width: deviceWidth * 0.9,
   },
   title: {
-    fontWeight: 'bold',
+    fontFamily: 'inter_Bold',
   } as TextStyle,
 
   cell: {
@@ -26,7 +26,7 @@ export const MeterDataGridStyle = StyleSheet.create({
     fontSize: deviceHeight * 0.018,
     textAlign: 'left',
     marginTop: deviceHeight * 0.01,
-    fontStyle: 'italic',
+    fontFamily: 'inter_BlackItalic',
     color: '#ababab',
   },
 });

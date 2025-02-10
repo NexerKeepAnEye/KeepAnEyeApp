@@ -8,7 +8,7 @@ export const meterSearch = StyleSheet.create({
     // marginTop: 12,
   },
   pickerContainer: {
-    // flexDirection: 'row',
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
@@ -30,6 +30,16 @@ export const meterSearch = StyleSheet.create({
     height: deviceHeight * 0,
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
+  },
+  iconMeterResetContainer: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-start',
+    borderWidth: 1,
+    borderColor: '#dddddd',
+    width: deviceWidth * 0,
+    height: deviceHeight * 0,
+    bottom: deviceHeight * 0.014,
+    // left: deviceWidth * 0.18,
   },
   pickerText: {
     fontSize: deviceWidth * 0.045,
@@ -82,12 +92,15 @@ export const meterSearch = StyleSheet.create({
   meterTextContainer: {
     flex: 1,
     marginLeft: deviceWidth * 0.025,
+    fontFamily: 'inter_Regular',
   },
   meterText: {
     fontSize: deviceWidth * 0.04,
+    fontFamily: 'inter_Regular',
   },
   meterSubText: {
     fontSize: deviceWidth * 0.035,
+    fontFamily: 'inter_Regular',
     color: 'gray',
   },
   closeButton: {

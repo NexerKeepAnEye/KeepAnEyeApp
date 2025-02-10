@@ -26,8 +26,8 @@ export const AccordionStyle = StyleSheet.create({
     textAlignVertical: 'center',
     flex: 1,
     fontSize: deviceWidth * 0.045,
-    fontWeight: 'bold',
     height: deviceHeight * 0.08,
+    fontFamily: 'inter_Bold',
   },
   dDL: {
     position: 'absolute',
@@ -54,10 +54,11 @@ export const AccordionStyle = StyleSheet.create({
   },
   listText: {
     textAlign: 'center',
+    fontFamily: 'inter_Regular',
   },
   headerChanged: {
     textAlign: 'center',
     fontSize: deviceWidth * 0.05,
-    fontWeight: 'bold',
+    fontFamily: 'inter_Bold',
   },
 });
