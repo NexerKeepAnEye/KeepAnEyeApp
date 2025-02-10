@@ -12,27 +12,27 @@ export const groupMeters = (meters: Meter[]): Section[] => {
   return [
     {
       title: 'Fjärrvärme',
-      data: filterProductIds(meters, [25,]),
+      data: filterProductIds(meters, [25]),
     },
     {
       title: 'El',
-      data: filterProductIds(meters, [26,]),
+      data: filterProductIds(meters, [26]),
     },
     {
       title: 'Fjärrkyla',
-      data: filterProductIds(meters, [27, ]),
+      data: filterProductIds(meters, [27]),
     },
     {
       title: 'Vatten',
-      data: filterProductIds(meters, [28, 426, ]),
+      data: filterProductIds(meters, [28, 426]),
     },
     {
       title: 'Effekt',
-      data: filterProductIds(meters, [29, ]),
+      data: filterProductIds(meters, [29]),
     },
     {
       title: 'Flöde',
-      data: filterProductIds(meters, [30, ]),
+      data: filterProductIds(meters, [30]),
     },
     {
       title: 'Temperatur',
@@ -40,7 +40,7 @@ export const groupMeters = (meters: Meter[]): Section[] => {
     },
     {
       title: 'Volym',
-      data: filterProductIds(meters, [33, ]),
+      data: filterProductIds(meters, [33]),
     },
     {
       title: 'Olja',
@@ -64,19 +64,19 @@ export const groupMeters = (meters: Meter[]): Section[] => {
     },
     {
       title: 'Fjärrvärme under',
-      data: filterProductIds(meters, [67, ]),
+      data: filterProductIds(meters, [67]),
     },
     {
       title: 'El under',
-      data: filterProductIds(meters, [68, ]),
+      data: filterProductIds(meters, [68]),
     },
     {
       title: 'Fjärrkyla under',
-      data: filterProductIds(meters, [69, ]),
+      data: filterProductIds(meters, [69]),
     },
     {
       title: 'Vatten under',
-      data: filterProductIds(meters, [70, ]),
+      data: filterProductIds(meters, [70]),
     },
     {
       title: 'NN',
@@ -115,8 +115,7 @@ export const groupMeters = (meters: Meter[]): Section[] => {
       data: meters.filter(
         (meter) =>
           ![
-            22, 23, 24, 34, 35, 36, 37, 38,
-            39, 71, 72, 305, 306,449, 476
+            22, 23, 24, 34, 35, 36, 37, 38, 39, 71, 72, 305, 306, 449, 476,
           ].includes(meter.ProductId),
       ),
     },
