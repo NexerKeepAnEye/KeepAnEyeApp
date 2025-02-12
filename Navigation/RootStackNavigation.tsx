@@ -1,4 +1,3 @@
-import { MaterialIcons } from '@expo/vector-icons';
 import { NavigatorScreenParams, useNavigation } from '@react-navigation/native';
 import {
   createNativeStackNavigator,
@@ -7,6 +6,8 @@ import {
 import * as React from 'react';
 import { useCallback, useEffect } from 'react';
 import { Alert, TouchableOpacity, View } from 'react-native';
+import 'react-native-gesture-handler';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import StorageService from '../AsyncStorage/AsyncStorage';
 import { LogoTitle } from '../Components/Header';
 import { usePremiseContext } from '../Context/PremiseContext';
@@ -73,7 +74,7 @@ export default function RootStackNavigator() {
       initialRouteName="Splash"
       screenOptions={() => ({
         headerRight: () => (
-          <TouchableOpacity onPress={handleLogout}>
+          <TouchableOpacity onPressOut={handleLogout}>
             <View style={{ padding: 10 }}>
               <MaterialIcons
                 name="exit-to-app"
