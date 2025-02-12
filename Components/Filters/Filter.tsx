@@ -63,7 +63,7 @@ const Filter = ({
   const { showSnackbar } = useSnackbar();
   const { state } = usePremiseContext();
   const [apikey, setApiKey] = useState<string | null>(null);
-  const [isChecked, setIsChecked] = useState(false);
+  const [correctedValues, setIsChecked] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -91,8 +91,9 @@ const Filter = ({
         translateResolution(resolution ?? ''),
         fromDate,
         toDate,
-        isChecked,
-        state.selectedPremise?.Id ? [state.selectedPremise.Id] : [],
+        correctedValues,
+        [] /*state.selectedPremise?.Id ? [state.selectedPremise.Id] : [],*/,
+        [],
         meterId !== undefined ? [meterId] : (meter?.map((m) => m.Id) ?? []),
       );
       return data;
@@ -325,7 +326,7 @@ const Filter = ({
               )}
               {filters.includes('standardAdjusted') && (
                 <StandardYearAdjusted
-                  isChecked={isChecked}
+                  isChecked={correctedValues}
                   setIsChecked={setIsChecked}
                 />
               )}

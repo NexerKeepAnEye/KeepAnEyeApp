@@ -38,3 +38,4 @@ yarn-error.*
 
 #Mocked Data
 ./mockedData/API/*.json
+./Api/testFetch.js
