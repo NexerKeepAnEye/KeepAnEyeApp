@@ -1,12 +1,13 @@
-import { MaterialIcons } from '@expo/vector-icons';
 import { NavigatorScreenParams, useNavigation } from '@react-navigation/native';
 import {
   createNativeStackNavigator,
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { useEffect } from 'react';
-import { Alert, Pressable } from 'react-native';
+import { useCallback, useEffect } from 'react';
+import { Alert, TouchableOpacity, View } from 'react-native';
+import 'react-native-gesture-handler';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import StorageService from '../AsyncStorage/AsyncStorage';
 import { LogoTitle } from '../Components/Header';
 import { usePremiseContext } from '../Context/PremiseContext';
@@ -36,7 +37,8 @@ export default function RootStackNavigator() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { state } = usePremiseContext();
-  const handleLogout = async () => {
+  const handleLogout = useCallback(async () => {
+    console.log('PRESSED');
     Alert.alert(
       '',
       'Är du säker på att du vill logga ut?',
@@ -58,7 +60,7 @@ export default function RootStackNavigator() {
       ],
       { cancelable: false },
     );
-  };
+  }, [navigation, state]);
 
   useEffect(() => {
     const apiKey = StorageService.getApiKey();
@@ -72,13 +74,15 @@ export default function RootStackNavigator() {
       initialRouteName="Splash"
       screenOptions={() => ({
         headerRight: () => (
-          <Pressable onPress={handleLogout}>
-            <MaterialIcons
-              name="exit-to-app"
-              size={30}
-              color="#D32F2F"
-            />
-          </Pressable>
+          <TouchableOpacity onPressOut={handleLogout}>
+            <View style={{ padding: 10 }}>
+              <MaterialIcons
+                name="exit-to-app"
+                size={30}
+                color="#D32F2F"
+              />
+            </View>
+          </TouchableOpacity>
         ),
         headerTitle: () => <LogoTitle />,
         headerTitleAlign: 'center',
