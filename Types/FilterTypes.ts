@@ -12,10 +12,10 @@ export const filterTypes = {
       id: 3,
       type: 'Årsrapport',
     },
-    {
-      id: 4,
-      type: 'Kostnadsrapport',
-    },
+    // {
+    //   id: 4,
+    //   type: 'Kostnadsrapport',
+    // },
     {
       id: 5,
       type: 'Analysrapport',
