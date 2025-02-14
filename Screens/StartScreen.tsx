@@ -1,6 +1,15 @@
+import { useFocusEffect } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React from 'react';
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import React, { useCallback } from 'react';
+import {
+  Alert,
+  BackHandler,
+  Image,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import NexerLogo from '../assets/NexerLogo.png';
 import { usePremiseContext } from '../Context/PremiseContext';
@@ -20,6 +29,31 @@ type Props = {
 export default function StartScreen({ navigation }: Props) {
   const { state, dispatch } = usePremiseContext();
   const premises: Premise[] = state.premises;
+
+  useFocusEffect(
+    useCallback(() => {
+      const onBackPress = () => {
+        Alert.alert(
+          '',
+          'Vill du stänga av appen?',
+          [
+            {
+              text: 'Nej',
+              onPress: () => {},
+            },
+            { text: 'Ja', onPress: () => BackHandler.exitApp() },
+          ],
+          { cancelable: false },
+        );
+
+        return true;
+      };
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, []),
+  );
 
   const renderItem = (item: Premise) => (
     <TouchableOpacity
