@@ -1,4 +1,4 @@
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useCallback } from 'react';
 import {
@@ -29,30 +29,34 @@ type Props = {
 export default function StartScreen({ navigation }: Props) {
   const { state, dispatch } = usePremiseContext();
   const premises: Premise[] = state.premises;
+  const isFocused = useIsFocused();
 
   useFocusEffect(
     useCallback(() => {
       const onBackPress = () => {
-        Alert.alert(
-          '',
-          'Vill du stänga av appen?',
-          [
-            {
-              text: 'Nej',
-              onPress: () => {},
-            },
-            { text: 'Ja', onPress: () => BackHandler.exitApp() },
-          ],
-          { cancelable: false },
-        );
+        if (isFocused) {
+          Alert.alert(
+            '',
+            'Vill du stänga av appen?',
+            [
+              {
+                text: 'Nej',
+                onPress: () => {},
+              },
+              { text: 'Ja', onPress: () => BackHandler.exitApp() },
+            ],
+            { cancelable: false },
+          );
 
-        return true;
+          return true;
+        }
+        return false;
       };
       BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
       return () =>
         BackHandler.removeEventListener('hardwareBackPress', onBackPress);
-    }, []),
+    }, [isFocused]),
   );
 
   const renderItem = (item: Premise) => (
