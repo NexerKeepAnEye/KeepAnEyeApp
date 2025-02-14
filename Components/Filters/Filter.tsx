@@ -78,11 +78,20 @@ const Filter = ({
     setLoading(true);
     let meterData: MeterData[] | null = null;
 
-    if (meterId !== undefined) {
+    if (meterId === undefined) {
       [meterId] = filterstate.meter.map((m) => m.Id);
-    } else {
-      meterId = filterstate.meter[0].Id;
     }
+
+    const selectedMeterId =
+      meterId !== undefined
+        ? state.selectedPremise?.Meters.find((meter) => meter.Id === meterId)
+        : undefined;
+
+    const selectedMeter: Meter =
+      (meter ?? []).find((m) => m.ProductId) ?? ({} as Meter);
+
+    const selectedProductId: number =
+      selectedMeterId?.ProductId ?? selectedMeter.ProductId;
 
     const fetchDataForDateRange = async (fromDate: Date, toDate: Date) => {
       const data = await fetchMeterData(
@@ -189,17 +198,6 @@ const Filter = ({
         return;
       }
     }
-
-    const selectedMeterId =
-      meterId !== undefined
-        ? state.selectedPremise?.Meters.find((meter) => meter.Id === meterId)
-        : undefined;
-
-    const selectedMeter: Meter =
-      (meter ?? []).find((m) => m.ProductId) ?? ({} as Meter);
-
-    const selectedProductId: number =
-      selectedMeterId?.ProductId ?? selectedMeter.ProductId;
 
     try {
       if (year && yearTwo && filters.includes('compareYears')) {

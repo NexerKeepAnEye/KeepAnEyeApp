@@ -81,8 +81,8 @@ export default function MeterDataGrid({ meterId }: Props) {
                     <DataTable.Cell>
                       {data.DateTime.toISOString().split('T')[0]}
                     </DataTable.Cell>
-                    <DataTable.Cell>{data.Value}</DataTable.Cell>
-                    <DataTable.Cell>{data.Cost}</DataTable.Cell>
+                    <DataTable.Cell>{Math.round(data.Value)}</DataTable.Cell>
+                    <DataTable.Cell>{Math.round(data.Cost)}</DataTable.Cell>
                     <DataTable.Cell>{data.Code}</DataTable.Cell>
                   </DataTable.Row>
                 ))
