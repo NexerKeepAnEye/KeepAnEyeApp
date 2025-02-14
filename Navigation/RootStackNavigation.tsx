@@ -38,7 +38,6 @@ export default function RootStackNavigator() {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { state } = usePremiseContext();
   const handleLogout = useCallback(async () => {
-    console.log('PRESSED');
     Alert.alert(
       '',
       'Är du säker på att du vill logga ut?',
