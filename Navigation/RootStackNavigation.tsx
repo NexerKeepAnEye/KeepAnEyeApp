@@ -1,4 +1,3 @@
-import { MaterialIcons } from '@expo/vector-icons';
 import { NavigatorScreenParams, useNavigation } from '@react-navigation/native';
 import {
   createNativeStackNavigator,
@@ -7,6 +6,7 @@ import {
 import * as React from 'react';
 import { useEffect } from 'react';
 import { Alert, Pressable } from 'react-native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import StorageService from '../AsyncStorage/AsyncStorage';
 import { LogoTitle } from '../Components/Header';
 import { usePremiseContext } from '../Context/PremiseContext';
@@ -37,6 +37,7 @@ export default function RootStackNavigator() {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { state } = usePremiseContext();
   const handleLogout = async () => {
+    console.log('logout');
     Alert.alert(
       '',
       'Är du säker på att du vill logga ut?',
@@ -72,7 +73,7 @@ export default function RootStackNavigator() {
       initialRouteName="Splash"
       screenOptions={() => ({
         headerRight: () => (
-          <Pressable onPress={handleLogout}>
+          <Pressable onPressOut={handleLogout}>
             <MaterialIcons
               name="exit-to-app"
               size={30}
