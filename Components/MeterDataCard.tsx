@@ -22,7 +22,7 @@ export default function MeterDataCard({ meterId, navigation }: Props) {
       onPress={() => {
         navigation?.goBack();
       }}
-      underlayColor={'#ddd'}
+      underlayColor={'transparent'}
       style={CardStyle.cardButton}
     >
       <Card style={CardStyle.card}>

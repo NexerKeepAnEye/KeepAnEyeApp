@@ -13,7 +13,10 @@ export const premiseCardStyle = StyleSheet.create({
     shadowRadius: 4,
     backgroundColor: '#ffffff',
     minWidth: deviceWidth * 0.9,
+    maxWidth: deviceWidth * 0.95,
     minHeight: deviceHeight * 0.08,
+    maxHeight: deviceHeight * 0.1,
+    overflow: 'hidden',
   },
   row: {
     flexDirection: 'row',
@@ -24,7 +27,7 @@ export const premiseCardStyle = StyleSheet.create({
     alignItems: 'center',
   },
   content: {
-    flex: 1,
+    flex: 0,
   },
   title: {
     color: '#000000',

@@ -22,7 +22,7 @@ const PremiseCard = <T extends keyof RootStackParamList>({
         dispatch({ type: 'RESET_PREMISE' });
         navigation.navigate('StartScreen');
       }}
-      underlayColor={'#ddd'}
+      underlayColor={'transparent'}
       style={premiseCardStyle.cardButton}
     >
       <Card style={premiseCardStyle.card}>

@@ -99,20 +99,20 @@ export const MonthlyReport = () => {
                       <DataTable.Cell>
                         {formatMonth(item.DateTime.toDateString())}
                       </DataTable.Cell>
-                      <DataTable.Cell>{item.Value}</DataTable.Cell>
+                      <DataTable.Cell>{Math.round(item.Value)}</DataTable.Cell>
                     </DataTable.Row>
                   ))}
                   <DataTable.Row>
                     <DataTable.Cell textStyle={ReportGridStyle.columntext}>
                       Min
                     </DataTable.Cell>
-                    <DataTable.Cell>{minValue}</DataTable.Cell>
+                    <DataTable.Cell>{Math.round(minValue!)}</DataTable.Cell>
                   </DataTable.Row>
                   <DataTable.Row>
                     <DataTable.Cell textStyle={ReportGridStyle.columntext}>
                       Max
                     </DataTable.Cell>
-                    <DataTable.Cell>{maxValue}</DataTable.Cell>
+                    <DataTable.Cell>{Math.round(maxValue!)}</DataTable.Cell>
                   </DataTable.Row>
                   <DataTable.Row>
                     <DataTable.Cell textStyle={ReportGridStyle.columntext}>

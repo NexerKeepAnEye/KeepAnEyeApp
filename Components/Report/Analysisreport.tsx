@@ -234,7 +234,7 @@ export default function Analysisreport() {
                     Min
                   </DataTable.Cell>
                   <DataTable.Cell style={ReportGridStyle.flex11}>
-                    {minValue} {productName}
+                    {Math.round(minValue!)} {productName}
                   </DataTable.Cell>
                   <DataTable.Cell style={ReportGridStyle.flex09}>
                     {minDate
@@ -247,7 +247,7 @@ export default function Analysisreport() {
                     Max
                   </DataTable.Cell>
                   <DataTable.Cell style={ReportGridStyle.flex11}>
-                    {max} {productName}
+                    {Math.round(max!)} {productName}
                   </DataTable.Cell>
                   <DataTable.Cell style={ReportGridStyle.flex09}>
                     {maxDate

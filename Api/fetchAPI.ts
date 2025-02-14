@@ -138,7 +138,6 @@ export async function fetchMeterData(
     });
 
     // console.log('fetchMeterData: ', response);
-    // console.log('fetchMeterData: ', response);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
