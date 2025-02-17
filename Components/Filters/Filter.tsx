@@ -273,7 +273,10 @@ const Filter = ({
     <PaperProvider>
       <View style={{ flex: 1 }}>
         <View style={{ flex: 1 }}>
-          <ScrollView horizontal>
+          <ScrollView
+            horizontal
+            persistentScrollbar={true}
+          >
             <View style={filterStyle.container}>
               {filters.includes('year') && setYear && (
                 <YearSearch

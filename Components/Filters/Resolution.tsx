@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, Modal, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { width } from '../../Style/Dimensions';
@@ -19,6 +19,11 @@ export function Resolution({ setSelectedResolution }: ResolutionProps) {
     setSelectedResolution(selectedResolution);
     setShowResolutionModal(false);
   }
+
+  useEffect(() => {
+    setResolution('Timma');
+    setSelectedResolution('Timma');
+  }, []);
 
   return (
     <View style={ResolutionStyle.container}>
