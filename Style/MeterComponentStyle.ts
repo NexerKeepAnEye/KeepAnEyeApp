@@ -4,7 +4,7 @@ import { deviceHeight, deviceWidth } from './Dimensions';
 export const MeterComponentStyle = StyleSheet.create({
   container: {
     width: deviceWidth * 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f4f5f7',
   },
   listItem: {
     height: deviceHeight * 0.08,
@@ -13,6 +13,7 @@ export const MeterComponentStyle = StyleSheet.create({
     alignContent: 'center',
     flexDirection: 'row',
     paddingHorizontal: deviceWidth * 0.03,
+    backgroundColor: '#fff',
   },
   iconContainer: {
     width: deviceWidth * 0.1,
