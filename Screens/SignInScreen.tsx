@@ -116,7 +116,7 @@ export default function SignInScreen() {
               style={SignIn.logo}
             />
             <View style={SignIn.container}>
-              <Text style={SignIn.title}>Ange Api-Nyckel:</Text>
+              <Text style={SignIn.title}>Ange API-nyckel:</Text>
               <TextInput
                 style={SignIn.input}
                 mode="outlined"
@@ -133,7 +133,7 @@ export default function SignInScreen() {
             >
               {loading ? (
                 <>
-                  <Text style={SignIn.buttonText}>Loggar In...</Text>
+                  <Text style={SignIn.buttonText}>Loggar in...</Text>
                   <ActivityIndicator
                     animating={true}
                     color={MD2Colors.white}
@@ -142,7 +142,7 @@ export default function SignInScreen() {
                   />
                 </>
               ) : (
-                <Text style={SignIn.buttonText}>Logga In</Text>
+                <Text style={SignIn.buttonText}>Logga in</Text>
               )}
             </TouchableOpacity>
           </View>

@@ -47,7 +47,9 @@ const PremiseCard = <T extends keyof RootStackParamList>({
             </>
           ) : (
             <Card.Content style={premiseCardStyle.content}>
-              <Text style={premiseCardStyle.noTitle}>No premise provided!</Text>
+              <Text style={premiseCardStyle.noTitle}>
+                Ingen fastighet vald!
+              </Text>
             </Card.Content>
           )}
         </View>

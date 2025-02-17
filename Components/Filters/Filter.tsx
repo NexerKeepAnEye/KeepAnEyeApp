@@ -343,7 +343,7 @@ const Filter = ({
           >
             {loading ? (
               <>
-                <Text style={searchButtonStyle.text}>Loading</Text>
+                <Text style={searchButtonStyle.text}>Hämtar...</Text>
                 <ActivityIndicator
                   animating={true}
                   color={MD2Colors.white}
