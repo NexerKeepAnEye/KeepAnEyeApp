@@ -12,7 +12,7 @@ const PremiseStack = createStackNavigator<PremiseStackParamList>();
 
 export default function PremiseStackNavigator() {
   return (
-    <PremiseStack.Navigator>
+    <PremiseStack.Navigator id={undefined}>
       <PremiseStack.Screen
         name="PremiseScreen"
         component={PremiseScreen}
