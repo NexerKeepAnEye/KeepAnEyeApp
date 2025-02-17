@@ -4,7 +4,14 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { useEffect } from 'react';
-import { Alert, Dimensions, Pressable, Text, View } from 'react-native';
+import {
+  Alert,
+  Dimensions,
+  Pressable,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { Portal, Snackbar } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import StorageService from '../AsyncStorage/AsyncStorage';
@@ -86,10 +93,6 @@ export default function TabNavigator() {
 
       <Tab.Navigator
         screenOptions={() => ({
-          headerStyle: {
-            height: 120,
-            // backgroundColor: '#f8f8f8',
-          },
           headerRight: () => (
             <Pressable onPress={handleLogout}>
               <MaterialIcons
@@ -105,7 +108,9 @@ export default function TabNavigator() {
           tabBarStyle: BottomTabStyle.tabBar,
           tabBarLabelStyle: BottomTabStyle.tabBarText,
           tabBarActiveTintColor: '#222',
-          tabBarInactiveTintColor: '#d9d9d9',
+          tabBarInactiveTintColor: 'grey',
+          tabBarPressColor: 'transparent',
+          tabBarPressOpacity: 1,
         })}
       >
         <Tab.Screen
@@ -127,6 +132,13 @@ export default function TabNavigator() {
                 />
               </View>
             ),
+            tabBarButton: (props) => (
+              <TouchableOpacity
+                {...props}
+                activeOpacity={1}
+                delayLongPress={undefined}
+              />
+            ),
           }}
         />
         <Tab.Screen
@@ -147,6 +159,13 @@ export default function TabNavigator() {
                   size={30}
                 />
               </View>
+            ),
+            tabBarButton: (props) => (
+              <TouchableOpacity
+                {...props}
+                activeOpacity={1}
+                delayLongPress={undefined}
+              />
             ),
           }}
         />

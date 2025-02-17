@@ -5,7 +5,7 @@ import { headerStyle } from '../Style/HeaderStyle';
 
 export function LogoTitle() {
   return (
-    <View style={{ height: 70, padding: 5 }}>
+    <View style={headerStyle.container}>
       <Image
         style={headerStyle.HeaderLogo}
         source={logoKAE}

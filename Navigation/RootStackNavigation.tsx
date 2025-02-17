@@ -74,7 +74,7 @@ export default function RootStackNavigator() {
       screenOptions={() => ({
         headerRight: () => (
           <TouchableOpacity onPressOut={handleLogout}>
-            <View style={{ padding: 10 }}>
+            <View>
               <MaterialIcons
                 name="exit-to-app"
                 size={30}
