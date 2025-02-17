@@ -51,6 +51,7 @@ export const AccordionStyle = StyleSheet.create({
     borderColor: '#d9d9d9',
     fontWeight: 'bold',
     justifyContent: 'center',
+    backgroundColor: '#ffffff',
   },
   listText: {
     textAlign: 'center',
