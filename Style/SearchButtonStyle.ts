@@ -11,7 +11,7 @@ export const searchButtonStyle = StyleSheet.create({
     alignSelf: 'flex-end',
     alignItems: 'center',
     marginTop: 3,
-    height: deviceHeight * 0.045,
+    height: deviceHeight * 0.05,
     flexDirection: 'row',
     justifyContent: 'center',
   },
@@ -31,7 +31,7 @@ export const searchButtonStyle = StyleSheet.create({
   },
   text: {
     color: 'white',
-    fontSize: deviceHeight * 0.017,
+    fontSize: deviceHeight * 0.018,
     textAlign: 'center',
     fontFamily: 'inter_Regular',
   },
