@@ -13,15 +13,14 @@ export const StartScreenStyle = StyleSheet.create({
     height: deviceHeight * 0.1,
     backgroundColor: '#f4f5f7',
     alignItems: 'center',
-    flex: 1,
   },
   textHeader: {
     marginTop: deviceHeight * 0.03,
-    fontSize: deviceHeight * 0.04,
+    fontSize: deviceHeight * 0.0285,
     // fontWeight: 'bold',
     justifyContent: 'center',
     alignItems: 'center',
-    fontFamily: 'inter_SemiBoldItalic',
+    fontFamily: 'inter_Bold',
   },
   itemBox: {
     width: deviceWidth * 1,
