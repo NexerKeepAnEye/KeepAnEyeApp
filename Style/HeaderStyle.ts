@@ -7,8 +7,5 @@ export const headerStyle = StyleSheet.create({
   },
   container: {
     height: deviceHeight * 0.1,
-    // padding: 10,
-    // justifyContent: 'center',
-    // alignItems: 'center',
   },
 });
