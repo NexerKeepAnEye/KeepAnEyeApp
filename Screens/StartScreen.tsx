@@ -5,6 +5,7 @@ import {
   Alert,
   BackHandler,
   Image,
+  Linking,
   Platform,
   ScrollView,
   Text,
@@ -73,7 +74,13 @@ export default function StartScreen({ navigation }: Props) {
                 },
                 {
                   text: 'Ja',
-                  onPress: () => BackHandler.exitApp(),
+                  onPress: () => {
+                    if (Platform.OS === 'android') {
+                      BackHandler.exitApp();
+                    } else {
+                      Linking.openURL('app-settings');
+                    }
+                  },
                 },
               ],
               { cancelable: false },
