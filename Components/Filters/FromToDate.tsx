@@ -1,7 +1,7 @@
 import RNDateTimePicker, {
   DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Alert,
   Modal,
@@ -32,6 +32,17 @@ export function FromToDate({
   const [currentPicker, setCurrentPicker] = useState<'from' | 'to' | null>(
     null,
   );
+
+  useEffect(() => {
+    if (!fromDate && !toDate) {
+      const today = new Date();
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(today.getDate() - 30);
+
+      setFromDate(thirtyDaysAgo);
+      setToDate(today);
+    }
+  }, [setFromDate, setToDate]);
 
   const handleDateChange = (
     event: DateTimePickerEvent,
