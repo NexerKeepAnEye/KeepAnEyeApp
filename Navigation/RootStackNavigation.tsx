@@ -70,6 +70,7 @@ export default function RootStackNavigator() {
 
   return (
     <RootStack.Navigator
+      id={undefined}
       initialRouteName="Splash"
       screenOptions={() => ({
         headerRight: () => (
