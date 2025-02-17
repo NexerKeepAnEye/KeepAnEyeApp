@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { height, width } from './Dimensions';
+import { deviceHeight, deviceWidth, height, width } from './Dimensions';
 
 export const yearSearchStyle = StyleSheet.create({
   container: {
@@ -11,8 +11,8 @@ export const yearSearchStyle = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#dddddd',
     borderRadius: 10,
-    minWidth: width * 0.15,
-    height: height * 0.05,
+    minWidth: deviceWidth * 0.15,
+    height: deviceHeight * 0.055,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',

@@ -4,9 +4,10 @@ import { deviceHeight, deviceWidth } from './Dimensions';
 export const dateStyles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    gap: 3,
+    gap: 6,
     marginBottom: deviceHeight * 0.01,
-    marginHorizontal: 3,
+    // marginHorizontal: 3,
+    marginRight: 6,
   },
   dateContainer: {
     alignItems: 'center',
@@ -18,10 +19,10 @@ export const dateStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#dddddd',
     borderRadius: 10,
-    maxWidth: deviceWidth * 0.3,
+    // maxWidth: deviceWidth * 0.3,
     minWidth: deviceWidth * 0.2,
     paddingHorizontal: 10,
-    height: deviceHeight * 0.053,
+    height: deviceHeight * 0.055,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',

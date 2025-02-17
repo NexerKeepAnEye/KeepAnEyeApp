@@ -92,6 +92,7 @@ export default function TabNavigator() {
       </Portal>
 
       <Tab.Navigator
+        id={undefined}
         screenOptions={() => ({
           headerRight: () => (
             <Pressable onPress={handleLogout}>
