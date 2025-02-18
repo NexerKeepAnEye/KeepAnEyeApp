@@ -39,6 +39,7 @@ export const dateStyles = StyleSheet.create({
   },
   modalContent: {
     width: deviceWidth * 0.8,
+    height: deviceHeight * 0.1,
     backgroundColor: 'white',
     borderRadius: 10,
     alignItems: 'center',

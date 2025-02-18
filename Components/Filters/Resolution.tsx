@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Modal, Text, TouchableOpacity, View } from 'react-native';
+import {
+  FlatList,
+  Modal,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { width } from '../../Style/Dimensions';
 import { ResolutionStyle } from '../../Style/ResolutionStyle';
@@ -56,31 +63,37 @@ export function Resolution({ setSelectedResolution }: ResolutionProps) {
           animationType="fade"
           onRequestClose={() => setShowResolutionModal(false)}
         >
-          <View style={ResolutionStyle.modalContainer}>
-            <View style={ResolutionStyle.modalContent}>
-              {/* <Text style={TestFilterStyle.modalTitle}>Upplösning</Text> */}
-              <FlatList
-                data={resolutions}
-                keyExtractor={(item) => item}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    style={ResolutionStyle.modalItem}
-                    onPress={() => handleResolutionChange(item)}
-                  >
-                    <Text style={ResolutionStyle.modalItemText}>
-                      {item.toString()}
-                    </Text>
-                  </TouchableOpacity>
-                )}
-              />
-              <TouchableOpacity
-                style={ResolutionStyle.modalCloseButton}
-                onPress={() => setShowResolutionModal(false)}
-              >
-                <Text style={ResolutionStyle.modalCloseButtonText}>Stäng</Text>
-              </TouchableOpacity>
+          <TouchableWithoutFeedback
+            onPress={() => setShowResolutionModal(false)}
+          >
+            <View style={ResolutionStyle.modalContainer}>
+              <View style={ResolutionStyle.modalContent}>
+                {/* <Text style={TestFilterStyle.modalTitle}>Upplösning</Text> */}
+                <FlatList
+                  data={resolutions}
+                  keyExtractor={(item) => item}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity
+                      style={ResolutionStyle.modalItem}
+                      onPress={() => handleResolutionChange(item)}
+                    >
+                      <Text style={ResolutionStyle.modalItemText}>
+                        {item.toString()}
+                      </Text>
+                    </TouchableOpacity>
+                  )}
+                />
+                <TouchableOpacity
+                  style={ResolutionStyle.modalCloseButton}
+                  onPress={() => setShowResolutionModal(false)}
+                >
+                  <Text style={ResolutionStyle.modalCloseButtonText}>
+                    Stäng
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
+          </TouchableWithoutFeedback>
         </Modal>
       )}
     </View>
