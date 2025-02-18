@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import {
   FlatList,
-  Keyboard,
+  KeyboardAvoidingView,
   Modal,
-  StyleSheet,
+  Platform,
+  ScrollView,
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import { Divider, TextInput } from 'react-native-paper';
-import { deviceHeight, deviceWidth } from '../../Style/Dimensions';
+import { calendar } from '../../Style/CalendarStyle';
+
+interface CustomCalanderProps {
+  value: Date;
+  onChange: (date: Date) => void;
+}
 
 const months = [
   'Januari',
@@ -54,7 +60,7 @@ const getDaysInMonth = (month, year) => {
   return daysArray;
 };
 
-const CustomCalendar = ({ value, onChange }) => {
+const CustomCalendar = ({ value, onChange }: CustomCalanderProps) => {
   const today = new Date();
   const [selectedDate, setSelectedDate] = useState(value || today);
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
@@ -92,24 +98,29 @@ const CustomCalendar = ({ value, onChange }) => {
   const handleDateSelect = (day, monthOffset) => {
     const newDate = new Date(currentYear, currentMonth + monthOffset, day);
     setSelectedDate(newDate);
-    onChange && onChange(newDate);
+    if (onChange) {
+      onChange(newDate);
+    }
   };
 
   const goToToday = () => {
     setCurrentMonth(today.getMonth());
     setCurrentYear(today.getFullYear());
     setSelectedDate(today);
-    onChange && onChange(today);
+    if (onChange) {
+      onChange(today);
+    }
   };
 
   const goToSelectedDate = () => {
-    Keyboard.dismiss();
     if (!inputDate) return alert('Vänligen ange ett datum');
 
-    if (!/^\d{8}$/.test(inputDate))
+    if (!/^\d{8}$/.test(inputDate)) {
       return alert('Ogiltigt datumformat. Använd YYYYMMDD.');
+    }
 
-    // Extrahera år, månad och dag från inputDate
+    // Keyboard.dismiss();
+
     const year = parseInt(inputDate.substring(0, 4), 10);
     const month = parseInt(inputDate.substring(4, 6), 10) - 1;
     const day = parseInt(inputDate.substring(6, 8), 10);
@@ -122,7 +133,9 @@ const CustomCalendar = ({ value, onChange }) => {
     setCurrentYear(newDate.getFullYear());
     setSelectedDate(newDate);
     setShowDateInput(false);
-    onChange && onChange(newDate);
+    if (onChange) {
+      onChange(newDate);
+    }
   };
 
   const toggleYearPicker = () => setShowYearPicker(!showYearPicker);
@@ -142,297 +155,164 @@ const CustomCalendar = ({ value, onChange }) => {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'flex-start' }}>
-      <View style={calendar.container}>
-        {/* Header */}
-        <View style={calendar.header}>
-          <TouchableOpacity onPress={() => changeMonth(-1)}>
-            <Text style={calendar.navButton}>◀</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={toggleYearPicker}>
-            <Text style={calendar.monthText}>
-              {months[currentMonth]} {currentYear}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => changeMonth(1)}>
-            <Text style={calendar.navButton}>▶</Text>
-          </TouchableOpacity>
-        </View>
-
-        <Divider style={calendar.divider} />
-
-        {/* Weekdays */}
-        <View style={calendar.weekDays}>
-          {['Mån', 'Tis', 'Ons', 'Tor', 'Fre', 'Lör', 'Sön'].map(
-            (day, index) => (
-              <Text
-                key={index}
-                style={calendar.weekDay}
-              >
-                {day}
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+      <View style={calendar.root}>
+        <View style={calendar.container}>
+          {/* Header */}
+          <View style={calendar.header}>
+            <TouchableOpacity onPress={() => changeMonth(-1)}>
+              <Text style={calendar.navButton}>◀</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={toggleYearPicker}>
+              <Text style={calendar.monthText}>
+                {months[currentMonth]} {currentYear}
               </Text>
-            ),
-          )}
-        </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => changeMonth(1)}>
+              <Text style={calendar.navButton}>▶</Text>
+            </TouchableOpacity>
+          </View>
 
-        {/* Days Grid */}
-        <View style={calendar.daysGrid}>
-          {days.map(({ day, monthOffset }, index) => {
-            const isCurrentMonth = monthOffset === 0;
-            const isSelected =
-              selectedDate &&
-              selectedDate.getDate() === day &&
-              selectedDate.getMonth() === currentMonth + monthOffset &&
-              selectedDate.getFullYear() === currentYear;
-            const isToday =
-              today.getDate() === day &&
-              today.getMonth() === currentMonth + monthOffset &&
-              today.getFullYear() === currentYear;
+          <Divider style={calendar.divider} />
 
-            return (
-              <TouchableOpacity
-                key={index}
-                style={[
-                  calendar.day,
-                  isSelected && calendar.selectedDay,
-                  !isCurrentMonth && calendar.grayBackground,
-                ]}
-                onPress={() => handleDateSelect(day, monthOffset)}
-              >
+          {/* Weekdays */}
+          <View style={calendar.weekDays}>
+            {['Mån', 'Tis', 'Ons', 'Tor', 'Fre', 'Lör', 'Sön'].map(
+              (day, index) => (
                 <Text
-                  style={[
-                    calendar.dayText,
-                    !isCurrentMonth && calendar.grayText,
-                    isToday && calendar.todayText,
-                  ]}
+                  key={index}
+                  style={calendar.weekDay}
                 >
                   {day}
                 </Text>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
+              ),
+            )}
+          </View>
 
-        {/* Footer */}
-        <View style={calendar.footer}>
-          <TouchableOpacity onPress={goToToday}>
-            <Text style={calendar.footerButton}>Idag</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setShowDateInput(true)}>
-            <Text style={calendar.footerButton}>Skriv Datum</Text>
-          </TouchableOpacity>
-        </View>
+          {/* Days Grid */}
+          <View style={calendar.daysGrid}>
+            {days.map(({ day, monthOffset }, index) => {
+              const isCurrentMonth = monthOffset === 0;
+              const isSelected =
+                selectedDate &&
+                selectedDate.getDate() === day &&
+                selectedDate.getMonth() === currentMonth + monthOffset &&
+                selectedDate.getFullYear() === currentYear;
+              const isToday =
+                today.getDate() === day &&
+                today.getMonth() === currentMonth + monthOffset &&
+                today.getFullYear() === currentYear;
 
-        {/* Modal for date-input */}
-        {showDateInput && (
+              return (
+                <TouchableOpacity
+                  key={index}
+                  style={[
+                    calendar.day,
+                    isSelected && calendar.selectedDay,
+                    !isCurrentMonth && calendar.grayBackground,
+                  ]}
+                  onPress={() => handleDateSelect(day, monthOffset)}
+                >
+                  <Text
+                    style={[
+                      calendar.dayText,
+                      !isCurrentMonth && calendar.grayText,
+                      isToday && calendar.todayText,
+                    ]}
+                  >
+                    {day}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+
+          {/* Footer */}
+          <View style={calendar.footer}>
+            <TouchableOpacity onPress={goToToday}>
+              <Text style={calendar.footerButton}>Idag</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setShowDateInput(true)}>
+              <Text style={calendar.footerButton}>Skriv Datum</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Modal for date-input */}
+          {showDateInput && (
+            <ScrollView keyboardShouldPersistTaps={'always'}>
+              <Modal
+                visible={true}
+                transparent
+                animationType="fade"
+              >
+                <TouchableWithoutFeedback
+                  onPress={() => setShowDateInput(false)}
+                >
+                  <View style={calendar.modalBackground}>
+                    <View style={calendar.modalContainer}>
+                      <TextInput
+                        style={calendar.input}
+                        placeholder="Exempel: 20250101"
+                        label={'Ange datum (YYYYMMDD)'}
+                        mode="outlined"
+                        keyboardType="numeric"
+                        onChangeText={setInputDate}
+                        activeOutlineColor="black"
+                        onSubmitEditing={goToSelectedDate}
+                      />
+                      <View style={calendar.modalButtonContainer}>
+                        <TouchableOpacity
+                          onPress={() => setShowDateInput(false)}
+                        >
+                          <Text style={calendar.modalClose}>Stäng</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={goToSelectedDate}>
+                          <Text style={calendar.modalButton}>Välj</Text>
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                  </View>
+                </TouchableWithoutFeedback>
+              </Modal>
+            </ScrollView>
+          )}
+
+          {/* Year Modal */}
           <Modal
-            visible={true}
+            visible={showYearPicker}
             transparent
             animationType="fade"
           >
-            <TouchableWithoutFeedback onPress={() => setShowDateInput(false)}>
+            <TouchableWithoutFeedback onPress={toggleYearPicker}>
               <View style={calendar.modalBackground}>
-                <View style={calendar.modalContainer}>
-                  <TextInput
-                    style={calendar.input}
-                    placeholder="Exempel: 20250101"
-                    label={'Ange datum (YYYYMMDD)'}
-                    mode="outlined"
-                    keyboardType="numeric"
-                    onChangeText={setInputDate}
-                    activeOutlineColor="black"
-                    onSubmitEditing={goToSelectedDate}
+                <View style={calendar.yearPicker}>
+                  <FlatList
+                    data={generateYears()}
+                    keyExtractor={(item) => item.toString()}
+                    renderItem={({ item }) => (
+                      <TouchableOpacity
+                        style={calendar.yearItem}
+                        onPress={() => selectYear(item)}
+                      >
+                        <Text style={calendar.yearText}>{item}</Text>
+                      </TouchableOpacity>
+                    )}
                   />
-                  <View style={calendar.modalButtonContainer}>
-                    <TouchableOpacity onPress={() => setShowDateInput(false)}>
-                      <Text style={calendar.modalClose}>Stäng</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={goToSelectedDate}>
-                      <Text style={calendar.modalButton}>Välj</Text>
-                    </TouchableOpacity>
-                  </View>
+                  <Divider />
+                  <TouchableOpacity onPress={() => setShowYearPicker(false)}>
+                    <Text style={calendar.closeButton}>Stäng</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
             </TouchableWithoutFeedback>
           </Modal>
-        )}
-
-        {/* Year Modal */}
-        <Modal
-          visible={showYearPicker}
-          transparent
-          animationType="fade"
-        >
-          <TouchableWithoutFeedback onPress={toggleYearPicker}>
-            <View style={calendar.modalBackground}>
-              <View style={calendar.yearPicker}>
-                <FlatList
-                  data={generateYears()}
-                  keyExtractor={(item) => item.toString()}
-                  renderItem={({ item }) => (
-                    <TouchableOpacity
-                      style={calendar.yearItem}
-                      onPress={() => selectYear(item)}
-                    >
-                      <Text style={calendar.yearText}>{item}</Text>
-                    </TouchableOpacity>
-                  )}
-                />
-                <Divider />
-                <TouchableOpacity onPress={() => setShowYearPicker(false)}>
-                  <Text style={calendar.closeButton}>Stäng</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </TouchableWithoutFeedback>
-        </Modal>
+        </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
-
-const calendar = StyleSheet.create({
-  container: {
-    paddingVertical: 15,
-    paddingLeft: 20,
-    paddingRight: 8,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    elevation: 3,
-    alignSelf: 'flex-start',
-    minHeight: deviceHeight * 0.5,
-    maxHeight: deviceHeight * 0.7,
-    bottom: deviceHeight * 0.08,
-  },
-  header: {
-    width: '98%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 10,
-    marginHorizontal: -1,
-  },
-  navButton: {
-    fontSize: 15,
-    fontFamily: 'inter_Bold',
-    padding: 7,
-  },
-  monthText: {
-    fontSize: 20,
-    fontFamily: 'inter_Bold',
-  },
-  weekDays: {
-    width: '97%',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-  weekDay: {
-    fontSize: deviceWidth < 400 ? 13 : 15,
-    fontFamily: 'inter_Bold',
-    width: '13%',
-    textAlign: 'center',
-    marginVertical: 5,
-    // marginHorizontal: 1,
-  },
-  daysGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  day: {
-    width: '14%',
-    aspectRatio: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-    marginVertical: 10,
-  },
-  dayText: {
-    fontSize: 16,
-    fontFamily: 'inter_Regular',
-  },
-  grayText: {
-    color: 'gray',
-  },
-  grayBackground: {
-    // backgroundColor: '#f0f0f0',
-  },
-  todayText: {
-    color: '#222',
-  },
-  selectedDay: {
-    backgroundColor: '#FF7043',
-    borderRadius: 10,
-    color: 'white',
-  },
-  footer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop:
-      deviceHeight < 800 ? deviceHeight * -0.03 : deviceHeight * -0.045,
-  },
-  footerButton: {
-    fontSize: 16,
-    color: '#007bff',
-  },
-  modalBackground: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-  },
-  modalContainer: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
-    width: '75%',
-  },
-  input: {
-    // borderBottomWidth: 1,
-    backgroundColor: 'white',
-    marginBottom: 10,
-    fontSize: 16,
-  },
-  modalButton: {
-    fontSize: 17,
-    color: '#007bff',
-    fontFamily: 'inter_Regular',
-  },
-  modalClose: {
-    color: 'red',
-    fontSize: 16,
-    fontFamily: 'inter_Regular',
-  },
-  modalButtonContainer: {
-    flexDirection: 'row',
-    // gap: '70%',
-    justifyContent: 'space-between',
-    marginTop: 10,
-  },
-  yearPicker: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
-    width: 100,
-    maxHeight: 300,
-  },
-  yearItem: {
-    paddingVertical: 10,
-    alignItems: 'center',
-  },
-  yearText: {
-    fontSize: 18,
-  },
-  closeButton: {
-    textAlign: 'center',
-    color: 'red',
-    marginTop: 10,
-    fontSize: 16,
-    fontFamily: 'inter_Medium',
-  },
-  divider: {
-    padding: 0.8,
-    width: deviceWidth < 400 ? deviceWidth * 0.69 : deviceWidth * 0.7,
-  },
-});
 
 export default CustomCalendar;
