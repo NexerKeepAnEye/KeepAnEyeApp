@@ -23,7 +23,7 @@ export const AccordionStyle = StyleSheet.create({
   },
   header: {
     // textAlign: 'center',
-    marginLeft: deviceWidth * 0.05,
+    marginLeft: deviceWidth * 0.1,
     textAlignVertical: 'center',
     flex: 1,
     fontSize: deviceWidth * 0.045,
@@ -57,6 +57,7 @@ export const AccordionStyle = StyleSheet.create({
     // textAlign: 'center',
     fontFamily: 'inter_Regular',
     fontSize: deviceWidth * 0.045,
+    marginLeft: deviceWidth * 0.07,
   },
   headerChanged: {
     textAlign: 'center',

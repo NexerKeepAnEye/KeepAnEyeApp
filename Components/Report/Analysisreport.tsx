@@ -220,7 +220,7 @@ export default function Analysisreport() {
               <DataTable style={MeterDataGridStyle.gridContainer}>
                 <DataTable.Header style={MeterDataGridStyle.header}>
                   <DataTable.Title style={ReportGridStyle.flex2}>
-                    {state.meter[0].Name}
+                    {state.meter[0].Name.toString()}
                   </DataTable.Title>
                   <DataTable.Title style={ReportGridStyle.flex2}>
                     Value
