@@ -6,7 +6,7 @@ export const ReportGridStyle = StyleSheet.create({
     width: deviceWidth * 0.9,
   },
   container: {
-    marginBottom: 90,
+    marginBottom: deviceHeight * 0.15,
   },
   header: {
     backgroundColor: '#d9d9d9',

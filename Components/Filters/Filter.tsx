@@ -38,7 +38,8 @@ interface FilterProps {
   meterId?: number;
   resolution?: string;
   filters: string[];
-  buttonText: string;
+  buttonText?: string;
+  showButton?: boolean;
 }
 
 const Filter = ({
@@ -59,6 +60,7 @@ const Filter = ({
   meterId,
   resolution,
   buttonText,
+  showButton = true,
 }: FilterProps) => {
   const { showSnackbar } = useSnackbar();
   const { state } = usePremiseContext();
@@ -271,94 +273,95 @@ const Filter = ({
 
   return (
     <PaperProvider>
-      <View style={{ flex: 1 }}>
-        <View style={{ flex: 1 }}>
-          <ScrollView
-            horizontal
-            persistentScrollbar={true}
-          >
-            <View style={filterStyle.container}>
-              {filters.includes('year') && setYear && (
+      <View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={true}
+          persistentScrollbar={true}
+        >
+          <View style={filterStyle.container}>
+            {filters.includes('year') && setYear && (
+              <YearSearch
+                setSelectedYear={setYear}
+                label="År"
+              />
+            )}
+            {filters.includes('fromToYear') && setYear && setYearTwo && (
+              <>
+                <YearSearch
+                  setSelectedYear={setYear}
+                  label="Från år"
+                />
+                <YearSearch
+                  setSelectedYear={setYearTwo}
+                  label="Till år"
+                />
+              </>
+            )}
+            {filters.includes('compareYears') && setYear && setYearTwo && (
+              <>
                 <YearSearch
                   setSelectedYear={setYear}
                   label="År"
                 />
-              )}
-              {filters.includes('fromToYear') && setYear && setYearTwo && (
-                <>
-                  <YearSearch
-                    setSelectedYear={setYear}
-                    label="Från år"
-                  />
-                  <YearSearch
-                    setSelectedYear={setYearTwo}
-                    label="Till år"
-                  />
-                </>
-              )}
-              {filters.includes('compareYears') && setYear && setYearTwo && (
-                <>
-                  <YearSearch
-                    setSelectedYear={setYear}
-                    label="År"
-                  />
-                  <YearSearch
-                    setSelectedYear={setYearTwo}
-                    label="År"
-                  />
-                </>
-              )}
-              {filters.includes('meter') && setMeter && (
-                <MeterSearch
-                  setSelectedMeter={setMeter}
-                  meters={meter}
-                />
-              )}
-              {filters.includes('dateRange') && setFromDate && setToDate && (
-                <FromToDate
-                  setFromDate={setFromDate}
-                  setToDate={setToDate}
-                  fromDate={fromDate ?? null}
-                  toDate={toDate ?? null}
-                />
-              )}
-              {filters.includes('resolution') && setResolution && (
-                <Resolution setSelectedResolution={setResolution} />
-              )}
-              {filters.includes('standardAdjusted') && (
-                <StandardYearAdjusted
-                  isChecked={correctedValues}
-                  setIsChecked={setIsChecked}
-                />
-              )}
-            </View>
-          </ScrollView>
-        </View>
-        <View style={filterStyle.buttonContainer}>
-          <TouchableOpacity
-            onPress={handleSearch}
-            style={
-              loading
-                ? searchButtonStyle.disableButton
-                : searchButtonStyle.button
-            }
-            disabled={loading}
-          >
-            {loading ? (
-              <>
-                <Text style={searchButtonStyle.text}>Hämtar...</Text>
-                <ActivityIndicator
-                  animating={true}
-                  color={MD2Colors.white}
-                  size="small"
-                  style={{ paddingLeft: 19 }}
+                <YearSearch
+                  setSelectedYear={setYearTwo}
+                  label="År"
                 />
               </>
-            ) : (
-              <Text style={searchButtonStyle.text}>{buttonText}</Text>
             )}
-          </TouchableOpacity>
-        </View>
+            {filters.includes('meter') && setMeter && (
+              <MeterSearch
+                setSelectedMeter={setMeter}
+                meters={meter}
+              />
+            )}
+            {filters.includes('dateRange') && setFromDate && setToDate && (
+              <FromToDate
+                setFromDate={setFromDate}
+                setToDate={setToDate}
+                fromDate={fromDate ?? null}
+                toDate={toDate ?? null}
+              />
+            )}
+            {filters.includes('resolution') && setResolution && (
+              <Resolution setSelectedResolution={setResolution} />
+            )}
+            {filters.includes('standardAdjusted') && (
+              <StandardYearAdjusted
+                isChecked={correctedValues}
+                setIsChecked={setIsChecked}
+              />
+            )}
+          </View>
+        </ScrollView>
+        {showButton && (
+          <View style={filterStyle.buttonContainer}>
+            <TouchableOpacity
+              onPress={handleSearch}
+              style={
+                loading
+                  ? searchButtonStyle.disableButton
+                  : searchButtonStyle.button
+              }
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <Text style={searchButtonStyle.text}>Hämtar...</Text>
+                  <ActivityIndicator
+                    animating={true}
+                    color={MD2Colors.white}
+                    size="small"
+                    style={{ paddingLeft: 19 }}
+                  />
+                </>
+              ) : (
+                <Text style={searchButtonStyle.text}>{buttonText}</Text>
+              )}
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </PaperProvider>
   );
