@@ -1,19 +1,16 @@
-import RNDateTimePicker, {
-  DateTimePickerEvent,
-} from '@react-native-community/datetimepicker';
 import React, { useEffect, useState } from 'react';
 import {
-  Alert,
   Modal,
-  Platform,
   Text,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { width } from '../../Style/Dimensions';
 import { dateStyles } from '../../Style/FromToDateStyle';
 import { searchButtonStyle } from '../../Style/SearchButtonStyle';
+import CustomCalendar from './CustomCalander';
 
 interface FromToDateProps {
   fromDate: Date | null;
@@ -44,37 +41,37 @@ export function FromToDate({
     }
   }, [setFromDate, setToDate]);
 
-  const handleDateChange = (
-    event: DateTimePickerEvent,
-    selectedDate: Date | undefined,
-  ) => {
-    if (selectedDate) {
-      const endOfYear = new Date(new Date().getFullYear(), 11, 31);
+  // const handleDateChange = (
+  //   event: DateTimePickerEvent,
+  //   selectedDate: Date | undefined,
+  // ) => {
+  //   if (selectedDate) {
+  //     const endOfYear = new Date(new Date().getFullYear(), 11, 31);
 
-      if (currentPicker === 'from') {
-        if (selectedDate > (toDate || endOfYear)) {
-          Alert.alert(
-            'Fel',
-            'Från-datumet kan inte vara större än till-datumet.',
-          );
-        } else if (selectedDate > endOfYear) {
-          Alert.alert('Fel', 'Från-datumet kan inte vara högre än årets slut.');
-        } else {
-          setFromDate(selectedDate);
-        }
-      } else if (currentPicker === 'to') {
-        if (selectedDate < (fromDate || new Date())) {
-          Alert.alert(
-            'Fel',
-            'Till-datumet kan inte vara mindre än från-datumet.',
-          );
-        } else {
-          setToDate(selectedDate);
-        }
-      }
-    }
-    setModalVisible(false);
-  };
+  //     if (currentPicker === 'from') {
+  //       if (selectedDate > (toDate || endOfYear)) {
+  //         Alert.alert(
+  //           'Fel',
+  //           'Från-datumet kan inte vara större än till-datumet.',
+  //         );
+  //       } else if (selectedDate > endOfYear) {
+  //         Alert.alert('Fel', 'Från-datumet kan inte vara högre än årets slut.');
+  //       } else {
+  //         setFromDate(selectedDate);
+  //       }
+  //     } else if (currentPicker === 'to') {
+  //       if (selectedDate < (fromDate || new Date())) {
+  //         Alert.alert(
+  //           'Fel',
+  //           'Till-datumet kan inte vara mindre än från-datumet.',
+  //         );
+  //       } else {
+  //         setToDate(selectedDate);
+  //       }
+  //     }
+  //   }
+  //   setModalVisible(false);
+  // };
 
   const formatDate = (date: Date | null) => {
     return date
@@ -146,32 +143,23 @@ export function FromToDate({
           transparent={true}
           animationType="fade"
         >
-          <View style={dateStyles.modalContainer}>
-            <View style={dateStyles.modalContent}>
-              <RNDateTimePicker
-                value={
-                  currentPicker === 'from'
-                    ? fromDate || new Date()
-                    : toDate || new Date()
-                }
-                mode="date"
-                display={Platform.OS === 'ios' ? 'inline' : 'default'}
-                onChange={handleDateChange}
-                style={{
-                  backgroundColor: 'white',
-                  borderRadius: 10,
-                }}
-                minimumDate={new Date(2015, 0, 1)}
-                maximumDate={
-                  new Date(
-                    new Date().getFullYear(),
-                    new Date().getMonth(),
-                    new Date().getDate(),
-                  )
-                }
-              />
+          <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+            <View style={dateStyles.modalContainer}>
+              <View style={dateStyles.modalContent}>
+                <CustomCalendar
+                  value={currentPicker === 'from' ? fromDate : toDate}
+                  onChange={(date) => {
+                    if (currentPicker === 'from') {
+                      setFromDate(date);
+                    } else {
+                      setToDate(date);
+                    }
+                    setModalVisible(false);
+                  }}
+                />
+              </View>
             </View>
-          </View>
+          </TouchableWithoutFeedback>
         </Modal>
       )}
     </View>
