@@ -1,25 +1,18 @@
-import { MaterialIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { useEffect } from 'react';
-import {
-  Alert,
-  Dimensions,
-  Pressable,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Alert, Pressable, Text, TouchableOpacity, View } from 'react-native';
 import { Portal, Snackbar } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import StorageService from '../AsyncStorage/AsyncStorage';
 import { LogoTitle } from '../Components/Header';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { useSnackbar } from '../Context/SnackbarContext';
 import ReportScreen from '../Screens/ReportScreen';
 import { BottomTabStyle } from '../Style/BottomTabStyle';
+import { deviceWidth } from '../Style/Dimensions';
 import { filterStyle } from '../Style/FilterStyle';
 import PremiseStackNavigator from './PremiseStackNavigator';
 import { RootStackParamList } from './RootStackNavigation';
@@ -31,8 +24,7 @@ export type TabParamList = {
   PremiseScreen: { premiseId: number };
 };
 
-const { width } = Dimensions.get('window');
-const paddingHorizontal = width * 0.025;
+const paddingHorizontal = deviceWidth * 0.025;
 const Tab = createBottomTabNavigator<TabParamList>();
 
 export default function TabNavigator() {
@@ -108,7 +100,7 @@ export default function TabNavigator() {
           headerTitleAlign: 'center',
           tabBarStyle: BottomTabStyle.tabBar,
           tabBarLabelStyle: BottomTabStyle.tabBarText,
-          tabBarActiveTintColor: '#222',
+          tabBarActiveTintColor: '#ff7f57',
           tabBarInactiveTintColor: 'grey',
           tabBarPressColor: 'transparent',
           tabBarPressOpacity: 1,
@@ -120,17 +112,20 @@ export default function TabNavigator() {
           options={{
             tabBarLabel: 'Fastighet',
             tabBarIcon: ({ color, focused }) => (
-              <View
-                style={[
-                  BottomTabStyle.iconContainer,
-                  focused && BottomTabStyle.selectedTab,
-                ]}
-              >
-                <Icon
-                  name="home"
-                  color={color}
-                  size={30}
-                />
+              <View style={BottomTabStyle.iconContainer}>
+                {focused ? (
+                  <Ionicons
+                    name="home"
+                    size={30}
+                    color={color}
+                  />
+                ) : (
+                  <Ionicons
+                    name="home-outline"
+                    size={25}
+                    color={color}
+                  />
+                )}
               </View>
             ),
             tabBarButton: (props) => (
@@ -151,14 +146,22 @@ export default function TabNavigator() {
               <View
                 style={[
                   BottomTabStyle.iconContainer,
-                  focused && BottomTabStyle.selectedTab,
+                  // focused && BottomTabStyle.selectedTab,
                 ]}
               >
-                <Icon
-                  name="assessment"
-                  color={color}
-                  size={30}
-                />
+                {focused ? (
+                  <MaterialIcons
+                    name="insert-chart"
+                    size={30}
+                    color={color}
+                  />
+                ) : (
+                  <MaterialIcons
+                    name="insert-chart-outlined"
+                    size={25}
+                    color={color}
+                  />
+                )}
               </View>
             ),
             tabBarButton: (props) => (
