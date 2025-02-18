@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { List, RadioButton } from 'react-native-paper';
+import { Pressable, ScrollView, TouchableOpacity, View } from 'react-native';
+import { List, Text } from 'react-native-paper';
 import { AccordionStyle } from '../Style/AccordionStyle';
 import { deviceHeight, deviceWidth } from '../Style/Dimensions';
 import { filterTypes } from '../Types/FilterTypes';
@@ -18,6 +18,7 @@ export const Accordion2 = () => {
   const selectReport = (reportType: string) => {
     setSelectedReport(reportType);
     setSearchResults([]);
+    setExpandedReport(false);
   };
 
   const getFiltersForReport = (reportType: string) => {
@@ -36,67 +37,67 @@ export const Accordion2 = () => {
   };
 
   return (
-    <ScrollView>
+    <View style={{ marginTop: deviceHeight * 0.01 }}>
       <List.Section>
-        <List.Item
-          style={{
-            backgroundColor: '#fff',
-            width: deviceWidth * 0.9,
-          }}
-          title={selectedReport || '-- Välj rapport --'}
-          onPress={handleReportPress}
-          right={(props) => (
-            <List.Icon
-              {...props}
-              icon={expandedReport ? 'chevron-up' : 'chevron-down'}
-            />
-          )}
-          titleStyle={{ color: '#222', fontSize: deviceHeight * 0.025 }}
-        />
-        {expandedReport && (
-          <View>
-            <RadioButton.Group
-              onValueChange={(newValue) => selectReport(newValue)}
-              value={selectedReport}
-            >
+        <View style={AccordionStyle.container}>
+          <TouchableOpacity onPress={handleReportPress}>
+            <View style={AccordionStyle.content}>
+              <Text style={AccordionStyle.header}>
+                {selectedReport || 'Välj rapport'}
+              </Text>
+              <TouchableOpacity
+                onPress={handleReportPress}
+                style={AccordionStyle.dDL}
+              >
+                <List.Icon
+                  icon={expandedReport ? 'chevron-up' : 'chevron-down'}
+                  style={{
+                    marginRight: deviceWidth * 0.05,
+                    borderBottomRightRadius: expandedReport ? 0 : 10,
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
+
+          {expandedReport && (
+            <View style={AccordionStyle.listExpanded}>
               {filterTypes.rapporter.map((report) => (
-                <TouchableOpacity
+                <Pressable
                   key={report.id}
-                  style={AccordionStyle.listItem}
                   onPress={() => selectReport(report.type)}
+                  style={{ borderBottomWidth: 0.4 }}
                 >
-                  <RadioButton
-                    value={report.type}
-                    color={'#FF7043'}
+                  <List.Item
+                    title={report.type}
+                    style={AccordionStyle.listItem}
+                    titleStyle={AccordionStyle.listText}
                   />
-                  <Text style={AccordionStyle.listText}>{report.type}</Text>
-                </TouchableOpacity>
+                </Pressable>
               ))}
-            </RadioButton.Group>
-          </View>
-        )}
-        {expandedReport && selectedReport && (
-          <View
-            style={{
-              borderWidth: 1,
-              borderColor: 'red',
-              backgroundColor: '#fff',
-            }}
-          >
-            <Filter
-              filters={getFiltersForReport(selectedReport)}
-              setFilteredResults={setSearchResults}
-              meterData={[]}
-              showButton={false}
-            />
-            <ReportGrid
-              selectedReport={selectedReport}
-              searchResults={searchResults}
-            />
-          </View>
-        )}
+              {selectedReport && (
+                <View style={{ backgroundColor: '#fff' }}>
+                  <Filter
+                    filters={getFiltersForReport(selectedReport)}
+                    setFilteredResults={setSearchResults}
+                    meterData={[]}
+                    showButton={false}
+                  />
+                </View>
+              )}
+            </View>
+          )}
+        </View>
       </List.Section>
-    </ScrollView>
+      {selectedReport && (
+        <ScrollView>
+          <ReportGrid
+            selectedReport={selectedReport}
+            searchResults={searchResults}
+          />
+        </ScrollView>
+      )}
+    </View>
   );
 };
 

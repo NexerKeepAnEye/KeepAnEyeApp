@@ -22,7 +22,8 @@ export const AccordionStyle = StyleSheet.create({
     fontWeight: 'bold',
   },
   header: {
-    textAlign: 'center',
+    // textAlign: 'center',
+    marginLeft: deviceWidth * 0.05,
     textAlignVertical: 'center',
     flex: 1,
     fontSize: deviceWidth * 0.045,
@@ -53,7 +54,7 @@ export const AccordionStyle = StyleSheet.create({
     gap: deviceWidth * 0.02,
   },
   listText: {
-    textAlign: 'center',
+    // textAlign: 'center',
     fontFamily: 'inter_Regular',
     fontSize: deviceWidth * 0.045,
   },

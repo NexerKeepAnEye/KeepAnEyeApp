@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import {
   ActivityIndicator,
   MD2Colors,
@@ -274,7 +274,11 @@ const Filter = ({
   return (
     <PaperProvider>
       <View>
-        <View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={true}
+          persistentScrollbar={true}
+        >
           <View style={filterStyle.container}>
             {filters.includes('year') && setYear && (
               <YearSearch
@@ -330,7 +334,7 @@ const Filter = ({
               />
             )}
           </View>
-        </View>
+        </ScrollView>
         {showButton && (
           <View style={filterStyle.buttonContainer}>
             <TouchableOpacity
