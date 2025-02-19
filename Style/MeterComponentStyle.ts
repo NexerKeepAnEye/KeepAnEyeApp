@@ -36,6 +36,8 @@ export const MeterComponentStyle = StyleSheet.create({
     fontSize: deviceWidth * 0.045,
     color: '#222',
     fontFamily: 'inter_Regular',
+    paddingRight: deviceWidth * 0.15,
+    flexWrap: 'wrap',
   },
   textStyleProductCode: {
     fontSize: deviceWidth * 0.04,
