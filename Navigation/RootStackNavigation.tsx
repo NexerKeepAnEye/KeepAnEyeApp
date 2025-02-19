@@ -4,18 +4,20 @@ import {
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { useCallback, useEffect } from 'react';
-import { Alert, TouchableOpacity, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Modal, TouchableOpacity, View } from 'react-native';
 import 'react-native-gesture-handler';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import StorageService from '../AsyncStorage/AsyncStorage';
+import AlertDialog from '../Components/AlertDialog';
 import { LogoTitle } from '../Components/Header';
+import { setInitialFilterState } from '../Context/FilterReducer';
 import { usePremiseContext } from '../Context/PremiseContext';
-import PremiseScreen from '../Screens/PremiseScreen';
+import PremiseScreen from '../Screens/MeterScreen';
+import StartScreen from '../Screens/PremisesScreen';
 import ReportScreen from '../Screens/ReportScreen';
 import SignInScreen from '../Screens/SignInScreen';
 import Splash from '../Screens/Splashscreen';
-import StartScreen from '../Screens/StartScreen';
 import TabNavigator, { TabParamList } from './TabNavigator';
 
 export type RootStackParamList = {
@@ -34,32 +36,16 @@ export type RootStackParamList = {
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 export default function RootStackNavigator() {
+  const [showAlartDialog, setShowAlartDialog] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  // const [inputMessage, setInputMessage] = useState('');
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { state } = usePremiseContext();
-  const handleLogout = useCallback(async () => {
-    Alert.alert(
-      '',
-      'Är du säker på att du vill logga ut?',
-      [
-        {
-          text: 'Nej',
-          onPress: () => {},
-        },
-        {
-          text: 'Ja',
-          onPress: async () => {
-            await StorageService.clearApiKey();
-            state.products = [];
-            state.premises = [];
-            state.meterData = [];
-            navigation.navigate('SignInScreen');
-          },
-        },
-      ],
-      { cancelable: false },
-    );
-  }, [navigation, state]);
+  const handleLogout = () => {
+    setIsVisible(true);
+    setShowAlartDialog(true);
+  };
 
   useEffect(() => {
     const apiKey = StorageService.getApiKey();
@@ -69,55 +55,92 @@ export default function RootStackNavigator() {
   }, [navigation]);
 
   return (
-    <RootStack.Navigator
-      id={undefined}
-      initialRouteName="Splash"
-      screenOptions={() => ({
-        headerRight: () => (
-          <TouchableOpacity onPressOut={handleLogout}>
-            <View>
-              <MaterialIcons
-                name="exit-to-app"
-                size={30}
-                color="#D32F2F"
-              />
-            </View>
-          </TouchableOpacity>
-        ),
-        headerTitle: () => <LogoTitle />,
-        headerTitleAlign: 'center',
-      })}
-    >
-      <RootStack.Screen
-        name="Splash"
-        component={Splash}
-        options={{ headerShadowVisible: false, headerShown: false }}
-      />
-      <RootStack.Screen
-        name="StartScreen"
-        component={StartScreen}
-        options={{ headerLeft: () => null, headerBackVisible: false }}
-      />
-      <RootStack.Screen
-        name="SignInScreen"
-        component={SignInScreen}
-        options={{ headerShown: false }}
-      />
-      <RootStack.Screen
-        name="tabs"
-        component={TabNavigator}
-        options={{ headerShown: false }}
-      />
-      <RootStack.Screen
-        name="PremiseScreen"
-        component={PremiseScreen}
-        options={{ headerShown: false }}
-      />
-      <RootStack.Screen
-        name="ReportScreen"
-        component={ReportScreen}
-        options={{ headerShown: false }}
-      />
-    </RootStack.Navigator>
+    <>
+      <RootStack.Navigator
+        id={undefined}
+        initialRouteName="Splash"
+        screenOptions={() => ({
+          headerRight: () => (
+            <TouchableOpacity onPressOut={handleLogout}>
+              <View>
+                <MaterialIcons
+                  name="exit-to-app"
+                  size={30}
+                  color="#D32F2F"
+                />
+              </View>
+            </TouchableOpacity>
+          ),
+          headerTitle: () => <LogoTitle />,
+          headerTitleAlign: 'center',
+        })}
+      >
+        <RootStack.Screen
+          name="Splash"
+          component={Splash}
+          options={{ headerShadowVisible: false, headerShown: false }}
+        />
+        <RootStack.Screen
+          name="StartScreen"
+          component={StartScreen}
+          options={{ headerLeft: () => null, headerBackVisible: false }}
+        />
+        <RootStack.Screen
+          name="SignInScreen"
+          component={SignInScreen}
+          options={{ headerShown: false }}
+        />
+        <RootStack.Screen
+          name="tabs"
+          component={TabNavigator}
+          options={{ headerShown: false }}
+        />
+        <RootStack.Screen
+          name="PremiseScreen"
+          component={PremiseScreen}
+          options={{ headerShown: false }}
+        />
+        <RootStack.Screen
+          name="ReportScreen"
+          component={ReportScreen}
+          options={{ headerShown: false }}
+        />
+      </RootStack.Navigator>
+      <View>
+        <Modal
+          statusBarTranslucent={true}
+          animationType="fade"
+          transparent={true}
+          visible={showAlartDialog}
+          onRequestClose={() => {
+            setShowAlartDialog(!showAlartDialog);
+          }}
+        >
+          <AlertDialog
+            visible={isVisible}
+            title="Logga ut"
+            message="Är du säker på att du vill logga ut?"
+            onConfirmText="Avbryt"
+            onConfirm={async () => {
+              setIsVisible(false);
+              setShowAlartDialog(false);
+            }}
+            onCancelText="Logga ut"
+            onCancel={async () => {
+              await StorageService.clearApiKey();
+              state.products = [];
+              state.premises = [];
+              state.meterData = [];
+              setInitialFilterState();
+              navigation.navigate('SignInScreen');
+              setIsVisible(false);
+              setShowAlartDialog(false);
+            }}
+          >
+            {/* <Text>Extra innehåll här</Text> */}
+          </AlertDialog>
+        </Modal>
+      </View>
+    </>
   );
 }

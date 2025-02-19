@@ -10,7 +10,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { width } from '../../Style/Dimensions';
 import { dateStyles } from '../../Style/FromToDateStyle';
 import { searchButtonStyle } from '../../Style/SearchButtonStyle';
-import CustomCalendar from './CustomCalander';
+import AlertDialog from '../AlertDialog';
+import CustomCalendar from '../CustomCalander';
 
 interface FromToDateProps {
   fromDate: Date | null;
@@ -29,6 +30,9 @@ export function FromToDate({
   const [currentPicker, setCurrentPicker] = useState<'from' | 'to' | null>(
     null,
   );
+  const [showAlartDialog, setShowAlartDialog] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  // const [inputMessage, setInputMessage] = useState('');
 
   useEffect(() => {
     if (!fromDate && !toDate) {
@@ -41,38 +45,6 @@ export function FromToDate({
     }
   }, [setFromDate, setToDate]);
 
-  // const handleDateChange = (
-  //   event: DateTimePickerEvent,
-  //   selectedDate: Date | undefined,
-  // ) => {
-  //   if (selectedDate) {
-  //     const endOfYear = new Date(new Date().getFullYear(), 11, 31);
-
-  //     if (currentPicker === 'from') {
-  //       if (selectedDate > (toDate || endOfYear)) {
-  //         Alert.alert(
-  //           'Fel',
-  //           'Från-datumet kan inte vara större än till-datumet.',
-  //         );
-  //       } else if (selectedDate > endOfYear) {
-  //         Alert.alert('Fel', 'Från-datumet kan inte vara högre än årets slut.');
-  //       } else {
-  //         setFromDate(selectedDate);
-  //       }
-  //     } else if (currentPicker === 'to') {
-  //       if (selectedDate < (fromDate || new Date())) {
-  //         Alert.alert(
-  //           'Fel',
-  //           'Till-datumet kan inte vara mindre än från-datumet.',
-  //         );
-  //       } else {
-  //         setToDate(selectedDate);
-  //       }
-  //     }
-  //   }
-  //   setModalVisible(false);
-  // };
-
   const formatDate = (date: Date | null) => {
     return date
       ? date.toLocaleDateString('sv-SE', {
@@ -83,85 +55,123 @@ export function FromToDate({
       : '';
   };
 
+  const handleDateChange = (date: Date) => {
+    if (currentPicker === 'from') {
+      if (toDate && date > toDate && date !== fromDate) {
+        setIsVisible(true);
+        setShowAlartDialog(true);
+        return;
+      }
+      setFromDate(date);
+    } else {
+      if (fromDate && date < fromDate && date !== toDate) {
+        setIsVisible(true);
+        setShowAlartDialog(true);
+        return;
+      }
+      setToDate(date);
+    }
+    setModalVisible(false);
+  };
+
   return (
-    <View style={dateStyles.container}>
-      <View style={dateStyles.dateContainer}>
-        <TouchableOpacity
-          style={dateStyles.pickerContainer}
-          onPress={() => {
-            setCurrentPicker('from');
-            setModalVisible(true);
-          }}
-        >
-          <Text style={dateStyles.pickerText}>
-            {formatDate(fromDate) || 'Från datum'}
-          </Text>
-        </TouchableOpacity>
-        {fromDate && (
+    <>
+      <View style={dateStyles.container}>
+        <View style={dateStyles.dateContainer}>
           <TouchableOpacity
-            style={searchButtonStyle.resetButton}
+            style={dateStyles.pickerContainer}
             onPress={() => {
-              setFromDate(undefined);
+              setCurrentPicker('from');
+              setModalVisible(true);
             }}
           >
-            <Icon
-              name="close"
-              size={width * 0.03}
-              color="#333"
-            />
+            <Text style={dateStyles.pickerText}>
+              {formatDate(fromDate) || 'Från datum'}
+            </Text>
           </TouchableOpacity>
-        )}
-      </View>
-      <View style={dateStyles.dateContainer}>
-        <TouchableOpacity
-          style={dateStyles.pickerContainer}
-          onPress={() => {
-            setCurrentPicker('to');
-            setModalVisible(true);
-          }}
-        >
-          <Text style={dateStyles.pickerText}>
-            {formatDate(toDate) || 'Till datum'}
-          </Text>
-        </TouchableOpacity>
-        {toDate && (
+          {fromDate && (
+            <TouchableOpacity
+              style={searchButtonStyle.resetButton}
+              onPress={() => {
+                setFromDate(undefined);
+              }}
+            >
+              <Icon
+                name="close"
+                size={width * 0.03}
+                color="#333"
+              />
+            </TouchableOpacity>
+          )}
+        </View>
+        <View style={dateStyles.dateContainer}>
           <TouchableOpacity
-            style={searchButtonStyle.resetButton}
-            onPress={() => setToDate(undefined)}
+            style={dateStyles.pickerContainer}
+            onPress={() => {
+              setCurrentPicker('to');
+              setModalVisible(true);
+            }}
           >
-            <Icon
-              name="close"
-              size={width * 0.03}
-              color="#333"
-            />
+            <Text style={dateStyles.pickerText}>
+              {formatDate(toDate) || 'Till datum'}
+            </Text>
           </TouchableOpacity>
-        )}
-      </View>
-      {modalVisible && (
-        <Modal
-          visible={modalVisible}
-          transparent={true}
-          animationType="fade"
-        >
-          <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-            <View style={dateStyles.modalContainer}>
-              <View style={dateStyles.modalContent}>
-                <CustomCalendar
-                  value={currentPicker === 'from' ? fromDate : toDate}
-                  onChange={(date) => {
-                    if (currentPicker === 'from') {
-                      setFromDate(date);
-                    } else {
-                      setToDate(date);
-                    }
-                    setModalVisible(false);
-                  }}
-                />
+          {toDate && (
+            <TouchableOpacity
+              style={searchButtonStyle.resetButton}
+              onPress={() => setToDate(undefined)}
+            >
+              <Icon
+                name="close"
+                size={width * 0.03}
+                color="#333"
+              />
+            </TouchableOpacity>
+          )}
+        </View>
+        {modalVisible && (
+          <Modal
+            visible={modalVisible}
+            transparent={true}
+            animationType="fade"
+          >
+            <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+              <View style={dateStyles.modalContainer}>
+                <View style={dateStyles.modalContent}>
+                  <CustomCalendar
+                    value={currentPicker === 'from' ? fromDate : toDate}
+                    onChange={handleDateChange}
+                  />
+                </View>
               </View>
-            </View>
-          </TouchableWithoutFeedback>
-        </Modal>
-      )}
-    </View>
+            </TouchableWithoutFeedback>
+          </Modal>
+        )}
+        <View>
+          <Modal
+            statusBarTranslucent={true}
+            animationType="fade"
+            transparent={true}
+            visible={showAlartDialog}
+            onRequestClose={() => {
+              setShowAlartDialog(!showAlartDialog);
+            }}
+          >
+            <AlertDialog
+              visible={isVisible}
+              title="Varning"
+              message="Till datumet kan inte vara mindre än från datumet."
+              onConfirmText="Uppfattat"
+              onConfirm={async () => {
+                setIsVisible(false);
+                setShowAlartDialog(false);
+              }}
+            >
+              {/* <Text>Extra innehåll här</Text> */}
+            </AlertDialog>
+          </Modal>
+        </View>
+      </View>
+    </>
   );
 }

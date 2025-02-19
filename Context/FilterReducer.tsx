@@ -32,6 +32,17 @@ export const initialState: FilterState = {
   resolution: undefined,
 };
 
+export const setInitialFilterState = () => {
+  initialState.meter = [];
+  initialState.meterData = [];
+  initialState.filteredResults = [];
+  initialState.fromDate = undefined;
+  initialState.toDate = undefined;
+  initialState.year = undefined;
+  initialState.yearTwo = undefined;
+  initialState.resolution = undefined;
+};
+
 export const filterReducer = (
   state: FilterState,
   action: FilterAction,

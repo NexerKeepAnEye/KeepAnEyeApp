@@ -3,11 +3,13 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { useEffect } from 'react';
-import { Alert, Pressable, Text, TouchableOpacity, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Modal, Pressable, Text, TouchableOpacity, View } from 'react-native';
 import { Portal, Snackbar } from 'react-native-paper';
 import StorageService from '../AsyncStorage/AsyncStorage';
+import AlertDialog from '../Components/AlertDialog';
 import { LogoTitle } from '../Components/Header';
+import { setInitialFilterState } from '../Context/FilterReducer';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { useSnackbar } from '../Context/SnackbarContext';
 import ReportScreen from '../Screens/ReportScreen';
@@ -30,6 +32,9 @@ const Tab = createBottomTabNavigator<TabParamList>();
 export default function TabNavigator() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const [showAlartDialog, setShowAlartDialog] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  // const [inputMessage, setInputMessage] = useState('');
   const { visible, message, hideSnackbar } = useSnackbar();
   const { state } = usePremiseContext();
 
@@ -40,28 +45,9 @@ export default function TabNavigator() {
     }
   }, [navigation]);
 
-  const handleLogout = async () => {
-    Alert.alert(
-      '',
-      'Är du säker på att du vill logga ut?',
-      [
-        {
-          text: 'Nej',
-          onPress: () => {},
-        },
-        {
-          text: 'Ja',
-          onPress: async () => {
-            await StorageService.clearApiKey();
-            state.products = [];
-            state.premises = [];
-            state.meterData = [];
-            navigation.navigate('SignInScreen');
-          },
-        },
-      ],
-      { cancelable: false },
-    );
+  const handleLogout = () => {
+    setIsVisible(true);
+    setShowAlartDialog(true);
   };
 
   return (
@@ -174,6 +160,41 @@ export default function TabNavigator() {
           }}
         />
       </Tab.Navigator>
+      <View>
+        <Modal
+          statusBarTranslucent={true}
+          animationType="fade"
+          transparent={true}
+          visible={showAlartDialog}
+          onRequestClose={() => {
+            setShowAlartDialog(!showAlartDialog);
+          }}
+        >
+          <AlertDialog
+            visible={isVisible}
+            title="Logga ut"
+            message="Är du säker på att du vill logga ut?"
+            onConfirmText="Avbryt"
+            onConfirm={async () => {
+              setIsVisible(false);
+              setShowAlartDialog(false);
+            }}
+            onCancelText="Logga ut"
+            onCancel={async () => {
+              await StorageService.clearApiKey();
+              state.products = [];
+              state.premises = [];
+              state.meterData = [];
+              setInitialFilterState();
+              navigation.navigate('SignInScreen');
+              setIsVisible(false);
+              setShowAlartDialog(false);
+            }}
+          >
+            {/* <Text>Extra innehåll här</Text> */}
+          </AlertDialog>
+        </Modal>
+      </View>
     </>
   );
 }
