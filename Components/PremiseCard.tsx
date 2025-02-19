@@ -19,8 +19,10 @@ const PremiseCard = <T extends keyof RootStackParamList>({
   return (
     <TouchableHighlight
       onPress={() => {
-        dispatch({ type: 'RESET_PREMISE' });
         navigation.navigate('StartScreen');
+        setTimeout(() => {
+          dispatch({ type: 'RESET_PREMISE' });
+        }, 100);
       }}
       underlayColor={'transparent'}
       style={premiseCardStyle.cardButton}
