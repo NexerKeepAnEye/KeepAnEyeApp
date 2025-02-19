@@ -2,6 +2,7 @@ import React, { Reducer, useEffect, useReducer, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { LineChart } from 'react-native-gifted-charts';
 import { DataTable, Divider } from 'react-native-paper';
+import { useFilterContext } from '../../Context/FilterContext';
 import {
   FilterAction,
   filterReducer,
@@ -19,6 +20,8 @@ export default function Analysisreport() {
     filterReducer,
     initialState,
   );
+  const { state: filterstate } = useFilterContext();
+
   const [searchClicked, setSearchClicked] = useState(false);
   const [minValue, setMinValue] = useState<number | null>(null);
   const [max, setMaxValue] = useState<number | null>(null);
@@ -65,7 +68,7 @@ export default function Analysisreport() {
     12;
   const roundMaxValue = Math.round(maxValue / 1000) * 1000;
   // const step = maxValue / 4;
-  const meter = state.meter;
+  const meter = filterstate.meter;
   const [productName, setProductName] = useState<string | null>(null);
   const { state: premiseState } = usePremiseContext();
   const productCode = meter && meter.length > 0 ? meter[0].ProductCode : null;
@@ -220,7 +223,7 @@ export default function Analysisreport() {
               <DataTable style={MeterDataGridStyle.gridContainer}>
                 <DataTable.Header style={MeterDataGridStyle.header}>
                   <DataTable.Title style={ReportGridStyle.flex2}>
-                    {state.meter[0].Name}
+                    {filterstate.meter[0].Name}
                   </DataTable.Title>
                   <DataTable.Title style={ReportGridStyle.flex2}>
                     Value
