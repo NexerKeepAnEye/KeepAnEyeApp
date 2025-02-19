@@ -1,37 +1,47 @@
 import { StyleSheet } from 'react-native';
+import { deviceHeight, deviceWidth } from './Dimensions';
 
 export const alertDialogStyles = StyleSheet.create({
   dialog: {
     flex: 1,
-    // padding: 10,
-    // borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#f2f2f2',
-    maxHeight: '25%',
+    maxHeight: deviceHeight < 800 ? deviceHeight * 0.23 : deviceHeight * 0.2,
+    maxWidth: deviceWidth * 0.9,
   },
   title: {
-    fontSize: 20,
+    fontSize: deviceHeight * 0.03,
     fontFamily: 'inter_Bold',
   },
   message: {
-    fontSize: 16,
-    marginVertical: 10,
+    fontSize: deviceHeight > 800 ? deviceHeight * 0.018 : deviceHeight * 0.02,
+    paddingVertical: 10,
     fontFamily: 'inter_Regular',
   },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    paddingHorizontal: deviceWidth * 0.02,
+  },
   button: {
-    gap: 100,
+    flexGrow: 1,
+    justifyContent: 'space-between',
+    // paddingHorizontal: deviceWidth * 0.02,
+    marginLeft: deviceWidth * 0.09,
+    flexDirection: 'row',
   },
   confirmText: {
-    color: 'blue',
+    color: '#007bff',
     fontFamily: 'inter_Bold',
-    fontSize: 18,
+    fontSize: deviceHeight > 800 ? deviceHeight * 0.02 : deviceHeight * 0.025,
     paddingHorizontal: 10,
   },
   cancelText: {
-    color: 'red',
+    color: '#ed5e68',
     fontFamily: 'inter_Bold',
-    fontSize: 18,
+    fontSize: deviceHeight > 800 ? deviceHeight * 0.02 : deviceHeight * 0.025,
     paddingHorizontal: 10,
   },
 });

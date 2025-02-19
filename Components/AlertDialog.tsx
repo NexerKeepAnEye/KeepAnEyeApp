@@ -13,8 +13,8 @@ interface AlertDialogProps {
   visible: boolean;
   title: string;
   message: string;
-  onConfirm: () => void;
-  onConfirmText: string;
+  onConfirm?: () => void;
+  onConfirmText?: string;
   children?: React.ReactNode;
   onCancel?: () => void;
   onCancelText?: string;
@@ -49,7 +49,7 @@ const AlertDialog = ({
               </Text>
               {children}
             </Dialog.Content>
-            <Dialog.Actions style={alertDialogStyles.button}>
+            <Dialog.Actions style={alertDialogStyles.buttonContainer}>
               {onCancel && (
                 <Button
                   style={alertDialogStyles.button}

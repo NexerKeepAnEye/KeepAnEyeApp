@@ -138,7 +138,7 @@ export const calendar = StyleSheet.create({
   },
   closeButton: {
     textAlign: 'center',
-    color: 'red',
+    color: '#ed5e68',
     marginTop: 10,
     fontSize: 16,
     fontFamily: 'inter_Medium',
