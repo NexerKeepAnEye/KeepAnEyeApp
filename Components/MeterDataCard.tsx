@@ -1,5 +1,5 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Text, TouchableHighlight, View } from 'react-native';
 import { Card } from 'react-native-paper';
 import { usePremiseContext } from '../Context/PremiseContext';
@@ -14,8 +14,18 @@ type Props = {
 
 export default function MeterDataCard({ meterId, navigation }: Props) {
   const { state } = usePremiseContext();
+  const [expanded, setExpanded] = useState(false);
+  const [textHeight, setTextHeight] = useState(0);
+  const [containerHeight, setContainerHeight] = useState(0);
+  const textRef = useRef<Text>(null);
 
   const meter = state.selectedPremise?.Meters.find((m) => m.Id === meterId);
+
+  useEffect(() => {
+    if (textHeight > containerHeight) {
+      setExpanded(true);
+    }
+  }, [textHeight, containerHeight]);
 
   return (
     <TouchableHighlight
@@ -25,15 +35,31 @@ export default function MeterDataCard({ meterId, navigation }: Props) {
       underlayColor={'transparent'}
       style={CardStyle.cardButton}
     >
-      <Card style={CardStyle.card}>
+      <Card style={[CardStyle.card, expanded ? CardStyle.expandedCard : {}]}>
         <View style={CardStyle.row}>
           {state.selectedPremise?.Name ? (
             <>
               <View style={CardStyle.iconContainer}>
                 <MeterIcon productCode={meter?.ProductCode ?? ''} />
               </View>
-              <Card.Content style={CardStyle.content}>
-                <Text style={CardStyle.title}>{meter?.Name}</Text>
+              <Card.Content
+                style={CardStyle.content}
+                onLayout={(event) => {
+                  const { height } = event.nativeEvent.layout;
+                  setContainerHeight(height);
+                }}
+              >
+                <Text
+                  ref={textRef}
+                  style={CardStyle.title}
+                  numberOfLines={expanded ? undefined : 1}
+                  onLayout={(event) => {
+                    const { height } = event.nativeEvent.layout;
+                    setTextHeight(height);
+                  }}
+                >
+                  {meter?.Name}
+                </Text>
                 <Text style={CardStyle.subtitle}>
                   Produktkod: {meter?.ProductCode}
                 </Text>
@@ -41,7 +67,7 @@ export default function MeterDataCard({ meterId, navigation }: Props) {
             </>
           ) : (
             <Card.Content style={CardStyle.content}>
-              <Text style={CardStyle.noTitle}>No premise provided!</Text>
+              <Text style={CardStyle.noTitle}>Ingen mätare vald!</Text>
             </Card.Content>
           )}
         </View>

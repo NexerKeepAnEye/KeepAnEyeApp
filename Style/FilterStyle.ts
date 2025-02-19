@@ -3,7 +3,7 @@ import { deviceHeight, deviceWidth } from './Dimensions';
 
 export const filterStyle = StyleSheet.create({
   container: {
-    marginTop: deviceHeight * 0.007,
+    marginTop: deviceHeight * 0.01,
     // marginLeft: deviceWidth * 0.04,
     // marginRight: deviceWidth * 0.04,
     gap: deviceHeight * 0.01,
@@ -28,6 +28,7 @@ export const filterStyle = StyleSheet.create({
   },
   buttonContainer: {
     justifyContent: 'space-between',
+    marginRight: deviceWidth * 0.04,
   },
   scrolViewParent: {
     flex: 1,
