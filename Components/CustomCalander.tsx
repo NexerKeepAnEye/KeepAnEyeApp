@@ -11,7 +11,8 @@ import {
   View,
 } from 'react-native';
 import { Divider, TextInput } from 'react-native-paper';
-import { calendar } from '../../Style/CalendarStyle';
+import { calendar } from '../Style/CalendarStyle';
+import AlertDialog from './AlertDialog';
 
 interface CustomCalanderProps {
   value: Date;
@@ -68,7 +69,9 @@ const CustomCalendar = ({ value, onChange }: CustomCalanderProps) => {
   const [showDateInput, setShowDateInput] = useState(false);
   const [inputDate, setInputDate] = useState('');
   const [showYearPicker, setShowYearPicker] = useState(false);
-
+  const [showAlartDialog, setShowAlartDialog] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [inputMessage, setInputMessage] = useState('');
   useEffect(() => {
     if (value) {
       setSelectedDate(value);
@@ -113,10 +116,20 @@ const CustomCalendar = ({ value, onChange }: CustomCalanderProps) => {
   };
 
   const goToSelectedDate = () => {
-    if (!inputDate) return alert('Vänligen ange ett datum');
+    if (!inputDate) {
+      setInputMessage('Datumet får inte vara tomt');
+      setShowAlartDialog(true);
+      setIsVisible(true);
+      return;
+    }
 
-    if (!/^\d{8}$/.test(inputDate)) {
-      return alert('Ogiltigt datumformat. Använd YYYYMMDD.');
+    if (!/^\d{8}$/.test(inputDate) && inputDate) {
+      setInputMessage(
+        'Ogiltigt datumformat. Använd YYYYMMDD.Exempel: 20250101',
+      );
+      setShowAlartDialog(true);
+      setIsVisible(true);
+      return;
     }
 
     // Keyboard.dismiss();
@@ -139,7 +152,6 @@ const CustomCalendar = ({ value, onChange }: CustomCalanderProps) => {
   };
 
   const toggleYearPicker = () => setShowYearPicker(!showYearPicker);
-
   const selectYear = (year) => {
     setCurrentYear(year);
     setShowYearPicker(false);
@@ -279,6 +291,34 @@ const CustomCalendar = ({ value, onChange }: CustomCalanderProps) => {
               </Modal>
             </ScrollView>
           )}
+
+          {/* Alert Dialog */}
+          <Modal
+            animationType="fade"
+            transparent={true}
+            visible={showAlartDialog}
+            onRequestClose={() => {
+              setShowAlartDialog(!showAlartDialog);
+            }}
+          >
+            <AlertDialog
+              visible={isVisible}
+              title="Något gick fel"
+              message={inputMessage}
+              onConfirm={() => {
+                setIsVisible(false);
+                setShowAlartDialog(false);
+              }}
+              onConfirmText="Stäng"
+              // onCancelText="Cancel"
+              // onCancel={() => {
+              //   setIsVisible(false);s
+              //   setShowAlartDialog(false);
+              // }}
+            >
+              {/* <Text>Extra innehåll här</Text> */}
+            </AlertDialog>
+          </Modal>
 
           {/* Year Modal */}
           <Modal

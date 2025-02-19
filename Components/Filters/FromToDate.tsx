@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { width } from '../../Style/Dimensions';
 import { dateStyles } from '../../Style/FromToDateStyle';
 import { searchButtonStyle } from '../../Style/SearchButtonStyle';
-import CustomCalendar from './CustomCalander';
+import CustomCalendar from '../CustomCalander';
 
 interface FromToDateProps {
   fromDate: Date | null;
