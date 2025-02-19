@@ -4,14 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import {
-  BackHandler,
-  Modal,
-  Pressable,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Modal, Pressable, Text, TouchableOpacity, View } from 'react-native';
 import { Portal, Snackbar } from 'react-native-paper';
 import StorageService from '../AsyncStorage/AsyncStorage';
 import AlertDialog from '../Components/AlertDialog';
