@@ -7,7 +7,7 @@ export const MeterComponentStyle = StyleSheet.create({
     backgroundColor: '#f4f5f7',
   },
   listItem: {
-    height: deviceHeight * 0.08,
+    height: deviceHeight * 0.083,
     borderBottomWidth: 1,
     borderBottomColor: '#d9d9d9',
     alignContent: 'center',
@@ -36,7 +36,7 @@ export const MeterComponentStyle = StyleSheet.create({
     fontSize: deviceWidth * 0.045,
     color: '#222',
     fontFamily: 'inter_Regular',
-    paddingRight: deviceWidth * 0.15,
+    paddingRight: deviceWidth * 0.2,
     flexWrap: 'wrap',
   },
   textStyleProductCode: {

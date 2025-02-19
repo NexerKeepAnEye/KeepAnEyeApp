@@ -15,6 +15,10 @@ export const CardStyle = StyleSheet.create({
     backgroundColor: '#ffffff',
     minWidth: deviceWidth * 0.9,
     minHeight: deviceHeight * 0.08,
+    maxHeight: deviceHeight * 0.1,
+  },
+  expandedCard: {
+    maxHeight: 'auto',
   },
   row: {
     flexDirection: 'row',
@@ -25,7 +29,10 @@ export const CardStyle = StyleSheet.create({
     alignItems: 'center',
   },
   content: {
+    minHeight: deviceHeight * 0.06,
+    maxHeight: deviceHeight * 0.1,
     flex: 1,
+    flexWrap: 'wrap',
   },
   title: {
     color: '#000000',
