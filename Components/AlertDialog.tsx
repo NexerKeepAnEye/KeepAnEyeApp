@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import {
   Button,
   Dialog,
@@ -7,6 +7,7 @@ import {
   Portal,
   Text,
 } from 'react-native-paper';
+import { alertDialogStyles } from '../Style/AlertDialogStyle';
 
 interface AlertDialogProps {
   visible: boolean;
@@ -36,32 +37,36 @@ const AlertDialog = ({
           <Dialog
             visible={visible}
             onDismiss={onConfirm}
-            style={[styles.dialog]}
+            style={[alertDialogStyles.dialog]}
           >
-            <Dialog.Title style={styles.title}>{title}</Dialog.Title>
+            <Dialog.Title style={alertDialogStyles.title}>{title}</Dialog.Title>
             <Dialog.Content>
               <Text
                 variant="bodyMedium"
-                style={styles.message}
+                style={alertDialogStyles.message}
               >
                 {message}
               </Text>
               {children}
             </Dialog.Content>
-            <Dialog.Actions style={styles.button}>
+            <Dialog.Actions style={alertDialogStyles.button}>
               {onCancel && (
                 <Button
-                  style={styles.button}
+                  style={alertDialogStyles.button}
                   onPress={onCancel}
                 >
-                  <Text style={styles.cancelText}>{onCancelText}</Text>
+                  <Text style={alertDialogStyles.cancelText}>
+                    {onCancelText}
+                  </Text>
                 </Button>
               )}
               <Button
-                style={styles.button}
+                style={alertDialogStyles.button}
                 onPress={onConfirm}
               >
-                <Text style={styles.confirmText}>{onConfirmText}</Text>
+                <Text style={alertDialogStyles.confirmText}>
+                  {onConfirmText}
+                </Text>
               </Button>
             </Dialog.Actions>
           </Dialog>
@@ -70,40 +75,5 @@ const AlertDialog = ({
     </PaperProvider>
   );
 };
-
-const styles = StyleSheet.create({
-  dialog: {
-    flex: 1,
-    // padding: 10,
-    // borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f2f2f2',
-    maxHeight: '25%',
-  },
-  title: {
-    fontSize: 20,
-    fontFamily: 'inter_Bold',
-  },
-  message: {
-    fontSize: 16,
-    marginVertical: 10,
-    fontFamily: 'inter_Regular',
-  },
-  button: {
-    // marginHorizontal: 10,
-    gap: 100,
-  },
-  confirmText: {
-    color: 'blue',
-    fontFamily: 'inter_Bold',
-    fontSize: 18,
-  },
-  cancelText: {
-    color: 'red',
-    fontFamily: 'inter_Bold',
-    fontSize: 18,
-  },
-});
 
 export default AlertDialog;

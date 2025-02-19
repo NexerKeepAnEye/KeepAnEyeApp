@@ -294,6 +294,7 @@ const CustomCalendar = ({ value, onChange }: CustomCalanderProps) => {
 
           {/* Alert Dialog */}
           <Modal
+            statusBarTranslucent={true}
             animationType="fade"
             transparent={true}
             visible={showAlartDialog}
@@ -312,7 +313,7 @@ const CustomCalendar = ({ value, onChange }: CustomCalanderProps) => {
               onConfirmText="Stäng"
               // onCancelText="Cancel"
               // onCancel={() => {
-              //   setIsVisible(false);s
+              //   setIsVisible(false);
               //   setShowAlartDialog(false);
               // }}
             >

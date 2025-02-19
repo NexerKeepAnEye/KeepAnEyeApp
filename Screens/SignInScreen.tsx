@@ -4,10 +4,10 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
-  Alert,
   BackHandler,
   Image,
   KeyboardAvoidingView,
+  Modal,
   Platform,
   ScrollView,
   TouchableOpacity,
@@ -19,6 +19,7 @@ import { fetchPremise, fetchProduct } from '../Api/fetchAPI';
 import NexerLogo from '../assets/NexerLogo.png';
 import logoKAE from '../assets/UpscaleLogo.png';
 import StorageService from '../AsyncStorage/AsyncStorage';
+import AlertDialog from '../Components/AlertDialog';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { SignIn } from '../Style/SignInStyle';
@@ -29,6 +30,13 @@ export default function SignInScreen() {
   const { dispatch } = usePremiseContext();
   const [form, setForm] = useState({ apikey: '' });
   const [loading, setLoading] = useState(false);
+  const [showAlartDialog, setShowAlartDialog] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [inputMessage, setInputMessage] = useState('');
+  const [title, setTitle] = useState('');
+  const [confirmText, setConfirmText] = useState('');
+  const [cancelText, setCancelText] = useState('');
+  const [closeApp, setCloseApp] = useState(false);
 
   useEffect(() => {
     const checkApiKey = async () => {
@@ -38,7 +46,7 @@ export default function SignInScreen() {
         dispatch({ type: 'SET_PRODUCT', payload: products });
         const data = await fetchPremise(storedApiKey);
         dispatch({ type: 'SET_PREMISES', payload: data });
-        navigation.navigate('StartScreen');
+        navigation.push('StartScreen');
       }
     };
 
@@ -47,23 +55,15 @@ export default function SignInScreen() {
 
   useEffect(() => {
     const onBackPress = () => {
-      Alert.alert(
-        '',
-        'Vill du stänga av appen?',
-        [
-          {
-            text: 'Nej',
-            onPress: () => {},
-            // style: 'cancel',
-          },
-          { text: 'Ja', onPress: () => BackHandler.exitApp() },
-        ],
-        { cancelable: false },
-      );
-
+      setCloseApp(true);
+      setTitle('Varning');
+      setInputMessage('Vill du stänga av appen?');
+      setConfirmText('Ja');
+      setCancelText('Nej');
+      setIsVisible(true);
+      setShowAlartDialog(true);
       return true;
     };
-
     const backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       onBackPress,
@@ -71,6 +71,14 @@ export default function SignInScreen() {
 
     return () => backHandler.remove();
   }, []);
+
+  const errorMessages = (message: string) => {
+    setTitle('Inloggning misslyckades');
+    setInputMessage(message);
+    setConfirmText('Uppfattat');
+    setIsVisible(true);
+    setShowAlartDialog(true);
+  };
 
   const handleLogin = async () => {
     setLoading(true);
@@ -86,19 +94,20 @@ export default function SignInScreen() {
     } catch (error) {
       console.log('Error:', error);
       setLoading(false);
+      setCloseApp(false);
       if (error instanceof Error) {
         if (error.message.includes('status: 406')) {
-          Alert.alert('Fel', 'Felaktig API nyckel.');
+          errorMessages('Ogiltig API-nyckel. Försök igen.');
         } else if (
           error.message.includes('status: 500') ||
           error.message.includes('status: 504')
         ) {
-          Alert.alert('Fel', 'Oväntat fel inträffade.');
+          errorMessages('Serverfel. Försök igen.');
         } else {
-          Alert.alert('Fel', 'Ett fel inträffade.');
+          errorMessages('Ett okänt fel inträffade. Försök igen.');
         }
       } else {
-        Alert.alert('Fel', 'Ett okänt fel inträffade.');
+        errorMessages('Ett okänt fel inträffade. Försök igen.');
       }
     }
   };
@@ -153,6 +162,45 @@ export default function SignInScreen() {
           />
         </KeyboardAvoidingView>
       </ScrollView>
+      <Modal
+        statusBarTranslucent={true}
+        animationType="fade"
+        transparent={true}
+        visible={showAlartDialog}
+        onRequestClose={() => {
+          setShowAlartDialog(!showAlartDialog);
+        }}
+      >
+        {closeApp ? (
+          <AlertDialog
+            visible={isVisible}
+            title={title}
+            message={inputMessage}
+            onConfirmText={cancelText}
+            onConfirm={() => {
+              setIsVisible(false);
+              setShowAlartDialog(false);
+            }}
+            onCancelText={confirmText}
+            onCancel={() => {
+              setIsVisible(false);
+              setShowAlartDialog(false);
+              BackHandler.exitApp();
+            }}
+          ></AlertDialog>
+        ) : (
+          <AlertDialog
+            visible={isVisible}
+            title={title}
+            message={inputMessage}
+            onConfirmText={confirmText}
+            onConfirm={() => {
+              setIsVisible(false);
+              setShowAlartDialog(false);
+            }}
+          ></AlertDialog>
+        )}
+      </Modal>
     </SafeAreaView>
   );
 }

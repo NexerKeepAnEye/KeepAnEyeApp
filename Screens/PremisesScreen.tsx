@@ -1,11 +1,11 @@
 import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
-  Alert,
   BackHandler,
   Image,
   Linking,
+  Modal,
   Platform,
   ScrollView,
   Text,
@@ -15,6 +15,7 @@ import {
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import NexerLogo from '../assets/NexerLogo.png';
+import AlertDialog from '../Components/AlertDialog';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { StartScreenStyle } from '../Style/StartScreenStyle';
@@ -30,6 +31,10 @@ type Props = {
 };
 
 export default function StartScreen({ navigation }: Props) {
+  const [showAlartDialog, setShowAlartDialog] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [inputMessage, setInputMessage] = useState('');
+  const [title, setTitle] = useState('');
   const { state, dispatch } = usePremiseContext();
   const premises: Premise[] = state.premises;
   const isFocused = useIsFocused();
@@ -38,22 +43,10 @@ export default function StartScreen({ navigation }: Props) {
     useCallback(() => {
       const onBackPress = (): boolean => {
         if (isFocused) {
-          Alert.alert(
-            '',
-            'Vill du stänga av appen?',
-            [
-              {
-                text: 'Nej',
-                onPress: () => {},
-              },
-              {
-                text: 'Ja',
-                onPress: () => BackHandler.exitApp(),
-              },
-            ],
-            { cancelable: false },
-          );
-
+          setTitle('Varning');
+          setInputMessage('Vill du stänga av appen?');
+          setIsVisible(true);
+          setShowAlartDialog(true);
           return true;
         }
         return false;
@@ -64,27 +57,10 @@ export default function StartScreen({ navigation }: Props) {
       } else {
         const backHandler = () => {
           if (isFocused) {
-            Alert.alert(
-              '',
-              'Vill du stänga av appen?',
-              [
-                {
-                  text: 'Nej',
-                  onPress: () => navigation.navigate('StartScreen'),
-                },
-                {
-                  text: 'Ja',
-                  onPress: () => {
-                    if (Platform.OS === 'android') {
-                      BackHandler.exitApp();
-                    } else {
-                      Linking.openURL('app-settings');
-                    }
-                  },
-                },
-              ],
-              { cancelable: false },
-            );
+            setTitle('Varning');
+            setInputMessage('Vill du stänga av appen?');
+            setIsVisible(true);
+            setShowAlartDialog(true);
             return true;
           }
           return false;
@@ -104,6 +80,21 @@ export default function StartScreen({ navigation }: Props) {
       };
     }, [isFocused, navigation]),
   );
+
+  const handleConfirm = () => {
+    setIsVisible(false);
+    setShowAlartDialog(false);
+  };
+
+  const handleCancel = () => {
+    setIsVisible(false);
+    setShowAlartDialog(false);
+    if (Platform.OS === 'android') {
+      BackHandler.exitApp();
+    } else {
+      Linking.openURL('app-settings');
+    }
+  };
 
   const renderItem = (item: Premise) => (
     <TouchableOpacity
@@ -154,6 +145,25 @@ export default function StartScreen({ navigation }: Props) {
           style={StartScreenStyle.footer}
         />
       </View>
+      <Modal
+        statusBarTranslucent={true}
+        animationType="fade"
+        transparent={true}
+        visible={showAlartDialog}
+        onRequestClose={() => {
+          setShowAlartDialog(!showAlartDialog);
+        }}
+      >
+        <AlertDialog
+          visible={isVisible}
+          title={title}
+          message={inputMessage}
+          onConfirmText="Avbryt"
+          onConfirm={handleConfirm}
+          onCancelText="Ja"
+          onCancel={handleCancel}
+        />
+      </Modal>
     </GestureHandlerRootView>
   );
 }

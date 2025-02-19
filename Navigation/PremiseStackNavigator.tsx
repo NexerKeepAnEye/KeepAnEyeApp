@@ -1,7 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import MeterDataScreen from '../Screens/MeterDataScreen';
-import PremiseScreen from '../Screens/PremiseScreen';
+import PremiseScreen from '../Screens/MeterScreen';
 
 export type PremiseStackParamList = {
   PremiseScreen: { premiseId: number };
