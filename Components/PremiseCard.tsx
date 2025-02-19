@@ -22,7 +22,7 @@ const PremiseCard = <T extends keyof RootStackParamList>({
         navigation.navigate('StartScreen');
         setTimeout(() => {
           dispatch({ type: 'RESET_PREMISE' });
-        }, 1000);
+        }, 100);
       }}
       underlayColor={'transparent'}
       style={premiseCardStyle.cardButton}
