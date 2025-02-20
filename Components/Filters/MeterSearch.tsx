@@ -7,13 +7,9 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { FilterContext } from '../../Context/FilterContext';
-import { initialState } from '../../Context/FilterReducer';
 import { usePremiseContext } from '../../Context/PremiseContext';
-import { width } from '../../Style/Dimensions';
 import { meterSearch } from '../../Style/MeterSearchStyle';
-import { searchButtonStyle } from '../../Style/SearchButtonStyle';
 import { Meter } from '../../Types/Type';
 import { groupMeters, Section } from '../GroupMeter';
 import MeterIcon from '../MeterIcon';
@@ -83,7 +79,7 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
           </Text>
         </TouchableOpacity>
         <View style={meterSearch.iconMeterResetContainer}>
-          {selectedMeter && (
+          {/* {selectedMeter && (
             <TouchableOpacity
               style={searchButtonStyle.meterResetButton}
               onPress={() => {
@@ -97,7 +93,7 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
                 color="black"
               />
             </TouchableOpacity>
-          )}
+          )} */}
         </View>
       </View>
       <Modal

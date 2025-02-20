@@ -4,8 +4,9 @@ import { deviceHeight, deviceWidth, height, width } from './Dimensions';
 export const yearSearchStyle = StyleSheet.create({
   container: {
     alignItems: 'center',
-    marginRight: 5,
+    // marginRight: 5,
     minHeight: height * 0.065,
+    marginRight: 6,
   },
   pickerContainer: {
     borderWidth: 1,
@@ -19,9 +20,10 @@ export const yearSearchStyle = StyleSheet.create({
     opacity: 0.8,
     paddingHorizontal: 10,
     // marginTop: 12,
+    
   },
   pickerText: {
-    fontSize: width * 0.045,
+    fontSize: deviceHeight > 400 ? deviceWidth * 0.04 : deviceHeight * 0.021,
     flexShrink: 1,
     fontFamily: 'inter_Regular',
   },

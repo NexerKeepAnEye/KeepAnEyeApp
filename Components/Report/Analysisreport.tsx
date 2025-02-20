@@ -118,20 +118,20 @@ export default function Analysisreport() {
       <View>
         <Filter
           filters={['dateRange', 'meter', 'resolution']}
-          setMeter={(meter) => dispatch({ type: 'SET_METER', payload: meter })}
           setFromDate={(fromDate) =>
             dispatch({ type: 'SET_FROM_DATE', payload: fromDate })
           }
           setToDate={(toDate) =>
             dispatch({ type: 'SET_TO_DATE', payload: toDate })
           }
+          setMeter={(meter) => dispatch({ type: 'SET_METER', payload: meter })}
           setResolution={(resolution) =>
             dispatch({ type: 'SET_RESOLUTION', payload: resolution })
           }
-          meter={state.meter}
-          meterData={state.meterData}
           fromDate={state.fromDate}
           toDate={state.toDate}
+          meter={state.meter}
+          meterData={state.meterData}
           resolution={state.resolution}
           setFilteredResults={(data) => {
             dispatch({ type: 'SET_FILTERED_RESULTS', payload: data });

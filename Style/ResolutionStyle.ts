@@ -21,7 +21,7 @@ export const ResolutionStyle = StyleSheet.create({
     opacity: 0.8,
   },
   buttonText: {
-    fontSize: deviceWidth * 0.045,
+    fontSize: deviceHeight > 400 ? deviceWidth * 0.04 : deviceHeight * 0.021,
     color: '#222',
     textAlign: 'center',
     fontFamily: 'inter_Regular',
@@ -52,7 +52,7 @@ export const ResolutionStyle = StyleSheet.create({
     alignItems: 'center',
   },
   modalItemText: {
-    fontSize: deviceHeight * 0.02,
+    fontSize: deviceHeight * 0.021,
     fontFamily: 'inter_Regular',
   },
   modalCloseButton: {

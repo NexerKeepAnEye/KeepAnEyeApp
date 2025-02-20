@@ -7,10 +7,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import { width } from '../../Style/Dimensions';
 import { ResolutionStyle } from '../../Style/ResolutionStyle';
-import { searchButtonStyle } from '../../Style/SearchButtonStyle';
 
 interface ResolutionProps {
   setSelectedResolution: (resolution: string) => void;
@@ -44,7 +41,7 @@ export function Resolution({ setSelectedResolution }: ResolutionProps) {
           </Text>
         </TouchableOpacity>
       </View>
-      {resolution && (
+      {/* {resolution && (
         <TouchableOpacity
           onPress={() => setResolution('')}
           style={searchButtonStyle.resolutionButtonReset}
@@ -55,7 +52,7 @@ export function Resolution({ setSelectedResolution }: ResolutionProps) {
             color="#333"
           />
         </TouchableOpacity>
-      )}
+      )} */}
       {showResolutionModal && (
         <Modal
           visible={showResolutionModal}

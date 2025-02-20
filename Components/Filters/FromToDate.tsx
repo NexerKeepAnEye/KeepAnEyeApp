@@ -6,10 +6,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import { width } from '../../Style/Dimensions';
 import { dateStyles } from '../../Style/FromToDateStyle';
-import { searchButtonStyle } from '../../Style/SearchButtonStyle';
 import AlertDialog from '../AlertDialog';
 import CustomCalendar from '../CustomCalander';
 
@@ -89,7 +86,7 @@ export function FromToDate({
               {formatDate(fromDate) || 'Från datum'}
             </Text>
           </TouchableOpacity>
-          {fromDate && (
+          {/* {fromDate && (
             <TouchableOpacity
               style={searchButtonStyle.resetButton}
               onPress={() => {
@@ -102,7 +99,7 @@ export function FromToDate({
                 color="#333"
               />
             </TouchableOpacity>
-          )}
+          )} */}
         </View>
         <View style={dateStyles.dateContainer}>
           <TouchableOpacity
@@ -116,7 +113,7 @@ export function FromToDate({
               {formatDate(toDate) || 'Till datum'}
             </Text>
           </TouchableOpacity>
-          {toDate && (
+          {/* {toDate && (
             <TouchableOpacity
               style={searchButtonStyle.resetButton}
               onPress={() => setToDate(undefined)}
@@ -127,7 +124,7 @@ export function FromToDate({
                 color="#333"
               />
             </TouchableOpacity>
-          )}
+          )} */}
         </View>
         {modalVisible && (
           <Modal

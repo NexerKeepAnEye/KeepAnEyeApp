@@ -4,15 +4,19 @@ import { deviceHeight, deviceWidth } from './Dimensions';
 export const dateStyles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    gap: 6,
+    // gap: 6,
     marginBottom: deviceHeight * 0.01,
+    // marginLeft: deviceWidth * 0.05,
     // marginHorizontal: 3,
-    marginRight: 6,
+    // marginRight: 6,
   },
   dateContainer: {
     alignItems: 'center',
     opacity: 0.8,
     position: 'relative',
+    // borderWidth: 1,
+    // borderColor: 'red',
+    marginRight: 14,
   },
   pickerContainer: {
     flexDirection: 'row',
@@ -28,7 +32,7 @@ export const dateStyles = StyleSheet.create({
     backgroundColor: 'white',
   },
   pickerText: {
-    fontSize: deviceHeight * 0.021,
+    fontSize: deviceHeight > 400 ? deviceWidth * 0.04 : deviceHeight * 0.021,
     fontFamily: 'inter_Regular',
   },
   modalContainer: {

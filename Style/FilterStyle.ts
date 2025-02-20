@@ -4,9 +4,9 @@ import { deviceHeight, deviceWidth } from './Dimensions';
 export const filterStyle = StyleSheet.create({
   container: {
     marginTop: deviceHeight * 0.01,
-    // marginLeft: deviceWidth * 0.04,
-    // marginRight: deviceWidth * 0.04,
-    gap: deviceHeight * 0.01,
+    // marginLeft: deviceWidth * 0.02,
+    // marginRight: deviceWidth * 0.02,
+    gap: deviceHeight * 0.001,  
     flexDirection: 'row',
     // justifyContent: 'space-between',
     overflow: 'visible',
