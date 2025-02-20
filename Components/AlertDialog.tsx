@@ -24,7 +24,7 @@ const AlertDialog = ({
   visible,
   title,
   message,
-  onConfirm: onConfirm,
+  onConfirm,
   children,
   onCancel,
   onConfirmText,
