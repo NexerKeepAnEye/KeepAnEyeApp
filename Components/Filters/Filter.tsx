@@ -114,8 +114,8 @@ const Filter = ({
       (filters.includes('resolution') && !resolution) ||
       (filters.includes('year') && !year) ||
       (filters.includes('fromToYear') && !year && !yearTwo) ||
-      (filters.includes('meter') && !meter) ||
       (filters.includes('dateRange') && !fromDate && !toDate) ||
+      (filters.includes('meter') && !meter) ||
       (filters.includes('meter') && !meter) ||
       (filters.includes('compareYears') && !year && !yearTwo)
     ) {
@@ -310,18 +310,18 @@ const Filter = ({
                 />
               </>
             )}
-            {filters.includes('meter') && setMeter && (
-              <MeterSearch
-                setSelectedMeter={setMeter}
-                meters={meter}
-              />
-            )}
             {filters.includes('dateRange') && setFromDate && setToDate && (
               <FromToDate
                 setFromDate={setFromDate}
                 setToDate={setToDate}
                 fromDate={fromDate ?? null}
                 toDate={toDate ?? null}
+              />
+            )}
+            {filters.includes('meter') && setMeter && (
+              <MeterSearch
+                setSelectedMeter={setMeter}
+                meters={meter}
               />
             )}
             {filters.includes('resolution') && setResolution && (

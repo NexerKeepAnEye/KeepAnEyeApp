@@ -6,6 +6,7 @@ export const meterSearch = StyleSheet.create({
     maxWidth: deviceWidth * 0.45,
     minHeight: deviceHeight * 0.06,
     // marginTop: 12,
+    marginRight: 6,
   },
   pickerContainer: {
     flexDirection: 'row',
@@ -42,7 +43,8 @@ export const meterSearch = StyleSheet.create({
     // left: deviceWidth * 0.18,
   },
   pickerText: {
-    fontSize: deviceWidth * 0.045,
+    fontSize: deviceHeight > 400 ? deviceWidth * 0.04 : deviceHeight * 0.021,
+    fontFamily: 'inter_Regular',
   },
   touchArea: {
     maxWidth: deviceWidth * 0.4,

@@ -3,7 +3,7 @@ import { deviceHeight, deviceWidth } from './Dimensions';
 
 export const MeterDataGridStyle = StyleSheet.create({
   gridContainer: {
-    width: deviceWidth * 0.95,
+    width: deviceWidth * 0.9,
     marginTop: deviceHeight * 0.02,
     marginBottom: deviceHeight * 0.001,
   },
@@ -12,7 +12,6 @@ export const MeterDataGridStyle = StyleSheet.create({
     justifyContent: 'space-evenly',
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    width: deviceWidth * 0.9,
   },
   title: {
     fontFamily: 'inter_Bold',
