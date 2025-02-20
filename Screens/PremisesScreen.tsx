@@ -49,6 +49,7 @@ export default function StartScreen({ navigation }: Props) {
   useFocusEffect(
     useCallback(() => {
       const onBackPress = (): boolean => {
+        console.log(isFocused);
         if (isFocused) {
           errorMessage();
           return true;

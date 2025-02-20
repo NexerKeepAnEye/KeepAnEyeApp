@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
@@ -37,6 +37,7 @@ export default function SignInScreen() {
   const [confirmText, setConfirmText] = useState('');
   const [cancelText, setCancelText] = useState('');
   const [closeApp, setCloseApp] = useState(false);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     const checkApiKey = async () => {
@@ -54,23 +55,25 @@ export default function SignInScreen() {
   }, []);
 
   useEffect(() => {
-    const onBackPress = () => {
-      setCloseApp(true);
-      setTitle('Varning');
-      setInputMessage('Vill du stänga av appen?');
-      setConfirmText('Ja');
-      setCancelText('Nej');
-      setIsVisible(true);
-      setShowAlartDialog(true);
-      return true;
-    };
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      onBackPress,
-    );
+    if (isFocused) {
+      const onBackPress = () => {
+        setCloseApp(true);
+        setTitle('Varning');
+        setInputMessage('Vill du stänga av appen?');
+        setConfirmText('Ja');
+        setCancelText('Nej');
+        setIsVisible(true);
+        setShowAlartDialog(true);
+        return true;
+      };
+      const backHandler = BackHandler.addEventListener(
+        'hardwareBackPress',
+        onBackPress,
+      );
 
-    return () => backHandler.remove();
-  }, []);
+      return () => backHandler.remove();
+    }
+  }, [isFocused]);
 
   const errorMessages = (message: string) => {
     setTitle('Inloggning misslyckades');
@@ -90,6 +93,7 @@ export default function SignInScreen() {
         dispatch({ type: 'SET_PREMISES', payload: data });
         await StorageService.storeApiKey(form.apikey);
         navigation.navigate('StartScreen');
+        return BackHandler.removeEventListener('hardwareBackPress', () => true);
       }
     } catch (error) {
       console.log('Error:', error);
