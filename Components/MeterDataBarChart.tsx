@@ -73,8 +73,7 @@ export default function MeterDataBarChart({
   }));
 
   const maxValue =
-    Math.ceil(Math.max(...groupedData.map((item) => item.Value)) / 10000) *
-    10000;
+    Math.ceil(Math.max(...groupedData.map((item) => item.Value)) / 1000) * 1000;
   const stepValue = maxValue / 5;
 
   const handleBarPress = (
@@ -112,7 +111,7 @@ export default function MeterDataBarChart({
         xAxisColor={'#2222'}
         stepValue={stepValue}
         maxValue={maxValue}
-        yAxisLabelWidth={deviceHeight * 0.05}
+        yAxisLabelWidth={deviceHeight * 0.06}
         onPress={(item: Tooltip, index: number, x: number, y: number) =>
           handleBarPress(item.value, x, y, item.originalValue)
         }

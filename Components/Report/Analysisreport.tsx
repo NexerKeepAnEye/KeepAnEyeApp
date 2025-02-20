@@ -160,11 +160,11 @@ export default function Analysisreport() {
                 yAxisLabelWidth={deviceWidth * 0.1}
                 rotateLabel
                 labelsExtraHeight={deviceHeight * 0.055}
-                xAxisLabelsHeight={deviceHeight * 0.018}
+                xAxisLabelsHeight={deviceHeight * 0.025}
                 xAxisLabelsVerticalShift={10}
                 showTextOnFocus={true}
                 showVerticalLines
-                spacing={deviceWidth * 0.05}
+                spacing={deviceWidth * 0.08}
                 initialSpacing={deviceWidth * 0.04}
                 endSpacing={deviceWidth * 0.12}
                 color1="#ea5b0c"
@@ -191,8 +191,10 @@ export default function Analysisreport() {
                     return (
                       <View
                         style={{
-                          width: deviceWidth * 0.165,
-                          height: deviceHeight * 0.06,
+                          minWidth: deviceWidth * 0.165,
+                          minHeight: deviceHeight * 0.06,
+                          maxHeight: deviceHeight * 0.1,
+                          maxWidth: deviceWidth * 0.2,
                           justifyContent: 'center',
                           alignItems: 'center',
                           backgroundColor: 'white',
