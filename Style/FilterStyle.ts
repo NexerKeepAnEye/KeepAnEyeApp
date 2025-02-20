@@ -6,11 +6,12 @@ export const filterStyle = StyleSheet.create({
     marginTop: deviceHeight * 0.01,
     // marginLeft: deviceWidth * 0.02,
     // marginRight: deviceWidth * 0.02,
-    gap: deviceHeight * 0.001,
+    margin: deviceWidth > 400 ? deviceWidth * 0.001 : 0.1,
     flexDirection: 'row',
     // justifyContent: 'space-between',
     overflow: 'visible',
     // width: deviceWidth * 0.92,
+    marginLeft: deviceWidth > 400 ? 0 : deviceWidth * 0.01 ,
   },
   snackbar: {
     height: deviceHeight * 0.04,

@@ -3,19 +3,22 @@ import { deviceHeight, deviceWidth } from './Dimensions';
 
 export const MeterDataGridStyle = StyleSheet.create({
   gridContainer: {
-    width: deviceWidth * 0.9,
+    width: deviceWidth < 400 ? deviceWidth * 0.95 : deviceWidth * 0.9,
     marginTop: deviceHeight * 0.02,
     marginBottom: deviceHeight * 0.001,
+    // justifyContent: 'center',
   },
   header: {
     backgroundColor: '#d9d9d9',
-    justifyContent: 'space-evenly',
+    alignItems: 'center',
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
+    display: 'flex',
   },
   title: {
-    fontFamily: 'inter_Bold',
-  } as TextStyle,
+    fontFamily: 'inter_Bold' as TextStyle['fontFamily'],
+    marginLeft: deviceWidth * 0.05,
+  },
 
   cell: {
     borderColor: '#d9d9d9',

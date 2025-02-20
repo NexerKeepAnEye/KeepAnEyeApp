@@ -16,7 +16,7 @@ export const dateStyles = StyleSheet.create({
     position: 'relative',
     // borderWidth: 1,
     // borderColor: 'red',
-    marginRight: 14,
+    marginRight: 8,
   },
   pickerContainer: {
     flexDirection: 'row',
