@@ -1,8 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import AppLoading from 'expo-app-loading';
 import { hide, preventAutoHideAsync, setOptions } from 'expo-splash-screen';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchPremise, fetchProduct } from '../Api/fetchAPI';
 import StorageService from '../AsyncStorage/AsyncStorage';
 import { usePremiseContext } from '../Context/PremiseContext';
@@ -52,7 +51,7 @@ export default function Splash() {
   };
 
   if (!appIsReady) {
-    return <AppLoading />;
+    return null;
   }
 
   return null;
