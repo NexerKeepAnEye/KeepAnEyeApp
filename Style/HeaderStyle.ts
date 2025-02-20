@@ -6,7 +6,7 @@ export const headerStyle = StyleSheet.create({
     width: deviceWidth * 0.6,
   },
   container: {
-    height: Platform.OS === 'ios' ? deviceHeight * 0.025 : deviceHeight * 0.1,
+    height: Platform.OS === 'ios' ? deviceHeight * 0.025 : deviceHeight * 0.04,
     justifyContent: 'center',
     alignItems: 'center',
   },
