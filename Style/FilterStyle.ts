@@ -6,7 +6,7 @@ export const filterStyle = StyleSheet.create({
     marginTop: deviceHeight * 0.01,
     // marginLeft: deviceWidth * 0.02,
     // marginRight: deviceWidth * 0.02,
-    gap: deviceHeight * 0.001,  
+    gap: deviceHeight * 0.001,
     flexDirection: 'row',
     // justifyContent: 'space-between',
     overflow: 'visible',

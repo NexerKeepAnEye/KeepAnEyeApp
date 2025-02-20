@@ -46,7 +46,7 @@ export const searchButtonStyle = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     marginTop: -deviceHeight * 0.01,
-    left: deviceWidth > 400 ? deviceWidth * 0.3 :deviceWidth * 0.26,
+    left: deviceWidth > 400 ? deviceWidth * 0.3 : deviceWidth * 0.26,
     overflow: 'visible',
   },
   resolutionButtonReset: {
