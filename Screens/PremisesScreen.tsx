@@ -39,14 +39,18 @@ export default function StartScreen({ navigation }: Props) {
   const premises: Premise[] = state.premises;
   const isFocused = useIsFocused();
 
+  const errorMessage = () => {
+    setTitle('Varning');
+    setInputMessage('Vill du stänga av appen?');
+    setIsVisible(true);
+    setShowAlartDialog(true);
+  };
+
   useFocusEffect(
     useCallback(() => {
       const onBackPress = (): boolean => {
         if (isFocused) {
-          setTitle('Varning');
-          setInputMessage('Vill du stänga av appen?');
-          setIsVisible(true);
-          setShowAlartDialog(true);
+          errorMessage();
           return true;
         }
         return false;
@@ -57,10 +61,7 @@ export default function StartScreen({ navigation }: Props) {
       } else {
         const backHandler = () => {
           if (isFocused) {
-            setTitle('Varning');
-            setInputMessage('Vill du stänga av appen?');
-            setIsVisible(true);
-            setShowAlartDialog(true);
+            errorMessage();
             return true;
           }
           return false;
