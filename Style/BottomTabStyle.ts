@@ -3,23 +3,25 @@ import { deviceHeight } from './Dimensions';
 
 export const BottomTabStyle = StyleSheet.create({
   tabBar: {
-    height: deviceHeight * 0.085,
+    height: deviceHeight < 800 ? deviceHeight * 0.085 : deviceHeight * 0.07,
     backgroundColor: '#FFF',
   },
   iconContainer: {
     marginTop: deviceHeight * 0.02,
     justifyContent: 'center',
     // alignItems: 'center',
-    height: deviceHeight * 1,
-    marginBottom: deviceHeight * 0.01,
+    height: deviceHeight < 800 ? deviceHeight * 1 : deviceHeight * 0.05,
+    marginBottom:
+      deviceHeight < 800 ? deviceHeight * 0.01 : deviceHeight * 0.005,
   },
   tabBarIcon: {
-    height: deviceHeight * 0.04,
+    height: deviceHeight < 800 ? deviceHeight * 0.04 : deviceHeight * 0.01,
+    width: deviceHeight < 800 ? deviceHeight * 0.04 : deviceHeight * 0.03,
   },
   tabBarText: {
-    fontSize: deviceHeight * 0.013,
+    fontSize: deviceHeight < 800 ? deviceHeight * 0.015 : deviceHeight * 0.013,
     fontFamily: 'inter_Bold',
-    padding: deviceHeight * 0.01,
-    bottom: deviceHeight * 0.002,
+    padding: deviceHeight < 800 ? deviceHeight * 0.01 : deviceHeight * 0.009,
+    bottom: deviceHeight < 800 ? deviceHeight * 0.002 : deviceHeight * 0.001,
   },
 });

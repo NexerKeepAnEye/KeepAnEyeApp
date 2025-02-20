@@ -14,7 +14,7 @@ import { usePremiseContext } from '../Context/PremiseContext';
 import { useSnackbar } from '../Context/SnackbarContext';
 import ReportScreen from '../Screens/ReportScreen';
 import { BottomTabStyle } from '../Style/BottomTabStyle';
-import { deviceWidth } from '../Style/Dimensions';
+import { deviceHeight, deviceWidth } from '../Style/Dimensions';
 import { filterStyle } from '../Style/FilterStyle';
 import PremiseStackNavigator from './PremiseStackNavigator';
 import { RootStackParamList } from './RootStackNavigation';
@@ -102,13 +102,13 @@ export default function TabNavigator() {
                 {focused ? (
                   <Ionicons
                     name="home"
-                    size={30}
+                    size={deviceHeight < 800 ? 30 : 33}
                     color={color}
                   />
                 ) : (
                   <Ionicons
                     name="home-outline"
-                    size={25}
+                    size={deviceHeight < 800 ? 25 : 28}
                     color={color}
                   />
                 )}
@@ -138,13 +138,13 @@ export default function TabNavigator() {
                 {focused ? (
                   <MaterialIcons
                     name="insert-chart"
-                    size={30}
+                    size={deviceHeight < 800 ? 30 : 33}
                     color={color}
                   />
                 ) : (
                   <MaterialIcons
                     name="insert-chart-outlined"
-                    size={25}
+                    size={deviceHeight < 800 ? 25 : 28}
                     color={color}
                   />
                 )}
