@@ -12,7 +12,6 @@ export const MeterDataGridStyle = StyleSheet.create({
     justifyContent: 'space-evenly',
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    width: deviceWidth * 0.9,
   },
   title: {
     fontFamily: 'inter_Bold',
