@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { deviceHeight, deviceWidth } from './Dimensions';
 export const headerStyle = StyleSheet.create({
   HeaderLogo: {
@@ -6,6 +6,8 @@ export const headerStyle = StyleSheet.create({
     width: deviceWidth * 0.6,
   },
   container: {
-    height: deviceHeight * 0.1,
+    height: Platform.OS === 'ios' ? deviceHeight * 0.025 : deviceHeight * 0.04,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

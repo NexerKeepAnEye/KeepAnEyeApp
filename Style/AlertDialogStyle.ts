@@ -7,11 +7,13 @@ export const alertDialogStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#f2f2f2',
-    maxHeight: deviceHeight < 800 ? deviceHeight * 0.23 : deviceHeight * 0.2,
+    maxHeight: deviceHeight < 800 ? deviceHeight * 0.26 : deviceHeight * 0.22,
     maxWidth: deviceWidth * 0.9,
   },
   title: {
-    fontSize: deviceHeight * 0.03,
+    paddingTop: deviceHeight < 800 ? 5 : 5,
+    paddingBottom: deviceHeight < 800 ? 5 : 0,
+    fontSize: deviceHeight < 800 ? deviceHeight * 0.03 : deviceHeight * 0.028,
     fontFamily: 'inter_Bold',
   },
   message: {
@@ -35,13 +37,19 @@ export const alertDialogStyles = StyleSheet.create({
   confirmText: {
     color: '#007bff',
     fontFamily: 'inter_Bold',
-    fontSize: deviceHeight > 800 ? deviceHeight * 0.02 : deviceHeight * 0.025,
+    fontSize: deviceHeight > 800 ? deviceHeight * 0.02 : deviceHeight * 0.023,
     paddingHorizontal: 10,
   },
   cancelText: {
     color: '#ed5e68',
     fontFamily: 'inter_Bold',
-    fontSize: deviceHeight > 800 ? deviceHeight * 0.02 : deviceHeight * 0.025,
+    fontSize: deviceHeight > 800 ? deviceHeight * 0.02 : deviceHeight * 0.02,
     paddingHorizontal: 10,
+  },
+  singleButton: {
+    flexGrow: 1,
+    justifyContent: 'space-between',
+    paddingHorizontal: deviceWidth * 0.02,
+    marginLeft: deviceWidth < 400 ? deviceWidth * 0.04 : deviceWidth * 0.45,
   },
 });
