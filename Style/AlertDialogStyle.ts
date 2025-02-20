@@ -7,10 +7,11 @@ export const alertDialogStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#f2f2f2',
-    maxHeight: deviceHeight < 800 ? deviceHeight * 0.23 : deviceHeight * 0.2,
+    maxHeight: deviceHeight < 800 ? deviceHeight * 0.25 : deviceHeight * 0.22,
     maxWidth: deviceWidth * 0.9,
   },
   title: {
+    paddingTop: 10,
     fontSize: deviceHeight * 0.03,
     fontFamily: 'inter_Bold',
   },
@@ -43,5 +44,11 @@ export const alertDialogStyles = StyleSheet.create({
     fontFamily: 'inter_Bold',
     fontSize: deviceHeight > 800 ? deviceHeight * 0.02 : deviceHeight * 0.025,
     paddingHorizontal: 10,
+  },
+  singleButton: {
+    flexGrow: 1,
+    justifyContent: 'space-between',
+    paddingHorizontal: deviceWidth * 0.02,
+    marginLeft: deviceWidth < 400 ? deviceWidth * 0.4 : deviceWidth * 0.45,
   },
 });

@@ -306,11 +306,11 @@ const CustomCalendar = ({ value, onChange }: CustomCalanderProps) => {
               visible={isVisible}
               title="Något gick fel"
               message={inputMessage}
+              onConfirmText="Stäng"
               onConfirm={() => {
                 setIsVisible(false);
                 setShowAlartDialog(false);
               }}
-              onConfirmText="Stäng"
               // onCancelText="Cancel"
               // onCancel={() => {
               //   setIsVisible(false);

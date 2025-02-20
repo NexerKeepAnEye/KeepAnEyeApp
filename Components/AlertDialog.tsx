@@ -61,7 +61,11 @@ const AlertDialog = ({
                 </Button>
               )}
               <Button
-                style={alertDialogStyles.button}
+                style={
+                  onCancel
+                    ? alertDialogStyles.button
+                    : alertDialogStyles.singleButton
+                }
                 onPress={onConfirm}
               >
                 <Text style={alertDialogStyles.confirmText}>
