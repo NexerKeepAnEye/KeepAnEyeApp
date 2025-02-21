@@ -9,7 +9,7 @@ export const PremiseScreenStyle = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#f4f5f7',
   },
-   goToTop: {
+  goToTop: {
     position: 'absolute',
     bottom: 20,
     right: 20,
