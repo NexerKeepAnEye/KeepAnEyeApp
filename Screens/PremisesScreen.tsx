@@ -141,7 +141,7 @@ export default function StartScreen({ navigation }: Props) {
         color="#949494"
         style={StartScreenStyle.listItemPositionStart}
       />
-      <Text style={StartScreenStyle.textItem}>{item.Name}</Text>
+      <Text style={StartScreenStyle.textItem}>{item.Name.trimEnd()}</Text>
       <Icon
         name="keyboard-arrow-right"
         size={35}
