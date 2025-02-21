@@ -4,7 +4,7 @@ export interface Section {
   title: string;
   data: Meter[];
 }
-
+//prettier-ignore
 const productCodeMap: { [key: string]: string[] } = {
   'Fjärrvärme': ['FJV', 'fjv'],
   'El': ['EL', 'El'],
