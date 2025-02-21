@@ -1,6 +1,6 @@
 import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import {
   BackHandler,
   Image,
@@ -13,11 +13,16 @@ import {
   View,
 } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import {
+  default as Icon,
+  default as MaterialIcons,
+} from 'react-native-vector-icons/MaterialIcons';
 import NexerLogo from '../assets/NexerLogo.png';
 import AlertDialog from '../Components/AlertDialog';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
+import { deviceHeight } from '../Style/Dimensions';
+import { PremiseScreenStyle } from '../Style/PremiseScreenStyle';
 import { StartScreenStyle } from '../Style/StartScreenStyle';
 import { Premise } from '../Types/Type';
 
@@ -38,6 +43,7 @@ export default function StartScreen({ navigation }: Props) {
   const { state, dispatch } = usePremiseContext();
   const premises: Premise[] = state.premises;
   const isFocused = useIsFocused();
+  const [showButton, setShowButton] = useState(false);
 
   const errorMessage = () => {
     setTitle('Varning');
@@ -98,6 +104,18 @@ export default function StartScreen({ navigation }: Props) {
     }
   };
 
+  const scrollViewRef = useRef<ScrollView>(null);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleScroll = (event: any) => {
+    const scrollPosition = event.nativeEvent.contentOffset.y;
+    if (scrollPosition > deviceHeight) {
+      setShowButton(true);
+    } else {
+      setShowButton(false);
+    }
+  };
+
   const renderItem = (item: Premise) => (
     <TouchableOpacity
       key={item.Id}
@@ -139,8 +157,28 @@ export default function StartScreen({ navigation }: Props) {
         <View style={StartScreenStyle.headerBox}>
           <Text style={StartScreenStyle.textHeader}>MINA FASTIGHETER</Text>
         </View>
-        <ScrollView style={StartScreenStyle.itemBox}>
+        <ScrollView
+          style={StartScreenStyle.itemBox}
+          ref={scrollViewRef}
+          onScroll={handleScroll}
+          scrollEventThrottle={1}
+        >
           {Array.isArray(premises) && premises.map((item) => renderItem(item))}
+          {showButton && (
+            <View style={PremiseScreenStyle.goToTop}>
+              <TouchableOpacity
+                onPress={() => {
+                  scrollViewRef.current?.scrollTo({ y: 0, animated: true });
+                }}
+              >
+                <MaterialIcons
+                  name="arrow-upward"
+                  size={24}
+                  color="white"
+                />
+              </TouchableOpacity>
+            </View>
+          )}
         </ScrollView>
         <Image
           source={NexerLogo}

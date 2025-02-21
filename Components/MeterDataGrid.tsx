@@ -1,11 +1,5 @@
 import React, { useReducer, useRef, useState } from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { DataTable, Divider } from 'react-native-paper';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {
@@ -125,7 +119,7 @@ export default function MeterDataGrid({ meterId }: Props) {
         ) : null}
       </ScrollView>
       {showButton && (
-        <View style={styles.floatingButton}>
+        <View style={MeterDataGridStyle.goToTop}>
           <TouchableOpacity
             onPress={() => {
               scrollViewRef.current?.scrollTo({ y: 0, animated: true });
@@ -142,18 +136,3 @@ export default function MeterDataGrid({ meterId }: Props) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  floatingButton: {
-    position: 'absolute',
-    bottom: 20,
-    right: 0,
-    zIndex: 1000,
-    backgroundColor: '#FF7043',
-    height: deviceHeight * 0.055,
-    width: deviceHeight * 0.055,
-    borderRadius: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
