@@ -57,7 +57,9 @@ export default function MeterComponent({ navigation }: Props) {
         <MeterIcon productCode={item.ProductCode} />
       </View>
       <View style={MeterComponentStyle.textContainer}>
-        <Text style={MeterComponentStyle.textStyleName}>{item?.Name}</Text>
+        <Text style={MeterComponentStyle.textStyleName}>
+          {item?.Name.trimEnd()}
+        </Text>
         <Text style={MeterComponentStyle.textStyleProductCode}>
           {item?.ProductCode}
         </Text>
