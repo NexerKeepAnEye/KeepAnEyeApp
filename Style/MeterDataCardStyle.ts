@@ -4,7 +4,7 @@ import { deviceHeight, deviceWidth } from './Dimensions';
 export const CardStyle = StyleSheet.create({
   card: {
     marginBottom: deviceHeight * 0.01,
-    marginTop: deviceHeight * 0.01,
+    marginTop: deviceHeight * 0.02,
     padding: 10,
     borderRadius: 8,
     elevation: 4,
