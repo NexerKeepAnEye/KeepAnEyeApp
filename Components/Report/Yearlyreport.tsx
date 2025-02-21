@@ -78,7 +78,7 @@ export const YearlyReport = () => {
               <>
                 <Divider style={ReportGridStyle.header} />
                 <DataTable>
-                  <DataTable.Header>
+                  <DataTable.Header style={ReportGridStyle.header}>
                     <DataTable.Title>År</DataTable.Title>
                     <DataTable.Title>
                       Förbrukning ({productName})

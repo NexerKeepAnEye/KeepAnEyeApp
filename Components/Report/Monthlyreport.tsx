@@ -88,7 +88,7 @@ export const MonthlyReport = () => {
               <>
                 <Divider style={ReportGridStyle.header} />
                 <DataTable>
-                  <DataTable.Header>
+                  <DataTable.Header style={ReportGridStyle.header}>
                     <DataTable.Title>Månad</DataTable.Title>
                     <DataTable.Title>
                       Förbrukning ({productName})
