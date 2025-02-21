@@ -3,7 +3,7 @@ import { deviceHeight, deviceWidth } from './Dimensions';
 
 export const AccordionStyle = StyleSheet.create({
   container: {
-    marginTop: deviceHeight * 0.02,
+    marginTop: deviceHeight * 0.001,
     width: deviceWidth * 0.9,
     minHeight: deviceHeight * 0.08,
     borderWidth: 1,
@@ -22,7 +22,6 @@ export const AccordionStyle = StyleSheet.create({
     fontWeight: 'bold',
   },
   header: {
-    // textAlign: 'center',
     marginLeft: deviceWidth * 0.1,
     textAlignVertical: 'center',
     flex: 1,
@@ -54,7 +53,6 @@ export const AccordionStyle = StyleSheet.create({
     gap: deviceWidth * 0.02,
   },
   listText: {
-    // textAlign: 'center',
     fontFamily: 'inter_Regular',
     fontSize: deviceWidth * 0.045,
     marginLeft: deviceWidth * 0.07,
