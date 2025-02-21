@@ -60,4 +60,16 @@ export const MeterComponentStyle = StyleSheet.create({
     right: deviceWidth * 0.03,
     alignSelf: 'center',
   },
+  goToTop: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    zIndex: 1000,
+    backgroundColor: '#FF7043',
+    height: deviceHeight * 0.055,
+    width: deviceHeight * 0.055,
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
