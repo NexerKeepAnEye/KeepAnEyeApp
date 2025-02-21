@@ -161,25 +161,25 @@ export default function StartScreen({ navigation }: Props) {
           style={StartScreenStyle.itemBox}
           ref={scrollViewRef}
           onScroll={handleScroll}
-          scrollEventThrottle={1}
+          scrollEventThrottle={4}
         >
           {Array.isArray(premises) && premises.map((item) => renderItem(item))}
-          {showButton && (
-            <View style={PremiseScreenStyle.goToTop}>
-              <TouchableOpacity
-                onPress={() => {
-                  scrollViewRef.current?.scrollTo({ y: 0, animated: true });
-                }}
-              >
-                <MaterialIcons
-                  name="arrow-upward"
-                  size={24}
-                  color="white"
-                />
-              </TouchableOpacity>
-            </View>
-          )}
         </ScrollView>
+        {showButton && (
+          <View style={PremiseScreenStyle.goToTop}>
+            <TouchableOpacity
+              onPress={() => {
+                scrollViewRef.current?.scrollTo({ y: 0, animated: true });
+              }}
+            >
+              <MaterialIcons
+                name="arrow-upward"
+                size={24}
+                color="white"
+              />
+            </TouchableOpacity>
+          </View>
+        )}
         <Image
           source={NexerLogo}
           style={StartScreenStyle.footer}

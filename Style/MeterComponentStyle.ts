@@ -62,7 +62,7 @@ export const MeterComponentStyle = StyleSheet.create({
   },
   goToTop: {
     position: 'absolute',
-    bottom: 20,
+    bottom: deviceHeight * 0.03,
     right: 20,
     zIndex: 1000,
     backgroundColor: '#FF7043',
