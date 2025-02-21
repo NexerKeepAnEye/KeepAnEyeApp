@@ -11,7 +11,7 @@ export const filterStyle = StyleSheet.create({
     // justifyContent: 'space-between',
     overflow: 'visible',
     // width: deviceWidth * 0.92,
-    marginLeft: deviceWidth > 400 ? 0 : deviceWidth * 0.01 ,
+    marginLeft: deviceWidth > 400 ? 0 : deviceWidth * 0.01,
   },
   snackbar: {
     height: deviceHeight * 0.04,
