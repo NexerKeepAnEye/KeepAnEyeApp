@@ -26,6 +26,8 @@ export default function MeterDataGrid({ meterId }: Props) {
 
   const [filterApplied, setFilterApplied] = useState(false);
 
+  // console.log(device);
+
   return (
     <ScrollView>
       <Filter
@@ -59,6 +61,7 @@ export default function MeterDataGrid({ meterId }: Props) {
         {filterApplied ? (
           <View>
             <DataTable style={MeterDataGridStyle.gridContainer}>
+              {/* <Divider style={ReportGridStyle.header} /> */}
               <DataTable.Header style={MeterDataGridStyle.header}>
                 <DataTable.Title textStyle={MeterDataGridStyle.title}>
                   Datum
@@ -79,12 +82,18 @@ export default function MeterDataGrid({ meterId }: Props) {
                     key={index}
                     style={MeterDataGridStyle.cell}
                   >
-                    <DataTable.Cell>
+                    <DataTable.Cell style={{ justifyContent: 'center' }}>
                       {data.DateTime.toISOString().split('T')[0]}
                     </DataTable.Cell>
-                    <DataTable.Cell>{Math.round(data.Value)}</DataTable.Cell>
-                    <DataTable.Cell>{Math.round(data.Cost)}</DataTable.Cell>
-                    <DataTable.Cell>{data.Code}</DataTable.Cell>
+                    <DataTable.Cell style={{ justifyContent: 'center' }}>
+                      {Math.round(data.Value)}
+                    </DataTable.Cell>
+                    <DataTable.Cell style={{ justifyContent: 'center' }}>
+                      {Math.round(data.Cost)}
+                    </DataTable.Cell>
+                    <DataTable.Cell style={{ justifyContent: 'center' }}>
+                      {data.Code}
+                    </DataTable.Cell>
                   </DataTable.Row>
                 ))
               ) : (

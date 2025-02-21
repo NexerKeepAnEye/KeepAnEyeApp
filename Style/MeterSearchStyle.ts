@@ -20,7 +20,7 @@ export const meterSearch = StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: 'white',
     opacity: 0.8,
-    marginRight: 6,
+    marginRight: 5,
   },
   iconResetContainer: {
     justifyContent: 'center',
