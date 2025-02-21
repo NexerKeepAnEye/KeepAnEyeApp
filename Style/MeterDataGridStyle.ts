@@ -30,4 +30,16 @@ export const MeterDataGridStyle = StyleSheet.create({
     fontFamily: 'inter_BlackItalic',
     color: '#ababab',
   },
+  goToTop: {
+    position: 'absolute',
+    bottom: 20,
+    right: 0,
+    zIndex: 1000,
+    backgroundColor: '#FF7043',
+    height: deviceHeight * 0.055,
+    width: deviceHeight * 0.055,
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
