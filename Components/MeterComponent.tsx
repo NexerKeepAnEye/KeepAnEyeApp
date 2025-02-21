@@ -1,9 +1,11 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
+import { useRef, useState } from 'react';
 import { SectionList, Text, TouchableOpacity, View } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
+import { deviceHeight } from '../Style/Dimensions';
 import { MeterComponentStyle } from '../Style/MeterComponentStyle';
 import { meterSearch } from '../Style/MeterSearchStyle';
 import { Meter, MeterData } from '../Types/Type';
@@ -19,6 +21,9 @@ export default function MeterComponent({ navigation }: Props) {
   const meters = state.selectedPremise?.Meters || [];
   const sections = groupMeters(meters);
 
+  const [showButton, setShowButton] = useState(false);
+  const sectionListRef = useRef<SectionList>(null);
+
   const handleSelectMeter = (item: Meter) => {
     const meterData: MeterData[] = state.meterData.filter(
       (data) => data.MeterId === item.Id,
@@ -30,6 +35,16 @@ export default function MeterComponent({ navigation }: Props) {
     navigation.navigate('MeterDataScreen', {
       meterId: item.Id,
     });
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleScroll = (event: any) => {
+    const scrollPosition = event.nativeEvent.contentOffset.y;
+    if (scrollPosition > deviceHeight) {
+      setShowButton(true);
+    } else {
+      setShowButton(false);
+    }
   };
 
   const renderMeter = ({ item }: { item: Meter }) => (
@@ -65,13 +80,35 @@ export default function MeterComponent({ navigation }: Props) {
     <>
       <Text style={MeterComponentStyle.title}>Mätare</Text>
       <SectionList
+        ref={sectionListRef}
         sections={sections}
         keyExtractor={(item) => item.Id.toString()}
         renderItem={renderMeter}
         renderSectionHeader={renderSectionHeader}
         style={MeterComponentStyle.container}
         bounces={false}
+        onScroll={handleScroll}
+        scrollEventThrottle={4}
       />
+      {showButton && (
+        <View style={MeterComponentStyle.goToTop}>
+          <TouchableOpacity
+            onPress={() => {
+              sectionListRef.current?.scrollToLocation({
+                sectionIndex: 0,
+                itemIndex: 0,
+                animated: true,
+              });
+            }}
+          >
+            <MaterialIcons
+              name="arrow-upward"
+              size={24}
+              color="white"
+            />
+          </TouchableOpacity>
+        </View>
+      )}
     </>
   );
 }
