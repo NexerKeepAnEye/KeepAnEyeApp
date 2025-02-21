@@ -61,6 +61,7 @@ export default function MeterDataGrid({ meterId }: Props) {
         {filterApplied ? (
           <View>
             <DataTable style={MeterDataGridStyle.gridContainer}>
+              {/* <Divider style={ReportGridStyle.header} /> */}
               <DataTable.Header style={MeterDataGridStyle.header}>
                 <DataTable.Title textStyle={MeterDataGridStyle.title}>
                   Datum
