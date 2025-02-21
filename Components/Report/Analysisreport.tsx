@@ -223,38 +223,38 @@ export default function Analysisreport() {
             <View style={ReportGridStyle.container}>
               <Divider style={ReportGridStyle.header} />
               <DataTable style={MeterDataGridStyle.gridContainer}>
-                <DataTable.Header style={MeterDataGridStyle.header}>
+                <DataTable.Header style={ReportGridStyle.header}>
                   <DataTable.Title style={ReportGridStyle.flex2}>
                     {filterstate.meter[0].Name}
                   </DataTable.Title>
-                  <DataTable.Title style={ReportGridStyle.flex2}>
-                    Value
+                  <DataTable.Title style={ReportGridStyle.flex1}>
+                    Värde
                   </DataTable.Title>
                   <DataTable.Title style={ReportGridStyle.flex1}>
-                    Date
+                    Datum
                   </DataTable.Title>
                 </DataTable.Header>
                 <DataTable.Row>
-                  <DataTable.Cell style={ReportGridStyle.flex1}>
+                  <DataTable.Cell style={ReportGridStyle.flex2}>
                     Min
                   </DataTable.Cell>
-                  <DataTable.Cell style={ReportGridStyle.flex11}>
+                  <DataTable.Cell style={ReportGridStyle.flex1}>
                     {Math.round(minValue!)} {productName}
                   </DataTable.Cell>
-                  <DataTable.Cell style={ReportGridStyle.flex09}>
+                  <DataTable.Cell style={ReportGridStyle.flex1}>
                     {minDate
                       ? new Date(minDate).toLocaleDateString().split('T')[0]
                       : ''}
                   </DataTable.Cell>
                 </DataTable.Row>
                 <DataTable.Row>
-                  <DataTable.Cell style={ReportGridStyle.flex1}>
+                  <DataTable.Cell style={ReportGridStyle.flex2}>
                     Max
                   </DataTable.Cell>
-                  <DataTable.Cell style={ReportGridStyle.flex11}>
+                  <DataTable.Cell style={ReportGridStyle.flex1}>
                     {Math.round(max!)} {productName}
                   </DataTable.Cell>
-                  <DataTable.Cell style={ReportGridStyle.flex09}>
+                  <DataTable.Cell style={ReportGridStyle.flex1}>
                     {maxDate
                       ? new Date(maxDate).toLocaleDateString().split('T')[0]
                       : ''}

@@ -1,6 +1,6 @@
 import React, { useReducer, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import { DataTable } from 'react-native-paper';
+import { DataTable, Divider } from 'react-native-paper';
 import {
   FilterAction,
   filterReducer,
@@ -55,13 +55,12 @@ export default function MeterDataGrid({ meterId }: Props) {
           setFilterApplied(true);
         }}
         buttonText={'Sök'}
-        // productId={0}
       />
       <>
         {filterApplied ? (
           <View>
             <DataTable style={MeterDataGridStyle.gridContainer}>
-              {/* <Divider style={ReportGridStyle.header} /> */}
+              <Divider style={ReportGridStyle.header} />
               <DataTable.Header style={MeterDataGridStyle.header}>
                 <DataTable.Title textStyle={MeterDataGridStyle.title}>
                   Datum

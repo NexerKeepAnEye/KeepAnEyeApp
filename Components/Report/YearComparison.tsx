@@ -110,7 +110,7 @@ export const YearComparison = () => {
               <>
                 <Divider style={ReportGridStyle.header} />
                 <DataTable>
-                  <DataTable.Header>
+                  <DataTable.Header style={ReportGridStyle.header}>
                     <DataTable.Title>Månad</DataTable.Title>
                     <DataTable.Title>{state.year}</DataTable.Title>
                     <DataTable.Title>{state.yearTwo}</DataTable.Title>
