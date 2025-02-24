@@ -17,14 +17,14 @@ export const AccordionStyle = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     width: deviceWidth * 0.9,
+    justifyContent: 'center',
+    height: 70,
   },
   header: {
     marginLeft: deviceWidth * 0.1,
     flex: 1,
     fontSize: 18,
-    height: 70,
     fontFamily: 'inter_Bold',
-    lineHeight: 70,
   },
   dDL: {
     position: 'absolute',
