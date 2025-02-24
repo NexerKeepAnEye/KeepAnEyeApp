@@ -18,15 +18,12 @@ export const AccordionStyle = StyleSheet.create({
     alignItems: 'center',
     width: deviceWidth * 0.9,
     justifyContent: 'center',
-    position: 'relative',
-    fontWeight: 'bold',
+    height: 70,
   },
   header: {
     marginLeft: deviceWidth * 0.1,
-    textAlignVertical: 'center',
     flex: 1,
-    fontSize: deviceWidth * 0.045,
-    height: deviceHeight * 0.08,
+    fontSize: 18,
     fontFamily: 'inter_Bold',
   },
   dDL: {
@@ -34,10 +31,11 @@ export const AccordionStyle = StyleSheet.create({
     right: -1,
   },
   listButton: {
+    //BORT
     width: deviceWidth * 0.15,
     height: deviceHeight * 0.08,
-    backgroundColor: '#d9d9d9',
-    borderTopRightRadius: 10,
+    // backgroundColor: '#d9d9d9',
+    // borderTopRightRadius: 10,
   },
   listExpanded: {
     width: deviceWidth * 0.9,
@@ -59,7 +57,7 @@ export const AccordionStyle = StyleSheet.create({
   },
   headerChanged: {
     textAlign: 'center',
-    fontSize: deviceWidth * 0.05,
+    fontSize: 18,
     fontFamily: 'inter_Bold',
   },
 });
