@@ -5,7 +5,6 @@ import { BarChart } from 'react-native-gifted-charts';
 import { Text } from 'react-native-paper';
 import { useFilterContext } from '../Context/FilterContext';
 import { usePremiseContext } from '../Context/PremiseContext';
-import { BarChartStyle } from '../Style/ChartStyle';
 import { CompareChartStyle } from '../Style/CompareChartStyle';
 import { MeterData, Tooltip } from '../Types/Type';
 
@@ -150,6 +149,7 @@ export default function MeterDataBarChart({
         stepValue={stepValue}
         maxValue={maxValue}
         yAxisLabelWidth={50}
+        yAxisExtraHeight={23}
         xAxisLabelTexts={labels}
         xAxisLabelTextStyle={{ flex: 1 }}
         onPress={(item: Tooltip, index: number, x: number, y: number) =>
@@ -159,7 +159,7 @@ export default function MeterDataBarChart({
           return (
             <View
               style={[
-                BarChartStyle.tooltip,
+                CompareChartStyle.tooltip,
                 { top: tooltip.y, left: tooltip.x },
               ]}
             >

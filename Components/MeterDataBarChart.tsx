@@ -109,6 +109,7 @@ export default function MeterDataBarChart({
         barBorderTopRightRadius={4}
         yAxisColor={'#2222'}
         xAxisColor={'#2222'}
+        yAxisExtraHeight={20}
         stepValue={stepValue}
         maxValue={maxValue}
         yAxisLabelWidth={deviceHeight * 0.06}
