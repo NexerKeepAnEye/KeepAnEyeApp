@@ -30,7 +30,8 @@ export const AccordionStyle = StyleSheet.create({
     position: 'absolute',
     right: -1,
   },
-  listButton: { //BORT
+  listButton: {
+    //BORT
     width: deviceWidth * 0.15,
     height: deviceHeight * 0.08,
     // backgroundColor: '#d9d9d9',
