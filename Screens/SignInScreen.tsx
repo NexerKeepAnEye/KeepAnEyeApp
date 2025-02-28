@@ -107,8 +107,8 @@ export default function SignInScreen() {
           error.message.includes('status: 504')
         ) {
           errorMessages('Serverfel. Försök igen.');
-        } else {
-          errorMessages('Ett okänt fel inträffade. Försök igen.');
+        } else if (error.message.includes('status: 422')) {
+          errorMessages('Valideringsfel av indata. Försök igen.');
         }
       } else {
         errorMessages('Ett okänt fel inträffade. Försök igen.');
