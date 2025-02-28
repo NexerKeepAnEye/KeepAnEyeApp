@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { hide, preventAutoHideAsync, setOptions } from 'expo-splash-screen';
+// import { hide, preventAutoHideAsync, setOptions } from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
 import { fetchPremise, fetchProduct } from '../Api/fetchAPI';
 import StorageService from '../AsyncStorage/AsyncStorage';
@@ -9,7 +9,6 @@ import useFonts from '../Hooks/UseFonts';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 
 // Keep the splash screen visible while we fetch resources
-preventAutoHideAsync();
 
 export default function Splash() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -17,9 +16,9 @@ export default function Splash() {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const { dispatch } = usePremiseContext();
-  setOptions({
-    fade: true,
-  });
+  // setOptions({
+  //   fade: true,
+  // });
 
   useEffect(() => {
     const prepareApp = async () => {
@@ -39,7 +38,7 @@ export default function Splash() {
         console.warn(e);
       } finally {
         setAppIsReady(true);
-        hide();
+        // hide();
       }
     };
 
