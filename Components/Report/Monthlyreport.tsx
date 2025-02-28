@@ -10,6 +10,7 @@ import {
 } from '../../Context/FilterReducer';
 import { usePremiseContext } from '../../Context/PremiseContext';
 import { ReportGridStyle } from '../../Style/ReportGridStyleStyle';
+import ErrorBoundary from '../ErrorBoundary';
 import Filter from '../Filters/Filter';
 import MeterDataBarChart from '../MeterDataBarChart';
 
@@ -58,8 +59,24 @@ export const MonthlyReport = () => {
     }
   }, [filteredResults]);
 
+  const renderChart = () => {
+    try {
+      return (
+        <MeterDataBarChart
+          filteredResults={filteredResults}
+          resolution="Monthly"
+        />
+      );
+    } catch (error) {
+      <View>
+        <Text>error message: {error.message}</Text>
+        <Text>error: {error}</Text>
+      </View>;
+    }
+  };
+
   return (
-    <>
+    <ErrorBoundary>
       <Filter
         filters={['year', 'meter']}
         setYear={(year) => dispatch({ type: 'SET_YEAR', payload: year })}
@@ -78,10 +95,11 @@ export const MonthlyReport = () => {
         filteredResults.length > 0 ? (
           <>
             <View>
-              <MeterDataBarChart
-                filteredResults={filteredResults}
-                resolution="Monthly"
-              />
+              {/* <MeterDataBarChart
+              filteredResults={filteredResults}
+              resolution="Monthly"
+            /> */}
+              {renderChart()}
             </View>
             <View style={ReportGridStyle.container}>
               {/* {selectedReport && ( */}
@@ -137,6 +155,6 @@ export const MonthlyReport = () => {
           </View>
         )
       ) : null}
-    </>
+    </ErrorBoundary>
   );
 };
