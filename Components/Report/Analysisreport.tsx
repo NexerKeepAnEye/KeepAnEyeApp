@@ -27,18 +27,19 @@ export default function Analysisreport() {
   const [max, setMaxValue] = useState<number | null>(null);
   const [minDate, setMinDate] = useState<Date | null>(null);
   const [maxDate, setMaxDate] = useState<Date | null>(null);
+  const [averageValue, setAverageValue] = useState<number | null>(null);
   const filteredResults = state.filteredResults;
   const resolution = state.resolution;
+
   const formatDate = (dateString: string | number | Date) => {
     const date = new Date(dateString);
     switch (resolution) {
       case 'Dag':
         return `${date.getDate()}/${date.getMonth() + 1}`; // Dag och månad
-
       case 'Timma':
         return `${date.getDate()}/${date.getMonth() + 1}`; // Dag och månad
       case 'Månad':
-        return `${date.getMonth() + 1}/${date.getFullYear()}`; // Dag och månad
+        return `${date.getMonth() + 1}/${date.getFullYear()}`; // År och månad
       case 'År':
         return `${date.getFullYear()}`; // Endast år
       default:
@@ -46,28 +47,76 @@ export default function Analysisreport() {
     }
   };
 
-  const formattedData = filteredResults.map((item) => ({
-    value: item.Value || 0,
-    label: formatDate(item.DateTime),
-    customDataPoint: () => (
-      <View style={{ alignItems: 'center' }}>
-        <View
-          style={{
-            height: deviceHeight * 0.05,
-            width: deviceWidth * 0.06,
-            borderRadius: 5,
-            backgroundColor: '#ea5b0c',
-          }}
-        />
-      </View>
-    ),
-  }));
+  const getFormattedData = () => {
+    const totalPoints = filteredResults.length;
+    const seenDates = new Set();
 
-  const maxValue =
-    Math.round(Math.max(...filteredResults.map((item) => item.Value)) / 10) *
-    12;
-  const roundMaxValue = Math.round(maxValue / 1000) * 1000;
-  // const step = maxValue / 4;
+    if (totalPoints === 0) {
+      return [];
+    }
+    if (totalPoints <= 7) {
+      return filteredResults
+        .map((item, index) => {
+          const formattedDate = formatDate(item.DateTime);
+          if (
+            seenDates.has(formattedDate) ||
+            (index === 1 && (resolution === 'Timma' || resolution === 'Dag')) ||
+            (index === totalPoints - 2 &&
+              (resolution === 'Timma' || resolution === 'Dag'))
+          ) {
+            return null;
+          }
+          seenDates.add(formattedDate);
+          return {
+            value: item.Value || 0,
+            label: formattedDate,
+            date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString()}`,
+          };
+        })
+        .filter((item) => item && !isNaN(item.value));
+    }
+
+    const step = Math.round((totalPoints - 2) / 6); // 7 points between first and last
+
+    return filteredResults
+      .map((item, index) => {
+        const formattedDate = formatDate(item.DateTime);
+        if (
+          index !== 0 &&
+          index !== totalPoints - 1 &&
+          (index - 1) % step !== 0 &&
+          index >= 0
+        ) {
+          return {
+            value: item.Value || 0,
+            label: '',
+            date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
+          };
+        }
+        if (
+          seenDates.has(formattedDate) ||
+          (index === 1 && (resolution === 'Timma' || resolution === 'Dag')) ||
+          (index === totalPoints - 3 &&
+            (resolution === 'Timma' || resolution === 'Dag'))
+        ) {
+          return null;
+        }
+        seenDates.add(formattedDate);
+        return {
+          value: item.Value || 0,
+          label: formattedDate,
+          date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString()}`,
+        };
+      })
+      .filter((item) => item && !isNaN(item.value));
+  };
+
+  const formattedData = getFormattedData().filter((item) => !isNaN(item.value));
+
+  const maxValue = Math.round(
+    Math.max(...filteredResults.map((item) => item.Value)),
+  );
+  const roundMaxValue = Math.round(maxValue) * 1.5;
   const meter = filterstate.meter;
   const [productName, setProductName] = useState<string | null>(null);
   const { state: premiseState } = usePremiseContext();
@@ -105,6 +154,17 @@ export default function Analysisreport() {
           max: filteredResults[0],
         },
       );
+      if (filteredResults.length > 0) {
+        const values = filteredResults.map((item) => item.Value);
+        const min = Math.min(...values);
+        const max = Math.max(...values);
+        const sum = values.reduce((acc, val) => acc + val, 0);
+        const average = sum / values.length;
+
+        setMinValue(min);
+        setMaxValue(max);
+        setAverageValue(average);
+      }
 
       setMinValue(min.Value);
       setMaxValue(max.Value);
@@ -113,6 +173,9 @@ export default function Analysisreport() {
     }
   }, [filteredResults]);
 
+  const dynamicSpacing =
+    (deviceWidth * 2 - deviceWidth * 0.16) / filteredResults.length;
+  // console.log('data:', formattedData);
   return (
     <View>
       <View>
@@ -154,24 +217,34 @@ export default function Analysisreport() {
                 noOfSections={4}
                 maxValue={roundMaxValue}
                 focusEnabled
-                adjustToWidth={true}
+                // width={
+                //   filteredResults.length < 8
+                //     ? deviceWidth * 0.7
+                //     : deviceWidth * 2
+                // }
+                adjustToWidth
                 showDataPointLabelOnFocus
-                xAxisType="dashed"
+                // xAxisType="dashed"
                 yAxisLabelWidth={deviceWidth * 0.1}
-                rotateLabel
+                // rotateLabel
                 labelsExtraHeight={deviceHeight * 0.055}
                 xAxisLabelsHeight={deviceHeight * 0.025}
                 xAxisLabelsVerticalShift={10}
                 showTextOnFocus={true}
-                showVerticalLines
-                spacing={deviceWidth * 0.08}
-                initialSpacing={deviceWidth * 0.04}
-                endSpacing={deviceWidth * 0.12}
+                // showVerticalLines
+                spacing={
+                  filteredResults.length < 8
+                    ? dynamicSpacing / 3
+                    : dynamicSpacing / 2
+                }
+                initialSpacing={20}
+                endSpacing={deviceWidth * 0.08}
+                xAxisLabelTextStyle={{ right: 20 }}
                 color1="#ea5b0c"
                 textColor1="#222"
                 textFontSize1={deviceHeight * 0.02}
-                dataPointsHeight={deviceHeight * 0.01}
-                dataPointsWidth={deviceWidth * 0.01}
+                dataPointsHeight={deviceHeight * 0.02}
+                dataPointsWidth={deviceWidth * 0.02}
                 dataPointsColor1="#ea5b0c"
                 overflowTop={1}
                 pointerConfig={{
@@ -184,6 +257,7 @@ export default function Analysisreport() {
                   pointerLabelHeight: deviceHeight * 0.07,
                   pointerStripUptoDataPoint: true,
                   autoAdjustPointerLabelPosition: true,
+                  pointerVanishDelay: 15000,
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   pointerLabelComponent: (items: any[]) => {
                     const item = items[0];
@@ -191,10 +265,10 @@ export default function Analysisreport() {
                     return (
                       <View
                         style={{
-                          minWidth: deviceWidth * 0.165,
+                          minWidth: deviceWidth * 0.2,
                           minHeight: deviceHeight * 0.06,
-                          maxHeight: deviceHeight * 0.1,
-                          maxWidth: deviceWidth * 0.2,
+                          maxHeight: deviceHeight * 1,
+                          maxWidth: deviceWidth * 0.3,
                           justifyContent: 'center',
                           alignItems: 'center',
                           backgroundColor: 'white',
@@ -208,9 +282,10 @@ export default function Analysisreport() {
                           shadowRadius: 2,
                           elevation: 5,
                           overflow: 'visible',
+                          bottom: deviceHeight * 0.02,
                         }}
                       >
-                        <Text>{item.label}</Text>
+                        <Text>{item.date}</Text>
                         <Text style={{ fontWeight: 'bold' }}>
                           {item.value + ' ' + productName}
                         </Text>
@@ -224,40 +299,60 @@ export default function Analysisreport() {
               <Divider style={ReportGridStyle.header} />
               <DataTable style={MeterDataGridStyle.gridContainer}>
                 <DataTable.Header style={ReportGridStyle.header}>
-                  <DataTable.Title style={ReportGridStyle.flex2}>
+                  <DataTable.Title style={{ flex: 1.5 }}>
                     {filterstate.meter[0].Name}
                   </DataTable.Title>
-                  <DataTable.Title style={ReportGridStyle.flex1}>
+                  <DataTable.Title
+                    style={{ flex: 1, justifyContent: 'center' }}
+                  >
                     Värde
                   </DataTable.Title>
-                  <DataTable.Title style={ReportGridStyle.flex1}>
+                  <DataTable.Title
+                    style={{ flex: 1, justifyContent: 'center' }}
+                  >
                     Datum
                   </DataTable.Title>
                 </DataTable.Header>
                 <DataTable.Row>
-                  <DataTable.Cell style={ReportGridStyle.flex2}>
+                  <DataTable.Cell
+                    textStyle={[ReportGridStyle.columntext]}
+                    style={{ flex: 1.5 }}
+                  >
                     Min
                   </DataTable.Cell>
-                  <DataTable.Cell style={ReportGridStyle.flex1}>
-                    {Math.round(minValue!)} {productName}
+                  <DataTable.Cell style={{ flex: 1, justifyContent: 'center' }}>
+                    {Math.round(minValue!)}
                   </DataTable.Cell>
-                  <DataTable.Cell style={ReportGridStyle.flex1}>
-                    {minDate
-                      ? new Date(minDate).toLocaleDateString().split('T')[0]
-                      : ''}
+                  <DataTable.Cell style={{ flex: 1, justifyContent: 'center' }}>
+                    {minDate ? new Date(minDate).toLocaleDateString() : ''}
                   </DataTable.Cell>
                 </DataTable.Row>
                 <DataTable.Row>
-                  <DataTable.Cell style={ReportGridStyle.flex2}>
+                  <DataTable.Cell
+                    textStyle={ReportGridStyle.columntext}
+                    style={{ flex: 1.5 }}
+                  >
                     Max
                   </DataTable.Cell>
-                  <DataTable.Cell style={ReportGridStyle.flex1}>
-                    {Math.round(max!)} {productName}
+                  <DataTable.Cell style={{ flex: 1, justifyContent: 'center' }}>
+                    {Math.round(maxValue!)}
                   </DataTable.Cell>
-                  <DataTable.Cell style={ReportGridStyle.flex1}>
-                    {maxDate
-                      ? new Date(maxDate).toLocaleDateString().split('T')[0]
-                      : ''}
+                  <DataTable.Cell style={{ flex: 1, justifyContent: 'center' }}>
+                    {maxDate ? new Date(maxDate).toLocaleDateString() : ''}
+                  </DataTable.Cell>
+                </DataTable.Row>
+                <DataTable.Row>
+                  <DataTable.Cell
+                    textStyle={ReportGridStyle.columntext}
+                    style={{ flex: 1.5 }}
+                  >
+                    Medel
+                  </DataTable.Cell>
+                  <DataTable.Cell style={{ flex: 1, justifyContent: 'center' }}>
+                    {Math.round(averageValue!)}
+                  </DataTable.Cell>
+                  <DataTable.Cell style={{ flex: 1, justifyContent: 'center' }}>
+                    {' '}
                   </DataTable.Cell>
                 </DataTable.Row>
               </DataTable>
