@@ -1,4 +1,4 @@
-package com.alexskola23.KeepAnEyeApp
+package com.NexerKAE.KeepAnEyeApp
 
 import android.app.Application
 import android.content.res.Configuration

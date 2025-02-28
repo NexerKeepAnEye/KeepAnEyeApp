@@ -4,11 +4,11 @@
     "slug": "KeepAnEyeApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/UpscaleLogo.jpg",
+    "icon": "./assets/UpscaleLogo2.jpg",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/UpscaleLogo.jpg",
+      "image": "./assets/UpscaleLogo2.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,15 +21,18 @@
       "bundleIdentifier": "info.plist",
       "buildNumber": "1.0.0",
       "splash": {
-        "image": "./assets/UpscaleLogo.jpg",
+        "image": "./assets/UpscaleLogo2.jpg",
         "resizeMode": "contain",
         "backgroundColor": "#ffffff"
+      },
+      "runtimeVersion": {
+        "policy": "appVersion"
       }
     },
     "android": {
       "icon": "./assets/UpscaleIcon.jpg",
       "splash": {
-        "image": "./assets/UpscaleLogo.jpg",
+        "image": "./assets/UpscaleLogo2.jpg",
         "resizeMode": "contain",
         "backgroundColor": "#ffffff"
       },
@@ -38,7 +41,8 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.NexerKAE.KeepAnEyeApp",
-      "versionCode": 1
+      "versionCode": 1,
+      "runtimeVersion": "1.0.0"
     },
     "web": {
       "favicon": "./assets/splash-icon.png"
@@ -55,9 +59,9 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/UpscaleLogo.jpg",
+          "image": "./assets/UpscaleLogo2.jpg",
           "dark": {
-            "image": "./assets/UpscaleLogo.jpg"
+            "image": "./assets/UpscaleLogo2.jpg"
           }
         }
       ],
@@ -69,6 +73,9 @@
         "projectId": "50438267-223e-4603-9c2e-4029432fe4ec"
       }
     },
-    "owner": "alexskola23"
+    "owner": "alexskola23",
+    "updates": {
+      "url": "https://u.expo.dev/50438267-223e-4603-9c2e-4029432fe4ec"
+    }
   }
 }
