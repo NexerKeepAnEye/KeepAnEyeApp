@@ -3,6 +3,5 @@
   "compilerOptions": {
     "strict": false
   },
-    "include": ["./env.d.ts", "./**/*.ts", "./**/*.tsx"]
-
+  "include": ["./env.d.ts", "./**/*.ts", "./**/*.tsx"]
 }

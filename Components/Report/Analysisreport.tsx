@@ -24,6 +24,7 @@ export default function Analysisreport() {
 
   const [searchClicked, setSearchClicked] = useState(false);
   const [minValue, setMinValue] = useState<number | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [max, setMaxValue] = useState<number | null>(null);
   const [minDate, setMinDate] = useState<Date | null>(null);
   const [maxDate, setMaxDate] = useState<Date | null>(null);
