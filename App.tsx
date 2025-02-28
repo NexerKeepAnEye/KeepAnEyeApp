@@ -1,5 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import * as React from 'react';
+import 'react-native-gesture-handler';
 // import { useReducer } from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
