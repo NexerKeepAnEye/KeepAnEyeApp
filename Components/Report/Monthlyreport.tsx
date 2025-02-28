@@ -46,10 +46,10 @@ export const MonthlyReport = () => {
   useEffect(() => {
     if (filteredResults.length > 0) {
       const values = filteredResults.map((item) => item.Value);
-      const min = Math.min(...values);
-      const max = Math.max(...values);
+      const min = parseFloat(Math.min(...values).toFixed(2));
+      const max = parseFloat(Math.max(...values).toFixed(2));
       const sum = values.reduce((acc, val) => acc + val, 0);
-      const average = sum / values.length;
+      const average = parseFloat((sum / values.length).toFixed(2));
 
       setMinValue(min);
       setMaxValue(max);
@@ -106,19 +106,19 @@ export const MonthlyReport = () => {
                     <DataTable.Cell textStyle={ReportGridStyle.columntext}>
                       Min
                     </DataTable.Cell>
-                    <DataTable.Cell>{Math.round(minValue!)}</DataTable.Cell>
+                    <DataTable.Cell>{minValue!}</DataTable.Cell>
                   </DataTable.Row>
                   <DataTable.Row>
                     <DataTable.Cell textStyle={ReportGridStyle.columntext}>
                       Max
                     </DataTable.Cell>
-                    <DataTable.Cell>{Math.round(maxValue!)}</DataTable.Cell>
+                    <DataTable.Cell>{maxValue!}</DataTable.Cell>
                   </DataTable.Row>
                   <DataTable.Row>
                     <DataTable.Cell textStyle={ReportGridStyle.columntext}>
                       Medel
                     </DataTable.Cell>
-                    <DataTable.Cell>{Math.round(averageValue!)}</DataTable.Cell>
+                    <DataTable.Cell>{averageValue!}</DataTable.Cell>
                   </DataTable.Row>
                   <DataTable.Row>
                     <DataTable.Cell textStyle={ReportGridStyle.columntext}>

@@ -24,7 +24,7 @@ export default function Analysisreport() {
 
   const [searchClicked, setSearchClicked] = useState(false);
   const [minValue, setMinValue] = useState<number | null>(null);
-  const [max, setMaxValue] = useState<number | null>(null);
+  const [maxValue, setMaxValue] = useState<number | null>(null);
   const [minDate, setMinDate] = useState<Date | null>(null);
   const [maxDate, setMaxDate] = useState<Date | null>(null);
   const [averageValue, setAverageValue] = useState<number | null>(null);
@@ -113,9 +113,9 @@ export default function Analysisreport() {
 
   const formattedData = getFormattedData().filter((item) => !isNaN(item.value));
 
-  const maxValue = Math.round(
-    Math.max(...filteredResults.map((item) => item.Value)),
-  );
+  // const maxValue = Math.round(
+  //   Math.max(...filteredResults.map((item) => item.Value)),
+  // );
   const roundMaxValue = Math.round(maxValue) * 1.5;
   const meter = filterstate.meter;
   const [productName, setProductName] = useState<string | null>(null);
@@ -156,18 +156,18 @@ export default function Analysisreport() {
       );
       if (filteredResults.length > 0) {
         const values = filteredResults.map((item) => item.Value);
-        const min = Math.min(...values);
-        const max = Math.max(...values);
+        const min = parseFloat(Math.min(...values).toFixed(2));
+        const max = parseFloat(Math.max(...values).toFixed(2));
         const sum = values.reduce((acc, val) => acc + val, 0);
-        const average = sum / values.length;
+        const average = parseFloat((sum / values.length).toFixed(2));
 
         setMinValue(min);
         setMaxValue(max);
         setAverageValue(average);
       }
 
-      setMinValue(min.Value);
-      setMaxValue(max.Value);
+      setMinValue(parseFloat(min.Value.toFixed(2)));
+      setMaxValue(parseFloat(max.Value.toFixed(2)));
       setMinDate(min.DateTime);
       setMaxDate(max.DateTime);
     }
@@ -321,7 +321,7 @@ export default function Analysisreport() {
                     Min
                   </DataTable.Cell>
                   <DataTable.Cell style={{ flex: 1, justifyContent: 'center' }}>
-                    {Math.round(minValue!)}
+                    {minValue!}
                   </DataTable.Cell>
                   <DataTable.Cell style={{ flex: 1, justifyContent: 'center' }}>
                     {minDate ? new Date(minDate).toLocaleDateString() : ''}
@@ -335,7 +335,7 @@ export default function Analysisreport() {
                     Max
                   </DataTable.Cell>
                   <DataTable.Cell style={{ flex: 1, justifyContent: 'center' }}>
-                    {Math.round(maxValue!)}
+                    {maxValue!}
                   </DataTable.Cell>
                   <DataTable.Cell style={{ flex: 1, justifyContent: 'center' }}>
                     {maxDate ? new Date(maxDate).toLocaleDateString() : ''}
@@ -349,7 +349,7 @@ export default function Analysisreport() {
                     Medel
                   </DataTable.Cell>
                   <DataTable.Cell style={{ flex: 1, justifyContent: 'center' }}>
-                    {Math.round(averageValue!)}
+                    {averageValue!}
                   </DataTable.Cell>
                   <DataTable.Cell style={{ flex: 1, justifyContent: 'center' }}>
                     {' '}
