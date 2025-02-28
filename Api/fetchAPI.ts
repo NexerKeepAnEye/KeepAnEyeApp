@@ -1,12 +1,16 @@
 import { Meter, MeterData, Premise, Product } from '../Types/Type';
+import { EXPO_PUBLIC_API_URL } from '@env';
 // import https from 'https';
 // import fetch from 'node-fetch';
 
 // const agent = new https.Agent({
 //   rejectUnauthorized: false,
+
 // });
 
-const baseUrl = process.env.EXPO_PUBLIC_API_URL;
+// const baseUrl = process.env.EXPO_PUBLIC_API_URL;
+
+const baseUrl = EXPO_PUBLIC_API_URL;
 
 export async function fetchPremise(apiKey: string): Promise<Premise[]> {
   try {
