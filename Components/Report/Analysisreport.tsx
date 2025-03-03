@@ -35,15 +35,15 @@ export default function Analysisreport() {
     const date = new Date(dateString);
     switch (resolution) {
       case 'Dag':
-        return `${date.getDate()}/${date.getMonth() + 1}`; // Dag och månad
+        return `${date.getDate()}/${date.getMonth() + 1}`;
       case 'Timma':
-        return `${date.getDate()}/${date.getMonth() + 1}`; // Dag och månad
+        return `${date.getDate()}/${date.getMonth() + 1}`;
       case 'Månad':
-        return `${date.getMonth() + 1}/${date.getFullYear()}`; // År och månad
+        return `${date.getMonth() + 1}/${date.getFullYear()}`;
       case 'År':
-        return `${date.getFullYear()}`; // Endast år
+        return `${date.getFullYear()}`;
       default:
-        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear().toString().split('20')[1]}`; // Dag och månad
+        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear().toString().split('20')[1]}`;
     }
   };
 
@@ -76,7 +76,7 @@ export default function Analysisreport() {
         .filter((item) => item && !isNaN(item.value));
     }
 
-    const step = Math.round((totalPoints - 2) / 6); // 7 points between first and last
+    const step = Math.round((totalPoints - 2) / 6);
 
     return filteredResults
       .map((item, index) => {
@@ -113,9 +113,6 @@ export default function Analysisreport() {
 
   const formattedData = getFormattedData().filter((item) => !isNaN(item.value));
 
-  // const maxValue = Math.round(
-  //   Math.max(...filteredResults.map((item) => item.Value)),
-  // );
   const roundMaxValue = Math.round(maxValue) * 1.5;
   const meter = filterstate.meter;
   const [productName, setProductName] = useState<string | null>(null);
@@ -175,7 +172,6 @@ export default function Analysisreport() {
 
   const dynamicSpacing =
     (deviceWidth * 2 - deviceWidth * 0.16) / filteredResults.length;
-  // console.log('data:', formattedData);
   return (
     <View>
       <View>
@@ -217,21 +213,13 @@ export default function Analysisreport() {
                 noOfSections={4}
                 maxValue={roundMaxValue}
                 focusEnabled
-                // width={
-                //   filteredResults.length < 8
-                //     ? deviceWidth * 0.7
-                //     : deviceWidth * 2
-                // }
                 adjustToWidth
                 showDataPointLabelOnFocus
-                // xAxisType="dashed"
                 yAxisLabelWidth={deviceWidth * 0.1}
-                // rotateLabel
                 labelsExtraHeight={deviceHeight * 0.055}
                 xAxisLabelsHeight={deviceHeight * 0.025}
                 xAxisLabelsVerticalShift={10}
                 showTextOnFocus={true}
-                // showVerticalLines
                 spacing={
                   filteredResults.length < 8
                     ? dynamicSpacing / 3

@@ -104,7 +104,7 @@ const Filter = ({
         fromDate,
         toDate,
         correctedValues,
-        [] /*state.selectedPremise?.Id ? [state.selectedPremise.Id] : [],*/,
+        [],
         [],
         meterId !== undefined ? [meterId] : (meter?.map((m) => m.Id) ?? []),
       );
