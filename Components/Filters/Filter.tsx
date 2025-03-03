@@ -76,6 +76,7 @@ const Filter = ({
     fetchApiKey();
   }, []);
   const { state: filterstate } = useFilterContext();
+
   const handleSearch = async () => {
     setLoading(true);
     let meterData: MeterData[] | null = null;
@@ -143,6 +144,13 @@ const Filter = ({
       fromDate = new Date(Date.parse(year + '-01-01'));
       toDate = new Date(Date.parse(yearTwo + '-12-31'));
     }
+    if (fromDate < toDate) {
+      fromDate = new Date(Date.parse(year + '-01-01'));
+      toDate = new Date(Date.parse(yearTwo + '12-31'));
+    } else {
+      fromDate = new Date(Date.parse(yearTwo + '-01-01'));
+      toDate = new Date(Date.parse(year + '-12-31'));
+    }
     if (year && !yearTwo) {
       fromDate = new Date(Date.parse(year + '-01-01'));
       toDate = new Date(Date.parse(year + '-12-31'));
@@ -193,7 +201,6 @@ const Filter = ({
         fromDate && toDate
           ? Math.floor((toDate.getTime() - fromDate.getTime()) / 86400000)
           : 0;
-      // console.log('dayDiff:', dayDiff);
       if (dayDiff > 31) {
         showSnackbar('För stor tidsperiod, max 31 dagar');
         setLoading(false);
