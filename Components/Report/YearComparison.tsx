@@ -80,6 +80,23 @@ export const YearComparison = () => {
   const aggregatedDataForYear = aggregateDataByMonth(dataForYear);
   const aggregatedDataForYearTwo = aggregateDataByMonth(dataForYearTwo);
 
+  const renderChart = () => {
+    try {
+      return (
+        <MeterDataComparisonChart
+          filteredResults={filteredResults}
+          year={state.year}
+          yearTwo={state.yearTwo}
+        />
+      );
+    } catch (error) {
+      <View>
+        <Text>error message: {error.message}</Text>
+        <Text>error: {error}</Text>
+      </View>;
+    }
+  };
+
   return (
     <>
       <Filter
@@ -101,11 +118,7 @@ export const YearComparison = () => {
       {searchClicked ? (
         filteredResults.length > 0 ? (
           <>
-            <MeterDataComparisonChart
-              filteredResults={filteredResults}
-              year={state.year}
-              yearTwo={state.yearTwo}
-            />
+            {renderChart()}
             <View style={ReportGridStyle.container}>
               <>
                 <Divider style={ReportGridStyle.header} />

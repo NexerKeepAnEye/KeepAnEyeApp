@@ -1,0 +1,199 @@
+import React from 'react';
+import { ScrollView, Text, View } from 'react-native';
+import { LineChart } from 'react-native-gifted-charts';
+import { deviceHeight, deviceWidth } from '../Style/Dimensions';
+import { MeterData } from '../Types/Type';
+
+interface MeterDataLineChartProps {
+  filteredResults: MeterData[];
+  resolution: string;
+  maxValue: number;
+  productName: string;
+}
+
+export default function MeterDataLineChart({
+  filteredResults,
+  resolution,
+  maxValue,
+  productName,
+}: MeterDataLineChartProps) {
+  const dynamicSpacing =
+    (deviceWidth * 2 - deviceWidth * 0.16) / filteredResults.length;
+
+  const roundMaxValue = Math.round(maxValue) * 1.6;
+
+  const formatDate = (dateString: string | number | Date) => {
+    const date = new Date(dateString);
+    switch (resolution) {
+      case 'Dag':
+        return `${date.getDate()}/${date.getMonth() + 1}`; // Dag och månad
+      case 'Timma':
+        return `${date.getDate()}/${date.getMonth() + 1}`; // Dag och månad
+      case 'Månad':
+        return `${date.getMonth() + 1}/${date.getFullYear()}`; // År och månad
+      case 'År':
+        return `${date.getFullYear()}`; // Endast år
+      default:
+        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear().toString().split('20')[1]}`; // Dag och månad
+    }
+  };
+
+  const getFormattedData = () => {
+    const totalPoints = filteredResults.length;
+    const seenDates = new Set();
+
+    if (totalPoints === 0) {
+      return [];
+    }
+    if (totalPoints <= 7) {
+      return filteredResults
+        .map((item, index) => {
+          const formattedDate = formatDate(item.DateTime);
+          if (
+            seenDates.has(formattedDate) ||
+            (index === 1 && (resolution === 'Timma' || resolution === 'Dag')) ||
+            (index === totalPoints - 2 &&
+              (resolution === 'Timma' || resolution === 'Dag'))
+          ) {
+            return null;
+          }
+          seenDates.add(formattedDate);
+          return {
+            value: item.Value || 0,
+            label: formattedDate,
+            date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
+          };
+        })
+        .filter((item) => item && !isNaN(item.value));
+    }
+
+    const step = Math.round((totalPoints - 2) / 6); // 7 points between first and last
+
+    return filteredResults
+      .map((item, index) => {
+        const formattedDate = formatDate(item.DateTime);
+        if (
+          index !== 0 &&
+          index !== totalPoints - 1 &&
+          (index - 1) % step !== 0 &&
+          index >= 0
+        ) {
+          return {
+            value: item.Value || 0,
+            label: '',
+            date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
+          };
+        }
+        if (
+          seenDates.has(formattedDate) ||
+          (index === 1 && (resolution === 'Timma' || resolution === 'Dag')) ||
+          (index === totalPoints - 3 &&
+            (resolution === 'Timma' || resolution === 'Dag'))
+        ) {
+          return null;
+        }
+        seenDates.add(formattedDate);
+        return {
+          value: item.Value || 0,
+          label: formattedDate,
+          date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
+        };
+      })
+      .filter((item) => item && !isNaN(item.value));
+  };
+
+  const formattedData = getFormattedData().filter((item) => !isNaN(item.value));
+
+  return (
+    <ScrollView horizontal>
+      <LineChart
+        areaChart
+        hideDataPoints1
+        data={formattedData}
+        startFillColor="#ea5b0c"
+        startOpacity={0.3}
+        height={deviceHeight * 0.27}
+        noOfSections={4}
+        maxValue={roundMaxValue}
+        focusEnabled
+        adjustToWidth
+        showDataPointLabelOnFocus
+        yAxisLabelWidth={deviceWidth * 0.1}
+        labelsExtraHeight={deviceHeight * 0.055}
+        xAxisLabelsHeight={deviceHeight * 0.025}
+        xAxisLabelsVerticalShift={10}
+        // showTextOnFocus={true}
+        spacing={
+          filteredResults.length < 8 ? dynamicSpacing / 3 : dynamicSpacing / 2
+        }
+        initialSpacing={20}
+        endSpacing={deviceWidth * 0.08}
+        xAxisLabelTextStyle={{ right: 20 }}
+        color1="#ea5b0c"
+        textColor1="#222"
+        textFontSize1={deviceHeight * 0.02}
+        dataPointsHeight={deviceHeight * 0.02}
+        dataPointsWidth={deviceWidth * 0.02}
+        dataPointsColor1="#ea5b0c"
+        overflowTop={1}
+        rulesType="dashed"
+        pointerConfig={{
+          pointerStripHeight: deviceHeight * 0.2,
+          pointerStripColor: 'transparent',
+          pointerStripWidth: 2,
+          pointerColor: '#ea5b0c',
+          radius: 6,
+          pointerLabelWidth: deviceWidth * 0.15,
+          pointerLabelHeight: deviceHeight * 0.07,
+          pointerStripUptoDataPoint: true,
+          autoAdjustPointerLabelPosition: true,
+          pointerVanishDelay: 150000,
+          activatePointersInstantlyOnTouch: true,
+          pointerLabelComponent: (items: string | number) => {
+            const item = items[0];
+            const itemDate = new Date(item.date).toISOString();
+
+            const itemIndex = filteredResults.findIndex((index) => {
+              const indexDate = new Date(index.DateTime).toISOString();
+              return indexDate === itemDate;
+            });
+
+            const isOverHalf = itemIndex > filteredResults.length / 2;
+
+            return (
+              <View
+                style={{
+                  position: 'relative',
+                  minWidth: deviceWidth * 0.25,
+                  minHeight: deviceHeight * 0.06,
+                  maxHeight: deviceHeight * 1,
+                  maxWidth: deviceWidth * 0.3,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: 'white',
+                  borderRadius: 4,
+                  shadowColor: '#000',
+                  shadowOffset: {
+                    width: deviceWidth * 0,
+                    height: deviceHeight * 0.01,
+                  },
+                  shadowOpacity: 0.8,
+                  shadowRadius: 2,
+                  elevation: 5,
+                  overflow: 'visible',
+                  top: -deviceHeight * 0.02,
+                  left: isOverHalf ? -deviceWidth * 0.15 : 0,
+                }}
+              >
+                <Text>{item.date}</Text>
+                <Text style={{ fontWeight: 'bold' }}>
+                  {item.value + ' ' + productName}
+                </Text>
+              </View>
+            );
+          },
+        }}
+      />
+    </ScrollView>
+  );
+}

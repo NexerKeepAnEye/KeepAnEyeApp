@@ -1,6 +1,5 @@
 import React, { Reducer, useEffect, useReducer, useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
-import { LineChart } from 'react-native-gifted-charts';
+import { Text, View } from 'react-native';
 import { DataTable, Divider } from 'react-native-paper';
 import { useFilterContext } from '../../Context/FilterContext';
 import {
@@ -10,116 +9,33 @@ import {
   initialState,
 } from '../../Context/FilterReducer';
 import { usePremiseContext } from '../../Context/PremiseContext';
-import { deviceHeight, deviceWidth } from '../../Style/Dimensions';
 import { MeterDataGridStyle } from '../../Style/MeterDataGridStyle';
 import { ReportGridStyle } from '../../Style/ReportGridStyleStyle';
 import Filter from '../Filters/Filter';
+import MeterDataLineChart from '../MeterDataLineChart';
 
 export default function Analysisreport() {
   const [state, dispatch] = useReducer<Reducer<FilterState, FilterAction>>(
     filterReducer,
     initialState,
   );
-  const { state: filterstate } = useFilterContext();
-
+  const [productName, setProductName] = useState<string | null>(null);
   const [searchClicked, setSearchClicked] = useState(false);
   const [minValue, setMinValue] = useState<number | null>(null);
   const [maxValue, setMaxValue] = useState<number | null>(null);
   const [minDate, setMinDate] = useState<Date | null>(null);
   const [maxDate, setMaxDate] = useState<Date | null>(null);
   const [averageValue, setAverageValue] = useState<number | null>(null);
+
+  const { state: filterstate } = useFilterContext();
+  const { state: premiseState } = usePremiseContext();
+
   const filteredResults = state.filteredResults;
+
   const resolution = state.resolution;
 
-  const formatDate = (dateString: string | number | Date) => {
-    const date = new Date(dateString);
-    switch (resolution) {
-      case 'Dag':
-        return `${date.getDate()}/${date.getMonth() + 1}`; // Dag och månad
-      case 'Timma':
-        return `${date.getDate()}/${date.getMonth() + 1}`; // Dag och månad
-      case 'Månad':
-        return `${date.getMonth() + 1}/${date.getFullYear()}`; // År och månad
-      case 'År':
-        return `${date.getFullYear()}`; // Endast år
-      default:
-        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear().toString().split('20')[1]}`; // Dag och månad
-    }
-  };
-
-  const getFormattedData = () => {
-    const totalPoints = filteredResults.length;
-    const seenDates = new Set();
-
-    if (totalPoints === 0) {
-      return [];
-    }
-    if (totalPoints <= 7) {
-      return filteredResults
-        .map((item, index) => {
-          const formattedDate = formatDate(item.DateTime);
-          if (
-            seenDates.has(formattedDate) ||
-            (index === 1 && (resolution === 'Timma' || resolution === 'Dag')) ||
-            (index === totalPoints - 2 &&
-              (resolution === 'Timma' || resolution === 'Dag'))
-          ) {
-            return null;
-          }
-          seenDates.add(formattedDate);
-          return {
-            value: item.Value || 0,
-            label: formattedDate,
-            date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString()}`,
-          };
-        })
-        .filter((item) => item && !isNaN(item.value));
-    }
-
-    const step = Math.round((totalPoints - 2) / 6); // 7 points between first and last
-
-    return filteredResults
-      .map((item, index) => {
-        const formattedDate = formatDate(item.DateTime);
-        if (
-          index !== 0 &&
-          index !== totalPoints - 1 &&
-          (index - 1) % step !== 0 &&
-          index >= 0
-        ) {
-          return {
-            value: item.Value || 0,
-            label: '',
-            date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
-          };
-        }
-        if (
-          seenDates.has(formattedDate) ||
-          (index === 1 && (resolution === 'Timma' || resolution === 'Dag')) ||
-          (index === totalPoints - 3 &&
-            (resolution === 'Timma' || resolution === 'Dag'))
-        ) {
-          return null;
-        }
-        seenDates.add(formattedDate);
-        return {
-          value: item.Value || 0,
-          label: formattedDate,
-          date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString()}`,
-        };
-      })
-      .filter((item) => item && !isNaN(item.value));
-  };
-
-  const formattedData = getFormattedData().filter((item) => !isNaN(item.value));
-
-  // const maxValue = Math.round(
-  //   Math.max(...filteredResults.map((item) => item.Value)),
-  // );
-  const roundMaxValue = Math.round(maxValue) * 1.5;
   const meter = filterstate.meter;
-  const [productName, setProductName] = useState<string | null>(null);
-  const { state: premiseState } = usePremiseContext();
+
   const productCode = meter && meter.length > 0 ? meter[0].ProductCode : null;
 
   useEffect(() => {
@@ -173,9 +89,26 @@ export default function Analysisreport() {
     }
   }, [filteredResults]);
 
-  const dynamicSpacing =
-    (deviceWidth * 2 - deviceWidth * 0.16) / filteredResults.length;
-  // console.log('data:', formattedData);
+  const renderChart = () => {
+    try {
+      return (
+        <MeterDataLineChart
+          filteredResults={filteredResults}
+          resolution={resolution}
+          productName={productName}
+          maxValue={maxValue}
+        />
+      );
+    } catch (error) {
+      return (
+        <View>
+          <Text>error message: {error.message}</Text>
+          <Text>error: {error}</Text>
+        </View>
+      );
+    }
+  };
+
   return (
     <View>
       <View>
@@ -206,95 +139,7 @@ export default function Analysisreport() {
       {searchClicked ? (
         filteredResults.length > 0 ? (
           <>
-            <ScrollView horizontal>
-              <LineChart
-                areaChart
-                hideDataPoints1
-                data={formattedData}
-                startFillColor="#ea5b0c"
-                startOpacity={0.3}
-                height={deviceHeight * 0.27}
-                noOfSections={4}
-                maxValue={roundMaxValue}
-                focusEnabled
-                // width={
-                //   filteredResults.length < 8
-                //     ? deviceWidth * 0.7
-                //     : deviceWidth * 2
-                // }
-                adjustToWidth
-                showDataPointLabelOnFocus
-                // xAxisType="dashed"
-                yAxisLabelWidth={deviceWidth * 0.1}
-                // rotateLabel
-                labelsExtraHeight={deviceHeight * 0.055}
-                xAxisLabelsHeight={deviceHeight * 0.025}
-                xAxisLabelsVerticalShift={10}
-                showTextOnFocus={true}
-                // showVerticalLines
-                spacing={
-                  filteredResults.length < 8
-                    ? dynamicSpacing / 3
-                    : dynamicSpacing / 2
-                }
-                initialSpacing={20}
-                endSpacing={deviceWidth * 0.08}
-                xAxisLabelTextStyle={{ right: 20 }}
-                color1="#ea5b0c"
-                textColor1="#222"
-                textFontSize1={deviceHeight * 0.02}
-                dataPointsHeight={deviceHeight * 0.02}
-                dataPointsWidth={deviceWidth * 0.02}
-                dataPointsColor1="#ea5b0c"
-                overflowTop={1}
-                pointerConfig={{
-                  pointerStripHeight: deviceHeight * 0.2,
-                  pointerStripColor: 'transparent',
-                  pointerStripWidth: 2,
-                  pointerColor: '#ea5b0c',
-                  radius: 6,
-                  pointerLabelWidth: deviceWidth * 0.15,
-                  pointerLabelHeight: deviceHeight * 0.07,
-                  pointerStripUptoDataPoint: true,
-                  autoAdjustPointerLabelPosition: true,
-                  pointerVanishDelay: 15000,
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  pointerLabelComponent: (items: any[]) => {
-                    const item = items[0];
-
-                    return (
-                      <View
-                        style={{
-                          minWidth: deviceWidth * 0.2,
-                          minHeight: deviceHeight * 0.06,
-                          maxHeight: deviceHeight * 1,
-                          maxWidth: deviceWidth * 0.3,
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          backgroundColor: 'white',
-                          borderRadius: 4,
-                          shadowColor: '#000',
-                          shadowOffset: {
-                            width: deviceWidth * 0,
-                            height: deviceHeight * 0.01,
-                          },
-                          shadowOpacity: 0.8,
-                          shadowRadius: 2,
-                          elevation: 5,
-                          overflow: 'visible',
-                          bottom: deviceHeight * 0.02,
-                        }}
-                      >
-                        <Text>{item.date}</Text>
-                        <Text style={{ fontWeight: 'bold' }}>
-                          {item.value + ' ' + productName}
-                        </Text>
-                      </View>
-                    );
-                  },
-                }}
-              />
-            </ScrollView>
+            {renderChart()}
             <View style={ReportGridStyle.container}>
               <Divider style={ReportGridStyle.header} />
               <DataTable style={MeterDataGridStyle.gridContainer}>
@@ -305,7 +150,7 @@ export default function Analysisreport() {
                   <DataTable.Title
                     style={{ flex: 1, justifyContent: 'center' }}
                   >
-                    Värde
+                    Värde ({productName})
                   </DataTable.Title>
                   <DataTable.Title
                     style={{ flex: 1, justifyContent: 'center' }}

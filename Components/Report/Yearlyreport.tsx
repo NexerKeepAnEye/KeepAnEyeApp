@@ -47,6 +47,22 @@ export const YearlyReport = () => {
     }
   }, [filteredResults]);
 
+  const renderChart = () => {
+    try {
+      return (
+        <MeterDataBarChart
+          filteredResults={filteredResults}
+          resolution="Yearly"
+        />
+      );
+    } catch (error) {
+      <View>
+        <Text>error message: {error.message}</Text>
+        <Text>error: {error}</Text>
+      </View>;
+    }
+  };
+
   return (
     <>
       <Filter
@@ -68,12 +84,7 @@ export const YearlyReport = () => {
       {searchClicked ? (
         filteredResults.length > 0 ? (
           <>
-            <View>
-              <MeterDataBarChart
-                filteredResults={filteredResults}
-                resolution="Yearly"
-              />
-            </View>
+            <View>{renderChart()}</View>
             <View style={ReportGridStyle.container}>
               <>
                 <Divider style={ReportGridStyle.header} />
