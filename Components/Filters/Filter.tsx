@@ -141,17 +141,16 @@ const Filter = ({
     };
 
     if (year && yearTwo) {
-      fromDate = new Date(Date.parse(year + '-01-01'));
-      toDate = new Date(Date.parse(yearTwo + '-12-31'));
-    }
-    if (fromDate < toDate) {
-      fromDate = new Date(Date.parse(year + '-01-01'));
-      toDate = new Date(Date.parse(yearTwo + '12-31'));
-    } else {
-      fromDate = new Date(Date.parse(yearTwo + '-01-01'));
-      toDate = new Date(Date.parse(year + '-12-31'));
-    }
-    if (year && !yearTwo) {
+      const year1 = new Date(Date.parse(year + 10));
+      const year2 = new Date(Date.parse(yearTwo + 10));
+      if (year1 < year2) {
+        fromDate = new Date(Date.parse(year + '-01-01'));
+        toDate = new Date(Date.parse(yearTwo + '12-31'));
+      } else {
+        fromDate = new Date(Date.parse(yearTwo + '-01-01'));
+        toDate = new Date(Date.parse(year + '-12-31'));
+      }
+    } else if (year && !yearTwo) {
       fromDate = new Date(Date.parse(year + '-01-01'));
       toDate = new Date(Date.parse(year + '-12-31'));
     }
@@ -210,13 +209,23 @@ const Filter = ({
 
     try {
       if (year && yearTwo && filters.includes('compareYears')) {
-        const fromDate1 = new Date(Date.parse(year + '-01-01'));
-        const toDate1 = new Date(Date.parse(year + '-12-31'));
+        const year1 = parseInt(year, 10);
+        const year2 = parseInt(yearTwo, 10);
+        const fromDate1 = new Date(
+          Date.parse(year1 < year2 ? year + '-01-01' : yearTwo + '-01-01'),
+        );
+        const toDate1 = new Date(
+          Date.parse(year1 < year2 ? year + '-12-31' : yearTwo + '-12-31'),
+        );
         const data1 = await fetchDataForDateRange(fromDate1, toDate1);
         meterData = [...(meterData ?? []), ...data1];
 
-        const fromDate2 = new Date(Date.parse(yearTwo + '-01-01'));
-        const toDate2 = new Date(Date.parse(yearTwo + '-12-31'));
+        const fromDate2 = new Date(
+          Date.parse(year1 < year2 ? yearTwo + '-01-01' : year + '-01-01'),
+        );
+        const toDate2 = new Date(
+          Date.parse(year1 < year2 ? yearTwo + '-12-31' : year + '-12-31'),
+        );
         const data2 = await fetchDataForDateRange(fromDate2, toDate2);
         meterData = [...(meterData ?? []), ...data2];
       } else if (year && !yearTwo) {

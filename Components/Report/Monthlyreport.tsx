@@ -10,7 +10,6 @@ import {
 } from '../../Context/FilterReducer';
 import { usePremiseContext } from '../../Context/PremiseContext';
 import { ReportGridStyle } from '../../Style/ReportGridStyleStyle';
-import ErrorBoundary from '../ErrorBoundary';
 import Filter from '../Filters/Filter';
 import MeterDataBarChart from '../MeterDataBarChart';
 
@@ -76,7 +75,7 @@ export const MonthlyReport = () => {
   };
 
   return (
-    <ErrorBoundary>
+    <>
       <Filter
         filters={['year', 'meter']}
         setYear={(year) => dispatch({ type: 'SET_YEAR', payload: year })}
@@ -155,6 +154,6 @@ export const MonthlyReport = () => {
           </View>
         )
       ) : null}
-    </ErrorBoundary>
+    </>
   );
 };
