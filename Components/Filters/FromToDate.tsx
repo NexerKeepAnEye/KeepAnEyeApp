@@ -29,7 +29,6 @@ export function FromToDate({
   );
   const [showAlartDialog, setShowAlartDialog] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  // const [inputMessage, setInputMessage] = useState('');
 
   useEffect(() => {
     if (!fromDate && !toDate) {
@@ -86,20 +85,6 @@ export function FromToDate({
               {formatDate(fromDate) || 'Från datum'}
             </Text>
           </TouchableOpacity>
-          {/* {fromDate && (
-            <TouchableOpacity
-              style={searchButtonStyle.resetButton}
-              onPress={() => {
-                setFromDate(undefined);
-              }}
-            >
-              <Icon
-                name="close"
-                size={width * 0.03}
-                color="#333"
-              />
-            </TouchableOpacity>
-          )} */}
         </View>
         <View style={dateStyles.dateContainer}>
           <TouchableOpacity
@@ -113,18 +98,6 @@ export function FromToDate({
               {formatDate(toDate) || 'Till datum'}
             </Text>
           </TouchableOpacity>
-          {/* {toDate && (
-            <TouchableOpacity
-              style={searchButtonStyle.resetButton}
-              onPress={() => setToDate(undefined)}
-            >
-              <Icon
-                name="close"
-                size={width * 0.03}
-                color="#333"
-              />
-            </TouchableOpacity>
-          )} */}
         </View>
         {modalVisible && (
           <Modal
@@ -163,9 +136,7 @@ export function FromToDate({
                 setIsVisible(false);
                 setShowAlartDialog(false);
               }}
-            >
-              {/* <Text>Extra innehåll här</Text> */}
-            </AlertDialog>
+            ></AlertDialog>
           </Modal>
         </View>
       </View>

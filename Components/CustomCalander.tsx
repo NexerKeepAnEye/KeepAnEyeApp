@@ -132,8 +132,6 @@ const CustomCalendar = ({ value, onChange }: CustomCalanderProps) => {
       return;
     }
 
-    // Keyboard.dismiss();
-
     const year = parseInt(inputDate.substring(0, 4), 10);
     const month = parseInt(inputDate.substring(4, 6), 10) - 1;
     const day = parseInt(inputDate.substring(6, 8), 10);
@@ -173,7 +171,6 @@ const CustomCalendar = ({ value, onChange }: CustomCalanderProps) => {
     >
       <View style={calendar.root}>
         <View style={calendar.container}>
-          {/* Header */}
           <View style={calendar.header}>
             <TouchableOpacity onPress={() => changeMonth(-1)}>
               <Text style={calendar.navButton}>◀</Text>
@@ -187,10 +184,7 @@ const CustomCalendar = ({ value, onChange }: CustomCalanderProps) => {
               <Text style={calendar.navButton}>▶</Text>
             </TouchableOpacity>
           </View>
-
           <Divider style={calendar.divider} />
-
-          {/* Weekdays */}
           <View style={calendar.weekDays}>
             {['Mån', 'Tis', 'Ons', 'Tor', 'Fre', 'Lör', 'Sön'].map(
               (day, index) => (
@@ -203,8 +197,6 @@ const CustomCalendar = ({ value, onChange }: CustomCalanderProps) => {
               ),
             )}
           </View>
-
-          {/* Days Grid */}
           <View style={calendar.daysGrid}>
             {days.map(({ day, monthOffset }, index) => {
               const isCurrentMonth = monthOffset === 0;
@@ -241,8 +233,6 @@ const CustomCalendar = ({ value, onChange }: CustomCalanderProps) => {
               );
             })}
           </View>
-
-          {/* Footer */}
           <View style={calendar.footer}>
             <TouchableOpacity onPress={goToToday}>
               <Text style={calendar.footerButton}>Idag</Text>
@@ -251,8 +241,6 @@ const CustomCalendar = ({ value, onChange }: CustomCalanderProps) => {
               <Text style={calendar.footerButton}>Skriv Datum</Text>
             </TouchableOpacity>
           </View>
-
-          {/* Modal for date-input */}
           {showDateInput && (
             <ScrollView keyboardShouldPersistTaps={'always'}>
               <Modal
@@ -291,8 +279,6 @@ const CustomCalendar = ({ value, onChange }: CustomCalanderProps) => {
               </Modal>
             </ScrollView>
           )}
-
-          {/* Alert Dialog */}
           <Modal
             statusBarTranslucent={true}
             animationType="fade"
@@ -311,17 +297,8 @@ const CustomCalendar = ({ value, onChange }: CustomCalanderProps) => {
                 setIsVisible(false);
                 setShowAlartDialog(false);
               }}
-              // onCancelText="Cancel"
-              // onCancel={() => {
-              //   setIsVisible(false);
-              //   setShowAlartDialog(false);
-              // }}
-            >
-              {/* <Text>Extra innehåll här</Text> */}
-            </AlertDialog>
+            ></AlertDialog>
           </Modal>
-
-          {/* Year Modal */}
           <Modal
             visible={showYearPicker}
             transparent

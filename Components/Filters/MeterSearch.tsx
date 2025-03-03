@@ -14,11 +14,6 @@ import { Meter } from '../../Types/Type';
 import { groupMeters, Section } from '../GroupMeter';
 import MeterIcon from '../MeterIcon';
 
-// interface Section {
-//   title: string;
-//   data: Meter[];
-// }
-
 interface MeterSearchProps {
   setSelectedMeter: (meter: Meter[]) => void;
   meters: Meter[] | undefined;
@@ -78,23 +73,6 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
             {selectedMeter?.toString() || 'Mätare'}
           </Text>
         </TouchableOpacity>
-        <View style={meterSearch.iconMeterResetContainer}>
-          {/* {selectedMeter && (
-            <TouchableOpacity
-              style={searchButtonStyle.meterResetButton}
-              onPress={() => {
-                setSelectedMeterState(undefined);
-                dispatch({ type: 'SET_METER', payload: initialState.meter });
-              }}
-            >
-              <Icon
-                name="close"
-                size={width * 0.03}
-                color="black"
-              />
-            </TouchableOpacity>
-          )} */}
-        </View>
       </View>
       <Modal
         visible={modalVisible}

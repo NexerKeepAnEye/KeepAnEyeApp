@@ -13,10 +13,6 @@ import { ReportGridStyle } from '../../Style/ReportGridStyleStyle';
 import Filter from '../Filters/Filter';
 import MeterDataBarChart from '../MeterDataBarChart';
 
-// interface MonthlyReportProps {
-//   selectedReport: string;
-// }
-
 export const MonthlyReport = () => {
   const [state, dispatch] = useReducer<Reducer<FilterState, FilterAction>>(
     filterReducer,
@@ -93,59 +89,47 @@ export const MonthlyReport = () => {
       {searchClicked ? (
         filteredResults.length > 0 ? (
           <>
-            <View>
-              {/* <MeterDataBarChart
-              filteredResults={filteredResults}
-              resolution="Monthly"
-            /> */}
-              {renderChart()}
-            </View>
+            <View>{renderChart()}</View>
             <View style={ReportGridStyle.container}>
-              {/* {selectedReport && ( */}
-              <>
-                <Divider style={ReportGridStyle.header} />
-                <DataTable>
-                  <DataTable.Header style={ReportGridStyle.header}>
-                    <DataTable.Title>Månad</DataTable.Title>
-                    <DataTable.Title>
-                      Förbrukning ({productName})
-                    </DataTable.Title>
-                  </DataTable.Header>
-                  {filteredResults.map((item, index) => (
-                    <DataTable.Row key={index}>
-                      <DataTable.Cell>
-                        {formatMonth(item.DateTime.toDateString())}
-                      </DataTable.Cell>
-                      <DataTable.Cell>{Math.round(item.Value)}</DataTable.Cell>
-                    </DataTable.Row>
-                  ))}
-                  <DataTable.Row>
-                    <DataTable.Cell textStyle={ReportGridStyle.columntext}>
-                      Min
+              <Divider style={ReportGridStyle.header} />
+              <DataTable>
+                <DataTable.Header style={ReportGridStyle.header}>
+                  <DataTable.Title>Månad</DataTable.Title>
+                  <DataTable.Title>Förbrukning ({productName})</DataTable.Title>
+                </DataTable.Header>
+                {filteredResults.map((item, index) => (
+                  <DataTable.Row key={index}>
+                    <DataTable.Cell>
+                      {formatMonth(item.DateTime.toDateString())}
                     </DataTable.Cell>
-                    <DataTable.Cell>{minValue!}</DataTable.Cell>
+                    <DataTable.Cell>{Math.round(item.Value)}</DataTable.Cell>
                   </DataTable.Row>
-                  <DataTable.Row>
-                    <DataTable.Cell textStyle={ReportGridStyle.columntext}>
-                      Max
-                    </DataTable.Cell>
-                    <DataTable.Cell>{maxValue!}</DataTable.Cell>
-                  </DataTable.Row>
-                  <DataTable.Row>
-                    <DataTable.Cell textStyle={ReportGridStyle.columntext}>
-                      Medel
-                    </DataTable.Cell>
-                    <DataTable.Cell>{averageValue!}</DataTable.Cell>
-                  </DataTable.Row>
-                  <DataTable.Row>
-                    <DataTable.Cell textStyle={ReportGridStyle.columntext}>
-                      Summa
-                    </DataTable.Cell>
-                    <DataTable.Cell>{sumValue}</DataTable.Cell>
-                  </DataTable.Row>
-                </DataTable>
-              </>
-              {/* )} */}
+                ))}
+                <DataTable.Row>
+                  <DataTable.Cell textStyle={ReportGridStyle.columntext}>
+                    Min
+                  </DataTable.Cell>
+                  <DataTable.Cell>{minValue!}</DataTable.Cell>
+                </DataTable.Row>
+                <DataTable.Row>
+                  <DataTable.Cell textStyle={ReportGridStyle.columntext}>
+                    Max
+                  </DataTable.Cell>
+                  <DataTable.Cell>{maxValue!}</DataTable.Cell>
+                </DataTable.Row>
+                <DataTable.Row>
+                  <DataTable.Cell textStyle={ReportGridStyle.columntext}>
+                    Medel
+                  </DataTable.Cell>
+                  <DataTable.Cell>{averageValue!}</DataTable.Cell>
+                </DataTable.Row>
+                <DataTable.Row>
+                  <DataTable.Cell textStyle={ReportGridStyle.columntext}>
+                    Summa
+                  </DataTable.Cell>
+                  <DataTable.Cell>{sumValue}</DataTable.Cell>
+                </DataTable.Row>
+              </DataTable>
             </View>
           </>
         ) : (

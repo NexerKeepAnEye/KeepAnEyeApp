@@ -8,7 +8,6 @@ import {
   View,
 } from 'react-native';
 import { Divider } from 'react-native-paper';
-import { meterSearch } from '../../Style/MeterSearchStyle';
 import { yearSearchStyle } from '../../Style/YearSearchStyle';
 
 interface YearSearchProps {
@@ -39,22 +38,6 @@ export function YearSearch({ setSelectedYear, label }: YearSearchProps) {
         >
           <Text style={yearSearchStyle.pickerText}>{year ? year : label}</Text>
         </TouchableOpacity>
-        <View style={meterSearch.iconResetContainer}>
-          {/* {year && (
-            <TouchableOpacity
-              style={searchButtonStyle.yearResetButton}
-              onPress={() => {
-                setYear(null);
-              }}
-            >
-              <Icon
-                name="close"
-                size={width * 0.03}
-                color="#333"
-              />
-            </TouchableOpacity>
-          )} */}
-        </View>
         <Modal
           visible={modalVisible}
           transparent={true}
