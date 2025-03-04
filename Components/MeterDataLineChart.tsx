@@ -18,7 +18,7 @@ export default function MeterDataLineChart({
   productName,
 }: MeterDataLineChartProps) {
   const dynamicSpacing =
-    (deviceWidth * 2 - deviceWidth * 0.16) / filteredResults.length;
+    (deviceWidth * 2 - deviceWidth * 0.1) / filteredResults.length;
 
   const roundMaxValue = Math.round(maxValue) * 1.6;
 
@@ -30,7 +30,7 @@ export default function MeterDataLineChart({
       case 'Timma':
         return `${date.getDate()}/${date.getMonth() + 1}`; // Dag och månad
       case 'Månad':
-        return `${date.getMonth() + 1}/${date.getFullYear()}`; // År och månad
+        return `${date.getMonth() + 1}/${date.getFullYear().toString().slice(-2)}`; // År och månad
       case 'År':
         return `${date.getFullYear()}`; // Endast år
       default:
@@ -39,27 +39,35 @@ export default function MeterDataLineChart({
   };
 
   const getFormattedData = () => {
-    const totalPoints = filteredResults.length;
+    const sortedResults = [...filteredResults].sort(
+      (a, b) => new Date(a.DateTime).getTime() - new Date(b.DateTime).getTime(),
+    );
     const seenDates = new Set();
 
-    if (totalPoints === 0) {
-      return [];
-    }
-    if (totalPoints <= 7) {
-      return filteredResults
+    // console.log('sortedResults', sortedResults);
+
+    // if (sortedResults.length === 0) {
+    //   return [];
+    // }
+    if (sortedResults.length <= 7) {
+      return sortedResults
         .map((item, index) => {
           const formattedDate = formatDate(item.DateTime);
           if (
             seenDates.has(formattedDate) ||
             (index === 1 && (resolution === 'Timma' || resolution === 'Dag')) ||
-            (index === totalPoints - 2 &&
+            (index === sortedResults.length - 2 &&
               (resolution === 'Timma' || resolution === 'Dag'))
           ) {
-            return null;
+            return {
+              label: '',
+              value: item.Value,
+              date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
+            };
           }
           seenDates.add(formattedDate);
           return {
-            value: item.Value || 0,
+            value: parseFloat(item.Value.toFixed(3)) || 0,
             label: formattedDate,
             date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
           };
@@ -67,34 +75,47 @@ export default function MeterDataLineChart({
         .filter((item) => item && !isNaN(item.value));
     }
 
-    const step = Math.round((totalPoints - 2) / 6); // 7 points between first and last
+    const step = Math.round((sortedResults.length - 2) / 6); // 7 points between first and last
 
-    return filteredResults
+    return sortedResults
       .map((item, index) => {
         const formattedDate = formatDate(item.DateTime);
         if (
           index !== 0 &&
-          index !== totalPoints - 1 &&
+          index !== sortedResults.length - 1 &&
           (index - 1) % step !== 0 &&
           index >= 0
         ) {
           return {
-            value: item.Value || 0,
+            value: parseFloat(item.Value.toFixed(3)) || 0,
             label: '',
             date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
           };
         }
         if (
           seenDates.has(formattedDate) ||
-          (index === 1 && (resolution === 'Timma' || resolution === 'Dag')) ||
-          (index === totalPoints - 3 &&
-            (resolution === 'Timma' || resolution === 'Dag'))
+          (index === 1 &&
+            (resolution === 'Timma' ||
+              resolution === 'Dag' ||
+              resolution === 'Månad')) ||
+          (index === sortedResults.length - 3 &&
+            (resolution === 'Timma' ||
+              resolution === 'Dag' ||
+              resolution === 'Månad')) ||
+          (index === sortedResults.length - 2 &&
+            (resolution === 'Timma' ||
+              resolution === 'Dag' ||
+              resolution === 'Månad'))
         ) {
-          return null;
+          return {
+            label: '',
+            value: item.Value,
+            date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
+          };
         }
         seenDates.add(formattedDate);
         return {
-          value: item.Value || 0,
+          value: parseFloat(item.Value.toFixed(3)) || 0,
           label: formattedDate,
           date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
         };
@@ -122,11 +143,10 @@ export default function MeterDataLineChart({
         labelsExtraHeight={deviceHeight * 0.055}
         xAxisLabelsHeight={deviceHeight * 0.025}
         xAxisLabelsVerticalShift={10}
-        // showTextOnFocus={true}
         spacing={
           filteredResults.length < 8 ? dynamicSpacing / 3 : dynamicSpacing / 2
         }
-        initialSpacing={20}
+        // initialSpacing={20}
         endSpacing={deviceWidth * 0.08}
         xAxisLabelTextStyle={{ right: 20 }}
         color1="#ea5b0c"
@@ -153,12 +173,25 @@ export default function MeterDataLineChart({
             const item = items[0];
             const itemDate = new Date(item.date).toISOString();
 
-            const itemIndex = filteredResults.findIndex((index) => {
+            const sortedResults = [...filteredResults].sort(
+              (a, b) =>
+                new Date(a.DateTime).getTime() - new Date(b.DateTime).getTime(),
+            );
+
+            const itemIndex = sortedResults.findIndex((index) => {
               const indexDate = new Date(index.DateTime).toISOString();
               return indexDate === itemDate;
             });
 
-            const isOverHalf = itemIndex > filteredResults.length / 2;
+            // const isOverHalf = () => {
+            //   if (sortedResults.length >= 7) {
+            //     return false;
+            //   } else {
+            //     return itemIndex > sortedResults.length / 2;
+            //   }
+            // };
+            const isOverHalf =
+              itemIndex > sortedResults.length / 2 && sortedResults.length < 4;
 
             return (
               <View
