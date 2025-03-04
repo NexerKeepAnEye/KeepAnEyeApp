@@ -26,15 +26,15 @@ export default function MeterDataLineChart({
     const date = new Date(dateString);
     switch (resolution) {
       case 'Dag':
-        return `${date.getDate()}/${date.getMonth() + 1}`; // Dag och månad
+        return `${date.getDate()}/${date.getMonth() + 1}`;
       case 'Timma':
-        return `${date.getDate()}/${date.getMonth() + 1}`; // Dag och månad
+        return `${date.getDate()}/${date.getMonth() + 1}`;
       case 'Månad':
-        return `${date.getMonth() + 1}/${date.getFullYear().toString().slice(-2)}`; // År och månad
+        return `${date.getMonth() + 1}/${date.getFullYear().toString().slice(-2)}`;
       case 'År':
-        return `${date.getFullYear()}`; // Endast år
+        return `${date.getFullYear()}`;
       default:
-        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear().toString().split('20')[1]}`; // Dag och månad
+        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear().toString().split('20')[1]}`;
     }
   };
 
@@ -44,11 +44,6 @@ export default function MeterDataLineChart({
     );
     const seenDates = new Set();
 
-    // console.log('sortedResults', sortedResults);
-
-    // if (sortedResults.length === 0) {
-    //   return [];
-    // }
     if (sortedResults.length <= 7) {
       return sortedResults
         .map((item, index) => {
@@ -75,7 +70,7 @@ export default function MeterDataLineChart({
         .filter((item) => item && !isNaN(item.value));
     }
 
-    const step = Math.round((sortedResults.length - 2) / 6); // 7 points between first and last
+    const step = Math.round((sortedResults.length - 2) / 6);
 
     return sortedResults
       .map((item, index) => {
@@ -146,7 +141,6 @@ export default function MeterDataLineChart({
         spacing={
           filteredResults.length < 8 ? dynamicSpacing / 3 : dynamicSpacing / 2
         }
-        // initialSpacing={20}
         endSpacing={deviceWidth * 0.08}
         xAxisLabelTextStyle={{ right: 20 }}
         color1="#ea5b0c"
@@ -183,13 +177,6 @@ export default function MeterDataLineChart({
               return indexDate === itemDate;
             });
 
-            // const isOverHalf = () => {
-            //   if (sortedResults.length >= 7) {
-            //     return false;
-            //   } else {
-            //     return itemIndex > sortedResults.length / 2;
-            //   }
-            // };
             const isOverHalf =
               itemIndex > sortedResults.length / 2 && sortedResults.length < 4;
 
