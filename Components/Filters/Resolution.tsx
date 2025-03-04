@@ -41,18 +41,6 @@ export function Resolution({ setSelectedResolution }: ResolutionProps) {
           </Text>
         </TouchableOpacity>
       </View>
-      {/* {resolution && (
-        <TouchableOpacity
-          onPress={() => setResolution('')}
-          style={searchButtonStyle.resolutionButtonReset}
-        >
-          <Icon
-            name="close"
-            size={width * 0.03}
-            color="#333"
-          />
-        </TouchableOpacity>
-      )} */}
       {showResolutionModal && (
         <Modal
           visible={showResolutionModal}
@@ -65,7 +53,6 @@ export function Resolution({ setSelectedResolution }: ResolutionProps) {
           >
             <View style={ResolutionStyle.modalContainer}>
               <View style={ResolutionStyle.modalContent}>
-                {/* <Text style={TestFilterStyle.modalTitle}>Upplösning</Text> */}
                 <FlatList
                   data={resolutions}
                   keyExtractor={(item) => item}
