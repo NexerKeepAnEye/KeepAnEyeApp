@@ -9,15 +9,11 @@ export const ReportGridStyle = StyleSheet.create({
     marginBottom: deviceHeight * 0.12,
   },
   header: {
-    // backgroundColor: '#d9d9d9',
-    // height: deviceHeight * 0.001,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
   title: {
     fontFamily: 'inter_Bold' as TextStyle['fontFamily'],
-    // textAlign: 'center',
-    // flex: 1,
   },
   filtersContainer: {
     flexDirection: 'row',

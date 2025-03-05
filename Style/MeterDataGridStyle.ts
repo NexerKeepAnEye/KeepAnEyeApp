@@ -8,7 +8,6 @@ export const MeterDataGridStyle = StyleSheet.create({
     marginBottom: deviceHeight * 0.001,
   },
   header: {
-    // backgroundColor: '#d9d9d9',
     alignItems: 'center',
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,

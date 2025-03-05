@@ -9,7 +9,6 @@ export const BottomTabStyle = StyleSheet.create({
   iconContainer: {
     marginTop: deviceHeight * 0.02,
     justifyContent: 'center',
-    // alignItems: 'center',
     height: deviceHeight < 800 ? deviceHeight * 1 : deviceHeight * 0.05,
     marginBottom:
       deviceHeight < 800 ? deviceHeight * 0.01 : deviceHeight * 0.005,

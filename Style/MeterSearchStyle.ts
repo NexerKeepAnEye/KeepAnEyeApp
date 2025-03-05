@@ -5,7 +5,6 @@ export const meterSearch = StyleSheet.create({
   container: {
     maxWidth: deviceWidth * 0.45,
     minHeight: deviceHeight * 0.06,
-    // marginTop: 12,
     marginRight: 6,
   },
   pickerContainer: {
@@ -15,7 +14,6 @@ export const meterSearch = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#dddddd',
     borderRadius: 10,
-    // width: width * 0.4,
     height: deviceHeight * 0.055,
     paddingHorizontal: 10,
     backgroundColor: 'white',
@@ -40,7 +38,6 @@ export const meterSearch = StyleSheet.create({
     width: deviceWidth * 0,
     height: deviceHeight * 0,
     bottom: deviceHeight * 0.014,
-    // left: deviceWidth * 0.18,
   },
   pickerText: {
     fontSize: deviceHeight > 400 ? deviceWidth * 0.04 : deviceHeight * 0.021,

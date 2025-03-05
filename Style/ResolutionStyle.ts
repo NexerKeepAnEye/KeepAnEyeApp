@@ -2,9 +2,6 @@ import { StyleSheet } from 'react-native';
 import { deviceHeight, deviceWidth } from './Dimensions';
 
 export const ResolutionStyle = StyleSheet.create({
-  container: {
-    // marginTop: 12,
-  },
   resolutionContainer: {
     alignItems: 'center',
   },
