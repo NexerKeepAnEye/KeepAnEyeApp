@@ -1,4 +1,4 @@
-import { StyleSheet, TextStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { deviceHeight, deviceWidth } from './Dimensions';
 
 export const ReportGridStyle = StyleSheet.create({
@@ -11,14 +11,6 @@ export const ReportGridStyle = StyleSheet.create({
   header: {
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-  },
-  title: {
-    fontFamily: 'inter_Bold' as TextStyle['fontFamily'],
-  },
-  filtersContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: deviceHeight * 0.02,
   },
   noDataText: {
     fontSize: deviceHeight * 0.02,

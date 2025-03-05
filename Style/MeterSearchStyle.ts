@@ -20,25 +20,6 @@ export const meterSearch = StyleSheet.create({
     opacity: 0.8,
     marginRight: 5,
   },
-  iconResetContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#dddddd',
-    width: deviceWidth * 0,
-    height: deviceHeight * 0,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-  },
-  iconMeterResetContainer: {
-    justifyContent: 'flex-end',
-    alignItems: 'flex-start',
-    borderWidth: 1,
-    borderColor: '#dddddd',
-    width: deviceWidth * 0,
-    height: deviceHeight * 0,
-    bottom: deviceHeight * 0.014,
-  },
   pickerText: {
     fontSize: deviceHeight > 400 ? deviceWidth * 0.04 : deviceHeight * 0.021,
     fontFamily: 'inter_Regular',
@@ -47,12 +28,6 @@ export const meterSearch = StyleSheet.create({
     maxWidth: deviceWidth * 0.4,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  iconContainer: {
-    paddingLeft: 0,
-  },
-  icon: {
-    marginLeft: 0,
   },
   modalContainer: {
     flex: 1,

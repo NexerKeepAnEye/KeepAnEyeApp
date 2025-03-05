@@ -22,13 +22,6 @@ export const MeterDataGridStyle = StyleSheet.create({
     borderColor: '#d9d9d9',
     borderBottomWidth: 0.8,
   },
-  text: {
-    fontSize: deviceHeight * 0.018,
-    textAlign: 'left',
-    marginTop: deviceHeight * 0.01,
-    fontFamily: 'inter_BlackItalic',
-    color: '#ababab',
-  },
   goToTop: {
     position: 'absolute',
     bottom: deviceHeight * 0.03,

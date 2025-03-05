@@ -22,7 +22,7 @@ export default function MeterDataScreen({ route, navigation }: Props) {
     <View style={MeterDataScreenStyle.container}>
       <PremiseCard navigation={navigation} />
       {meter ? (
-        <View style={MeterDataScreenStyle.container2}>
+        <View style={MeterDataScreenStyle.container}>
           <MeterDataCard
             meterId={meter.Id}
             navigation={navigation}

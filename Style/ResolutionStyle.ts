@@ -36,11 +36,6 @@ export const ResolutionStyle = StyleSheet.create({
     padding: 20,
     alignItems: 'center',
   },
-  modalTitle: {
-    fontSize: deviceHeight * 0.03,
-    marginBottom: deviceHeight * 0.02,
-    fontFamily: 'inter_Bold',
-  },
   modalItem: {
     padding: 10,
     borderBottomWidth: 1,

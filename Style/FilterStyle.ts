@@ -27,7 +27,4 @@ export const filterStyle = StyleSheet.create({
     justifyContent: 'space-between',
     marginRight: deviceWidth * 0.04,
   },
-  scrolViewParent: {
-    flex: 1,
-  },
 });
