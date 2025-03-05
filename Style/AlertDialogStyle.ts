@@ -30,7 +30,6 @@ export const alertDialogStyles = StyleSheet.create({
   button: {
     flexGrow: 1,
     justifyContent: 'space-between',
-    // paddingHorizontal: deviceWidth * 0.02,
     marginLeft: deviceWidth * 0.09,
     flexDirection: 'row',
   },

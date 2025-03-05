@@ -15,12 +15,6 @@ export const MeterComponentStyle = StyleSheet.create({
     paddingHorizontal: deviceWidth * 0.03,
     backgroundColor: '#fff',
   },
-  iconContainer: {
-    width: deviceWidth * 0.1,
-    height: deviceHeight * 1,
-    alignItems: 'center',
-    marginTop: deviceHeight * 0.005,
-  },
   meterIconList: {
     width: deviceWidth * 0.1,
     height: deviceHeight * 1,

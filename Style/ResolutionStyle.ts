@@ -2,9 +2,6 @@ import { StyleSheet } from 'react-native';
 import { deviceHeight, deviceWidth } from './Dimensions';
 
 export const ResolutionStyle = StyleSheet.create({
-  container: {
-    // marginTop: 12,
-  },
   resolutionContainer: {
     alignItems: 'center',
   },
@@ -38,11 +35,6 @@ export const ResolutionStyle = StyleSheet.create({
     borderRadius: 10,
     padding: 20,
     alignItems: 'center',
-  },
-  modalTitle: {
-    fontSize: deviceHeight * 0.03,
-    marginBottom: deviceHeight * 0.02,
-    fontFamily: 'inter_Bold',
   },
   modalItem: {
     padding: 10,

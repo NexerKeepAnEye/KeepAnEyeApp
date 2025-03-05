@@ -46,7 +46,6 @@ export const calendar = StyleSheet.create({
     width: '13%',
     textAlign: 'center',
     marginVertical: 5,
-    // marginHorizontal: 1,
   },
   daysGrid: {
     flexDirection: 'row',
@@ -66,9 +65,6 @@ export const calendar = StyleSheet.create({
   },
   grayText: {
     color: 'gray',
-  },
-  grayBackground: {
-    // backgroundColor: '#f0f0f0',
   },
   todayText: {
     color: '#222',
@@ -101,7 +97,6 @@ export const calendar = StyleSheet.create({
     width: '75%',
   },
   input: {
-    // borderBottomWidth: 1,
     backgroundColor: 'white',
     marginBottom: 10,
     fontSize: 16,
@@ -118,7 +113,6 @@ export const calendar = StyleSheet.create({
   },
   modalButtonContainer: {
     flexDirection: 'row',
-    // gap: '70%',
     justifyContent: 'space-between',
     marginTop: 10,
   },

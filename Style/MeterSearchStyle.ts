@@ -5,7 +5,6 @@ export const meterSearch = StyleSheet.create({
   container: {
     maxWidth: deviceWidth * 0.45,
     minHeight: deviceHeight * 0.06,
-    // marginTop: 12,
     marginRight: 6,
   },
   pickerContainer: {
@@ -15,32 +14,11 @@ export const meterSearch = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#dddddd',
     borderRadius: 10,
-    // width: width * 0.4,
     height: deviceHeight * 0.055,
     paddingHorizontal: 10,
     backgroundColor: 'white',
     opacity: 0.8,
     marginRight: 5,
-  },
-  iconResetContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#dddddd',
-    width: deviceWidth * 0,
-    height: deviceHeight * 0,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-  },
-  iconMeterResetContainer: {
-    justifyContent: 'flex-end',
-    alignItems: 'flex-start',
-    borderWidth: 1,
-    borderColor: '#dddddd',
-    width: deviceWidth * 0,
-    height: deviceHeight * 0,
-    bottom: deviceHeight * 0.014,
-    // left: deviceWidth * 0.18,
   },
   pickerText: {
     fontSize: deviceHeight > 400 ? deviceWidth * 0.04 : deviceHeight * 0.021,
@@ -50,12 +28,6 @@ export const meterSearch = StyleSheet.create({
     maxWidth: deviceWidth * 0.4,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  iconContainer: {
-    paddingLeft: 0,
-  },
-  icon: {
-    marginLeft: 0,
   },
   modalContainer: {
     flex: 1,

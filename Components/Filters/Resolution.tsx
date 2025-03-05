@@ -30,7 +30,7 @@ export function Resolution({ setSelectedResolution }: ResolutionProps) {
   }, []);
 
   return (
-    <View style={ResolutionStyle.container}>
+    <View>
       <View style={ResolutionStyle.resolutionContainer}>
         <TouchableOpacity
           style={ResolutionStyle.button}
