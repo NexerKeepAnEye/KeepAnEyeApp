@@ -5,8 +5,4 @@ export const MeterDataScreenStyle = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  container2: {
-    flex: 1,
-    alignItems: 'center',
-  },
 });

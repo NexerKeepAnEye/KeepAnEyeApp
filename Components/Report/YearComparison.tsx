@@ -126,6 +126,23 @@ export const YearComparison = () => {
     );
   };
 
+  const renderChart = () => {
+    try {
+      return (
+        <MeterDataComparisonChart
+          filteredResults={filteredResults}
+          year={state.year}
+          yearTwo={state.yearTwo}
+        />
+      );
+    } catch (error) {
+      <View>
+        <Text>error message: {error.message}</Text>
+        <Text>error: {error}</Text>
+      </View>;
+    }
+  };
+
   return (
     <>
       <Filter
@@ -148,11 +165,7 @@ export const YearComparison = () => {
         filteredResults.length > 0 ? (
           <>
             {renderPoints()}
-            <MeterDataComparisonChart
-              filteredResults={filteredResults}
-              year={state.year}
-              yearTwo={state.yearTwo}
-            />
+            {renderChart()}
             <View style={ReportGridStyle.container}>
               <Divider style={ReportGridStyle.header} />
               <DataTable>

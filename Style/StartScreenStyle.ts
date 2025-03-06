@@ -17,7 +17,6 @@ export const StartScreenStyle = StyleSheet.create({
   textHeader: {
     marginTop: deviceHeight * 0.03,
     fontSize: deviceHeight * 0.0285,
-    // fontWeight: 'bold',
     justifyContent: 'center',
     alignItems: 'center',
     fontFamily: 'inter_Bold',
@@ -40,7 +39,6 @@ export const StartScreenStyle = StyleSheet.create({
   textItem: {
     fontSize: deviceHeight * 0.02,
     marginLeft: deviceWidth * 0.05,
-    // color: 'black',
     flex: 1,
     fontFamily: 'inter_Regular',
   },
