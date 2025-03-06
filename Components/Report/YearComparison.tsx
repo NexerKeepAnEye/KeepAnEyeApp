@@ -80,6 +80,52 @@ export const YearComparison = () => {
   const aggregatedDataForYear = aggregateDataByMonth(dataForYear);
   const aggregatedDataForYearTwo = aggregateDataByMonth(dataForYearTwo);
 
+  const renderPoints = () => {
+    const points = [
+      { label: state.year, color: '#ea5b0c' },
+      { label: state.yearTwo, color: '#AF220A' },
+    ];
+
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+          marginTop: 20,
+        }}
+      >
+        {points.map((point, index) => (
+          <View
+            key={index}
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <View
+              style={{
+                height: 15,
+                width: 15,
+                borderRadius: 10,
+                backgroundColor: point.color,
+                marginRight: 8,
+              }}
+            />
+            <Text
+              style={{
+                height: 20,
+                color: '#ababab',
+              }}
+            >
+              {point.label}
+            </Text>
+          </View>
+        ))}
+      </View>
+    );
+  };
+
   const renderChart = () => {
     try {
       return (
@@ -118,37 +164,36 @@ export const YearComparison = () => {
       {searchClicked ? (
         filteredResults.length > 0 ? (
           <>
+            {renderPoints()}
             {renderChart()}
             <View style={ReportGridStyle.container}>
-              <>
-                <Divider style={ReportGridStyle.header} />
-                <DataTable>
-                  <DataTable.Header style={ReportGridStyle.header}>
-                    <DataTable.Title>Månad</DataTable.Title>
-                    <DataTable.Title>{state.year}</DataTable.Title>
-                    <DataTable.Title>{state.yearTwo}</DataTable.Title>
-                    <DataTable.Title>Föränding %</DataTable.Title>
-                  </DataTable.Header>
-                  {months.map((month, index) => {
-                    const valueYear = aggregatedDataForYear[index];
-                    const valueYearTwo = aggregatedDataForYearTwo[index];
-                    const percentageChange = calculatePercentageChange(
-                      valueYear,
-                      valueYearTwo,
-                    );
-                    return (
-                      <DataTable.Row key={index}>
-                        <DataTable.Cell>{month}</DataTable.Cell>
-                        <DataTable.Cell>{valueYear}</DataTable.Cell>
-                        <DataTable.Cell>{valueYearTwo}</DataTable.Cell>
-                        <DataTable.Cell>
-                          {percentageChange.toFixed(2)}%
-                        </DataTable.Cell>
-                      </DataTable.Row>
-                    );
-                  })}
-                </DataTable>
-              </>
+              <Divider style={ReportGridStyle.header} />
+              <DataTable>
+                <DataTable.Header style={ReportGridStyle.header}>
+                  <DataTable.Title>Månad</DataTable.Title>
+                  <DataTable.Title>{state.year}</DataTable.Title>
+                  <DataTable.Title>{state.yearTwo}</DataTable.Title>
+                  <DataTable.Title>Föränding %</DataTable.Title>
+                </DataTable.Header>
+                {months.map((month, index) => {
+                  const valueYear = aggregatedDataForYear[index];
+                  const valueYearTwo = aggregatedDataForYearTwo[index];
+                  const percentageChange = calculatePercentageChange(
+                    valueYear,
+                    valueYearTwo,
+                  );
+                  return (
+                    <DataTable.Row key={index}>
+                      <DataTable.Cell>{month}</DataTable.Cell>
+                      <DataTable.Cell>{valueYear}</DataTable.Cell>
+                      <DataTable.Cell>{valueYearTwo}</DataTable.Cell>
+                      <DataTable.Cell>
+                        {percentageChange.toFixed(2)}%
+                      </DataTable.Cell>
+                    </DataTable.Row>
+                  );
+                })}
+              </DataTable>
             </View>
           </>
         ) : (
