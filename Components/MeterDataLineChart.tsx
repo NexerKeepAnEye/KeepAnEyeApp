@@ -20,7 +20,24 @@ export default function MeterDataLineChart({
   const dynamicSpacing =
     (deviceWidth * 2 - deviceWidth * 0.1) / filteredResults.length;
 
-  const roundMaxValue = Math.round(maxValue) * 1.6;
+  // const roundMaxValue = Math.round(maxValue) * 1.6;
+
+  const getRoundedMaxValue = (value: number) => {
+    if (value >= 1000) {
+      return Math.ceil(value / 1000) * 1000;
+    } else if (value >= 100) {
+      return Math.ceil(value / 100) * 100;
+    } else if (value >= 10) {
+      return Math.ceil(value / 10) * 10;
+    } else if (value >= -2 && value <= 2) {
+      return 2;
+      // return Math.ceil(value / 10) * 10;
+    } else {
+      return Math.ceil(value);
+    }
+  };
+
+  const roundMaxValue = getRoundedMaxValue(maxValue) * 1.5;
 
   const formatDate = (dateString: string | number | Date) => {
     const date = new Date(dateString);
@@ -56,7 +73,7 @@ export default function MeterDataLineChart({
           ) {
             return {
               label: '',
-              value: item.Value,
+              value: parseFloat(item.Value.toFixed(3)) || 0,
               date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
             };
           }
@@ -104,7 +121,7 @@ export default function MeterDataLineChart({
         ) {
           return {
             label: '',
-            value: item.Value,
+            value: parseFloat(item.Value.toFixed(3)) || 0,
             date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
           };
         }
@@ -124,13 +141,17 @@ export default function MeterDataLineChart({
     <ScrollView horizontal>
       <LineChart
         areaChart
+        scrollAnimation
         hideDataPoints1
+        roundToDigits={3}
         data={formattedData}
         startFillColor="#ea5b0c"
         startOpacity={0.3}
         height={deviceHeight * 0.27}
-        noOfSections={4}
+        noOfSections={6}
         maxValue={roundMaxValue}
+        initialSpacing={0}
+        showDataPointsForMissingValues
         focusEnabled
         adjustToWidth
         showDataPointLabelOnFocus
@@ -142,12 +163,12 @@ export default function MeterDataLineChart({
           filteredResults.length < 8 ? dynamicSpacing / 3 : dynamicSpacing / 2
         }
         endSpacing={deviceWidth * 0.08}
-        xAxisLabelTextStyle={{ right: 20 }}
+        xAxisLabelTextStyle={{ right: 5 }}
         color1="#ea5b0c"
         textColor1="#222"
         textFontSize1={deviceHeight * 0.02}
-        dataPointsHeight={deviceHeight * 0.02}
-        dataPointsWidth={deviceWidth * 0.02}
+        // dataPointsHeight={deviceHeight * 0.02}
+        // dataPointsWidth={deviceWidth * 0.02}
         dataPointsColor1="#ea5b0c"
         overflowTop={1}
         rulesType="dashed"
@@ -178,7 +199,7 @@ export default function MeterDataLineChart({
             });
 
             const isOverHalf =
-              itemIndex > sortedResults.length / 2 && sortedResults.length < 4;
+              itemIndex > sortedResults.length / 2 && sortedResults.length > 4;
 
             return (
               <View

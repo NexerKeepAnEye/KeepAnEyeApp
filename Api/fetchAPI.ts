@@ -1,5 +1,5 @@
-import { Meter, MeterData, Premise, Product } from '../Types/Type';
 import { EXPO_PUBLIC_API_URL } from '@env';
+import { Meter, MeterData, Premise, Product } from '../Types/Type';
 
 const baseUrl = EXPO_PUBLIC_API_URL;
 
@@ -98,9 +98,9 @@ export async function fetchMeterData(
     //   'resolution: ',
     //   resolution,
     //   'from: ',
-    //   new Date(from).toISOString().split('T')[0],
+    //   new Date(from).toISOString(),
     //   'to: ',
-    //   new Date(to).toISOString().split('T')[0],
+    //   new Date(to).toISOString(),
     //   'correctedValues: ',
     //   correctedValues,
     //   'premiseIds: ',
@@ -124,8 +124,8 @@ export async function fetchMeterData(
         ProductId: productId,
         Resolution: resolution,
         CorrectedValues: correctedValues,
-        From: new Date(from).toISOString().split('T')[0],
-        To: new Date(to).toISOString().split('T')[0],
+        From: new Date(from).toISOString(),
+        To: new Date(to).toISOString(),
         PremiseIds: premiseIds,
         Designation: designations,
         MeterIds: meterIds,
@@ -145,7 +145,7 @@ export async function fetchMeterData(
     const meterData: MeterData[] = data.map(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (item: any): MeterData => ({
-        DateTime: new Date(item.DateTime),
+        DateTime: new Date(new Date(item.DateTime).toLocaleDateString()),
         Value: item.Value,
         Cost: item.Cost,
         Code: item.Code,
