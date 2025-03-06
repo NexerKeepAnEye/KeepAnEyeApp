@@ -2,7 +2,10 @@
 
 # dependencies
 node_modules/
-../android
+android/
+android
+ios/
+ios
 
 # Expo
 .expo/
@@ -38,9 +41,13 @@ yarn-error.*
 *.tsbuildinfo
 
 #Mocked Data
-./mockedData/API/*.json
-./Api/testFetch.js
+mockedData/
+mockedData
+
+# API files
+Api/mockApi.ts
 
 # Build files
-.idea/*
-.vscode/*
+.idea/
+.idea
+.vscode/
