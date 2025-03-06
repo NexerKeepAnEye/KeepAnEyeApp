@@ -90,26 +90,26 @@ export async function fetchMeterData(
   meterIds: number[] = [],
 ): Promise<MeterData[]> {
   try {
-    console.log(
-      'apikey: ',
-      apiKey,
-      'productId: ',
-      productId,
-      'resolution: ',
-      resolution,
-      'from: ',
-      new Date(from).toISOString(),
-      'to: ',
-      new Date(to).toISOString(),
-      'correctedValues: ',
-      correctedValues,
-      'premiseIds: ',
-      premiseIds,
-      'designations: ',
-      designations,
-      'meterIds: ',
-      meterIds,
-    );
+    // console.log(
+    //   'apikey: ',
+    //   apiKey,
+    //   'productId: ',
+    //   productId,
+    //   'resolution: ',
+    //   resolution,
+    //   'from: ',
+    //   new Date(from).toISOString(),
+    //   'to: ',
+    //   new Date(to).toISOString(),
+    //   'correctedValues: ',
+    //   correctedValues,
+    //   'premiseIds: ',
+    //   premiseIds,
+    //   'designations: ',
+    //   designations,
+    //   'meterIds: ',
+    //   meterIds,
+    // );
     correctedValues = correctedValues ?? false;
 
     const response = await fetch(`${baseUrl}/meterdata`, {
@@ -154,7 +154,7 @@ export async function fetchMeterData(
         MeterId: item.MeterId,
       }),
     );
-    console.log('meterData:', meterData);
+    // console.log('meterData:', meterData);
     return meterData;
   } catch (error) {
     console.error('Error fetching meter data:', error);

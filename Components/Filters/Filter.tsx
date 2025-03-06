@@ -140,20 +140,20 @@ const Filter = ({
       }
     };
 
-    if (year && yearTwo) {
-      const year1 = new Date(Date.parse(year + 10));
-      const year2 = new Date(Date.parse(yearTwo + 10));
-      if (year1 < year2) {
-        fromDate = new Date(Date.parse(year + '-01-01'));
-        toDate = new Date(Date.parse(yearTwo + '12-31'));
-      } else {
-        fromDate = new Date(Date.parse(yearTwo + '-01-01'));
-        toDate = new Date(Date.parse(year + '-12-31'));
-      }
-    } else if (year && !yearTwo) {
-      fromDate = new Date(Date.parse(year + '-01-01'));
-      toDate = new Date(Date.parse(year + '-12-31'));
-    }
+    // if (year && yearTwo) {
+    //   const year1 = new Date(Date.parse(year + 10));
+    //   const year2 = new Date(Date.parse(yearTwo + 10));
+    //   if (year1 < year2) {
+    //     fromDate = new Date(Date.parse(year + '-01-01'));
+    //     toDate = new Date(Date.parse(yearTwo + '12-31'));
+    //   } else {
+    //     fromDate = new Date(Date.parse(yearTwo + '-01-01'));
+    //     toDate = new Date(Date.parse(year + '-12-31'));
+    //   }
+    // } else if (year && !yearTwo) {
+    //   fromDate = new Date(Date.parse(year + '-01-01'));
+    //   toDate = new Date(Date.parse(year + '-12-31'));
+    // }
 
     if (translateResolution(resolution ?? '') === 'Yearly') {
       const yearDiff =
@@ -249,40 +249,40 @@ const Filter = ({
       showSnackbar('Ett fel inträffade');
     }
 
-    let filteredData = meterData ?? [];
+    const filteredData = meterData ?? [];
 
-    if (year && !yearTwo) {
-      if (Array.isArray(filteredData)) {
-        filteredData = filteredData.filter((item: MeterData) => {
-          const itemYear = new Date(item.DateTime).getFullYear();
-          return itemYear === parseInt(year, 10);
-        });
-      }
-    }
+    // if (year && !yearTwo) {
+    //   if (Array.isArray(filteredData)) {
+    //     filteredData = filteredData.filter((item: MeterData) => {
+    //       const itemYear = new Date(item.DateTime).getFullYear();
+    //       return itemYear === parseInt(year, 10);
+    //     });
+    //   }
+    // }
 
-    if (fromDate && toDate) {
-      filteredData = filteredData.filter((item: MeterData) => {
-        const itemDate = new Date(item.DateTime);
-        return fromDate && toDate
-          ? itemDate >= fromDate && itemDate <= toDate
-          : false;
-      });
-    }
+    // if (fromDate && toDate) {
+    //   filteredData = filteredData.filter((item: MeterData) => {
+    //     const itemDate = new Date(item.DateTime);
+    //     return fromDate && toDate
+    //       ? itemDate >= fromDate && itemDate <= toDate
+    //       : false;
+    //   });
+    // }
 
-    if (meter && meter.length > 0) {
-      filteredData = filteredData.filter((item: MeterData) =>
-        meter.some((m) => m.Id === item.MeterId),
-      );
-    }
+    // if (meter && meter.length > 0) {
+    //   filteredData = filteredData.filter((item: MeterData) =>
+    //     meter.some((m) => m.Id === item.MeterId),
+    //   );
+    // }
 
-    if (meterId !== null && meterId !== undefined) {
-      filteredData = filteredData.filter(
-        (data: MeterData) => data.MeterId === meterId,
-      );
-      if (setMeterId) {
-        setMeterId(meterId);
-      }
-    }
+    // if (meterId !== null && meterId !== undefined) {
+    //   filteredData = filteredData.filter(
+    //     (data: MeterData) => data.MeterId === meterId,
+    //   );
+    //   if (setMeterId) {
+    //     setMeterId(meterId);
+    //   }
+    // }
     setLoading(false);
     setFilteredResults(filteredData);
   };
