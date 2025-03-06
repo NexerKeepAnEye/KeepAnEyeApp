@@ -14,6 +14,7 @@ import { useSnackbar } from '../../Context/SnackbarContext';
 import { filterStyle } from '../../Style/FilterStyle';
 import { searchButtonStyle } from '../../Style/SearchButtonStyle';
 import { Meter, MeterData } from '../../Types/Type';
+import SnackBarErrorHandling from '../../Utils/SnackBarErrorHandling';
 import { FromToDate } from './FromToDate';
 import MeterSearch from './MeterSearch';
 import { Resolution } from './Resolution';
@@ -125,7 +126,6 @@ const Filter = ({
       setLoading(false);
       return;
     }
-
     const translateResolution = (resolution: string) => {
       switch (resolution) {
         case 'Timma':
@@ -141,57 +141,17 @@ const Filter = ({
       }
     };
 
-    if (translateResolution(resolution ?? '') === 'Yearly') {
-      const yearDiff =
-        fromDate && toDate ? toDate.getFullYear() - fromDate.getFullYear() : 0;
-      if (yearDiff > 5) {
-        showSnackbar('För stor tidsperiod, max 5 år');
-        setLoading(false);
-
-        return;
-      }
-    }
-    if (
-      translateResolution(resolution ?? '') === 'Monthly' &&
-      !filters.includes('compareYears')
-    ) {
-      const monthDiff =
-        fromDate && toDate
-          ? toDate.getMonth() -
-            fromDate.getMonth() +
-            12 * (toDate.getFullYear() - fromDate.getFullYear())
-          : 0;
-      if (monthDiff > 12) {
-        showSnackbar('För stor tidsperiod, max 12 månader');
-        setLoading(false);
-
-        return;
-      }
-    }
-    if (translateResolution(resolution ?? '') === 'Daily') {
-      const dayDiff =
-        fromDate && toDate
-          ? Math.floor((toDate.getTime() - fromDate.getTime()) / 86400000)
-          : 0;
-      if (dayDiff > 90) {
-        showSnackbar('För stor tidsperiod, max 90 dagar');
-        setLoading(false);
-
-        return;
-      }
-    }
-
-    if (translateResolution(resolution ?? '') === 'Hourly') {
-      const dayDiff =
-        fromDate && toDate
-          ? Math.floor((toDate.getTime() - fromDate.getTime()) / 86400000)
-          : 0;
-      if (dayDiff > 31) {
-        showSnackbar('För stor tidsperiod, max 31 dagar');
-        setLoading(false);
-        return;
-      }
-    }
+    SnackBarErrorHandling(
+      translateResolution(resolution ?? ''),
+      fromDate,
+      toDate,
+      filters,
+      setLoading,
+      showSnackbar,
+      year,
+      yearTwo,
+      meter,
+    );
 
     try {
       if (year && yearTwo && filters.includes('compareYears')) {
@@ -220,7 +180,7 @@ const Filter = ({
         meterData = await fetchDataForDateRange(fromDate, toDate);
       } else if (fromDate && toDate) {
         meterData = await fetchDataForDateRange(fromDate, toDate);
-      } else if (year && yearTwo && filters.includes('fromToYear')) {
+      } else if (filters.includes('fromToYear')) {
         const fromDate = new Date(Date.parse(year + '-01-01'));
         const toDate = new Date(Date.parse(yearTwo + '-12-31'));
         meterData = await fetchDataForDateRange(fromDate, toDate);
@@ -235,10 +195,8 @@ const Filter = ({
       showSnackbar('Ett fel inträffade');
     }
 
-    const filteredData = meterData ?? [];
-
     setLoading(false);
-    setFilteredResults(filteredData);
+    setFilteredResults(meterData ?? []);
   };
 
   return (
