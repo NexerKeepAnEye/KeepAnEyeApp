@@ -63,6 +63,9 @@ export const calendar = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'inter_Regular',
   },
+  grayBackground: {
+    // backgroundColor: '#f0f0f0',
+  },
   grayText: {
     color: 'gray',
   },
