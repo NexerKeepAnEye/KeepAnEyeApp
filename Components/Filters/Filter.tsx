@@ -49,6 +49,7 @@ const Filter = ({
   setMeter,
   setFromDate,
   setToDate,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setMeterId,
   setResolution,
   setFilteredResults,
