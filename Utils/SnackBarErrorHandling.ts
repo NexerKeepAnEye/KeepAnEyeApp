@@ -11,6 +11,20 @@ export default function SnackBarErrorHandling(
   yearTwo?: string,
   meter?: Meter[],
 ) {
+  if (
+    (filters.includes('meter') && !meter) ||
+    (filters.includes('resolution') && !resolution) ||
+    (filters.includes('year') && !year) ||
+    (filters.includes('yearRange') && !year) ||
+    (filters.includes('yearRange') && !yearTwo) ||
+    (filters.includes('dateRange') && (!fromDate || !toDate)) ||
+    (filters.includes('compareYears') && !year && !yearTwo)
+  ) {
+    showSnackbar('Fyll i fälten');
+    setLoading(false);
+    return 'error';
+  }
+
   if (resolution === 'Yearly') {
     const yearDiff =
       fromDate && toDate ? toDate.getFullYear() - fromDate.getFullYear() : 0;
@@ -55,19 +69,5 @@ export default function SnackBarErrorHandling(
       setLoading(false);
       return 'error';
     }
-  }
-
-  if (
-    (filters.includes('resolution') && !resolution) ||
-    (filters.includes('year') && !year) ||
-    (filters.includes('yearRange') && !year) ||
-    (filters.includes('yearRange') && !yearTwo) ||
-    (filters.includes('dateRange') && !fromDate && !toDate) ||
-    (filters.includes('meter') && !meter) ||
-    (filters.includes('compareYears') && !year && !yearTwo)
-  ) {
-    showSnackbar('Fyll i fälten');
-    setLoading(false);
-    return 'error';
   }
 }
