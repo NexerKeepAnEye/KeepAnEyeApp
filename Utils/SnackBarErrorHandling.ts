@@ -16,7 +16,8 @@ export default function SnackBarErrorHandling(
       fromDate && toDate ? toDate.getFullYear() - fromDate.getFullYear() : 0;
     if (yearDiff > 5) {
       showSnackbar('För stor tidsperiod, max 5 år');
-      return setLoading(false);
+      setLoading(false);
+      return 'error';
     }
   }
   if (resolution === 'Monthly' && !filters.includes('compareYears')) {
@@ -28,7 +29,8 @@ export default function SnackBarErrorHandling(
         : 0;
     if (monthDiff > 12) {
       showSnackbar('För stor tidsperiod, max 12 månader');
-      return setLoading(false);
+      setLoading(false);
+      return 'error';
     }
   }
   if (resolution === 'Daily') {
@@ -38,7 +40,8 @@ export default function SnackBarErrorHandling(
         : 0;
     if (dayDiff > 90) {
       showSnackbar('För stor tidsperiod, max 90 dagar');
-      return setLoading(false);
+      setLoading(false);
+      return 'error';
     }
   }
 
@@ -49,20 +52,22 @@ export default function SnackBarErrorHandling(
         : 0;
     if (dayDiff > 31) {
       showSnackbar('För stor tidsperiod, max 31 dagar');
-      return setLoading(false);
+      setLoading(false);
+      return 'error';
     }
   }
 
   if (
     (filters.includes('resolution') && !resolution) ||
     (filters.includes('year') && !year) ||
-    (filters.includes('fromToYear') && !year && !yearTwo) ||
+    (filters.includes('yearRange') && !year) ||
+    (filters.includes('yearRange') && !yearTwo) ||
     (filters.includes('dateRange') && !fromDate && !toDate) ||
-    (filters.includes('meter') && !meter) ||
     (filters.includes('meter') && !meter) ||
     (filters.includes('compareYears') && !year && !yearTwo)
   ) {
     showSnackbar('Fyll i fälten');
-    return setLoading(false);
+    setLoading(false);
+    return 'error';
   }
 }
