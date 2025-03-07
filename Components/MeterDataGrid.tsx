@@ -98,7 +98,7 @@ export default function MeterDataGrid({ meterId }: Props) {
                     style={MeterDataGridStyle.cell}
                   >
                     <DataTable.Cell style={{ justifyContent: 'center' }}>
-                      {data.DateTime.toISOString().split('T')[0]}
+                      {data.DateTime.toLocaleDateString().split('T')[0]}
                     </DataTable.Cell>
                     <DataTable.Cell style={{ justifyContent: 'center' }}>
                       {data.Value.toFixed(2)}
