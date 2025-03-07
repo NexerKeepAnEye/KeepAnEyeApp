@@ -186,7 +186,7 @@ export default function MeterDataLineChart({
           activatePointersInstantlyOnTouch: true,
           pointerLabelComponent: (items: string | number) => {
             const item = items[0];
-            const itemDate = new Date(item.date).toISOString();
+            const itemDate = new Date(item.date).toString();
 
             const sortedResults = [...filteredResults].sort(
               (a, b) =>
@@ -194,7 +194,7 @@ export default function MeterDataLineChart({
             );
 
             const itemIndex = sortedResults.findIndex((index) => {
-              const indexDate = new Date(index.DateTime).toISOString();
+              const indexDate = new Date(index.DateTime).toString();
               return indexDate === itemDate;
             });
 
