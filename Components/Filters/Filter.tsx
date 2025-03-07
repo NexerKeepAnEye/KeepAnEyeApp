@@ -14,6 +14,7 @@ import { useSnackbar } from '../../Context/SnackbarContext';
 import { filterStyle } from '../../Style/FilterStyle';
 import { searchButtonStyle } from '../../Style/SearchButtonStyle';
 import { Meter, MeterData } from '../../Types/Type';
+import SnackBarErrorHandling from '../../Utils/SnackBarErrorHandling';
 import { FromToDate } from './FromToDate';
 import MeterSearch from './MeterSearch';
 import { Resolution } from './Resolution';
@@ -49,8 +50,6 @@ const Filter = ({
   setMeter,
   setFromDate,
   setToDate,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  setMeterId,
   setResolution,
   setFilteredResults,
   year,
@@ -76,10 +75,43 @@ const Filter = ({
     };
     fetchApiKey();
   }, []);
+
   const { state: filterstate } = useFilterContext();
 
   const handleSearch = async () => {
     setLoading(true);
+
+    const translateResolution = (resolution: string) => {
+      switch (resolution) {
+        case 'Timma':
+          return 'Hourly';
+        case 'Dag':
+          return 'Daily';
+        case 'Månad':
+          return 'Monthly';
+        case 'År':
+          return 'Yearly';
+        default:
+          return resolution;
+      }
+    };
+
+    if (
+      SnackBarErrorHandling(
+        translateResolution(resolution ?? ''),
+        fromDate,
+        toDate,
+        filters,
+        setLoading,
+        showSnackbar,
+        year,
+        yearTwo,
+        meter,
+      ) === 'error'
+    ) {
+      return;
+    }
+
     let meterData: MeterData[] | null = null;
 
     if (meterId === undefined) {
@@ -97,7 +129,7 @@ const Filter = ({
     const selectedProductId: number =
       selectedMeterId?.ProductId ?? selectedMeter.ProductId;
 
-    const fetchDataForDateRange = async (fromDate: Date, toDate: Date) => {
+    const FetchData = async (fromDate: Date, toDate: Date) => {
       const data = await fetchMeterData(
         apikey ?? '',
         selectedProductId ?? filterstate.meter[0].ProductId,
@@ -112,122 +144,31 @@ const Filter = ({
       return data;
     };
 
-    if (
-      (filters.includes('resolution') && !resolution) ||
-      (filters.includes('year') && !year) ||
-      (filters.includes('fromToYear') && !year && !yearTwo) ||
-      (filters.includes('dateRange') && !fromDate && !toDate) ||
-      (filters.includes('meter') && !meter) ||
-      (filters.includes('meter') && !meter) ||
-      (filters.includes('compareYears') && !year && !yearTwo)
-    ) {
-      showSnackbar('Fyll i fälten');
-      setLoading(false);
-      return;
-    }
-
-    const translateResolution = (resolution: string) => {
-      switch (resolution) {
-        case 'Timma':
-          return 'Hourly';
-        case 'Dag':
-          return 'Daily';
-        case 'Månad':
-          return 'Monthly';
-        case 'År':
-          return 'Yearly';
-        default:
-          return resolution;
-      }
-    };
-
-    if (translateResolution(resolution ?? '') === 'Yearly') {
-      const yearDiff =
-        fromDate && toDate ? toDate.getFullYear() - fromDate.getFullYear() : 0;
-      if (yearDiff > 5) {
-        showSnackbar('För stor tidsperiod, max 5 år');
-        setLoading(false);
-
-        return;
-      }
-    }
-    if (
-      translateResolution(resolution ?? '') === 'Monthly' &&
-      !filters.includes('compareYears')
-    ) {
-      const monthDiff =
-        fromDate && toDate
-          ? toDate.getMonth() -
-            fromDate.getMonth() +
-            12 * (toDate.getFullYear() - fromDate.getFullYear())
-          : 0;
-      if (monthDiff > 12) {
-        showSnackbar('För stor tidsperiod, max 12 månader');
-        setLoading(false);
-
-        return;
-      }
-    }
-    if (translateResolution(resolution ?? '') === 'Daily') {
-      const dayDiff =
-        fromDate && toDate
-          ? Math.floor((toDate.getTime() - fromDate.getTime()) / 86400000)
-          : 0;
-      if (dayDiff > 90) {
-        showSnackbar('För stor tidsperiod, max 90 dagar');
-        setLoading(false);
-
-        return;
-      }
-    }
-
-    if (translateResolution(resolution ?? '') === 'Hourly') {
-      const dayDiff =
-        fromDate && toDate
-          ? Math.floor((toDate.getTime() - fromDate.getTime()) / 86400000)
-          : 0;
-      if (dayDiff > 31) {
-        showSnackbar('För stor tidsperiod, max 31 dagar');
-        setLoading(false);
-        return;
-      }
-    }
-
     try {
-      if (year && yearTwo && filters.includes('compareYears')) {
-        const year1 = parseInt(year, 10);
-        const year2 = parseInt(yearTwo, 10);
-        const fromDate1 = new Date(
-          Date.parse(year1 < year2 ? year + '-01-01' : yearTwo + '-01-01'),
-        );
-        const toDate1 = new Date(
-          Date.parse(year1 < year2 ? year + '-12-31' : yearTwo + '-12-31'),
-        );
-        const data1 = await fetchDataForDateRange(fromDate1, toDate1);
-        meterData = [...(meterData ?? []), ...data1];
+      const fetchYearlyData = async (start: string, end: string) => {
+        const fromDate = new Date(Date.parse(start + '-01-01T00:00:00'));
+        const toDate = new Date(Date.parse(end + '-12-31T23:59:59'));
+        return await FetchData(fromDate, toDate);
+      };
 
-        const fromDate2 = new Date(
-          Date.parse(year1 < year2 ? yearTwo + '-01-01' : year + '-01-01'),
-        );
-        const toDate2 = new Date(
-          Date.parse(year1 < year2 ? yearTwo + '-12-31' : year + '-12-31'),
-        );
-        const data2 = await fetchDataForDateRange(fromDate2, toDate2);
-        meterData = [...(meterData ?? []), ...data2];
-      } else if (year && !yearTwo) {
-        const fromDate = new Date(Date.parse(year + '-01-01'));
-        const toDate = new Date(Date.parse(year + '-12-31'));
-        meterData = await fetchDataForDateRange(fromDate, toDate);
-      } else if (fromDate && toDate) {
-        meterData = await fetchDataForDateRange(fromDate, toDate);
-      } else if (year && yearTwo && filters.includes('fromToYear')) {
-        const fromDate = new Date(Date.parse(year + '-01-01'));
-        const toDate = new Date(Date.parse(yearTwo + '-12-31'));
-        meterData = await fetchDataForDateRange(fromDate, toDate);
+      if (filters.includes('compareYears')) {
+        const [startYear, endYear] = [
+          parseInt(year, 10),
+          parseInt(yearTwo, 10),
+        ].sort();
+        meterData = [
+          ...(await fetchYearlyData(
+            startYear.toString(),
+            startYear.toString(),
+          )),
+          ...(await fetchYearlyData(endYear.toString(), endYear.toString())),
+        ];
+      } else if (filters.includes('year')) {
+        meterData = await fetchYearlyData(year, year);
+      } else if (filters.includes('yearRange')) {
+        meterData = await fetchYearlyData(year, yearTwo);
       } else {
-        const fromDate = new Date();
-        const toDate = new Date();
-        meterData = await fetchDataForDateRange(fromDate, toDate);
+        meterData = await FetchData(fromDate, toDate);
       }
     } catch (error) {
       setLoading(false);
@@ -235,10 +176,8 @@ const Filter = ({
       showSnackbar('Ett fel inträffade');
     }
 
-    const filteredData = meterData ?? [];
-
     setLoading(false);
-    setFilteredResults(filteredData);
+    setFilteredResults(meterData ?? []);
   };
 
   return (
@@ -256,7 +195,7 @@ const Filter = ({
                 label="År"
               />
             )}
-            {filters.includes('fromToYear') && setYear && setYearTwo && (
+            {filters.includes('yearRange') && setYear && setYearTwo && (
               <>
                 <YearSearch
                   setSelectedYear={setYear}

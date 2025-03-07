@@ -66,7 +66,7 @@ export const YearlyReport = () => {
   return (
     <>
       <Filter
-        filters={['fromToYear', 'meter']}
+        filters={['yearRange', 'meter']}
         setYear={(year) => dispatch({ type: 'SET_YEAR', payload: year })}
         setYearTwo={(year) => dispatch({ type: 'SET_YEAR_TWO', payload: year })}
         setMeter={(meter) => dispatch({ type: 'SET_METER', payload: meter })}
