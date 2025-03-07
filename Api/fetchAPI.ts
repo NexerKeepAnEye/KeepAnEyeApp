@@ -145,7 +145,7 @@ export async function fetchMeterData(
     const meterData: MeterData[] = data.map(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (item: any): MeterData => ({
-        DateTime: new Date(new Date(item.DateTime).toLocaleDateString()),
+        DateTime: new Date(new Date(item.DateTime).toISOString()),
         Value: item.Value,
         Cost: item.Cost,
         Code: item.Code,
