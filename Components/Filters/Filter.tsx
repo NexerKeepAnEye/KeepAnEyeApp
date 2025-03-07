@@ -168,7 +168,30 @@ const Filter = ({
       } else if (filters.includes('yearRange')) {
         meterData = await fetchYearlyData(year, yearTwo);
       } else {
-        meterData = await FetchData(fromDate, toDate);
+        const adjustedFromDate = new Date(
+          Date.UTC(
+            fromDate.getFullYear(),
+            fromDate.getMonth(),
+            fromDate.getDate(),
+            0,
+            0,
+            0,
+            0,
+          ),
+        );
+        const adjustedToDate = new Date(
+          Date.UTC(
+            toDate.getFullYear(),
+            toDate.getMonth(),
+            toDate.getDate(),
+            23,
+            59,
+            59,
+            999,
+          ),
+        );
+
+        meterData = await FetchData(adjustedFromDate, adjustedToDate);
       }
     } catch (error) {
       setLoading(false);

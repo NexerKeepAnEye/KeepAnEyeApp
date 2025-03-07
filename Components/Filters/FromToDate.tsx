@@ -53,14 +53,14 @@ export function FromToDate({
 
   const handleDateChange = (date: Date) => {
     if (currentPicker === 'from') {
-      if (toDate && date > toDate && date !== fromDate) {
+      if (toDate && date > toDate) {
         setIsVisible(true);
         setShowAlartDialog(true);
         return;
       }
       setFromDate(date);
     } else {
-      if (fromDate && date < fromDate && date !== toDate) {
+      if (fromDate && date < fromDate) {
         setIsVisible(true);
         setShowAlartDialog(true);
         return;
