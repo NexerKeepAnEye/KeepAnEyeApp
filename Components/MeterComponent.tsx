@@ -9,7 +9,7 @@ import { deviceHeight } from '../Style/Dimensions';
 import { MeterComponentStyle } from '../Style/MeterComponentStyle';
 import { meterSearch } from '../Style/MeterSearchStyle';
 import { Meter, MeterData } from '../Types/Type';
-import { groupMeters, Section } from './GroupMeter';
+import { groupMeters, Section } from '../Utils/GroupMeter';
 import MeterIcon from './MeterIcon';
 
 type Props = {

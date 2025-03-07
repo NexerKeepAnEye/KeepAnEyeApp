@@ -101,10 +101,10 @@ export default function MeterDataGrid({ meterId }: Props) {
                       {data.DateTime.toISOString().split('T')[0]}
                     </DataTable.Cell>
                     <DataTable.Cell style={{ justifyContent: 'center' }}>
-                      {Math.round(data.Value)}
+                      {data.Value.toFixed(2)}
                     </DataTable.Cell>
                     <DataTable.Cell style={{ justifyContent: 'center' }}>
-                      {Math.round(data.Cost)}
+                      {data.Cost.toFixed(2)}
                     </DataTable.Cell>
                     <DataTable.Cell style={{ justifyContent: 'center' }}>
                       {data.Code}

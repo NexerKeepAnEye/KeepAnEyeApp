@@ -1,0 +1,73 @@
+import { Meter } from '../Types/Type';
+
+export default function SnackBarErrorHandling(
+  resolution: string,
+  fromDate: Date,
+  toDate: Date,
+  filters: string[],
+  setLoading: (loading: boolean) => void,
+  showSnackbar: (message: string) => void,
+  year?: string,
+  yearTwo?: string,
+  meter?: Meter[],
+) {
+  if (resolution === 'Yearly') {
+    const yearDiff =
+      fromDate && toDate ? toDate.getFullYear() - fromDate.getFullYear() : 0;
+    if (yearDiff > 5) {
+      showSnackbar('För stor tidsperiod, max 5 år');
+      setLoading(false);
+      return 'error';
+    }
+  }
+  if (resolution === 'Monthly' && !filters.includes('compareYears')) {
+    const monthDiff =
+      fromDate && toDate
+        ? toDate.getMonth() -
+          fromDate.getMonth() +
+          12 * (toDate.getFullYear() - fromDate.getFullYear())
+        : 0;
+    if (monthDiff > 12) {
+      showSnackbar('För stor tidsperiod, max 12 månader');
+      setLoading(false);
+      return 'error';
+    }
+  }
+  if (resolution === 'Daily') {
+    const dayDiff =
+      fromDate && toDate
+        ? Math.floor((toDate.getTime() - fromDate.getTime()) / 86400000)
+        : 0;
+    if (dayDiff > 90) {
+      showSnackbar('För stor tidsperiod, max 90 dagar');
+      setLoading(false);
+      return 'error';
+    }
+  }
+
+  if (resolution === 'Hourly') {
+    const dayDiff =
+      fromDate && toDate
+        ? Math.floor((toDate.getTime() - fromDate.getTime()) / 86400000)
+        : 0;
+    if (dayDiff > 31) {
+      showSnackbar('För stor tidsperiod, max 31 dagar');
+      setLoading(false);
+      return 'error';
+    }
+  }
+
+  if (
+    (filters.includes('resolution') && !resolution) ||
+    (filters.includes('year') && !year) ||
+    (filters.includes('yearRange') && !year) ||
+    (filters.includes('yearRange') && !yearTwo) ||
+    (filters.includes('dateRange') && !fromDate && !toDate) ||
+    (filters.includes('meter') && !meter) ||
+    (filters.includes('compareYears') && !year && !yearTwo)
+  ) {
+    showSnackbar('Fyll i fälten');
+    setLoading(false);
+    return 'error';
+  }
+}

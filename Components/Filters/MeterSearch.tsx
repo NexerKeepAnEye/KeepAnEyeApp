@@ -11,7 +11,7 @@ import { FilterContext } from '../../Context/FilterContext';
 import { usePremiseContext } from '../../Context/PremiseContext';
 import { meterSearch } from '../../Style/MeterSearchStyle';
 import { Meter } from '../../Types/Type';
-import { groupMeters, Section } from '../GroupMeter';
+import { groupMeters, Section } from '../../Utils/GroupMeter';
 import MeterIcon from '../MeterIcon';
 
 interface MeterSearchProps {
