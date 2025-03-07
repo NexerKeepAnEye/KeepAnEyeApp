@@ -20,8 +20,6 @@ export default function MeterDataLineChart({
   const dynamicSpacing =
     (deviceWidth * 2 - deviceWidth * 0.1) / filteredResults.length;
 
-  // const roundMaxValue = Math.round(maxValue) * 1.6;
-
   const getRoundedMaxValue = (value: number) => {
     if (value >= 1000) {
       return Math.ceil(value / 1000) * 1000;
@@ -31,7 +29,6 @@ export default function MeterDataLineChart({
       return Math.ceil(value / 10) * 10;
     } else if (value >= -2 && value <= 2) {
       return 2;
-      // return Math.ceil(value / 10) * 10;
     } else {
       return Math.ceil(value);
     }
@@ -41,6 +38,10 @@ export default function MeterDataLineChart({
 
   const formatDate = (dateString: string | number | Date) => {
     const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      console.error('Invalid date:', dateString);
+      return '';
+    }
     switch (resolution) {
       case 'Dag':
         return `${date.getDate()}/${date.getMonth() + 1}`;
@@ -167,8 +168,6 @@ export default function MeterDataLineChart({
         color1="#ea5b0c"
         textColor1="#222"
         textFontSize1={deviceHeight * 0.02}
-        // dataPointsHeight={deviceHeight * 0.02}
-        // dataPointsWidth={deviceWidth * 0.02}
         dataPointsColor1="#ea5b0c"
         overflowTop={1}
         rulesType="dashed"
@@ -186,7 +185,7 @@ export default function MeterDataLineChart({
           activatePointersInstantlyOnTouch: true,
           pointerLabelComponent: (items: string | number) => {
             const item = items[0];
-            const itemDate = new Date(item.date).toISOString();
+            const itemDate = new Date(item.date).toString();
 
             const sortedResults = [...filteredResults].sort(
               (a, b) =>
