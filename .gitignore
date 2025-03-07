@@ -3,9 +3,7 @@
 # dependencies
 node_modules/
 android/
-android
 ios/
-ios
 
 # Expo
 .expo/
@@ -40,14 +38,12 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
-#Mocked Data
+# Mocked Data
 mockedData/
-mockedData
 
 # API files
 Api/mockApi.ts
 
 # Build files
 .idea/
-.idea
 .vscode/
