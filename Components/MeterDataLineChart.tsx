@@ -31,12 +31,13 @@ export default function MeterDataLineChart({
       return Math.ceil(value / 10) * 10;
     } else if (value >= -2 && value <= 2) {
       return 2;
-      // return Math.ceil(value / 10) * 10;
     } else {
       return Math.ceil(value);
     }
   };
-
+  const getLowestValue = (data: MeterData[]) => {
+    return Math.min(...data.map((item) => item.Value));
+  };
   const roundMaxValue = getRoundedMaxValue(maxValue) * 1.5;
 
   const formatDate = (dateString: string | number | Date) => {
@@ -136,6 +137,8 @@ export default function MeterDataLineChart({
   };
 
   const formattedData = getFormattedData().filter((item) => !isNaN(item.value));
+  const minValue = getLowestValue(filteredResults);
+  console.log(minValue);
 
   return (
     <ScrollView horizontal>
@@ -162,8 +165,13 @@ export default function MeterDataLineChart({
         spacing={
           filteredResults.length < 8 ? dynamicSpacing / 3 : dynamicSpacing / 2
         }
+        yAxisOffset={minValue <= 1 ? minValue - 0.5 : 0}
         endSpacing={deviceWidth * 0.08}
-        xAxisLabelTextStyle={{ right: 5 }}
+        xAxisLabelTextStyle={{
+          right: 5,
+          // marginTop: minValue < 0 ? minValue + 15 : 0,
+          overFlow: 'visible',
+        }}
         color1="#ea5b0c"
         textColor1="#222"
         textFontSize1={deviceHeight * 0.02}
