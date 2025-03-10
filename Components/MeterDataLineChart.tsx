@@ -61,64 +61,26 @@ export default function MeterDataLineChart({
       (a, b) => new Date(a.DateTime).getTime() - new Date(b.DateTime).getTime(),
     );
     const seenDates = new Set();
-
-    if (sortedResults.length <= 7) {
-      return sortedResults
-        .map((item, index) => {
-          const formattedDate = formatDate(item.DateTime);
-          if (
-            seenDates.has(formattedDate) ||
-            (index === 1 && (resolution === 'Timma' || resolution === 'Dag')) ||
-            (index === sortedResults.length - 2 &&
-              (resolution === 'Timma' || resolution === 'Dag'))
-          ) {
-            return {
-              label: '',
-              value: parseFloat(item.Value.toFixed(3)) || 0,
-              date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
-            };
-          }
-          seenDates.add(formattedDate);
-          return {
-            value: parseFloat(item.Value.toFixed(3)) || 0,
-            label: formattedDate,
-            date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
-          };
-        })
-        .filter((item) => item && !isNaN(item.value));
-    }
-
-    const step = Math.round((sortedResults.length - 2) / 6);
+    const step =
+      sortedResults.length > 7 ? Math.round((sortedResults.length - 2) / 6) : 1;
 
     return sortedResults
       .map((item, index) => {
         const formattedDate = formatDate(item.DateTime);
-        if (
-          index !== 0 &&
-          index !== sortedResults.length - 1 &&
-          (index - 1) % step !== 0 &&
-          index >= 0
-        ) {
-          return {
-            value: parseFloat(item.Value.toFixed(3)) || 0,
-            label: '',
-            date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
-          };
-        }
+        const isEdgeCase =
+          index === 1 ||
+          index === sortedResults.length - 2 ||
+          index === sortedResults.length - 3;
+
         if (
           seenDates.has(formattedDate) ||
-          (index === 1 &&
-            (resolution === 'Timma' ||
-              resolution === 'Dag' ||
-              resolution === 'Månad')) ||
-          (index === sortedResults.length - 3 &&
-            (resolution === 'Timma' ||
-              resolution === 'Dag' ||
-              resolution === 'Månad')) ||
-          (index === sortedResults.length - 2 &&
-            (resolution === 'Timma' ||
-              resolution === 'Dag' ||
-              resolution === 'Månad'))
+          (sortedResults.length <= 7 &&
+            isEdgeCase &&
+            (resolution === 'Timma' || resolution === 'Dag')) ||
+          (sortedResults.length > 7 &&
+            index !== 0 &&
+            index !== sortedResults.length - 1 &&
+            (index - 1) % step !== 0)
         ) {
           return {
             label: '',
@@ -126,6 +88,7 @@ export default function MeterDataLineChart({
             date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
           };
         }
+
         seenDates.add(formattedDate);
         return {
           value: parseFloat(item.Value.toFixed(3)) || 0,
@@ -168,14 +131,11 @@ export default function MeterDataLineChart({
         endSpacing={deviceWidth * 0.08}
         xAxisLabelTextStyle={{
           right: 5,
-          // marginTop: minValue < 0 ? minValue + 15 : 0,
           overFlow: 'visible',
         }}
         color1="#ea5b0c"
         textColor1="#222"
         textFontSize1={deviceHeight * 0.02}
-        // dataPointsHeight={deviceHeight * 0.02}
-        // dataPointsWidth={deviceWidth * 0.02}
         dataPointsColor1="#ea5b0c"
         overflowTop={1}
         rulesType="dashed"

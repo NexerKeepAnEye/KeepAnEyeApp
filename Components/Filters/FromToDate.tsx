@@ -9,6 +9,7 @@ import {
 import { dateStyles } from '../../Style/FromToDateStyle';
 import AlertDialog from '../AlertDialog';
 import CustomCalendar from '../CustomCalander';
+import { TimeConverter } from '../../Utils/TimeConverter';
 
 interface FromToDateProps {
   fromDate: Date | null;
@@ -52,24 +53,62 @@ export function FromToDate({
   };
 
   const handleDateChange = (date: Date) => {
+    date = new Date(
+      Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0),
+    );
+    const convertedDate = TimeConverter({ fromDate, toDate });
+    fromDate = convertedDate.fromDate;
+    toDate = convertedDate.toDate;
+
     if (currentPicker === 'from') {
-      if (toDate && date > toDate && date !== fromDate) {
+      if (toDate && date > toDate && date !== toDate) {
+        setToDate(date);
         setIsVisible(true);
         setShowAlartDialog(true);
-        return;
       }
       setFromDate(date);
     } else {
-      if (fromDate && date < fromDate && date !== toDate) {
+      if (fromDate && date < fromDate && date !== fromDate) {
+        setFromDate(date);
         setIsVisible(true);
         setShowAlartDialog(true);
-        return;
       }
       date.setHours(23, 59, 59);
       setToDate(date);
     }
     setModalVisible(false);
   };
+
+  // const handleDateChange = (date: Date) => {
+  //   date = new Date(
+  //     Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()),
+  //   );
+  //   fromDate = new Date(
+  //     Date.UTC(
+  //       fromDate?.getFullYear(),
+  //       fromDate?.getMonth(),
+  //       fromDate?.getDate(),
+  //     ),
+  //   );
+  //   toDate = new Date(
+  //     Date.UTC(toDate?.getFullYear(), toDate?.getMonth(), toDate?.getDate()),
+  //   );
+
+  //   if (currentPicker === 'from') {
+  //     if (toDate && date > toDate && date !== toDate) {
+  //       setToDate(date);
+  //       setIsVisible(true);
+  //       setShowAlartDialog(true);
+  //     }
+  //     setFromDate(date);
+  //   } else {
+  //     if (fromDate && date < fromDate && date !== fromDate) {
+  //       setFromDate(date);
+  //       setIsVisible(true);
+  //       setShowAlartDialog(true);
+  //     }
+  //     setToDate(date);
+  //   }
 
   return (
     <>
