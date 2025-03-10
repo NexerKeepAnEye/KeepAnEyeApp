@@ -8,6 +8,7 @@ import {
   FilterState,
   initialState,
 } from '../Context/FilterReducer';
+import { usePremiseContext } from '../Context/PremiseContext';
 import { deviceHeight } from '../Style/Dimensions';
 import { MeterDataGridStyle } from '../Style/MeterDataGridStyle';
 import { ReportGridStyle } from '../Style/ReportGridStyleStyle';
@@ -24,11 +25,21 @@ export default function MeterDataGrid({ meterId }: Props) {
     React.Reducer<FilterState, FilterAction>
   >(filterReducer, initialState);
 
+  const { state: product } = usePremiseContext();
   const [filteredResults, setFilteredResults] = useState<MeterData[]>([]);
   const [filterApplied, setFilterApplied] = useState(false);
   const [showButton, setShowButton] = useState(false);
 
   const scrollViewRef = useRef<ScrollView>(null);
+
+  const selectedMeter =
+    meterId !== undefined
+      ? product.selectedPremise?.Meters.find((meter) => meter.Id === meterId)
+      : undefined;
+
+  const productCode = selectedMeter?.ProductCode || '';
+  const productName =
+    product.products.find((item) => item.Code === productCode)?.Unit || '';
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleScroll = (event: any) => {
@@ -37,6 +48,31 @@ export default function MeterDataGrid({ meterId }: Props) {
       setShowButton(true);
     } else {
       setShowButton(false);
+    }
+  };
+
+  const displayByRes = (resolution: string, data: MeterData) => {
+    switch (resolution) {
+      case 'Timma':
+        return resolution === 'Timma'
+          ? data.DateTime.toLocaleDateString().slice(5, 10) +
+              ' ' +
+              data.DateTime.toLocaleTimeString().slice(0, 5)
+          : data.DateTime.toLocaleDateString();
+      case 'Dag':
+        return resolution === 'Dag'
+          ? data.DateTime.toLocaleDateString()
+          : data.DateTime.toLocaleDateString();
+      case 'Månad':
+        return resolution === 'Månad'
+          ? data.DateTime.toLocaleDateString().slice(0, 7)
+          : data.DateTime.toLocaleDateString();
+      case 'År':
+        return resolution === 'År'
+          ? data.DateTime.toLocaleDateString().slice(0, 4)
+          : data.DateTime.toLocaleDateString();
+      default:
+        return data.DateTime.toLocaleDateString();
     }
   };
 
@@ -82,7 +118,7 @@ export default function MeterDataGrid({ meterId }: Props) {
                   Datum
                 </DataTable.Title>
                 <DataTable.Title textStyle={MeterDataGridStyle.title}>
-                  Värde
+                  Värde ({productName})
                 </DataTable.Title>
                 <DataTable.Title textStyle={MeterDataGridStyle.title}>
                   Kostnad
@@ -98,7 +134,7 @@ export default function MeterDataGrid({ meterId }: Props) {
                     style={MeterDataGridStyle.cell}
                   >
                     <DataTable.Cell style={{ justifyContent: 'center' }}>
-                      {data.DateTime.toLocaleDateString().split('T')[0]}
+                      {displayByRes(state.resolution, data)}
                     </DataTable.Cell>
                     <DataTable.Cell style={{ justifyContent: 'center' }}>
                       {data.Value.toFixed(2)}

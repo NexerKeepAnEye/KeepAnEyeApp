@@ -73,6 +73,7 @@ export function FromToDate({
         setIsVisible(true);
         setShowAlartDialog(true);
       }
+      date.setHours(23, 59, 59);
       setToDate(date);
     }
     setModalVisible(false);
