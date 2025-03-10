@@ -101,7 +101,6 @@ export default function MeterDataLineChart({
 
   const formattedData = getFormattedData().filter((item) => !isNaN(item.value));
   const minValue = getLowestValue(filteredResults);
-  console.log(minValue);
 
   return (
     <ScrollView horizontal>

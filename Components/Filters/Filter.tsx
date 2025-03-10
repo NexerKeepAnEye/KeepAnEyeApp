@@ -20,6 +20,7 @@ import MeterSearch from './MeterSearch';
 import { Resolution } from './Resolution';
 import StandardYearAdjusted from './StandardYearAdjusted';
 import YearSearch from './YearSearch';
+import { TimeConverter } from '../../Utils/TimeConverter';
 
 interface FilterProps {
   setYear?: (year: string) => void;
@@ -168,30 +169,15 @@ const Filter = ({
       } else if (filters.includes('yearRange')) {
         meterData = await fetchYearlyData(year, yearTwo);
       } else {
-        const adjustedFromDate = new Date(
-          Date.UTC(
-            fromDate.getFullYear(),
-            fromDate.getMonth(),
-            fromDate.getDate(),
-            0,
-            0,
-            0,
-            0,
-          ),
-        );
-        const adjustedToDate = new Date(
-          Date.UTC(
-            toDate.getFullYear(),
-            toDate.getMonth(),
-            toDate.getDate(),
-            23,
-            59,
-            59,
-            999,
-          ),
-        );
+        const convertedDate = TimeConverter({
+          fromDate: fromDate,
+          toDate: toDate,
+        });
 
-        meterData = await FetchData(adjustedFromDate, adjustedToDate);
+        meterData = await FetchData(
+          convertedDate.fromDate,
+          convertedDate.toDate,
+        );
       }
     } catch (error) {
       setLoading(false);
