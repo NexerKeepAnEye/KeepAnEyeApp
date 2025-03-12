@@ -5,10 +5,9 @@ import { List, Text } from 'react-native-paper';
 import { AccordionStyle } from '../Style/AccordionStyle';
 import { deviceHeight, deviceWidth } from '../Style/Dimensions';
 import { filterTypes } from '../Types/FilterTypes';
-import Filter from './Filters/Filter';
 import { ReportGrid } from './Report/ReportGrid';
 
-export const Accordion2 = () => {
+export const Accordion = () => {
   const [expandedReport, setExpandedReport] = useState(false);
   const [selectedReport, setSelectedReport] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -21,20 +20,9 @@ export const Accordion2 = () => {
     setExpandedReport(false);
   };
 
-  const getFiltersForReport = (reportType: string) => {
-    switch (reportType) {
-      case 'Månadsrapport':
-        return ['year', 'month', 'meter'];
-      case 'Årsrapport':
-        return ['year', 'meter'];
-      case 'Jämför år':
-        return ['year', 'yearTwo', 'meter'];
-      case 'Analysrapport':
-        return ['dateRange', 'meter'];
-      default:
-        return [];
-    }
-  };
+  const sortedReports = filterTypes.rapporter.sort((a, b) =>
+    a.type.localeCompare(b.type),
+  );
 
   return (
     <View style={{ marginTop: deviceHeight * 0.01 }}>
@@ -62,7 +50,7 @@ export const Accordion2 = () => {
 
           {expandedReport && (
             <View style={AccordionStyle.listExpanded}>
-              {filterTypes.rapporter.map((report) => (
+              {sortedReports.map((report) => (
                 <Pressable
                   key={report.id}
                   onPress={() => selectReport(report.type)}
@@ -75,16 +63,6 @@ export const Accordion2 = () => {
                   />
                 </Pressable>
               ))}
-              {selectedReport && (
-                <View style={{ backgroundColor: '#fff' }}>
-                  <Filter
-                    filters={getFiltersForReport(selectedReport)}
-                    setFilteredResults={setSearchResults}
-                    meterData={[]}
-                    showButton={false}
-                  />
-                </View>
-              )}
             </View>
           )}
         </View>
@@ -101,4 +79,4 @@ export const Accordion2 = () => {
   );
 };
 
-export default Accordion2;
+export default Accordion;
