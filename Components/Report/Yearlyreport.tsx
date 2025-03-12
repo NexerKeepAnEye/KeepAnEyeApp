@@ -118,7 +118,7 @@ export const YearlyReport = () => {
                     <DataTable.Cell textStyle={ReportGridStyle.columntext}>
                       Max
                     </DataTable.Cell>
-                    <DataTable.Cell>{formatValue(maxValue)}</DataTable.Cell>
+                    <DataTable.Cell>{formatValue(maxValue!)}</DataTable.Cell>
                   </DataTable.Row>
                   <DataTable.Row>
                     <DataTable.Cell textStyle={ReportGridStyle.columntext}>

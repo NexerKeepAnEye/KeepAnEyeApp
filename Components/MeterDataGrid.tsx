@@ -13,6 +13,7 @@ import { deviceHeight } from '../Style/Dimensions';
 import { MeterDataGridStyle } from '../Style/MeterDataGridStyle';
 import { ReportGridStyle } from '../Style/ReportGridStyleStyle';
 import { MeterData } from '../Types/Type';
+import { formatValue } from '../Utils/FormatValue';
 import Filter from './Filters/Filter';
 
 type Props = {
@@ -137,10 +138,10 @@ export default function MeterDataGrid({ meterId }: Props) {
                       {displayByRes(state.resolution, data)}
                     </DataTable.Cell>
                     <DataTable.Cell style={{ justifyContent: 'center' }}>
-                      {data.Value.toFixed(2)}
+                      {formatValue(data.Value)}
                     </DataTable.Cell>
                     <DataTable.Cell style={{ justifyContent: 'center' }}>
-                      {data.Cost.toFixed(2)}
+                      {formatValue(data.Cost)}
                     </DataTable.Cell>
                     <DataTable.Cell style={{ justifyContent: 'center' }}>
                       {data.Code}

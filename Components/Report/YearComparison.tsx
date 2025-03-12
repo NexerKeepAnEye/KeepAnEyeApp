@@ -191,7 +191,7 @@ export const YearComparison = () => {
                         {formatValue(valueYearTwo)}
                       </DataTable.Cell>
                       <DataTable.Cell>
-                        {percentageChange.toFixed(2)}%
+                        {formatValue(percentageChange)}%
                       </DataTable.Cell>
                     </DataTable.Row>
                   );
