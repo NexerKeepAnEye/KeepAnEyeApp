@@ -15,12 +15,12 @@ import { filterStyle } from '../../Style/FilterStyle';
 import { searchButtonStyle } from '../../Style/SearchButtonStyle';
 import { Meter, MeterData } from '../../Types/Type';
 import SnackBarErrorHandling from '../../Utils/SnackBarErrorHandling';
+import { TimeConverter } from '../../Utils/TimeConverter';
 import { FromToDate } from './FromToDate';
 import MeterSearch from './MeterSearch';
 import { Resolution } from './Resolution';
 import StandardYearAdjusted from './StandardYearAdjusted';
 import YearSearch from './YearSearch';
-import { TimeConverter } from '../../Utils/TimeConverter';
 
 interface FilterProps {
   setYear?: (year: string) => void;
@@ -148,7 +148,7 @@ const Filter = ({
     try {
       const fetchYearlyData = async (start: string, end: string) => {
         const fromDate = new Date(Date.parse(start + '-01-01T00:00:00'));
-        const toDate = new Date(Date.parse(end + '-12-31T23:59:59'));
+        const toDate = new Date(Date.parse(end + '-12-01T23:59:59'));
         return await FetchData(fromDate, toDate);
       };
 
@@ -169,10 +169,17 @@ const Filter = ({
       } else if (filters.includes('yearRange')) {
         meterData = await fetchYearlyData(year, yearTwo);
       } else {
-        const convertedDate = TimeConverter({
-          fromDate: fromDate,
-          toDate: toDate,
-        });
+        let convertedDate;
+        try {
+          convertedDate = TimeConverter({
+            fromDate,
+            toDate,
+          });
+        } catch (error) {
+          setLoading(false);
+          console.log('error converting date:', error);
+          showSnackbar('Ett fel inträffade');
+        }
 
         meterData = await FetchData(
           convertedDate.fromDate,

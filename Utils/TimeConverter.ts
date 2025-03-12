@@ -21,9 +21,9 @@ export function TimeConverter({
       toDate.getFullYear(),
       toDate.getMonth(),
       toDate.getDate(),
-      0,
-      0,
-      0,
+      23,
+      59,
+      59,
       0,
     ),
   );
