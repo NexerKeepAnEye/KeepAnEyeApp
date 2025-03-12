@@ -6,7 +6,7 @@ import { Text } from 'react-native-paper';
 import { useFilterContext } from '../Context/FilterContext';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { BarChartStyle } from '../Style/ChartStyle';
-import { deviceHeight } from '../Style/Dimensions';
+import { deviceHeight, deviceWidth } from '../Style/Dimensions';
 import { MeterData, Tooltip } from '../Types/Type';
 
 interface MeterDataBarChartProps {
@@ -116,6 +116,7 @@ export default function MeterDataBarChart({
         onPress={(item: Tooltip, index: number, x: number, y: number) =>
           handleBarPress(item.value, x, y, item.originalValue)
         }
+        endSpacing={deviceWidth * 0.08}
         renderTooltip={() => {
           return (
             <View
