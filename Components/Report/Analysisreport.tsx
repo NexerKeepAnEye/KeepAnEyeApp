@@ -11,6 +11,7 @@ import {
 import { usePremiseContext } from '../../Context/PremiseContext';
 import { MeterDataGridStyle } from '../../Style/MeterDataGridStyle';
 import { ReportGridStyle } from '../../Style/ReportGridStyleStyle';
+import { formatValue } from '../../Utils/FormatValue';
 import Filter from '../Filters/Filter';
 import MeterDataLineChart from '../MeterDataLineChart';
 
@@ -166,7 +167,7 @@ export default function Analysisreport() {
                     Min
                   </DataTable.Cell>
                   <DataTable.Cell style={{ flex: 1, justifyContent: 'center' }}>
-                    {minValue!}
+                    {formatValue(minValue)}
                   </DataTable.Cell>
                   <DataTable.Cell style={{ flex: 1, justifyContent: 'center' }}>
                     {minDate ? new Date(minDate).toLocaleDateString() : ''}
@@ -180,7 +181,7 @@ export default function Analysisreport() {
                     Max
                   </DataTable.Cell>
                   <DataTable.Cell style={{ flex: 1, justifyContent: 'center' }}>
-                    {maxValue!}
+                    {formatValue(maxValue)}
                   </DataTable.Cell>
                   <DataTable.Cell style={{ flex: 1, justifyContent: 'center' }}>
                     {maxDate ? new Date(maxDate).toLocaleDateString() : ''}
@@ -194,7 +195,7 @@ export default function Analysisreport() {
                     Medel
                   </DataTable.Cell>
                   <DataTable.Cell style={{ flex: 1, justifyContent: 'center' }}>
-                    {averageValue!}
+                    {formatValue(averageValue)}
                   </DataTable.Cell>
                   <DataTable.Cell style={{ flex: 1, justifyContent: 'center' }}>
                     {' '}

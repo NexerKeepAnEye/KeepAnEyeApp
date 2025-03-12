@@ -10,6 +10,7 @@ import {
 import { usePremiseContext } from '../../Context/PremiseContext';
 import { ReportGridStyle } from '../../Style/ReportGridStyleStyle';
 import { MeterData } from '../../Types/Type';
+import { formatValue } from '../../Utils/FormatValue';
 import Filter from '../Filters/Filter';
 import MeterDataComparisonChart from '../MeterDataComparisonChart';
 
@@ -185,8 +186,10 @@ export const YearComparison = () => {
                   return (
                     <DataTable.Row key={index}>
                       <DataTable.Cell>{month}</DataTable.Cell>
-                      <DataTable.Cell>{valueYear}</DataTable.Cell>
-                      <DataTable.Cell>{valueYearTwo}</DataTable.Cell>
+                      <DataTable.Cell>{formatValue(valueYear)}</DataTable.Cell>
+                      <DataTable.Cell>
+                        {formatValue(valueYearTwo)}
+                      </DataTable.Cell>
                       <DataTable.Cell>
                         {percentageChange.toFixed(2)}%
                       </DataTable.Cell>
