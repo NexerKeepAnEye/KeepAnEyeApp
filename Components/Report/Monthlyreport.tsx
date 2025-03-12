@@ -10,6 +10,7 @@ import {
 } from '../../Context/FilterReducer';
 import { usePremiseContext } from '../../Context/PremiseContext';
 import { ReportGridStyle } from '../../Style/ReportGridStyleStyle';
+import { formatValue } from '../../Utils/FormatValue';
 import Filter from '../Filters/Filter';
 import MeterDataBarChart from '../MeterDataBarChart';
 
@@ -102,32 +103,32 @@ export const MonthlyReport = () => {
                     <DataTable.Cell>
                       {formatMonth(item.DateTime.toDateString())}
                     </DataTable.Cell>
-                    <DataTable.Cell>{Math.round(item.Value)}</DataTable.Cell>
+                    <DataTable.Cell>{formatValue(item.Value!)}</DataTable.Cell>
                   </DataTable.Row>
                 ))}
                 <DataTable.Row>
                   <DataTable.Cell textStyle={ReportGridStyle.columntext}>
                     Min
                   </DataTable.Cell>
-                  <DataTable.Cell>{minValue!}</DataTable.Cell>
+                  <DataTable.Cell>{formatValue(minValue!)}</DataTable.Cell>
                 </DataTable.Row>
                 <DataTable.Row>
                   <DataTable.Cell textStyle={ReportGridStyle.columntext}>
                     Max
                   </DataTable.Cell>
-                  <DataTable.Cell>{maxValue!}</DataTable.Cell>
+                  <DataTable.Cell>{formatValue(maxValue!)}</DataTable.Cell>
                 </DataTable.Row>
                 <DataTable.Row>
                   <DataTable.Cell textStyle={ReportGridStyle.columntext}>
                     Medel
                   </DataTable.Cell>
-                  <DataTable.Cell>{averageValue!}</DataTable.Cell>
+                  <DataTable.Cell>{formatValue(averageValue!)}</DataTable.Cell>
                 </DataTable.Row>
                 <DataTable.Row>
                   <DataTable.Cell textStyle={ReportGridStyle.columntext}>
                     Summa
                   </DataTable.Cell>
-                  <DataTable.Cell>{sumValue}</DataTable.Cell>
+                  <DataTable.Cell>{formatValue(sumValue!)}</DataTable.Cell>
                 </DataTable.Row>
               </DataTable>
             </View>

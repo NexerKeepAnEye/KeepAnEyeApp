@@ -10,6 +10,7 @@ import {
 } from '../../Context/FilterReducer';
 import { usePremiseContext } from '../../Context/PremiseContext';
 import { ReportGridStyle } from '../../Style/ReportGridStyleStyle';
+import { formatValue } from '../../Utils/FormatValue';
 import Filter from '../Filters/Filter';
 import MeterDataBarChart from '../MeterDataBarChart';
 
@@ -104,20 +105,20 @@ export const YearlyReport = () => {
                           )[0]
                         }
                       </DataTable.Cell>
-                      <DataTable.Cell>{Math.round(item.Value)}</DataTable.Cell>
+                      <DataTable.Cell>{formatValue(item.Value)}</DataTable.Cell>
                     </DataTable.Row>
                   ))}
                   <DataTable.Row>
                     <DataTable.Cell textStyle={ReportGridStyle.columntext}>
                       Min
                     </DataTable.Cell>
-                    <DataTable.Cell>{Math.round(minValue!)}</DataTable.Cell>
+                    <DataTable.Cell>{formatValue(minValue!)}</DataTable.Cell>
                   </DataTable.Row>
                   <DataTable.Row>
                     <DataTable.Cell textStyle={ReportGridStyle.columntext}>
                       Max
                     </DataTable.Cell>
-                    <DataTable.Cell>{Math.round(maxValue!)}</DataTable.Cell>
+                    <DataTable.Cell>{formatValue(maxValue!)}</DataTable.Cell>
                   </DataTable.Row>
                   <DataTable.Row>
                     <DataTable.Cell textStyle={ReportGridStyle.columntext}>
