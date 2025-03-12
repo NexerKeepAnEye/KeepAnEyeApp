@@ -148,7 +148,7 @@ const Filter = ({
     try {
       const fetchYearlyData = async (start: string, end: string) => {
         const fromDate = new Date(Date.parse(start + '-01-01T00:00:00'));
-        const toDate = new Date(Date.parse(end + '-12-31T23:59:59'));
+        const toDate = new Date(Date.parse(end + '-12-01T23:59:59'));
         return await FetchData(fromDate, toDate);
       };
 
