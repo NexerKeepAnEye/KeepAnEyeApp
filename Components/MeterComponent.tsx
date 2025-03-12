@@ -80,7 +80,7 @@ export default function MeterComponent({ navigation }: Props) {
 
   return (
     <>
-      <Text style={MeterComponentStyle.title}>Mätare</Text>
+      <Text style={MeterComponentStyle.margin}></Text>
       <SectionList
         ref={sectionListRef}
         sections={sections}
