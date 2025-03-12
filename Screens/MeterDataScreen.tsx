@@ -4,14 +4,16 @@ import { Text, View } from 'react-native';
 import MeterDataCard from '../Components/MeterDataCard';
 import MeterDataGrid from '../Components/MeterDataGrid';
 import PremiseCard from '../Components/PremiseCard';
+import { useFilterContext } from '../Context/FilterContext';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { MeterDataScreenStyle } from '../Style/MeterDataScreenStyle';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'MeterDataScreen'>;
 
-export default function MeterDataScreen({ route, navigation }: Props) {
-  const { meterId } = route.params;
+export default function MeterDataScreen({ navigation }: Props) {
+  const { state: filterState } = useFilterContext();
+  const meterId = filterState.meter.length > 0 ? filterState.meter[0].Id : null;
   const { state } = usePremiseContext();
   const meter = state.selectedPremise?.Meters.find((m) => m.Id === meterId);
   const meterData = state.meterData
