@@ -8,6 +8,7 @@ import { usePremiseContext } from '../Context/PremiseContext';
 import { BarChartStyle } from '../Style/ChartStyle';
 import { deviceHeight } from '../Style/Dimensions';
 import { MeterData, Tooltip } from '../Types/Type';
+import { formatValue } from '../Utils/FormatValue';
 
 interface MeterDataBarChartProps {
   filteredResults: MeterData[];
@@ -125,7 +126,7 @@ export default function MeterDataBarChart({
               ]}
             >
               <Text style={BarChartStyle.tooltipText}>
-                {tooltip.value + ' ' + productName}
+                {formatValue(tooltip.value) + ' ' + productName}
               </Text>
             </View>
           );

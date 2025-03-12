@@ -3,6 +3,7 @@ import { ScrollView, Text, View } from 'react-native';
 import { LineChart } from 'react-native-gifted-charts';
 import { deviceHeight, deviceWidth } from '../Style/Dimensions';
 import { MeterData } from '../Types/Type';
+import { formatValue } from '../Utils/FormatValue';
 
 interface MeterDataLineChartProps {
   filteredResults: MeterData[];
@@ -72,6 +73,12 @@ export default function MeterDataLineChart({
           index === sortedResults.length - 2 ||
           index === sortedResults.length - 3;
 
+        const date = new Date(item.DateTime);
+        const dateString =
+          resolution === 'Timma'
+            ? `${date.getDate()}/${date.getMonth() + 1} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
+            : date.toLocaleDateString();
+
         if (
           seenDates.has(formattedDate) ||
           (sortedResults.length <= 7 &&
@@ -85,7 +92,7 @@ export default function MeterDataLineChart({
           return {
             label: '',
             value: parseFloat(item.Value.toFixed(3)) || 0,
-            date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
+            date: dateString,
           };
         }
 
@@ -93,7 +100,7 @@ export default function MeterDataLineChart({
         return {
           value: parseFloat(item.Value.toFixed(3)) || 0,
           label: formattedDate,
-          date: `${new Date(item.DateTime).toLocaleDateString()} ${new Date(item.DateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
+          date: dateString,
         };
       })
       .filter((item) => item && !isNaN(item.value));
@@ -127,7 +134,7 @@ export default function MeterDataLineChart({
         spacing={
           filteredResults.length < 8 ? dynamicSpacing / 3 : dynamicSpacing / 2
         }
-        yAxisOffset={minValue <= 1 ? minValue - 0.5 : 0}
+        yAxisOffset={minValue <= 0 ? minValue - 0.5 : 0}
         endSpacing={deviceWidth * 0.08}
         xAxisLabelTextStyle={{
           right: 5,
@@ -195,7 +202,7 @@ export default function MeterDataLineChart({
               >
                 <Text>{item.date}</Text>
                 <Text style={{ fontWeight: 'bold' }}>
-                  {item.value + ' ' + productName}
+                  {formatValue(item.value) + ' ' + productName}
                 </Text>
               </View>
             );
