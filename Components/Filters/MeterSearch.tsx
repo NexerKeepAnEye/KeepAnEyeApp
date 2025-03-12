@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Modal,
   SectionList,
@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import { FilterContext } from '../../Context/FilterContext';
+import { useFilterContext } from '../../Context/FilterContext';
 import { usePremiseContext } from '../../Context/PremiseContext';
 import { meterSearch } from '../../Style/MeterSearchStyle';
 import { Meter } from '../../Types/Type';
@@ -20,24 +20,45 @@ interface MeterSearchProps {
 }
 
 export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
-  const { state: filterstate, dispatch } = useContext(FilterContext);
+  const { state: premiseState } = usePremiseContext();
+  const { state: filterstate, dispatch } = useFilterContext();
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedMeter, setSelectedMeterState] = useState<
     Meter[] | string[] | undefined
   >(
-    filterstate.meter.length > 0 && filterstate.meter.length < 2
-      ? filterstate.meter.map((m) => m.Name)
-      : groupMeters(filterstate.meter).map((m) => m.title),
+    filterstate.meter.length === 0
+      ? undefined
+      : filterstate.meter.length < 2
+        ? filterstate.meter.map((m) => m.Name)
+        : groupMeters(filterstate.meter).map((m) => m.title),
   );
 
-  useEffect(() => {
-    if (filterstate.meter.length === 0) {
-      setSelectedMeterState(undefined);
-    }
-  }, [filterstate.meter.length]);
+  const premiseRef = useRef(premiseState.selectedPremise);
 
-  const { state } = usePremiseContext();
-  const meters: Meter[] = state.selectedPremise?.Meters || [];
+  const meterRef = useRef(filterstate.meter);
+
+  useEffect(() => {
+    if (premiseRef.current !== premiseState.selectedPremise) {
+      setSelectedMeter([]);
+      setSelectedMeterState(['Mätare']);
+      dispatch({ type: 'SET_METER', payload: [] });
+      premiseRef.current = premiseState.selectedPremise;
+    }
+    if (
+      meterRef.current !== filterstate.meter &&
+      filterstate.filteredResults.length === 0
+    ) {
+      setSelectedMeter(filterstate.meter);
+      setSelectedMeterState(
+        filterstate.meter.length < 2
+          ? filterstate.meter.map((m) => m.Name)
+          : groupMeters(filterstate.meter).map((m) => m.title),
+      );
+      meterRef.current = filterstate.meter;
+    }
+  }, [premiseState.selectedPremise, dispatch, setSelectedMeter]);
+
+  const meters: Meter[] = premiseState.selectedPremise?.Meters || [];
 
   const handlePress = () => setModalVisible(true);
 

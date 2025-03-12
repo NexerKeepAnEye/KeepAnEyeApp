@@ -3,12 +3,13 @@ import * as React from 'react';
 import { useRef, useState } from 'react';
 import { SectionList, Text, TouchableOpacity, View } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { useFilterContext } from '../Context/FilterContext';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { deviceHeight } from '../Style/Dimensions';
 import { MeterComponentStyle } from '../Style/MeterComponentStyle';
 import { meterSearch } from '../Style/MeterSearchStyle';
-import { Meter, MeterData } from '../Types/Type';
+import { Meter } from '../Types/Type';
 import { groupMeters, Section } from '../Utils/GroupMeter';
 import MeterIcon from './MeterIcon';
 
@@ -17,7 +18,8 @@ type Props = {
 };
 
 export default function MeterComponent({ navigation }: Props) {
-  const { state, dispatch } = usePremiseContext();
+  const { state } = usePremiseContext();
+  const { dispatch: filterDispatch } = useFilterContext();
   const meters = state.selectedPremise?.Meters || [];
   const sections = groupMeters(meters);
 
@@ -25,16 +27,11 @@ export default function MeterComponent({ navigation }: Props) {
   const sectionListRef = useRef<SectionList>(null);
 
   const handleSelectMeter = (item: Meter) => {
-    const meterData: MeterData[] = state.meterData.filter(
-      (data) => data.MeterId === item.Id,
-    );
-    dispatch({
-      type: 'SET_METER_DATA',
-      payload: meterData,
+    filterDispatch({
+      type: 'SET_METER',
+      payload: [item],
     });
-    navigation.navigate('MeterDataScreen', {
-      meterId: item.Id,
-    });
+    navigation.navigate('MeterDataScreen');
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
