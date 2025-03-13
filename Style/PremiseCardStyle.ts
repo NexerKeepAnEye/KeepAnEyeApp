@@ -6,11 +6,11 @@ export const premiseCardStyle = StyleSheet.create({
     marginTop: deviceHeight * 0.02,
     padding: 10,
     borderRadius: 8,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: deviceWidth * 0, height: deviceHeight * 0.01 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
+    elevation: 4, // Android only
+    shadowColor: '#000', // iOS only
+    shadowOffset: { width: deviceWidth * 0, height: deviceHeight * 0.01 }, // iOS only
+    shadowOpacity: 0.2, // iOS only
+    shadowRadius: 4, // iOS only
     backgroundColor: '#ffffff',
     width: deviceWidth * 0.9,
     minHeight: deviceHeight * 0.08,

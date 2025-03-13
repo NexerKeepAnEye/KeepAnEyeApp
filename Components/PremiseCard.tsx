@@ -3,11 +3,11 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { TouchableHighlight, View } from 'react-native';
 import { Card, Text } from 'react-native-paper';
+import { useFilterContext } from '../Context/FilterContext';
 import { initialState } from '../Context/FilterReducer';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { premiseCardStyle } from '../Style/PremiseCardStyle';
-import { useFilterContext } from '../Context/FilterContext';
 
 type Props<T extends keyof RootStackParamList> = {
   navigation: NativeStackNavigationProp<RootStackParamList, T>;

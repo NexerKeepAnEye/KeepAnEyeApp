@@ -69,6 +69,7 @@ export default function MeterDataLineChart({
       .map((item, index) => {
         const formattedDate = formatDate(item.DateTime);
         const isEdgeCase =
+          index === 2 ||
           index === 1 ||
           index === sortedResults.length - 2 ||
           index === sortedResults.length - 3;
@@ -87,11 +88,16 @@ export default function MeterDataLineChart({
           (sortedResults.length > 7 &&
             index !== 0 &&
             index !== sortedResults.length - 1 &&
-            (index - 1) % step !== 0)
+            (index - 1) % step !== 0) ||
+          (index === 0 && resolution === 'Timma') ||
+          (index === 0 && resolution === 'Dag') ||
+          (index === sortedResults.length - 3 && resolution === 'Timma') ||
+          (index === sortedResults.length - 3 && resolution === 'Dag')
         ) {
           return {
             label: '',
             value: parseFloat(item.Value.toFixed(3)) || 0,
+            index: index,
             date: dateString,
           };
         }
@@ -100,6 +106,7 @@ export default function MeterDataLineChart({
         return {
           value: parseFloat(item.Value.toFixed(3)) || 0,
           label: formattedDate,
+          index: index,
           date: dateString,
         };
       })
@@ -160,17 +167,12 @@ export default function MeterDataLineChart({
           activatePointersInstantlyOnTouch: true,
           pointerLabelComponent: (items: string | number) => {
             const item = items[0];
-            const itemDate = new Date(item.date).toString();
-
             const sortedResults = [...filteredResults].sort(
               (a, b) =>
                 new Date(a.DateTime).getTime() - new Date(b.DateTime).getTime(),
             );
 
-            const itemIndex = sortedResults.findIndex((index) => {
-              const indexDate = new Date(index.DateTime).toString();
-              return indexDate === itemDate;
-            });
+            const itemIndex = item.index;
 
             const isOverHalf =
               itemIndex > sortedResults.length / 2 && sortedResults.length > 4;
