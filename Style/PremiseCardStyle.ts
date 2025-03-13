@@ -10,7 +10,7 @@ export const premiseCardStyle = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: { width: deviceWidth * 0, height: deviceHeight * 0.01 },
     shadowOpacity: 0.2,
-    shadowRadius: 4,
+    shadowRadius: 10,
     backgroundColor: '#ffffff',
     width: deviceWidth * 0.9,
     minHeight: deviceHeight * 0.08,

@@ -3,12 +3,13 @@ import { deviceHeight } from './Dimensions';
 
 export const BottomTabStyle = StyleSheet.create({
   tabBar: {
-    height: deviceHeight < 800 ? deviceHeight * 0.085 : deviceHeight * 0.07,
+    height: deviceHeight < 900 ? deviceHeight * 0.085 : deviceHeight * 0.07,
     backgroundColor: '#FFF',
   },
   iconContainer: {
     marginTop: deviceHeight * 0.02,
     justifyContent: 'center',
+
     height: deviceHeight < 800 ? deviceHeight * 1 : deviceHeight * 0.05,
     marginBottom:
       deviceHeight < 800 ? deviceHeight * 0.01 : deviceHeight * 0.005,

@@ -190,10 +190,10 @@ export default function MeterDataLineChart({
                   shadowColor: '#000',
                   shadowOffset: {
                     width: deviceWidth * 0,
-                    height: deviceHeight * 0.01,
+                    height: deviceHeight * 0.015,
                   },
-                  shadowOpacity: 0.8,
-                  shadowRadius: 2,
+                  shadowOpacity: 0.1,
+                  shadowRadius: 20,
                   elevation: 5,
                   overflow: 'visible',
                   top: -deviceHeight * 0.02,
