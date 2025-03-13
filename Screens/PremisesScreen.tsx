@@ -9,6 +9,7 @@ import {
   Platform,
   ScrollView,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -44,6 +45,15 @@ export default function StartScreen({ navigation }: Props) {
   const premises: Premise[] = state.premises;
   const isFocused = useIsFocused();
   const [showButton, setShowButton] = useState(false);
+  const [search, setSearch] = useState('');
+  const [showSearchBar, setShowSearchBar] = useState(false);
+
+  const filteredPremises =
+    search.length >= 2
+      ? premises.filter((premise) =>
+          premise.Name.toLowerCase().includes(search.toLowerCase()),
+        )
+      : premises;
 
   const errorMessage = () => {
     setTitle('Varning');
@@ -155,7 +165,31 @@ export default function StartScreen({ navigation }: Props) {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <View style={StartScreenStyle.container}>
         <View style={StartScreenStyle.headerBox}>
-          <Text style={StartScreenStyle.textHeader}>MINA FASTIGHETER</Text>
+          {showSearchBar ? (
+            <TextInput
+              style={StartScreenStyle.searchBar}
+              placeholder="Sök efter fastighet"
+              value={search}
+              onChangeText={(text) => setSearch(text)}
+            />
+          ) : (
+            <Text style={StartScreenStyle.textHeader}>MINA FASTIGHETER</Text>
+          )}
+          <TouchableOpacity
+            style={StartScreenStyle.searchIcon}
+            onPress={() => {
+              if (showSearchBar) {
+                setSearch('');
+              }
+              setShowSearchBar((prev) => !prev);
+            }}
+          >
+            <Icon
+              name={showSearchBar ? 'close' : 'search'}
+              size={22}
+              color={'white'}
+            />
+          </TouchableOpacity>
         </View>
         <ScrollView
           style={StartScreenStyle.itemBox}
@@ -163,7 +197,13 @@ export default function StartScreen({ navigation }: Props) {
           onScroll={handleScroll}
           scrollEventThrottle={4}
         >
-          {Array.isArray(premises) && premises.map((item) => renderItem(item))}
+          {Array.isArray(filteredPremises) && filteredPremises.length > 0
+            ? filteredPremises.map((item) => renderItem(item))
+            : search.length >= 2 && (
+                <Text style={StartScreenStyle.noResultsText}>
+                  Inga fastigheter hittades
+                </Text>
+              )}
         </ScrollView>
         {showButton && (
           <View style={PremiseScreenStyle.goToTop}>
