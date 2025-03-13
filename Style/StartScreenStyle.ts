@@ -58,16 +58,17 @@ export const StartScreenStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   searchIcon: {
-  borderWidth: 1,
-  backgroundColor: '#FF7043',
-  borderColor: '#FF7043',
-  borderRadius: 30,
-  padding: 7,
-  left: 30,
+    borderWidth: 1,
+    backgroundColor: '#FF7043',
+    borderColor: '#FF7043',
+    borderRadius: 30,
+    padding: 7,
+    left: 30,
   },
-   searchBar: {
-    height: deviceHeight * 0.05,
-    flex: 1,
+  searchBar: {
+    height: deviceHeight > 800 ? deviceHeight * 0.045 : deviceHeight * 0.06,
+    width: deviceWidth * 0.65,
+    fontSize: deviceHeight * 0.017,
     borderColor: '#d9d9d9',
     borderWidth: 1,
     borderRadius: 5,
@@ -79,5 +80,5 @@ export const StartScreenStyle = StyleSheet.create({
     marginTop: deviceHeight * 0.1,
     fontSize: deviceHeight * 0.025,
     color: '#ababab',
-  }
+  },
 });

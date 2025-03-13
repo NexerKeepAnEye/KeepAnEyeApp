@@ -2,6 +2,7 @@ import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useCallback, useRef, useState } from 'react';
 import {
+  Animated,
   BackHandler,
   Image,
   Linking,
@@ -47,6 +48,8 @@ export default function StartScreen({ navigation }: Props) {
   const [showButton, setShowButton] = useState(false);
   const [search, setSearch] = useState('');
   const [showSearchBar, setShowSearchBar] = useState(false);
+  const flipAnim = useRef(new Animated.Value(0)).current;
+  const searchInputRef = useRef<TextInput>(null);
 
   const filteredPremises =
     search.length >= 2
@@ -161,34 +164,107 @@ export default function StartScreen({ navigation }: Props) {
     </TouchableOpacity>
   );
 
+  const flipToSearchBar = () => {
+    Animated.timing(flipAnim, {
+      toValue: 1,
+      duration: 150,
+      useNativeDriver: true,
+    }).start(() => {
+      setShowSearchBar(true);
+      searchInputRef.current?.focus();
+    });
+  };
+
+  const flipToTitle = () => {
+    Animated.timing(flipAnim, {
+      toValue: 0,
+      duration: 150,
+      useNativeDriver: true,
+    }).start(() => {
+      setShowSearchBar(false);
+      searchInputRef.current?.blur();
+    });
+  };
+
+  const interpolateFront = flipAnim.interpolate({
+    inputRange: [0, 0.33, 0.66, 1],
+    outputRange: ['0deg', '30deg', '60deg', '90deg'],
+  });
+
+  const interpolateBack = flipAnim.interpolate({
+    inputRange: [0, 0.33, 0.66, 1],
+    outputRange: ['90deg', '60deg', '30deg', '0deg'],
+  });
+
+  const frontAnimatedStyle = {
+    transform: [{ rotateX: interpolateFront }],
+  };
+
+  const backAnimatedStyle = {
+    transform: [{ rotateX: interpolateBack }],
+  };
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <View style={StartScreenStyle.container}>
         <View style={StartScreenStyle.headerBox}>
-          {showSearchBar ? (
+          <Animated.View
+            style={[
+              frontAnimatedStyle,
+              { display: showSearchBar ? 'none' : 'flex' },
+            ]}
+          >
+            <Text style={StartScreenStyle.textHeader}>MINA FASTIGHETER</Text>
+          </Animated.View>
+          <Animated.View
+            style={[
+              backAnimatedStyle,
+              { display: showSearchBar ? 'flex' : 'none' },
+            ]}
+          >
             <TextInput
+              ref={searchInputRef}
               style={StartScreenStyle.searchBar}
               placeholder="Sök efter fastighet"
               value={search}
               onChangeText={(text) => setSearch(text)}
             />
-          ) : (
-            <Text style={StartScreenStyle.textHeader}>MINA FASTIGHETER</Text>
-          )}
+          </Animated.View>
           <TouchableOpacity
             style={StartScreenStyle.searchIcon}
             onPress={() => {
               if (showSearchBar) {
                 setSearch('');
+                flipToTitle();
+              } else {
+                flipToSearchBar();
               }
-              setShowSearchBar((prev) => !prev);
             }}
           >
-            <Icon
-              name={showSearchBar ? 'close' : 'search'}
-              size={22}
-              color={'white'}
-            />
+            <Animated.View
+              style={[
+                frontAnimatedStyle,
+                { display: showSearchBar ? 'none' : 'flex' },
+              ]}
+            >
+              <Icon
+                name="search"
+                size={22}
+                color={'white'}
+              />
+            </Animated.View>
+            <Animated.View
+              style={[
+                backAnimatedStyle,
+                { display: showSearchBar ? 'flex' : 'none' },
+              ]}
+            >
+              <Icon
+                name="close"
+                size={22}
+                color={'white'}
+              />
+            </Animated.View>
           </TouchableOpacity>
         </View>
         <ScrollView
