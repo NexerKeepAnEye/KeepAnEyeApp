@@ -27,7 +27,7 @@ const PremiseCard = <T extends keyof RootStackParamList>({
           type: 'SET_FILTERED_RESULTS',
           payload: initialState.filteredResults,
         });
-        navigation.navigate('StartScreen');
+        navigation.navigate('PremisesScreen');
         setTimeout(() => {
           dispatch({ type: 'RESET_PREMISE' });
         }, 100);

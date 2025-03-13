@@ -24,7 +24,7 @@ export default function Splash() {
           dispatch({ type: 'SET_PRODUCT', payload: products });
           const data = await fetchPremise(storedApiKey);
           dispatch({ type: 'SET_PREMISES', payload: data });
-          navigation.navigate('StartScreen');
+          navigation.navigate('PremisesScreen');
         } else {
           navigation.navigate('SignInScreen');
         }

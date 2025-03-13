@@ -7,7 +7,7 @@ import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { ReportScreenStyle } from '../Style/ReportScreenStyle';
 
 type Props = {
-  navigation: NativeStackNavigationProp<RootStackParamList, 'ReportScreen'>;
+  navigation: NativeStackNavigationProp<RootStackParamList, 'tabs'>;
 };
 
 export default function ReportScreen({ navigation }: Props) {

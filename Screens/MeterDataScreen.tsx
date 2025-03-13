@@ -10,7 +10,7 @@ import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { MeterDataScreenStyle } from '../Style/MeterDataScreenStyle';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'MeterDataScreen'>;
+type Props = NativeStackScreenProps<RootStackParamList, 'tabs'>;
 
 export default function MeterDataScreen({ navigation }: Props) {
   const { state: filterState, dispatch } = useFilterContext();
@@ -24,7 +24,7 @@ export default function MeterDataScreen({ navigation }: Props) {
   useFocusEffect(() => {
     const onBackPress = () => {
       dispatch({ type: 'SET_METER', payload: [] });
-      navigation.navigate('PremiseScreen');
+      navigation.navigate('tabs', { screen: 'MeterScreen' });
       return true;
     };
     const backHandler = BackHandler.addEventListener(

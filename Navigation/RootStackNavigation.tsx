@@ -13,23 +13,15 @@ import AlertDialog from '../Components/AlertDialog';
 import { LogoTitle } from '../Components/Header';
 import { setInitialFilterState } from '../Context/FilterReducer';
 import { usePremiseContext } from '../Context/PremiseContext';
-import PremiseScreen from '../Screens/MeterScreen';
-import StartScreen from '../Screens/PremisesScreen';
-import ReportScreen from '../Screens/ReportScreen';
+import PremisesScreen from '../Screens/PremisesScreen';
 import SignInScreen from '../Screens/SignInScreen';
 import Splash from '../Screens/Splashscreen';
 import TabNavigator, { TabParamList } from './TabNavigator';
 
 export type RootStackParamList = {
   SignInScreen: undefined;
-  StartScreen: undefined;
+  PremisesScreen: undefined;
   Splash: undefined;
-  PremiseScreen: {
-    navigation: NavigatorScreenParams<TabParamList>;
-    premiseId: number;
-  };
-  ReportScreen: { premiseId: number };
-  MeterDataScreen: { meterId: number };
   tabs: NavigatorScreenParams<TabParamList>;
 };
 
@@ -81,8 +73,8 @@ export default function RootStackNavigator() {
           options={{ headerShadowVisible: false, headerShown: false }}
         />
         <RootStack.Screen
-          name="StartScreen"
-          component={StartScreen}
+          name="PremisesScreen"
+          component={PremisesScreen}
           options={{ headerLeft: () => null, headerBackVisible: false }}
         />
         <RootStack.Screen
@@ -95,9 +87,9 @@ export default function RootStackNavigator() {
           component={TabNavigator}
           options={{ headerShown: false }}
         />
-        <RootStack.Screen
-          name="PremiseScreen"
-          component={PremiseScreen}
+        {/* <RootStack.Screen
+          name="MeterScreen"
+          component={MeterScreen}
           options={{ headerShown: false }}
         />
         <RootStack.Screen
@@ -105,6 +97,11 @@ export default function RootStackNavigator() {
           component={ReportScreen}
           options={{ headerShown: false }}
         />
+        <RootStack.Screen
+          name="MeterDataScreen"
+          component={MeterDataScreen}
+          options={{ headerShown: false }}
+        /> */}
       </RootStack.Navigator>
       <View>
         <Modal

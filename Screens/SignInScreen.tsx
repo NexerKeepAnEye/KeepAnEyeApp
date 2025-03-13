@@ -47,7 +47,7 @@ export default function SignInScreen() {
         dispatch({ type: 'SET_PRODUCT', payload: products });
         const data = await fetchPremise(storedApiKey);
         dispatch({ type: 'SET_PREMISES', payload: data });
-        navigation.push('StartScreen');
+        navigation.push('PremisesScreen');
       }
     };
 
@@ -92,7 +92,7 @@ export default function SignInScreen() {
         dispatch({ type: 'SET_PRODUCT', payload: products });
         dispatch({ type: 'SET_PREMISES', payload: data });
         await StorageService.storeApiKey(form.apikey);
-        navigation.navigate('StartScreen');
+        navigation.navigate('PremisesScreen');
         return BackHandler.removeEventListener('hardwareBackPress', () => true);
       }
     } catch (error) {

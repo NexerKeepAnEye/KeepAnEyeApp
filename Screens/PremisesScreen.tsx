@@ -28,14 +28,14 @@ import { Premise } from '../Types/Type';
 
 type StartScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
-  'StartScreen'
+  'PremisesScreen'
 >;
 
 type Props = {
   navigation: StartScreenNavigationProp;
 };
 
-export default function StartScreen({ navigation }: Props) {
+export default function PremisesScreen({ navigation }: Props) {
   const [showAlartDialog, setShowAlartDialog] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [inputMessage, setInputMessage] = useState('');
@@ -126,12 +126,15 @@ export default function StartScreen({ navigation }: Props) {
           payload: item,
         });
         navigation.navigate('tabs', {
+          screen: 'MeterScreen',
+        });
+        navigation.navigate('tabs', {
           screen: 'ReportScreen',
           params: { premiseId: item.Id },
         });
         navigation.navigate('tabs', {
-          screen: 'PremiseStackNavigator',
-          params: { premiseId: item.Id },
+          screen: 'MeterDataScreen',
+          params: { meterId: item.Meters[0].Id },
         });
       }}
     >

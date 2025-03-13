@@ -8,21 +8,21 @@ import { useFilterContext } from '../Context/FilterContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { PremiseScreenStyle } from '../Style/PremiseScreenStyle';
 
-type Prop = NativeStackNavigationProp<RootStackParamList, 'MeterDataScreen'>;
+type Prop = NativeStackNavigationProp<RootStackParamList, 'tabs'>;
 
 type Props = {
   navigation: Prop;
 };
 
-export default function PremiseScreen({ navigation }: Props) {
+export default function MeterScreen({ navigation }: Props) {
   const { state } = useFilterContext();
 
   useFocusEffect(() => {
     if (state.meter.length > 0) {
-      navigation.navigate('MeterDataScreen');
+      navigation.navigate('tabs', { screen: 'MeterDataScreen' });
     } else {
       const onBackPress = () => {
-        navigation.navigate('StartScreen');
+        navigation.navigate('PremisesScreen');
         return true;
       };
       const backHandler = BackHandler.addEventListener(

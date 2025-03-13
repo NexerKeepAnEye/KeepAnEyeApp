@@ -14,7 +14,7 @@ import { groupMeters, Section } from '../Utils/GroupMeter';
 import MeterIcon from './MeterIcon';
 
 type Props = {
-  navigation: NativeStackNavigationProp<RootStackParamList, 'MeterDataScreen'>;
+  navigation: NativeStackNavigationProp<RootStackParamList, 'tabs'>;
 };
 
 export default function MeterComponent({ navigation }: Props) {
@@ -31,7 +31,7 @@ export default function MeterComponent({ navigation }: Props) {
       type: 'SET_METER',
       payload: [item],
     });
-    navigation.navigate('MeterDataScreen');
+    navigation.navigate('tabs', { screen: 'MeterDataScreen' });
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

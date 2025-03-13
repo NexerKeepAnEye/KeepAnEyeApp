@@ -38,7 +38,7 @@ export default function MeterDataCard({ meterId, navigation }: Props) {
           type: 'SET_FILTERED_RESULTS',
           payload: initialState.filteredResults,
         });
-        navigation?.goBack();
+        navigation.navigate('tabs', { screen: 'MeterScreen' });
       }}
       underlayColor={'transparent'}
       style={CardStyle.cardButton}
