@@ -150,7 +150,7 @@ export default function MeterDataBarChart({
         stepValue={stepValue}
         maxValue={maxValue}
         yAxisLabelWidth={50}
-        yAxisExtraHeight={23}
+        yAxisExtraHeight={20}
         xAxisLabelTexts={labels}
         xAxisLabelTextStyle={{ flex: 1 }}
         onPress={(item: Tooltip, index: number, x: number, y: number) =>
