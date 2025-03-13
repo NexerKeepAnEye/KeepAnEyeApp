@@ -78,7 +78,13 @@ export default function MeterDataLineChart({
         const dateString =
           resolution === 'Timma'
             ? `${date.getDate()}/${date.getMonth() + 1} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
-            : date.toLocaleDateString();
+            : resolution === 'Dag'
+              ? `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
+              : resolution === 'Månad'
+                ? `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}`
+                : resolution === 'År'
+                  ? `${date.getFullYear()}`
+                  : '';
 
         if (
           seenDates.has(formattedDate) ||
@@ -89,10 +95,12 @@ export default function MeterDataLineChart({
             index !== 0 &&
             index !== sortedResults.length - 1 &&
             (index - 1) % step !== 0) ||
-          (index === 0 && resolution === 'Timma') ||
-          (index === 0 && resolution === 'Dag') ||
+          (index === 1 && resolution === 'Timma') ||
+          (index === 1 && resolution === 'Dag') ||
+          (index === 1 && resolution === 'Månad') ||
           (index === sortedResults.length - 3 && resolution === 'Timma') ||
-          (index === sortedResults.length - 3 && resolution === 'Dag')
+          (index === sortedResults.length - 3 && resolution === 'Dag') ||
+          (index === sortedResults.length - 2 && resolution === 'Månad')
         ) {
           return {
             label: '',
