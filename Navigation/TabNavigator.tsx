@@ -129,12 +129,7 @@ export default function TabNavigator() {
           options={{
             tabBarLabel: 'Rapporter',
             tabBarIcon: ({ color, focused }) => (
-              <View
-                style={[
-                  BottomTabStyle.iconContainer,
-                  // focused && BottomTabStyle.selectedTab,
-                ]}
-              >
+              <View style={[BottomTabStyle.iconContainer]}>
                 {focused ? (
                   <MaterialIcons
                     name="insert-chart"
