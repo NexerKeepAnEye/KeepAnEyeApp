@@ -1,13 +1,17 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { deviceHeight, deviceWidth } from './Dimensions';
 
 export const alertDialogStyles = StyleSheet.create({
   dialog: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#f2f2f2',
-    maxHeight: deviceHeight < 800 ? deviceHeight * 0.26 : deviceHeight * 0.22,
+    maxHeight:
+      Platform.OS === 'ios'
+        ? deviceHeight * 0.3 // iOS specific height
+        : deviceHeight < 800
+          ? deviceHeight * 0.26
+          : deviceHeight * 0.22,
     maxWidth: deviceWidth * 0.9,
   },
   title: {
