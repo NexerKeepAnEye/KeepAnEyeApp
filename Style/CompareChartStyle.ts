@@ -16,7 +16,7 @@ export const CompareChartStyle = StyleSheet.create({
     borderColor: '#ccc',
     marginLeft: -deviceWidth * 0.015,
     marginTop: 10,
-    marginBottom: -40, //unavaibale to use deviceprops, since max value exceeds amount needed
+    marginBottom: 10,
   },
   tooltipText: {
     color: '#000',
