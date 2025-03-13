@@ -146,12 +146,14 @@ export default function Analysisreport() {
               <DataTable style={MeterDataGridStyle.gridContainer}>
                 <DataTable.Header style={ReportGridStyle.header}>
                   <DataTable.Title style={{ flex: 1.5 }}>
-                    {filterstate.meter[0].Name}
+                    {filterstate.meter && filterstate.meter.length > 0
+                      ? filterstate.meter[0].Name
+                      : 'mätare'}
                   </DataTable.Title>
                   <DataTable.Title
                     style={{ flex: 1, justifyContent: 'center' }}
                   >
-                    Värde ({productName})
+                    Värde ({productName || ''})
                   </DataTable.Title>
                   <DataTable.Title
                     style={{ flex: 1, justifyContent: 'center' }}
