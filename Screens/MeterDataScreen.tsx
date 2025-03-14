@@ -13,7 +13,7 @@ import { MeterDataScreenStyle } from '../Style/MeterDataScreenStyle';
 type Props = NativeStackScreenProps<RootStackParamList, 'tabs'>;
 
 export default function MeterDataScreen({ navigation }: Props) {
-  const { state: filterState, dispatch } = useFilterContext();
+  const { state: filterState } = useFilterContext();
   const meterId = filterState.meter.length > 0 ? filterState.meter[0].Id : null;
   const { state } = usePremiseContext();
   const meter = state.selectedPremise?.Meters.find((m) => m.Id === meterId);
@@ -37,16 +37,16 @@ export default function MeterDataScreen({ navigation }: Props) {
     }, [navigation]),
   );
 
-  React.useEffect(() => {
-    const unsubscribe = navigation.addListener('beforeRemove', (e) => {
-      if (e.data.action.type !== 'GO_BACK') {
-        e.preventDefault();
-        navigation.navigate('tabs', { screen: 'MeterScreen' });
-      }
-    });
+  // React.useEffect(() => {
+  //   const unsubscribe = navigation.addListener('beforeRemove', (e) => {
+  //     if (e.data.action.type !== 'GO_BACK') {
+  //       e.preventDefault();
+  //       navigation.navigate('tabs', { screen: 'MeterScreen' });
+  //     }
+  //   });
 
-    return unsubscribe;
-  }, [navigation]);
+  //   return unsubscribe;
+  // }, [navigation]);
 
   return (
     <View style={MeterDataScreenStyle.container}>

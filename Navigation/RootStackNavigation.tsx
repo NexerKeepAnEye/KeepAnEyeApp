@@ -57,11 +57,11 @@ export default function RootStackNavigator() {
     <>
       <RootStack.Navigator
         id={undefined}
-        screenListeners={() => ({
-          beforeRemove: (e) => {
-            e.preventDefault();
-          },
-        })}
+        // screenListeners={() => ({
+        //   beforeRemove: (e) => {
+        //     e.preventDefault();
+        //   },
+        // })}
         initialRouteName="Splash"
         screenOptions={() => ({
           headerRight: () => (

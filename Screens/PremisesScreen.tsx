@@ -1,8 +1,4 @@
-import {
-  useFocusEffect,
-  useIsFocused,
-  usePreventRemove,
-} from '@react-navigation/native';
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useCallback, useRef, useState } from 'react';
 import {

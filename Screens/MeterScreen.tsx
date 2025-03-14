@@ -1,6 +1,6 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { BackHandler, View } from 'react-native';
 import MeterComponent from '../Components/MeterComponent';
 import PremiseCard from '../Components/PremiseCard';
@@ -38,16 +38,16 @@ export default function MeterScreen({ navigation }: Props) {
     }, [navigation]),
   );
 
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('beforeRemove', (e) => {
-      if (e.data.action.type !== 'GO_BACK') {
-        e.preventDefault();
-        navigation.navigate('tabs', { screen: 'MeterScreen' });
-      }
-    });
+  // useEffect(() => {
+  //   const unsubscribe = navigation.addListener('beforeRemove', (e) => {
+  //     if (e.data.action.type !== 'GO_BACK') {
+  //       e.preventDefault();
+  //       navigation.navigate('tabs', { screen: 'MeterScreen' });
+  //     }
+  //   });
 
-    return unsubscribe;
-  }, [navigation]);
+  //   return unsubscribe;
+  // }, [navigation]);
 
   return (
     <View style={PremiseScreenStyle.container}>
