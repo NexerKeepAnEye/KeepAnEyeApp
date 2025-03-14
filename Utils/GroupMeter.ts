@@ -37,7 +37,7 @@ export const groupMeters = (meters: Meter[]): Section[] => {
   const filterProductIds = (meters: Meter[], ids: string[]) =>
     meters.filter((meter) => ids.includes(meter.ProductCode));
 
-  const sections = Object.entries(productCodeMap).map(([title, ids]) => ({
+  let sections = Object.entries(productCodeMap).map(([title, ids]) => ({
     title,
     data: filterProductIds(meters, ids),
   }));
@@ -51,5 +51,13 @@ export const groupMeters = (meters: Meter[]): Section[] => {
     sections.push({ title: 'Övrigt', data: otherMeters });
   }
 
-  return sections.filter((section) => section.data.length > 0);
+  sections = sections.filter((section) => section.data.length > 0);
+  sections.sort((a, b) => a.title.localeCompare(b.title));
+  sections.forEach((section) => {
+    section.data.sort((a, b) => a.Name.localeCompare(b.Name));
+  });
+
+  // sections.filter((section) => section.data.length > 0);
+  // sections.sort((a, b) => a.title.localeCompare(b.title));
+  return sections;
 };
