@@ -15,7 +15,7 @@ export const premiseCardStyle = StyleSheet.create({
     width: deviceWidth * 0.9,
     minHeight: deviceHeight * 0.08,
     maxHeight: deviceHeight * 0.1,
-    overflow: 'hidden',
+    // overflow: 'hidden',
   },
   row: {
     flexDirection: 'row',

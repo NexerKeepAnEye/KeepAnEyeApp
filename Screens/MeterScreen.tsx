@@ -1,10 +1,9 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { BackHandler, View } from 'react-native';
 import MeterComponent from '../Components/MeterComponent';
 import PremiseCard from '../Components/PremiseCard';
-import { useFilterContext } from '../Context/FilterContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
 import { PremiseScreenStyle } from '../Style/PremiseScreenStyle';
 
@@ -15,24 +14,41 @@ type Props = {
 };
 
 export default function MeterScreen({ navigation }: Props) {
-  const { state } = useFilterContext();
+  // React.useEffect(() => {
+  //   if (Platform.OS === 'ios') {
+  //     navigation.setOptions({
+  //       gestureEnabled: false,
+  //     });
+  //   }
+  // }, [navigation]);
 
-  useFocusEffect(() => {
-    if (state.meter.length > 0) {
-      navigation.navigate('tabs', { screen: 'MeterDataScreen' });
-    } else {
+  useFocusEffect(
+    useCallback(() => {
       const onBackPress = () => {
-        navigation.navigate('PremisesScreen');
+        navigation.navigate('tabs', { screen: 'MeterScreen' });
         return true;
       };
+
       const backHandler = BackHandler.addEventListener(
         'hardwareBackPress',
         onBackPress,
       );
 
       return () => backHandler.remove();
-    }
-  });
+    }, [navigation]),
+  );
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('beforeRemove', (e) => {
+      if (e.data.action.type !== 'GO_BACK') {
+        e.preventDefault();
+        navigation.navigate('tabs', { screen: 'MeterScreen' });
+      }
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
   return (
     <View style={PremiseScreenStyle.container}>
       <PremiseCard navigation={navigation} />

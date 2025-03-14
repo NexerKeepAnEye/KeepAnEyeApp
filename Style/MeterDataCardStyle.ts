@@ -16,6 +16,7 @@ export const CardStyle = StyleSheet.create({
     minWidth: deviceWidth * 0.9,
     minHeight: deviceHeight * 0.08,
     maxHeight: deviceHeight * 0.1,
+    // overflow: 'hidden',
   },
   expandedCard: {
     maxHeight: 'auto',

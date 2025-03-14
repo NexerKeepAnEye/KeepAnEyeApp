@@ -21,19 +21,32 @@ export default function MeterDataScreen({ navigation }: Props) {
     ? state.meterData.filter((data) => data.MeterId === meterId)
     : [];
 
-  useFocusEffect(() => {
-    const onBackPress = () => {
-      dispatch({ type: 'SET_METER', payload: [] });
-      navigation.navigate('tabs', { screen: 'MeterScreen' });
-      return true;
-    };
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      onBackPress,
-    );
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        navigation.navigate('tabs', { screen: 'MeterScreen' });
+        return true;
+      };
 
-    return () => backHandler.remove();
-  });
+      const backHandler = BackHandler.addEventListener(
+        'hardwareBackPress',
+        onBackPress,
+      );
+
+      return () => backHandler.remove();
+    }, [navigation]),
+  );
+
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('beforeRemove', (e) => {
+      if (e.data.action.type !== 'GO_BACK') {
+        e.preventDefault();
+        navigation.navigate('tabs', { screen: 'MeterScreen' });
+      }
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <View style={MeterDataScreenStyle.container}>

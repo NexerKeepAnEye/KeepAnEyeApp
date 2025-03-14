@@ -76,6 +76,16 @@ export default function TabNavigator() {
 
       <Tab.Navigator
         id={undefined}
+        // screenListeners={{
+        //   beforeRemove: (e) => {
+        //     // Prevent navigation and handle it properly
+        //     const action = e.data.action;
+        //     if (action.type !== 'GO_BACK') {
+        //       e.preventDefault();
+        //       // Optionally, show a confirmation dialog or handle navigation
+        //     }
+        //   },
+        // }}
         screenOptions={() => ({
           headerRight: () => (
             <Pressable onPress={handleLogout}>
@@ -96,6 +106,9 @@ export default function TabNavigator() {
           tabBarPressColor: 'transparent',
           tabBarPressOpacity: 1,
           tabBarVisible: true,
+          swipeEnabled: false,
+          // gestureEnabled: false,
+          // headerBackButtonMenuEnabled: false,
         })}
       >
         {filterState.meter.length > 0 ? (
