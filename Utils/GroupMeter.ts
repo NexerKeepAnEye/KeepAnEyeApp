@@ -59,5 +59,5 @@ export const groupMeters = (meters: Meter[]): Section[] => {
 
   // sections.filter((section) => section.data.length > 0);
   // sections.sort((a, b) => a.title.localeCompare(b.title));
-  return sections; 
+  return sections;
 };
