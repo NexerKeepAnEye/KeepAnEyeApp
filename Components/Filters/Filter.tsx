@@ -189,7 +189,7 @@ const Filter = ({
     } catch (error) {
       setLoading(false);
       console.log('error fetching meterdata:', error);
-      showSnackbar('Ett fel inträffade');
+      showSnackbar('Fel, för stor tidsperiod');
     }
 
     setLoading(false);
