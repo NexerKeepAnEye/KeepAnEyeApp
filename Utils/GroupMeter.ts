@@ -36,7 +36,7 @@ const productCodeMap: { [key: string]: string[] } = {
 export const groupMeters = (meters: Meter[]): Section[] => {
   const filterProductIds = (meters: Meter[], ids: string[]) =>
     meters.filter((meter) =>
-      ids.some((id) => id.toLowerCase() === meter.ProductCode.toLowerCase())
+      ids.some((id) => id.toLowerCase() === meter.ProductCode.toLowerCase()),
     );
 
   let sections = Object.entries(productCodeMap).map(([title, ids]) => ({
@@ -48,7 +48,7 @@ export const groupMeters = (meters: Meter[]): Section[] => {
     (meter) =>
       !Object.values(productCodeMap)
         .flat()
-        .some((id) => id.toLowerCase() === meter.ProductCode.toLowerCase())
+        .some((id) => id.toLowerCase() === meter.ProductCode.toLowerCase()),
   );
 
   if (otherMeters.length > 0) {

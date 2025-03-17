@@ -23,7 +23,7 @@ export const StartScreenStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     fontFamily: 'inter_Bold',
-    marginLeft: deviceWidth < 400 ? deviceHeight * 0.05 :deviceWidth * 0.05,
+    marginLeft: deviceWidth < 400 ? deviceHeight * 0.05 : deviceWidth * 0.05,
   },
   itemBox: {
     width: deviceWidth * 1,
@@ -75,7 +75,7 @@ export const StartScreenStyle = StyleSheet.create({
     borderRadius: 5,
     paddingLeft: 8,
     fontFamily: 'inter_Regular',
-    marginLeft: deviceWidth < 400 ? deviceHeight * 0.03 :deviceWidth * 0.05,
+    marginLeft: deviceWidth < 400 ? deviceHeight * 0.03 : deviceWidth * 0.05,
   },
   sortButton: {
     borderRadius: 30,
