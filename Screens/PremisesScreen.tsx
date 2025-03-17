@@ -50,6 +50,7 @@ export default function StartScreen({ navigation }: Props) {
   const [showSearchBar, setShowSearchBar] = useState(false);
   const flipAnim = useRef(new Animated.Value(0)).current;
   const searchInputRef = useRef<TextInput>(null);
+  // const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
 
   const filteredPremises =
     search.length >= 2
@@ -58,9 +59,11 @@ export default function StartScreen({ navigation }: Props) {
         )
       : premises;
 
-  const sortedPremises = filteredPremises.sort((a, b) =>
-    a.Name.localeCompare(b.Name),
-  );
+  // const sortedPremises = filteredPremises.sort((a, b) =>
+  //   sortOrder === 'asc'
+  //     ? a.Name.localeCompare(b.Name)
+  //     : b.Name.localeCompare(a.Name),
+  // );
 
   const errorMessage = () => {
     setTitle('Varning');
@@ -223,7 +226,10 @@ export default function StartScreen({ navigation }: Props) {
           <Animated.View
             style={[
               backAnimatedStyle,
-              { display: showSearchBar ? 'flex' : 'none' },
+              {
+                display: showSearchBar ? 'flex' : 'none',
+                flexDirection: 'row',
+              },
             ]}
           >
             <TextInput
@@ -233,6 +239,16 @@ export default function StartScreen({ navigation }: Props) {
               value={search}
               onChangeText={(text) => setSearch(text)}
             />
+            {/* <TouchableOpacity
+              style={StartScreenStyle.sortButton}
+              onPress={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+            >
+              <Icon
+                name="sort"
+                size={22}
+                color="black"
+              />
+            </TouchableOpacity> */}
           </Animated.View>
           <TouchableOpacity
             style={StartScreenStyle.searchIcon}
@@ -277,7 +293,8 @@ export default function StartScreen({ navigation }: Props) {
           onScroll={handleScroll}
           scrollEventThrottle={4}
         >
-          {Array.isArray(sortedPremises) && sortedPremises.length > 0
+          {/* {Array.isArray(sortedPremises) && sortedPremises.length > 0 */}
+          {Array.isArray(filteredPremises) && filteredPremises.length > 0
             ? filteredPremises.map((item) => renderItem(item))
             : search.length >= 2 && (
                 <Text style={StartScreenStyle.noResultsText}>
