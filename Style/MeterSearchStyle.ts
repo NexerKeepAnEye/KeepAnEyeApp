@@ -3,8 +3,8 @@ import { deviceHeight, deviceWidth } from './Dimensions';
 
 export const meterSearch = StyleSheet.create({
   container: {
-    maxWidth: deviceWidth * 0.45,
-    minHeight: deviceHeight * 0.06,
+    maxWidth: deviceWidth * 0.91,
+    // minHeight: deviceHeight * 0.06,
     marginRight: 6,
   },
   pickerContainer: {
@@ -14,18 +14,20 @@ export const meterSearch = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#dddddd',
     borderRadius: 10,
-    height: deviceHeight * 0.055,
+    height: deviceHeight * 0.05,
     paddingHorizontal: 10,
     backgroundColor: 'white',
     opacity: 0.8,
     marginRight: 5,
+    flex: 2,
+    // marginBottom: 5,
   },
   pickerText: {
     fontSize: deviceHeight > 400 ? deviceWidth * 0.04 : deviceHeight * 0.021,
     fontFamily: 'inter_Regular',
   },
   touchArea: {
-    maxWidth: deviceWidth * 0.4,
+    width: deviceWidth * 0.91,
     alignItems: 'center',
     justifyContent: 'center',
   },

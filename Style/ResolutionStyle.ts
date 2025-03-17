@@ -8,14 +8,15 @@ export const ResolutionStyle = StyleSheet.create({
   button: {
     backgroundColor: '#fff',
     padding: 5,
-    width: deviceWidth * 0.28,
-    height: deviceHeight * 0.055,
+    width: deviceWidth * 0.44,
+    height: deviceHeight * 0.05,
     borderColor: '#ddd',
     borderWidth: 1,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
     opacity: 0.8,
+    flex: 1
   },
   buttonText: {
     fontSize: deviceHeight > 400 ? deviceWidth * 0.04 : deviceHeight * 0.021,

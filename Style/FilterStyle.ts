@@ -6,8 +6,10 @@ export const filterStyle = StyleSheet.create({
     marginTop: deviceHeight * 0.01,
     margin: deviceWidth > 400 ? deviceWidth * 0.001 : 0.1,
     flexDirection: 'row',
-    overflow: 'visible',
+    // overflow: 'visible',
     marginLeft: deviceWidth > 400 ? 0 : deviceWidth * 0.01,
+    flexWrap: 'wrap',
+    marginBottom: deviceHeight * 0.03,
   },
   snackbar: {
     height: deviceHeight * 0.04,
@@ -24,7 +26,15 @@ export const filterStyle = StyleSheet.create({
     fontFamily: 'inter_Bold',
   },
   buttonContainer: {
-    justifyContent: 'space-between',
-    marginRight: deviceWidth * 0.04,
+    // justifyContent: 'space-between',
+    // marginRight: deviceWidth * 0.04,
+    // borderWidth: 1,
+    // borderColor: 'red',
+    flex: 1,
+    // marginTop: deviceHeight * 0.02,
+  },
+  metersContainer: {
+    width: deviceWidth * 0.95,
+    marginBottom: deviceHeight * 0.01,
   },
 });
