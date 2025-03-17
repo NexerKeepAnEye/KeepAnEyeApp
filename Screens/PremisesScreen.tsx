@@ -59,11 +59,13 @@ export default function StartScreen({ navigation }: Props) {
         )
       : premises;
 
-  // const sortedPremises = filteredPremises.sort((a, b) =>
-  //   sortOrder === 'asc'
-  //     ? a.Name.localeCompare(b.Name)
-  //     : b.Name.localeCompare(a.Name),
-  // );
+  const sortedPremises = filteredPremises.sort(
+    (a, b) =>
+      // sortOrder === 'asc'
+      // ?
+      a.Name.localeCompare(b.Name),
+    // : b.Name.localeCompare(a.Name),
+  );
 
   const errorMessage = () => {
     setTitle('Varning');
@@ -293,9 +295,9 @@ export default function StartScreen({ navigation }: Props) {
           onScroll={handleScroll}
           scrollEventThrottle={4}
         >
-          {/* {Array.isArray(sortedPremises) && sortedPremises.length > 0 */}
-          {Array.isArray(filteredPremises) && filteredPremises.length > 0
-            ? filteredPremises.map((item) => renderItem(item))
+          {Array.isArray(sortedPremises) && sortedPremises.length > 0
+            ? // {Array.isArray(filteredPremises) && filteredPremises.length > 0
+              filteredPremises.map((item) => renderItem(item))
             : search.length >= 2 && (
                 <Text style={StartScreenStyle.noResultsText}>
                   Inga fastigheter hittades
