@@ -6,36 +6,38 @@ export interface Section {
 }
 //prettier-ignore
 const productCodeMap: { [key: string]: string[] } = {
-  'Fjärrvärme': ['FJV', 'fjv'],
-  'El': ['EL', 'El'],
-  'Fjärrkyla': ['FJK', 'fjk'],
-  'Vatten': ['VAT', 'vat'],
-  'Effekt': ['Effekt', 'effekt'],
-  'Flöde': ['Flöde', 'flöde'],
-  'Temperatur': ['TMP', 'tmp'],
-  'Volym': ['VOL', 'vol'],
-  'Olja': ['Olja', 'olja'],
-  'Fjärrvärme sek': ['FJV sek', 'fjv sek'],
-  'El sek': ['EL sek', 'El sek', 'el sek'],
-  'Fjärrkyla sek': ['FJK sek', 'fjk sek'],
-  'Vatten sek': ['VAT sek', 'vat sek'],
-  'Fjärrvärme under': ['FJV under', 'fjv under'],
-  'El under': ['EL under', 'el under'],
-  'Fjärrkyla under': ['FJK under', 'fjk under'],
-  'Vatten under': ['VAT under', 'vat under'],
-  'NN': ['NN', 'nn'],
-  'Fjärrvärme Virtuell': ['FJV virtuell', 'fjv virtuell'],
-  'El Virtuell': ['EL virtuell', 'el virtuell'],
-  'Industriellt Vatten': ['VAT ind', 'industriellt vatten'],
+  'Fjärrvärme': ['FJV',],
+  'El': ['EL',  ],
+  'Fjärrkyla': ['FJK',],
+  'Vatten': ['VAT', ],
+  'Effekt': ['Effekt',],
+  'Flöde': ['Flöde', ],
+  'Temperatur': ['TMP',],
+  'Volym': ['VOL', ],
+  'Olja': ['Olja', ],
+  'Fjärrvärme sek': ['FJV sek', ],
+  'El sek': ['EL sek', ],
+  'Fjärrkyla sek': ['FJK sek',],
+  'Vatten sek': ['VAT sek', ],
+  'Fjärrvärme under': ['FJV under',],
+  'El under': ['EL under', ],
+  'Fjärrkyla under': ['FJK under',],
+  'Vatten under': ['VAT under', ],
+  'NN': ['NN', ],
+  'Fjärrvärme Virtuell': ['FJV virtuell',],
+  'El Virtuell': ['EL virtuell', ],
+  'Industriellt Vatten': ['VAT ind', ],
   'BSK': ['bsk'],
   'Utetemperatur': ['utetemperatur'],
-  'Fjärrvärme Effekt': ['FJV Effekt', 'fjv effekt'],
-  'El Effekt': ['EL Effekt', 'el effekt'],
+  'Fjärrvärme Effekt': ['FJV Effekt', ],
+  'El Effekt': ['EL Effekt', ],
 };
 
 export const groupMeters = (meters: Meter[]): Section[] => {
   const filterProductIds = (meters: Meter[], ids: string[]) =>
-    meters.filter((meter) => ids.includes(meter.ProductCode));
+    meters.filter((meter) =>
+      ids.some((id) => id.toLowerCase() === meter.ProductCode.toLowerCase())
+    );
 
   let sections = Object.entries(productCodeMap).map(([title, ids]) => ({
     title,
@@ -44,7 +46,9 @@ export const groupMeters = (meters: Meter[]): Section[] => {
 
   const otherMeters = meters.filter(
     (meter) =>
-      !Object.values(productCodeMap).flat().includes(meter.ProductCode),
+      !Object.values(productCodeMap)
+        .flat()
+        .some((id) => id.toLowerCase() === meter.ProductCode.toLowerCase())
   );
 
   if (otherMeters.length > 0) {
@@ -57,7 +61,5 @@ export const groupMeters = (meters: Meter[]): Section[] => {
     section.data.sort((a, b) => a.Name.localeCompare(b.Name));
   });
 
-  // sections.filter((section) => section.data.length > 0);
-  // sections.sort((a, b) => a.title.localeCompare(b.title));
   return sections;
 };
