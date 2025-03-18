@@ -189,7 +189,7 @@ const Filter = ({
     } catch (error) {
       setLoading(false);
       console.log('error fetching meterdata:', error);
-      showSnackbar('Fel, för stor tidsperiod');
+      showSnackbar('Fel, kunde inte hämta data');
     }
 
     setLoading(false);
@@ -199,96 +199,89 @@ const Filter = ({
   return (
     <PaperProvider>
       <View>
-        <View
-        // horizontal
-        // showsHorizontalScrollIndicator={true}
-        // persistentScrollbar={true}
-        //
-        >
-          <View style={filterStyle.container}>
-            {filters.includes('meter') && setMeter && (
-              <View style={filterStyle.metersContainer}>
-                <MeterSearch
-                  setSelectedMeter={setMeter}
-                  meters={meter}
-                />
-              </View>
-            )}
-            {filters.includes('year') && setYear && (
+        <View style={filterStyle.container}>
+          {filters.includes('meter') && setMeter && (
+            <View style={filterStyle.metersContainer}>
+              <MeterSearch
+                setSelectedMeter={setMeter}
+                meters={meter}
+              />
+            </View>
+          )}
+          {filters.includes('year') && setYear && (
+            <YearSearch
+              setSelectedYear={setYear}
+              label="År"
+            />
+          )}
+          {filters.includes('yearRange') && setYear && setYearTwo && (
+            <>
+              <YearSearch
+                setSelectedYear={setYear}
+                label="Från år"
+              />
+              <YearSearch
+                setSelectedYear={setYearTwo}
+                label="Till år"
+              />
+            </>
+          )}
+          {filters.includes('compareYears') && setYear && setYearTwo && (
+            <>
               <YearSearch
                 setSelectedYear={setYear}
                 label="År"
               />
-            )}
-            {filters.includes('yearRange') && setYear && setYearTwo && (
-              <>
-                <YearSearch
-                  setSelectedYear={setYear}
-                  label="Från år"
-                />
-                <YearSearch
-                  setSelectedYear={setYearTwo}
-                  label="Till år"
-                />
-              </>
-            )}
-            {filters.includes('compareYears') && setYear && setYearTwo && (
-              <>
-                <YearSearch
-                  setSelectedYear={setYear}
-                  label="År"
-                />
-                <YearSearch
-                  setSelectedYear={setYearTwo}
-                  label="År"
-                />
-              </>
-            )}
-            {filters.includes('dateRange') && setFromDate && setToDate && (
-              <FromToDate
-                setFromDate={setFromDate}
-                setToDate={setToDate}
-                fromDate={fromDate ?? null}
-                toDate={toDate ?? null}
+              <YearSearch
+                setSelectedYear={setYearTwo}
+                label="År"
               />
-            )}
-            {filters.includes('resolution') && setResolution && (
-              <Resolution setSelectedResolution={setResolution} />
-            )}
-            {filters.includes('standardAdjusted') && (
-              <StandardYearAdjusted
-                isChecked={correctedValues}
-                setIsChecked={setIsChecked}
-              />
-            )}
-            {showButton && (
-              <View style={filterStyle.buttonContainer}>
-                <TouchableOpacity
-                  onPress={handleSearch}
-                  style={
-                    loading
-                      ? searchButtonStyle.disableButton
-                      : searchButtonStyle.button
-                  }
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <>
-                      <Text style={searchButtonStyle.text}>Hämtar...</Text>
-                      <ActivityIndicator
-                        animating={true}
-                        color={MD2Colors.white}
-                        size="small"
-                        style={{ paddingLeft: 19 }}
-                      />
-                    </>
-                  ) : (
-                    <Text style={searchButtonStyle.text}>{buttonText}</Text>
-                  )}
-                </TouchableOpacity>
-              </View>
-            )}
-          </View>
+            </>
+          )}
+          {filters.includes('dateRange') && setFromDate && setToDate && (
+            <FromToDate
+              setFromDate={setFromDate}
+              setToDate={setToDate}
+              fromDate={fromDate ?? null}
+              toDate={toDate ?? null}
+            />
+          )}
+          {filters.includes('resolution') && setResolution && (
+            <Resolution setSelectedResolution={setResolution} />
+          )}
+          {filters.includes('standardAdjusted') && (
+            <StandardYearAdjusted
+              isChecked={correctedValues}
+              setIsChecked={setIsChecked}
+            />
+          )}
+          {showButton && (
+            <View style={filterStyle.buttonContainer}>
+              <TouchableOpacity
+                onPress={handleSearch}
+                style={
+                  loading
+                    ? searchButtonStyle.disableButton
+                    : searchButtonStyle.button
+                }
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <Text style={searchButtonStyle.text}>Hämtar...</Text>
+                    <ActivityIndicator
+                      animating={true}
+                      color={MD2Colors.white}
+                      size="small"
+                      style={{ paddingLeft: 19 }}
+                    />
+                  </>
+                ) : (
+                  <Text style={searchButtonStyle.text}>{buttonText}</Text>
+                )}
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
       </View>
     </PaperProvider>

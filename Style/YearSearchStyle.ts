@@ -15,7 +15,7 @@ export const yearSearchStyle = StyleSheet.create({
     height: deviceHeight * 0.05,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#f9f9f9',
     opacity: 0.8,
     paddingHorizontal: 10,
     flex : 1,
