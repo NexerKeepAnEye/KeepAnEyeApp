@@ -8,7 +8,7 @@ export const filterStyle = StyleSheet.create({
     flexDirection: 'row',
     marginLeft: deviceWidth > 400 ? 0 : deviceWidth * 0.01,
     flexWrap: 'wrap',
-    marginBottom: deviceHeight * 0.03,
+    marginBottom: deviceHeight * 0.01,
   },
   snackbar: {
     height: deviceHeight * 0.04,
