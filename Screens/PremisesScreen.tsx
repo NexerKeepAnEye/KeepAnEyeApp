@@ -115,7 +115,7 @@ export default function PremisesScreen({ navigation }: Props) {
           BackHandler.removeEventListener('hardwareBackPress', onBackPress);
         }
       };
-    }, [isFocused, navigation]), // isFocused kan ändras på varje render
+    }, [isFocused, navigation]),
   );
 
   const handleConfirm = () => {
@@ -162,10 +162,10 @@ export default function PremisesScreen({ navigation }: Props) {
         //   screen: 'ReportScreen',
         //   params: { premiseId: item.Id },
         // });
-        navigation.push('tabs', {
-          screen: 'MeterDataScreen',
-          params: { meterId: item.Meters[0].Id },
-        });
+        // navigation.push('tabs', {
+        //   screen: 'MeterDataScreen',
+        //   params: { meterId: item.Meters[0].Id },
+        // });
       }}
     >
       <Icon

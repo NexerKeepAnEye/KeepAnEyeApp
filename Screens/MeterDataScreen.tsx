@@ -17,7 +17,7 @@ import { MeterDataScreenStyle } from '../Style/MeterDataScreenStyle';
 
 type Prop = CompositeNavigationProp<
   NativeStackNavigationProp<RootStackParamList, 'tabs'>,
-  BottomTabNavigationProp<TabParamList>
+  BottomTabNavigationProp<TabParamList, 'MeterDataScreen'>
 >;
 
 type Props = {
@@ -25,7 +25,7 @@ type Props = {
 };
 
 export default function MeterDataScreen({ navigation }: Props) {
-  const { state: filterState } = useFilterContext();
+  const { state: filterState, dispatch } = useFilterContext();
   const meterId = filterState.meter.length > 0 ? filterState.meter[0].Id : null;
   const { state } = usePremiseContext();
   const meter = state.selectedPremise?.Meters.find((m) => m.Id === meterId);
@@ -36,6 +36,7 @@ export default function MeterDataScreen({ navigation }: Props) {
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => {
+        dispatch({ type: 'SET_METER', payload: [] });
         navigation.navigate('tabs', { screen: 'MeterScreen' });
         return true;
       };
@@ -48,17 +49,6 @@ export default function MeterDataScreen({ navigation }: Props) {
       return () => backHandler.remove();
     }, [navigation]),
   );
-
-  // React.useEffect(() => {
-  //   const unsubscribe = navigation.addListener('beforeRemove', (e) => {
-  //     if (e.data.action.type !== 'GO_BACK') {
-  //       e.preventDefault();
-  //       navigation.navigate('tabs', { screen: 'MeterScreen' });
-  //     }
-  //   });
-
-  //   return unsubscribe;
-  // }, [navigation]);
 
   return (
     <View style={MeterDataScreenStyle.container}>

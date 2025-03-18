@@ -54,16 +54,6 @@ export default function TabNavigator() {
     setShowAlartDialog(true);
   };
 
-  // useEffect(() => {
-  //   const unsubscribe = navigation.addListener('state', () => {
-  //     const currentRoute =
-  //       navigation.getState().routes[navigation.getState().index];
-  //     console.log('Current screen:', currentRoute?.name);
-  //   });
-
-  //   return unsubscribe;
-  // }, [navigation]);
-
   return (
     <>
       <Portal>
@@ -86,7 +76,6 @@ export default function TabNavigator() {
       <Tab.Navigator
         id={undefined}
         detachInactiveScreens={true}
-        // initialRouteName="MeterScreen"
         screenOptions={() => ({
           popGesture: false,
           hardwareBackButton: {

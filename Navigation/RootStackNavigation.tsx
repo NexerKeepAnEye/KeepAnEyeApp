@@ -32,7 +32,6 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 export default function RootStackNavigator() {
   const [showAlartDialog, setShowAlartDialog] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  // const [inputMessage, setInputMessage] = useState('');
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { state } = usePremiseContext();
@@ -48,24 +47,10 @@ export default function RootStackNavigator() {
     }
   }, [navigation]);
 
-  // useEffect(() => {
-  //   const unsubscribe = navigation.addListener('state', () => {
-  //     const currentRoute = navigation.getCurrentRoute();
-  //     console.log('Current screen:', currentRoute?.name);
-  //   });
-
-  //   return unsubscribe;
-  // }, [navigation]);
-
   return (
     <>
       <RootStack.Navigator
         id={undefined}
-        // screenListeners={() => ({
-        //   beforeRemove: (e) => {
-        //     e.preventDefault();
-        //   },
-        // })}
         initialRouteName="Splash"
         screenOptions={() => ({
           popGesture: false,
@@ -115,7 +100,7 @@ export default function RootStackNavigator() {
         <RootStack.Screen
           name="tabs"
           component={TabNavigator}
-          options={{ headerShown: false, gestureEnabled: false }}
+          options={{ headerShown: false }}
         />
       </RootStack.Navigator>
       <View>

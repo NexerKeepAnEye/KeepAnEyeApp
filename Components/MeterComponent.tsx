@@ -1,14 +1,9 @@
-import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
-import { CompositeNavigationProp } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { useRef, useState } from 'react';
 import { SectionList, Text, TouchableOpacity, View } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useFilterContext } from '../Context/FilterContext';
 import { usePremiseContext } from '../Context/PremiseContext';
-import { RootStackParamList } from '../Navigation/RootStackNavigation';
-import { TabParamList } from '../Navigation/TabNavigator';
 import { deviceHeight } from '../Style/Dimensions';
 import { MeterComponentStyle } from '../Style/MeterComponentStyle';
 import { meterSearch } from '../Style/MeterSearchStyle';
@@ -16,16 +11,16 @@ import { Meter } from '../Types/Type';
 import { groupMeters, Section } from '../Utils/GroupMeter';
 import MeterIcon from './MeterIcon';
 
-type Prop = CompositeNavigationProp<
-  NativeStackNavigationProp<RootStackParamList, 'tabs'>,
-  BottomTabNavigationProp<TabParamList>
->;
+// type Prop = CompositeNavigationProp<
+//   NativeStackNavigationProp<RootStackParamList, 'tabs'>,
+//   BottomTabNavigationProp<TabParamList>
+// >;
 
-type Props = {
-  navigation: Prop;
-};
+// type Props = {
+//   navigation: Prop;
+// };
 
-export default function MeterComponent({ navigation }: Props) {
+export default function MeterComponent() {
   const { state } = usePremiseContext();
   const { dispatch: filterDispatch } = useFilterContext();
   const meters = state.selectedPremise?.Meters || [];
@@ -39,7 +34,7 @@ export default function MeterComponent({ navigation }: Props) {
       type: 'SET_METER',
       payload: [item],
     });
-    navigation.navigate('tabs', { screen: 'MeterDataScreen' });
+    // navigation.navigate('tabs', { screen: 'MeterDataScreen' });
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
