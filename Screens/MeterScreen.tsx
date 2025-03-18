@@ -6,7 +6,6 @@ import {
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { BackHandler, View } from 'react-native';
-import { Props } from 'react-native-paper';
 import MeterComponent from '../Components/MeterComponent';
 import PremiseCard from '../Components/PremiseCard';
 import { useFilterContext } from '../Context/FilterContext';
@@ -44,7 +43,7 @@ export default function MeterScreen({ navigation }: Props) {
   return (
     <View style={PremiseScreenStyle.container}>
       <PremiseCard navigation={navigation} />
-      <MeterComponent navigation={navigation} />
+      <MeterComponent />
     </View>
   );
 }
