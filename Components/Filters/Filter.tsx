@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import {
   ActivityIndicator,
   MD2Colors,
@@ -199,12 +199,16 @@ const Filter = ({
   return (
     <PaperProvider>
       <View>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={true}
-          persistentScrollbar={true}
-        >
+        <View>
           <View style={filterStyle.container}>
+            {filters.includes('meter') && setMeter && (
+              <View style={filterStyle.metersContainer}>
+                <MeterSearch
+                  setSelectedMeter={setMeter}
+                  meters={meter}
+                />
+              </View>
+            )}
             {filters.includes('year') && setYear && (
               <YearSearch
                 setSelectedYear={setYear}
@@ -243,12 +247,6 @@ const Filter = ({
                 toDate={toDate ?? null}
               />
             )}
-            {filters.includes('meter') && setMeter && (
-              <MeterSearch
-                setSelectedMeter={setMeter}
-                meters={meter}
-              />
-            )}
             {filters.includes('resolution') && setResolution && (
               <Resolution setSelectedResolution={setResolution} />
             )}
@@ -258,35 +256,35 @@ const Filter = ({
                 setIsChecked={setIsChecked}
               />
             )}
+            {showButton && (
+              <View style={filterStyle.buttonContainer}>
+                <TouchableOpacity
+                  onPress={handleSearch}
+                  style={
+                    loading
+                      ? searchButtonStyle.disableButton
+                      : searchButtonStyle.button
+                  }
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <>
+                      <Text style={searchButtonStyle.text}>Hämtar...</Text>
+                      <ActivityIndicator
+                        animating={true}
+                        color={MD2Colors.white}
+                        size="small"
+                        style={{ paddingLeft: 19 }}
+                      />
+                    </>
+                  ) : (
+                    <Text style={searchButtonStyle.text}>{buttonText}</Text>
+                  )}
+                </TouchableOpacity>
+              </View>
+            )}
           </View>
-        </ScrollView>
-        {showButton && (
-          <View style={filterStyle.buttonContainer}>
-            <TouchableOpacity
-              onPress={handleSearch}
-              style={
-                loading
-                  ? searchButtonStyle.disableButton
-                  : searchButtonStyle.button
-              }
-              disabled={loading}
-            >
-              {loading ? (
-                <>
-                  <Text style={searchButtonStyle.text}>Hämtar...</Text>
-                  <ActivityIndicator
-                    animating={true}
-                    color={MD2Colors.white}
-                    size="small"
-                    style={{ paddingLeft: 19 }}
-                  />
-                </>
-              ) : (
-                <Text style={searchButtonStyle.text}>{buttonText}</Text>
-              )}
-            </TouchableOpacity>
-          </View>
-        )}
+        </View>
       </View>
     </PaperProvider>
   );
