@@ -1,5 +1,9 @@
-import { useFocusEffect } from '@react-navigation/native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import {
+  CompositeNavigationProp,
+  useFocusEffect,
+} from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { BackHandler, Text, View } from 'react-native';
 import MeterDataCard from '../Components/MeterDataCard';
@@ -8,9 +12,17 @@ import PremiseCard from '../Components/PremiseCard';
 import { useFilterContext } from '../Context/FilterContext';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
+import { TabParamList } from '../Navigation/TabNavigator';
 import { MeterDataScreenStyle } from '../Style/MeterDataScreenStyle';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'tabs'>;
+type Prop = CompositeNavigationProp<
+  NativeStackNavigationProp<RootStackParamList, 'tabs'>,
+  BottomTabNavigationProp<TabParamList>
+>;
+
+type Props = {
+  navigation: Prop;
+};
 
 export default function MeterDataScreen({ navigation }: Props) {
   const { state: filterState } = useFilterContext();

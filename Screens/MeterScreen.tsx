@@ -1,13 +1,21 @@
-import { useFocusEffect } from '@react-navigation/native';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import {
+  CompositeNavigationProp,
+  useFocusEffect,
+} from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useCallback } from 'react';
 import { BackHandler, View } from 'react-native';
 import MeterComponent from '../Components/MeterComponent';
 import PremiseCard from '../Components/PremiseCard';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
+import { TabParamList } from '../Navigation/TabNavigator';
 import { PremiseScreenStyle } from '../Style/PremiseScreenStyle';
 
-type Prop = NativeStackNavigationProp<RootStackParamList, 'tabs'>;
+type Prop = CompositeNavigationProp<
+  NativeStackNavigationProp<RootStackParamList, 'tabs'>,
+  BottomTabNavigationProp<TabParamList, 'MeterScreen'>
+>;
 
 type Props = {
   navigation: Prop;

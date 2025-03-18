@@ -1,4 +1,6 @@
 import { SimpleLineIcons } from '@expo/vector-icons';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { CompositeNavigationProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { TouchableHighlight, View } from 'react-native';
@@ -7,15 +9,19 @@ import { useFilterContext } from '../Context/FilterContext';
 import { initialState } from '../Context/FilterReducer';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
+import { TabParamList } from '../Navigation/TabNavigator';
 import { premiseCardStyle } from '../Style/PremiseCardStyle';
 
-type Props<T extends keyof RootStackParamList> = {
-  navigation: NativeStackNavigationProp<RootStackParamList, T>;
+type Prop = CompositeNavigationProp<
+  NativeStackNavigationProp<RootStackParamList>,
+  BottomTabNavigationProp<TabParamList>
+>;
+
+type Props = {
+  navigation: Prop;
 };
 
-const PremiseCard = <T extends keyof RootStackParamList>({
-  navigation,
-}: Props<T>) => {
+const PremiseCard = ({ navigation }: Props) => {
   const { state, dispatch } = usePremiseContext();
   const { dispatch: filterDispatch } = useFilterContext();
 

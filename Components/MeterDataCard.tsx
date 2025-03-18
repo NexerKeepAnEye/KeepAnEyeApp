@@ -1,3 +1,5 @@
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { CompositeNavigationProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useEffect, useRef, useState } from 'react';
 import { Text, TouchableHighlight, View } from 'react-native';
@@ -6,12 +8,18 @@ import { useFilterContext } from '../Context/FilterContext';
 import { initialState } from '../Context/FilterReducer';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { RootStackParamList } from '../Navigation/RootStackNavigation';
+import { TabParamList } from '../Navigation/TabNavigator';
 import { CardStyle } from '../Style/MeterDataCardStyle';
 import MeterIcon from './MeterIcon';
 
+type Prop = CompositeNavigationProp<
+  NativeStackNavigationProp<RootStackParamList, 'tabs'>,
+  BottomTabNavigationProp<TabParamList>
+>;
+
 type Props = {
+  navigation: Prop;
   meterId: number;
-  navigation?: NativeStackNavigationProp<RootStackParamList>;
 };
 
 export default function MeterDataCard({ meterId, navigation }: Props) {

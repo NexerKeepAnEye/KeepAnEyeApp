@@ -1,6 +1,6 @@
 import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Animated,
   BackHandler,
@@ -44,6 +44,7 @@ export default function PremisesScreen({ navigation }: Props) {
   const [inputMessage, setInputMessage] = useState('');
   const [title, setTitle] = useState('');
   const { state, dispatch } = usePremiseContext();
+  const { state: filterState } = useFilterContext();
   const premises: Premise[] = state.premises;
   const isFocused = useIsFocused();
   const [showButton, setShowButton] = useState(false);
@@ -72,11 +73,13 @@ export default function PremisesScreen({ navigation }: Props) {
     setShowAlartDialog(true);
   };
 
-  useFocusEffect(
-    useCallback(() => {
-      filterDispatch({ type: 'SET_METER', payload: [] });
-    }, [filterDispatch]),
-  );
+  useEffect(() => {
+    if (Platform.OS === 'ios') {
+      if (filterState.meter.length > 0) {
+        navigation.navigate('tabs', { screen: 'MeterScreen' });
+      }
+    }
+  }, [filterState.meter.length, navigation]);
 
   useFocusEffect(
     useCallback(() => {
@@ -112,7 +115,7 @@ export default function PremisesScreen({ navigation }: Props) {
           BackHandler.removeEventListener('hardwareBackPress', onBackPress);
         }
       };
-    }, [isFocused, navigation]),
+    }, [isFocused, navigation]), // isFocused kan ändras på varje render
   );
 
   const handleConfirm = () => {
@@ -147,20 +150,22 @@ export default function PremisesScreen({ navigation }: Props) {
       key={item.Id}
       style={StartScreenStyle.listItems}
       onPress={() => {
+        filterDispatch({ type: 'SET_METER', payload: [] });
         dispatch({
           type: 'SET_PREMISE',
           payload: item,
         });
-
-        navigation.reset({
-          index: 0,
-          routes: [
-            {
-              name: 'PremisesScreen',
-            },
-          ],
+        navigation.navigate('tabs', {
+          screen: 'MeterScreen',
         });
-        navigation.navigate('tabs', { screen: 'MeterScreen' });
+        // navigation.push('tabs', {
+        //   screen: 'ReportScreen',
+        //   params: { premiseId: item.Id },
+        // });
+        navigation.push('tabs', {
+          screen: 'MeterDataScreen',
+          params: { meterId: item.Meters[0].Id },
+        });
       }}
     >
       <Icon

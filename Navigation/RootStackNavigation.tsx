@@ -20,7 +20,9 @@ import TabNavigator, { TabParamList } from './TabNavigator';
 
 export type RootStackParamList = {
   SignInScreen: undefined;
-  PremisesScreen: undefined;
+  PremisesScreen: {
+    navigation: NativeStackNavigationProp<TabParamList>;
+  };
   Splash: undefined;
   tabs: NavigatorScreenParams<TabParamList>;
 };
@@ -46,12 +48,14 @@ export default function RootStackNavigator() {
     }
   }, [navigation]);
 
-  // React.useEffect(
-  //   () => navigation.setOptions({ gestureEnabled: false }),
-  //   [navigation],
-  // );
+  // useEffect(() => {
+  //   const unsubscribe = navigation.addListener('state', () => {
+  //     const currentRoute = navigation.getCurrentRoute();
+  //     console.log('Current screen:', currentRoute?.name);
+  //   });
 
-  // console.log('RootStackNavigator', navigation);
+  //   return unsubscribe;
+  // }, [navigation]);
 
   return (
     <>
@@ -64,6 +68,11 @@ export default function RootStackNavigator() {
         // })}
         initialRouteName="Splash"
         screenOptions={() => ({
+          popGesture: false,
+          hardwareBackButton: {
+            dismissModalOnPress: false,
+            popStackOnPress: false,
+          },
           headerRight: () => (
             <TouchableOpacity onPressOut={handleLogout}>
               <View>
@@ -90,11 +99,6 @@ export default function RootStackNavigator() {
           }}
         />
         <RootStack.Screen
-          name="SignInScreen"
-          component={SignInScreen}
-          options={{ headerShown: false, gestureEnabled: false }}
-        />
-        <RootStack.Screen
           name="PremisesScreen"
           component={PremisesScreen}
           options={{
@@ -102,6 +106,11 @@ export default function RootStackNavigator() {
             headerBackVisible: false,
             gestureEnabled: false,
           }}
+        />
+        <RootStack.Screen
+          name="SignInScreen"
+          component={SignInScreen}
+          options={{ headerShown: false, gestureEnabled: false }}
         />
         <RootStack.Screen
           name="tabs"
