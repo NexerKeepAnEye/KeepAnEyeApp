@@ -50,9 +50,11 @@ const PremiseCard = <T extends keyof RootStackParamList>({
                 <Text style={premiseCardStyle.title}>
                   {state.selectedPremise.Name}
                 </Text>
-                <Text style={premiseCardStyle.subtitle}>
-                  Beteckning: {state.selectedPremise.Designation}
-                </Text>
+                {state.selectedPremise.Designation === '' ? (
+                  <Text style={premiseCardStyle.subtitle}>
+                    Beteckning: {state.selectedPremise.Designation}
+                  </Text>
+                ) : null}
               </Card.Content>
             </>
           ) : (
