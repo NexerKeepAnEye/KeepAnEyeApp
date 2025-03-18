@@ -10,6 +10,7 @@ export default function SnackBarErrorHandling(
   year?: string,
   yearTwo?: string,
   meter?: Meter[],
+  selectedProductId?: number,
 ) {
   if (
     (filters.includes('meter') && !meter) ||
@@ -18,7 +19,8 @@ export default function SnackBarErrorHandling(
     (filters.includes('yearRange') && !year) ||
     (filters.includes('yearRange') && !yearTwo) ||
     (filters.includes('dateRange') && (!fromDate || !toDate)) ||
-    (filters.includes('compareYears') && !year && !yearTwo)
+    (filters.includes('compareYears') && !year && !yearTwo) ||
+    selectedProductId === undefined
   ) {
     showSnackbar('Fyll i fälten');
     setLoading(false);
@@ -50,7 +52,7 @@ export default function SnackBarErrorHandling(
   if (resolution === 'Daily') {
     const dayDiff =
       fromDate && toDate
-        ? Math.floor((toDate.getTime() - fromDate.getTime()) / 86400000)
+        ? Math.floor((toDate.getTime() - fromDate.getTime()) / 86400000) // Beräkna antal dagar
         : 0;
     if (dayDiff > 90) {
       showSnackbar('För stor tidsperiod, max 90 dagar');
@@ -60,11 +62,12 @@ export default function SnackBarErrorHandling(
   }
 
   if (resolution === 'Hourly') {
-    const dayDiff =
+    const hourDiff =
       fromDate && toDate
-        ? Math.floor((toDate.getTime() - fromDate.getTime()) / 86400000)
+        ? Math.floor((toDate.getTime() - fromDate.getTime()) / 86400000) // Beräkna antal timmar
         : 0;
-    if (dayDiff > 31) {
+    if (hourDiff >= 30) {
+      console.log('hourDiff', hourDiff);
       showSnackbar('För stor tidsperiod, max 31 dagar');
       setLoading(false);
       return 'error';
