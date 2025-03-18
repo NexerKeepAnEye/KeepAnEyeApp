@@ -1,4 +1,4 @@
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { Entypo, MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -9,21 +9,24 @@ import { Portal, Snackbar } from 'react-native-paper';
 import StorageService from '../AsyncStorage/AsyncStorage';
 import AlertDialog from '../Components/AlertDialog';
 import { LogoTitle } from '../Components/Header';
+import { useFilterContext } from '../Context/FilterContext';
 import { setInitialFilterState } from '../Context/FilterReducer';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { useSnackbar } from '../Context/SnackbarContext';
+import MeterDataScreen from '../Screens/MeterDataScreen';
+import MeterScreen from '../Screens/MeterScreen';
 import ReportScreen from '../Screens/ReportScreen';
 import { BottomTabStyle } from '../Style/BottomTabStyle';
 import { deviceHeight, deviceWidth } from '../Style/Dimensions';
 import { filterStyle } from '../Style/FilterStyle';
-import PremiseStackNavigator from './PremiseStackNavigator';
 import { RootStackParamList } from './RootStackNavigation';
 
 export type TabParamList = {
-  PremiseStackNavigator: { premiseId: number };
+  MeterScreen: {
+    premiseId: number;
+  };
   ReportScreen: { premiseId: number };
   MeterDataScreen: { meterId: number };
-  PremiseScreen: { premiseId: number };
 };
 
 const paddingHorizontal = deviceWidth * 0.025;
@@ -34,9 +37,10 @@ export default function TabNavigator() {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [showAlartDialog, setShowAlartDialog] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  // const [inputMessage, setInputMessage] = useState('');
   const { visible, message, hideSnackbar } = useSnackbar();
   const { state } = usePremiseContext();
+
+  const { state: filterState } = useFilterContext();
 
   useEffect(() => {
     const apiKey = StorageService.getApiKey();
@@ -71,7 +75,13 @@ export default function TabNavigator() {
 
       <Tab.Navigator
         id={undefined}
+        detachInactiveScreens={true}
         screenOptions={() => ({
+          popGesture: false,
+          hardwareBackButton: {
+            dismissModalOnPress: false,
+            popStackOnPress: false,
+          },
           headerRight: () => (
             <Pressable onPress={handleLogout}>
               <MaterialIcons
@@ -90,39 +100,77 @@ export default function TabNavigator() {
           tabBarInactiveTintColor: 'grey',
           tabBarPressColor: 'transparent',
           tabBarPressOpacity: 1,
+          tabBarVisible: true,
+          swipeEnabled: false,
+          // gestureEnabled: false,
+          // headerBackButtonMenuEnabled: false,
         })}
       >
-        <Tab.Screen
-          name="PremiseStackNavigator"
-          component={PremiseStackNavigator}
-          options={{
-            tabBarLabel: 'Fastighet',
-            tabBarIcon: ({ color, focused }) => (
-              <View style={BottomTabStyle.iconContainer}>
-                {focused ? (
-                  <Ionicons
-                    name="home"
-                    size={deviceHeight < 800 ? 30 : 33}
-                    color={color}
-                  />
-                ) : (
-                  <Ionicons
-                    name="home-outline"
-                    size={deviceHeight < 800 ? 25 : 28}
-                    color={color}
-                  />
-                )}
-              </View>
-            ),
-            tabBarButton: (props) => (
-              <TouchableOpacity
-                {...props}
-                activeOpacity={1}
-                delayLongPress={undefined}
-              />
-            ),
-          }}
-        />
+        {filterState.meter.length > 0 ? (
+          <Tab.Screen
+            name="MeterDataScreen"
+            component={MeterDataScreen}
+            options={{
+              tabBarLabel: 'Mätardata',
+              tabBarIcon: ({ color, focused }) => (
+                <View style={[BottomTabStyle.iconContainer]}>
+                  {focused ? (
+                    <MaterialIcons
+                      name="data-usage"
+                      size={deviceHeight < 800 ? 30 : 33}
+                      color={color}
+                    />
+                  ) : (
+                    <MaterialIcons
+                      name="data-usage"
+                      size={deviceHeight < 800 ? 25 : 28}
+                      color={color}
+                    />
+                  )}
+                </View>
+              ),
+              tabBarButton: (props) => (
+                <TouchableOpacity
+                  {...props}
+                  activeOpacity={1}
+                  delayLongPress={undefined}
+                />
+              ),
+            }}
+          />
+        ) : (
+          <Tab.Screen
+            name="MeterScreen"
+            component={MeterScreen}
+            options={{
+              tabBarLabel: 'Mätare',
+              tabBarIcon: ({ color, focused }) => (
+                <View style={BottomTabStyle.iconContainer}>
+                  {focused ? (
+                    <Entypo
+                      name="gauge"
+                      size={deviceHeight < 800 ? 30 : 33}
+                      color={color}
+                    />
+                  ) : (
+                    <Entypo
+                      name="gauge"
+                      size={deviceHeight < 800 ? 25 : 28}
+                      color={color}
+                    />
+                  )}
+                </View>
+              ),
+              tabBarButton: (props) => (
+                <TouchableOpacity
+                  {...props}
+                  activeOpacity={1}
+                  delayLongPress={undefined}
+                />
+              ),
+            }}
+          />
+        )}
         <Tab.Screen
           name="ReportScreen"
           component={ReportScreen}
@@ -185,9 +233,7 @@ export default function TabNavigator() {
               setIsVisible(false);
               setShowAlartDialog(false);
             }}
-          >
-            {/* <Text>Extra innehåll här</Text> */}
-          </AlertDialog>
+          ></AlertDialog>
         </Modal>
       </View>
     </>

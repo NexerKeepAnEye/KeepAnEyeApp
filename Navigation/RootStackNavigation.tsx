@@ -13,23 +13,17 @@ import AlertDialog from '../Components/AlertDialog';
 import { LogoTitle } from '../Components/Header';
 import { setInitialFilterState } from '../Context/FilterReducer';
 import { usePremiseContext } from '../Context/PremiseContext';
-import PremiseScreen from '../Screens/MeterScreen';
-import StartScreen from '../Screens/PremisesScreen';
-import ReportScreen from '../Screens/ReportScreen';
+import PremisesScreen from '../Screens/PremisesScreen';
 import SignInScreen from '../Screens/SignInScreen';
 import Splash from '../Screens/Splashscreen';
 import TabNavigator, { TabParamList } from './TabNavigator';
 
 export type RootStackParamList = {
   SignInScreen: undefined;
-  StartScreen: undefined;
-  Splash: undefined;
-  PremiseScreen: {
-    navigation: NavigatorScreenParams<TabParamList>;
-    premiseId: number;
+  PremisesScreen: {
+    navigation: NativeStackNavigationProp<TabParamList>;
   };
-  ReportScreen: { premiseId: number };
-  MeterDataScreen: { meterId: number };
+  Splash: undefined;
   tabs: NavigatorScreenParams<TabParamList>;
 };
 
@@ -38,7 +32,6 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 export default function RootStackNavigator() {
   const [showAlartDialog, setShowAlartDialog] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  // const [inputMessage, setInputMessage] = useState('');
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { state } = usePremiseContext();
@@ -60,6 +53,11 @@ export default function RootStackNavigator() {
         id={undefined}
         initialRouteName="Splash"
         screenOptions={() => ({
+          popGesture: false,
+          hardwareBackButton: {
+            dismissModalOnPress: false,
+            popStackOnPress: false,
+          },
           headerRight: () => (
             <TouchableOpacity onPressOut={handleLogout}>
               <View>
@@ -73,36 +71,35 @@ export default function RootStackNavigator() {
           ),
           headerTitle: () => <LogoTitle />,
           headerTitleAlign: 'center',
+          gesturesEnabled: false,
         })}
       >
         <RootStack.Screen
           name="Splash"
           component={Splash}
-          options={{ headerShadowVisible: false, headerShown: false }}
+          options={{
+            headerShadowVisible: false,
+            headerShown: false,
+            gestureEnabled: false,
+          }}
         />
         <RootStack.Screen
-          name="StartScreen"
-          component={StartScreen}
-          options={{ headerLeft: () => null, headerBackVisible: false }}
+          name="PremisesScreen"
+          component={PremisesScreen}
+          options={{
+            headerLeft: () => null,
+            headerBackVisible: false,
+            gestureEnabled: false,
+          }}
         />
         <RootStack.Screen
           name="SignInScreen"
           component={SignInScreen}
-          options={{ headerShown: false }}
+          options={{ headerShown: false, gestureEnabled: false }}
         />
         <RootStack.Screen
           name="tabs"
           component={TabNavigator}
-          options={{ headerShown: false }}
-        />
-        <RootStack.Screen
-          name="PremiseScreen"
-          component={PremiseScreen}
-          options={{ headerShown: false }}
-        />
-        <RootStack.Screen
-          name="ReportScreen"
-          component={ReportScreen}
           options={{ headerShown: false }}
         />
       </RootStack.Navigator>

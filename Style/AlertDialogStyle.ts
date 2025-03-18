@@ -42,12 +42,13 @@ export const alertDialogStyles = StyleSheet.create({
     fontFamily: 'inter_Bold',
     fontSize: deviceHeight > 800 ? deviceHeight * 0.02 : deviceHeight * 0.023,
     paddingHorizontal: 10,
+    marginRight: 20,
   },
   cancelText: {
     color: '#ed5e68',
     fontFamily: 'inter_Bold',
-    fontSize: deviceHeight > 800 ? deviceHeight * 0.02 : deviceHeight * 0.02,
-    paddingHorizontal: 10,
+    fontSize: deviceHeight > 800 ? deviceHeight * 0.02 : deviceHeight * 0.023,
+    paddingHorizontal: 5,
   },
   singleButton: {
     flexGrow: 1,

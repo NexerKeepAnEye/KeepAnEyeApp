@@ -6,6 +6,7 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { FilterProvider } from './Context/FilterContext';
 // import { filterReducer, initialState } from './Context/FilterReducer';
+import 'react-native-gesture-handler';
 import { PremiseProvider } from './Context/PremiseContext';
 import { SnackbarProvider } from './Context/SnackbarContext';
 import RootStackNavigator from './Navigation/RootStackNavigation';
