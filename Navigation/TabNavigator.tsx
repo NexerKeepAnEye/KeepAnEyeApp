@@ -1,6 +1,6 @@
 import { Entypo, MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigatorScreenParams, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
@@ -23,7 +23,6 @@ import { RootStackParamList } from './RootStackNavigation';
 
 export type TabParamList = {
   MeterScreen: {
-    navigation: NavigatorScreenParams<TabParamList>;
     premiseId: number;
   };
   ReportScreen: { premiseId: number };
@@ -55,6 +54,16 @@ export default function TabNavigator() {
     setShowAlartDialog(true);
   };
 
+  // useEffect(() => {
+  //   const unsubscribe = navigation.addListener('state', () => {
+  //     const currentRoute =
+  //       navigation.getState().routes[navigation.getState().index];
+  //     console.log('Current screen:', currentRoute?.name);
+  //   });
+
+  //   return unsubscribe;
+  // }, [navigation]);
+
   return (
     <>
       <Portal>
@@ -76,7 +85,14 @@ export default function TabNavigator() {
 
       <Tab.Navigator
         id={undefined}
+        detachInactiveScreens={true}
+        // initialRouteName="MeterScreen"
         screenOptions={() => ({
+          popGesture: false,
+          hardwareBackButton: {
+            dismissModalOnPress: false,
+            popStackOnPress: false,
+          },
           headerRight: () => (
             <Pressable onPress={handleLogout}>
               <MaterialIcons

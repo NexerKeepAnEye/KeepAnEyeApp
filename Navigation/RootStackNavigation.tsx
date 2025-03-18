@@ -20,7 +20,9 @@ import TabNavigator, { TabParamList } from './TabNavigator';
 
 export type RootStackParamList = {
   SignInScreen: undefined;
-  PremisesScreen: undefined;
+  PremisesScreen: {
+    navigation: NativeStackNavigationProp<TabParamList>;
+  };
   Splash: undefined;
   tabs: NavigatorScreenParams<TabParamList>;
 };
@@ -46,12 +48,26 @@ export default function RootStackNavigator() {
     }
   }, [navigation]);
 
+  // useEffect(() => {
+  //   const unsubscribe = navigation.addListener('state', () => {
+  //     const currentRoute = navigation.getCurrentRoute();
+  //     console.log('Current screen:', currentRoute?.name);
+  //   });
+
+  //   return unsubscribe;
+  // }, [navigation]);
+
   return (
     <>
       <RootStack.Navigator
         id={undefined}
         initialRouteName="Splash"
         screenOptions={() => ({
+          popGesture: false,
+          hardwareBackButton: {
+            dismissModalOnPress: false,
+            popStackOnPress: false,
+          },
           headerRight: () => (
             <TouchableOpacity onPressOut={handleLogout}>
               <View>
@@ -70,38 +86,31 @@ export default function RootStackNavigator() {
         <RootStack.Screen
           name="Splash"
           component={Splash}
-          options={{ headerShadowVisible: false, headerShown: false }}
+          options={{
+            headerShadowVisible: false,
+            headerShown: false,
+            gestureEnabled: false,
+          }}
         />
         <RootStack.Screen
           name="PremisesScreen"
           component={PremisesScreen}
-          options={{ headerLeft: () => null, headerBackVisible: false }}
+          options={{
+            headerLeft: () => null,
+            headerBackVisible: false,
+            gestureEnabled: false,
+          }}
         />
         <RootStack.Screen
           name="SignInScreen"
           component={SignInScreen}
-          options={{ headerShown: false }}
+          options={{ headerShown: false, gestureEnabled: false }}
         />
         <RootStack.Screen
           name="tabs"
           component={TabNavigator}
           options={{ headerShown: false }}
         />
-        {/* <RootStack.Screen
-          name="MeterScreen"
-          component={MeterScreen}
-          options={{ headerShown: false }}
-        />
-        <RootStack.Screen
-          name="ReportScreen"
-          component={ReportScreen}
-          options={{ headerShown: false }}
-        />
-        <RootStack.Screen
-          name="MeterDataScreen"
-          component={MeterDataScreen}
-          options={{ headerShown: false }}
-        /> */}
       </RootStack.Navigator>
       <View>
         <Modal
