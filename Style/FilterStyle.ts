@@ -20,7 +20,7 @@ export const filterStyle = StyleSheet.create({
   },
 
   snackBarText: {
-    fontSize: 16,
+    fontSize: 14,
     color: 'white',
     fontFamily: 'inter_Bold',
   },
