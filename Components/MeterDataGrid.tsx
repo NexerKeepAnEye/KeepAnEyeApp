@@ -1,6 +1,6 @@
 import React, { useReducer, useRef, useState } from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { DataTable, Divider } from 'react-native-paper';
+import { DataTable, Divider, List } from 'react-native-paper';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {
   FilterAction,
@@ -10,6 +10,7 @@ import {
 } from '../Context/FilterReducer';
 import { usePremiseContext } from '../Context/PremiseContext';
 import { deviceHeight } from '../Style/Dimensions';
+import { filterStyle } from '../Style/FilterStyle';
 import { MeterDataGridStyle } from '../Style/MeterDataGridStyle';
 import { ReportGridStyle } from '../Style/ReportGridStyleStyle';
 import { MeterData } from '../Types/Type';
@@ -77,6 +78,10 @@ export default function MeterDataGrid({ meterId }: Props) {
     }
   };
 
+  const [expanded, setExpanded] = useState(false);
+
+  const handlePress = () => setExpanded(!expanded);
+
   return (
     <View style={{ flex: 1 }}>
       <ScrollView
@@ -84,32 +89,42 @@ export default function MeterDataGrid({ meterId }: Props) {
         onScroll={handleScroll}
         scrollEventThrottle={1}
       >
-        <Filter
-          filters={['dateRange', 'resolution']}
-          setFromDate={(date) => {
-            if (date !== null) {
-              dispatch({ type: 'SET_FROM_DATE', payload: date });
-            }
-          }}
-          setToDate={(date) => {
-            if (date !== null) {
-              dispatch({ type: 'SET_TO_DATE', payload: date });
-            }
-          }}
-          setResolution={(resolution) =>
-            dispatch({ type: 'SET_RESOLUTION', payload: resolution })
-          }
-          fromDate={state.fromDate}
-          toDate={state.toDate}
-          meterData={state.meterData}
-          resolution={state.resolution}
-          meterId={meterId}
-          setFilteredResults={(data) => {
-            setFilteredResults(data);
-            setFilterApplied(true);
-          }}
-          buttonText={'Sök'}
-        />
+        <View style={filterStyle.accordionView}>
+          <List.Accordion
+            title="Filter"
+            expanded={expanded}
+            onPress={handlePress}
+            style={filterStyle.accordion}
+            titleStyle={filterStyle.accordionText}
+          >
+            <Filter
+              filters={['dateRange', 'resolution']}
+              setFromDate={(date) => {
+                if (date !== null) {
+                  dispatch({ type: 'SET_FROM_DATE', payload: date });
+                }
+              }}
+              setToDate={(date) => {
+                if (date !== null) {
+                  dispatch({ type: 'SET_TO_DATE', payload: date });
+                }
+              }}
+              setResolution={(resolution) =>
+                dispatch({ type: 'SET_RESOLUTION', payload: resolution })
+              }
+              fromDate={state.fromDate}
+              toDate={state.toDate}
+              meterData={state.meterData}
+              resolution={state.resolution}
+              meterId={meterId}
+              setFilteredResults={(data) => {
+                setFilteredResults(data);
+                setFilterApplied(true);
+              }}
+              buttonText={'Sök'}
+            />
+          </List.Accordion>
+        </View>
         {filterApplied ? (
           <View>
             <DataTable style={MeterDataGridStyle.gridContainer}>
