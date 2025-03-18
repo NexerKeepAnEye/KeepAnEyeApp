@@ -32,7 +32,14 @@ export default function MeterIcon({ productCode }: { productCode: string }) {
     } else if (isProductId(productCode, ['TMP'])) {
       return 'thermostat';
     } else if (
-      isProductId(productCode, ['EL', 'El', 'EL sek', 'EL under', 'EL Effekt'])
+      isProductId(productCode, [
+        'EL',
+        'El',
+        'EL sek',
+        'EL under',
+        'EL Effekt',
+        'EL prod',
+      ])
     ) {
       return 'bolt';
     } else if (isProductId(productCode, ['FJK', 'FJK sek', 'FJK under'])) {

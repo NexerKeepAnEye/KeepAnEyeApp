@@ -15,7 +15,7 @@ export const StartScreenStyle = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingLeft: deviceWidth * 0.15,
+    paddingLeft: deviceWidth * 0.1,
     paddingRight: deviceWidth * 0.1,
   },
   textHeader: {
@@ -23,6 +23,7 @@ export const StartScreenStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     fontFamily: 'inter_Bold',
+    marginLeft: deviceWidth < 400 ? deviceHeight * 0.05 : deviceWidth * 0.05,
   },
   itemBox: {
     width: deviceWidth * 1,
@@ -63,17 +64,23 @@ export const StartScreenStyle = StyleSheet.create({
     borderColor: '#FF7043',
     borderRadius: 30,
     padding: 7,
-    left: 30,
+    left: 15,
   },
   searchBar: {
     height: deviceHeight > 800 ? deviceHeight * 0.045 : deviceHeight * 0.06,
-    width: deviceWidth * 0.65,
+    width: deviceWidth * 0.63,
     fontSize: deviceHeight * 0.017,
     borderColor: '#d9d9d9',
     borderWidth: 1,
     borderRadius: 5,
     paddingLeft: 8,
     fontFamily: 'inter_Regular',
+    marginLeft: deviceWidth < 400 ? deviceHeight * 0.03 : deviceWidth * 0.05,
+  },
+  sortButton: {
+    borderRadius: 30,
+    padding: 7,
+    left: 10,
   },
   noResultsText: {
     textAlign: 'center',

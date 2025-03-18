@@ -11,7 +11,7 @@ export const AccordionStyle = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
     overflow: 'hidden',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fefefe',
   },
   content: {
     flexDirection: 'row',
