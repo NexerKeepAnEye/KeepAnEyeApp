@@ -16,7 +16,7 @@ export const ResolutionStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     opacity: 0.8,
-    flex: 1
+    flex: 1,
   },
   buttonText: {
     fontSize: deviceHeight > 400 ? deviceWidth * 0.04 : deviceHeight * 0.021,

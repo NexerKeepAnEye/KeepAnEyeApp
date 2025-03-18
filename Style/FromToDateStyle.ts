@@ -24,7 +24,6 @@ export const dateStyles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#f9f9f9',
     flex: 1,
-
   },
   pickerText: {
     fontSize: deviceHeight > 400 ? deviceWidth * 0.04 : deviceHeight * 0.021,

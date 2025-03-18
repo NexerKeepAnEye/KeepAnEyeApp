@@ -18,7 +18,7 @@ export const yearSearchStyle = StyleSheet.create({
     backgroundColor: '#f9f9f9',
     opacity: 0.8,
     paddingHorizontal: 10,
-    flex : 1,
+    flex: 1,
   },
   pickerText: {
     fontSize: deviceHeight > 400 ? deviceWidth * 0.04 : deviceHeight * 0.021,

@@ -33,13 +33,13 @@ export const filterStyle = StyleSheet.create({
     marginBottom: deviceHeight * 0.01,
   },
   accordionView: {
-     marginBottom: 10,
-     borderWidth: 1,
-     borderColor: '#d9d9d9',
-     borderRadius: 8,
-     padding: 1,
-     backgroundColor: '#fff',
-     width: deviceWidth * 0.9,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#d9d9d9',
+    borderRadius: 8,
+    padding: 1,
+    backgroundColor: '#fff',
+    width: deviceWidth * 0.9,
   },
   accordion: {
     borderRadius: 8,
@@ -49,9 +49,9 @@ export const filterStyle = StyleSheet.create({
     padding: 29,
   },
   accordionText: {
-  fontFamily: 'inter_Regular',
-  fontSize: 17,
-  color: '#333',
-  fontWeight: 'bold',
-  }
+    fontFamily: 'inter_Regular',
+    fontSize: 17,
+    color: '#333',
+    fontWeight: 'bold',
+  },
 });
