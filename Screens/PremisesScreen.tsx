@@ -310,6 +310,10 @@ export default function PremisesScreen({ navigation }: Props) {
           ref={scrollViewRef}
           onScroll={handleScroll}
           scrollEventThrottle={4}
+          keyboardDismissMode={
+            Platform.OS === 'ios' ? 'interactive' : 'on-drag'
+          }
+          keyboardShouldPersistTaps="handled"
         >
           {Array.isArray(sortedPremises) && sortedPremises.length > 0
             ? // {Array.isArray(filteredPremises) && filteredPremises.length > 0
