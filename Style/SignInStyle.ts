@@ -27,11 +27,13 @@ export const SignIn = StyleSheet.create({
     fontSize: deviceWidth * 0.05,
     marginBottom: deviceHeight * 0.01,
     fontFamily: 'inter_Bold',
+    color: '#222',
   },
   input: {
     width: deviceWidth * 0.8,
     marginBottom: deviceHeight * 0.01,
     fontFamily: 'inter_Regular',
+    backgroundColor: '#fff',
   },
   button: {
     marginTop: deviceHeight * 0.01,

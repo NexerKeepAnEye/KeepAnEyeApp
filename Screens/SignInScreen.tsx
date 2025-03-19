@@ -38,6 +38,7 @@ export default function SignInScreen() {
   const [cancelText, setCancelText] = useState('');
   const [closeApp, setCloseApp] = useState(false);
   const isFocused = useIsFocused();
+  const [isInputFocused, setIsInputFocused] = useState(false);
 
   useEffect(() => {
     const checkApiKey = async () => {
@@ -129,13 +130,31 @@ export default function SignInScreen() {
               style={SignIn.logo}
             />
             <View style={SignIn.container}>
-              <Text style={SignIn.title}>Ange API-nyckel:</Text>
+              {/* <Text style={SignIn.title}>Ange API-nyckel:</Text> */}
               <TextInput
                 style={SignIn.input}
                 mode="outlined"
-                label="API-nyckel"
+                activeOutlineColor="lightblue"
+                outlineStyle={{ borderWidth: 1.3, borderColor: 'grey' }}
+                label={
+                  isInputFocused ? (
+                    <Text
+                      style={{ color: 'grey', fontFamily: 'inter_Regular' }}
+                    >
+                      API-nyckel
+                    </Text>
+                  ) : (
+                    <Text
+                      style={{ color: 'grey', fontFamily: 'inter_Regular' }}
+                    >
+                      Ange API-nyckel
+                    </Text>
+                  )
+                }
                 value={form.apikey}
                 onChangeText={(e) => setForm({ ...form, apikey: e })}
+                onFocus={() => setIsInputFocused(true)}
+                onBlur={() => setIsInputFocused(false)}
               />
             </View>
             <TouchableOpacity
