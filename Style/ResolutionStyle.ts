@@ -6,7 +6,7 @@ export const ResolutionStyle = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    backgroundColor: '#f9f9f9',
+    backgroundColor: 'white',
     padding: 5,
     width: deviceWidth * 0.42,
     height: deviceHeight * 0.05,

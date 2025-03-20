@@ -34,11 +34,8 @@ export const filterStyle = StyleSheet.create({
   },
   accordionView: {
     marginBottom: 10,
-    borderWidth: 1,
-    borderColor: '#d9d9d9',
     borderRadius: 8,
     padding: 1,
-    backgroundColor: '#fff',
     width: deviceWidth * 0.9,
   },
   accordion: {
