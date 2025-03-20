@@ -21,7 +21,7 @@ export const AccordionStyle = StyleSheet.create({
   },
   modalContent: {
     width: deviceWidth * 0.8,
-    height: deviceHeight * 0.32, 
+    height: deviceHeight * 0.32,
     backgroundColor: 'white',
     borderRadius: 8,
     padding: 20,
@@ -42,7 +42,7 @@ export const AccordionStyle = StyleSheet.create({
     fontFamily: 'inter_Bold',
   },
   listItem: {
-    fontSize: 22, 
+    fontSize: 22,
     fontFamily: 'inter_Regular',
     padding: 10,
   },
@@ -51,7 +51,7 @@ export const AccordionStyle = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'inter_Bold',
   },
-  listPressed:{
+  listPressed: {
     borderBottomWidth: 0.4,
     width: '90%',
     alignItems: 'center',
@@ -59,13 +59,13 @@ export const AccordionStyle = StyleSheet.create({
     justifyContent: 'center',
     display: 'flex',
   },
-  closeButton: { 
+  closeButton: {
     alignItems: 'center',
-    justifyContent: 'center' 
+    justifyContent: 'center',
   },
   closeButtonText: {
     color: 'blue',
     fontSize: 18,
     marginTop: 17,
-  }
+  },
 });
