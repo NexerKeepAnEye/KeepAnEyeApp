@@ -13,11 +13,13 @@ interface ReportGridProps {
 
 export const ReportGrid = ({ selectedReport }: ReportGridProps) => {
   return (
-    <ScrollView style={ReportGridStyle.root}>
-      {selectedReport === 'Månadsrapport' && <MonthlyReport />}
-      {selectedReport === 'Årsrapport' && <YearlyReport />}
-      {selectedReport === 'Jämför år' && <YearComparison />}
-      {selectedReport === 'Analysrapport' && <Analysisreport />}
-    </ScrollView>
+    <>
+      <ScrollView style={ReportGridStyle.root}>
+        {selectedReport === 'Månadsrapport' && <MonthlyReport />}
+        {selectedReport === 'Årsrapport' && <YearlyReport />}
+        {selectedReport === 'Jämför år' && <YearComparison />}
+        {selectedReport === 'Analysrapport' && <Analysisreport />}
+      </ScrollView>
+    </>
   );
 };

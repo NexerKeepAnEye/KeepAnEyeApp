@@ -1,6 +1,6 @@
 import React, { Reducer, useEffect, useReducer, useState } from 'react';
 import { Text, View } from 'react-native';
-import { DataTable, Divider, List } from 'react-native-paper';
+import { DataTable, Divider } from 'react-native-paper';
 import {
   FilterAction,
   filterReducer,
@@ -144,40 +144,28 @@ export const YearComparison = () => {
       </View>;
     }
   };
-  const [expanded, setExpanded] = useState(false);
 
-  const handlePress = () => setExpanded(!expanded);
   return (
     <View>
       <View style={filterStyle.accordionView}>
-        <List.Accordion
-          title="Filter"
-          expanded={expanded}
-          onPress={handlePress}
-          style={filterStyle.accordion}
-          titleStyle={filterStyle.accordionText}
-        >
-          <Filter
-            filters={['compareYears', 'meter']}
-            setYear={(year) => dispatch({ type: 'SET_YEAR', payload: year })}
-            setYearTwo={(year) =>
-              dispatch({ type: 'SET_YEAR_TWO', payload: year })
-            }
-            setMeter={(meter) =>
-              dispatch({ type: 'SET_METER', payload: meter })
-            }
-            year={state.year}
-            yearTwo={state.yearTwo}
-            meter={state.meter}
-            meterData={state.meterData}
-            resolution="Månad"
-            setFilteredResults={(data) => {
-              dispatch({ type: 'SET_FILTERED_RESULTS', payload: data });
-              setSearchClicked(true);
-            }}
-            buttonText="Skapa rapport"
-          />
-        </List.Accordion>
+        <Filter
+          filters={['compareYears', 'meter']}
+          setYear={(year) => dispatch({ type: 'SET_YEAR', payload: year })}
+          setYearTwo={(year) =>
+            dispatch({ type: 'SET_YEAR_TWO', payload: year })
+          }
+          setMeter={(meter) => dispatch({ type: 'SET_METER', payload: meter })}
+          year={state.year}
+          yearTwo={state.yearTwo}
+          meter={state.meter}
+          meterData={state.meterData}
+          resolution="Månad"
+          setFilteredResults={(data) => {
+            dispatch({ type: 'SET_FILTERED_RESULTS', payload: data });
+            setSearchClicked(true);
+          }}
+          buttonText="Skapa rapport"
+        />
       </View>
       {searchClicked ? (
         filteredResults.length > 0 ? (

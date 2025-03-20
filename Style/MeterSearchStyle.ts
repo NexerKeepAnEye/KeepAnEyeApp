@@ -15,7 +15,7 @@ export const meterSearch = StyleSheet.create({
     borderRadius: 10,
     height: deviceHeight * 0.05,
     paddingHorizontal: 10,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: 'white',
     opacity: 0.8,
     marginRight: 5,
     flex: 2,
