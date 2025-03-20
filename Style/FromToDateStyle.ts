@@ -22,7 +22,7 @@ export const dateStyles = StyleSheet.create({
     height: deviceHeight * 0.05,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f9f9f9',
+    backgroundColor: 'white',
     flex: 1,
   },
   pickerText: {

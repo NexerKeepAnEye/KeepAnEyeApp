@@ -1,6 +1,6 @@
 import React, { Reducer, useEffect, useReducer, useState } from 'react';
 import { Text, View } from 'react-native';
-import { DataTable, Divider, List } from 'react-native-paper';
+import { DataTable, Divider } from 'react-native-paper';
 import { useFilterContext } from '../../Context/FilterContext';
 import {
   FilterAction,
@@ -72,37 +72,23 @@ export const MonthlyReport = () => {
     }
   };
 
-  const [expanded, setExpanded] = useState(false);
-
-  const handlePress = () => setExpanded(!expanded);
-
   return (
     <View>
       <View style={filterStyle.accordionView}>
-        <List.Accordion
-          title="Filter"
-          expanded={expanded}
-          onPress={handlePress}
-          style={filterStyle.accordion}
-          titleStyle={filterStyle.accordionText}
-        >
-          <Filter
-            filters={['year', 'meter']}
-            setYear={(year) => dispatch({ type: 'SET_YEAR', payload: year })}
-            setMeter={(meter) =>
-              dispatch({ type: 'SET_METER', payload: meter })
-            }
-            year={state.year}
-            meter={state.meter}
-            meterData={state.meterData}
-            setFilteredResults={(data) => {
-              dispatch({ type: 'SET_FILTERED_RESULTS', payload: data });
-              setSearchClicked(true);
-            }}
-            resolution="Monthly"
-            buttonText="Skapa rapport"
-          />
-        </List.Accordion>
+        <Filter
+          filters={['year', 'meter']}
+          setYear={(year) => dispatch({ type: 'SET_YEAR', payload: year })}
+          setMeter={(meter) => dispatch({ type: 'SET_METER', payload: meter })}
+          year={state.year}
+          meter={state.meter}
+          meterData={state.meterData}
+          setFilteredResults={(data) => {
+            dispatch({ type: 'SET_FILTERED_RESULTS', payload: data });
+            setSearchClicked(true);
+          }}
+          resolution="Monthly"
+          buttonText="Skapa rapport"
+        />
       </View>
       {searchClicked ? (
         filteredResults.length > 0 ? (

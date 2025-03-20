@@ -1,6 +1,6 @@
 import React, { Reducer, useEffect, useReducer, useState } from 'react';
 import { Text, View } from 'react-native';
-import { DataTable, Divider, List } from 'react-native-paper';
+import { DataTable, Divider } from 'react-native-paper';
 import { useFilterContext } from '../../Context/FilterContext';
 import {
   FilterAction,
@@ -111,46 +111,32 @@ export default function Analysisreport() {
     }
   };
 
-  const [expanded, setExpanded] = useState(false);
-
-  const handlePress = () => setExpanded(!expanded);
-
   return (
     <View>
       <View style={filterStyle.accordionView}>
-        <List.Accordion
-          title="Filter"
-          expanded={expanded}
-          onPress={handlePress}
-          style={filterStyle.accordion}
-          titleStyle={filterStyle.accordionText}
-        >
-          <Filter
-            filters={['dateRange', 'meter', 'resolution']}
-            setFromDate={(fromDate) =>
-              dispatch({ type: 'SET_FROM_DATE', payload: fromDate })
-            }
-            setToDate={(toDate) =>
-              dispatch({ type: 'SET_TO_DATE', payload: toDate })
-            }
-            setMeter={(meter) =>
-              dispatch({ type: 'SET_METER', payload: meter })
-            }
-            setResolution={(resolution) =>
-              dispatch({ type: 'SET_RESOLUTION', payload: resolution })
-            }
-            fromDate={state.fromDate}
-            toDate={state.toDate}
-            meter={state.meter}
-            meterData={state.meterData}
-            resolution={state.resolution}
-            setFilteredResults={(data) => {
-              dispatch({ type: 'SET_FILTERED_RESULTS', payload: data });
-              setSearchClicked(true);
-            }}
-            buttonText="Skapa rapport"
-          />
-        </List.Accordion>
+        <Filter
+          filters={['dateRange', 'meter', 'resolution']}
+          setFromDate={(fromDate) =>
+            dispatch({ type: 'SET_FROM_DATE', payload: fromDate })
+          }
+          setToDate={(toDate) =>
+            dispatch({ type: 'SET_TO_DATE', payload: toDate })
+          }
+          setMeter={(meter) => dispatch({ type: 'SET_METER', payload: meter })}
+          setResolution={(resolution) =>
+            dispatch({ type: 'SET_RESOLUTION', payload: resolution })
+          }
+          fromDate={state.fromDate}
+          toDate={state.toDate}
+          meter={state.meter}
+          meterData={state.meterData}
+          resolution={state.resolution}
+          setFilteredResults={(data) => {
+            dispatch({ type: 'SET_FILTERED_RESULTS', payload: data });
+            setSearchClicked(true);
+          }}
+          buttonText="Skapa rapport"
+        />
       </View>
       {searchClicked ? (
         filteredResults.length > 0 ? (
