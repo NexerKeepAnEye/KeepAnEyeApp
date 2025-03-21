@@ -44,7 +44,7 @@ export const AccordionStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
-    marginRight: 45
+    marginRight: 45,
   },
   headerBlank: {
     fontSize: deviceWidth * 0.045,
@@ -52,7 +52,7 @@ export const AccordionStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
-    marginRight: 10
+    marginRight: 10,
   },
   listItem: {
     fontSize: deviceWidth > 400 ? 21 : 18,
@@ -79,7 +79,7 @@ export const AccordionStyle = StyleSheet.create({
   },
   closeButtonText: {
     color: '#056ffd',
-    fontSize:deviceWidth > 400 ? 18 : 16,
+    fontSize: deviceWidth > 400 ? 18 : 16,
     marginTop: 17,
     fontFamily: 'inter_Regular',
   },
