@@ -20,12 +20,13 @@ const AnimatedReportIcon = ({ reportType }) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
+    fadeAnim.setValue(0);
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 500,
       useNativeDriver: true,
     }).start();
-  }, [fadeAnim]);
+  }, [reportType]);
 
   return (
     <Animated.View style={{ opacity: fadeAnim }}>
