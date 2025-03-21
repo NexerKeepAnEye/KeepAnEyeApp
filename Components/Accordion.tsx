@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
+  Animated,
   Modal,
   Pressable,
   ScrollView,
@@ -13,6 +14,26 @@ import { deviceHeight } from '../Style/Dimensions';
 import { filterTypes } from '../Types/FilterTypes';
 import { ReportGrid } from './Report/ReportGrid';
 import ReportIcon from './ReportIcon';
+
+// eslint-disable-next-line react/prop-types
+const AnimatedReportIcon = ({ reportType }) => {
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    fadeAnim.setValue(0);
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  }, [reportType]);
+
+  return (
+    <Animated.View style={{ opacity: fadeAnim }}>
+      <ReportIcon reportType={reportType} />
+    </Animated.View>
+  );
+};
 
 export const Accordion = () => {
   const [expandedReport, setExpandedReport] = useState(false);
@@ -39,9 +60,27 @@ export const Accordion = () => {
         <View style={AccordionStyle.container}>
           <TouchableOpacity onPress={handleReportPress}>
             <View style={AccordionStyle.content}>
-              <Text style={AccordionStyle.header}>
-                {selectedReport || '-- Välj rapport --'}
-              </Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flex: 0.95,
+                  marginLeft: 10,
+                }}
+              >
+                {selectedReport && (
+                  <AnimatedReportIcon reportType={selectedReport} />
+                )}
+                {selectedReport ? (
+                  <Text style={AccordionStyle.header}>{selectedReport}</Text>
+                ) : (
+                  <Text style={AccordionStyle.headerBlank}>
+                    {' '}
+                    -- Välj rapport --
+                  </Text>
+                )}
+              </View>
               <TouchableOpacity onPress={handleReportPress}></TouchableOpacity>
             </View>
           </TouchableOpacity>
@@ -65,7 +104,7 @@ export const Accordion = () => {
                       style={AccordionStyle.listPressed}
                     >
                       <View style={{ flex: 1 }}>
-                        <ReportIcon reportType={report.type} />
+                        <AnimatedReportIcon reportType={report.type} />
                       </View>
 
                       <View style={{ flex: 3 }}>
@@ -79,7 +118,7 @@ export const Accordion = () => {
                     onPress={closeModal}
                     style={AccordionStyle.closeButton}
                   >
-                    <Text style={AccordionStyle.closeButtonText}>stäng</Text>
+                    <Text style={AccordionStyle.closeButtonText}>Stäng</Text>
                   </TouchableOpacity>
                 </View>
               </TouchableOpacity>
