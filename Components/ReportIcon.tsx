@@ -21,7 +21,7 @@ export default function ReportIcon({ reportType }: { reportType: string }) {
     <View>
       <Icon
         name={iconSelector(reportType)}
-        style={{ fontSize: 30 }}
+        style={{ fontSize: 30, color: '#234' }}
       />
     </View>
   );

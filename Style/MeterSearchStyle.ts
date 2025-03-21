@@ -25,6 +25,7 @@ export const meterSearch = StyleSheet.create({
     fontSize: deviceHeight > 400 ? deviceWidth * 0.04 : deviceHeight * 0.021,
     fontFamily: 'inter_Regular',
     textAlign: 'center',
+    marginRight: 25,
   },
   touchArea: {
     width: '100%',

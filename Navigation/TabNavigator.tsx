@@ -149,7 +149,7 @@ export default function TabNavigator() {
                   {focused ? (
                     <Entypo
                       name="gauge"
-                      size={deviceHeight < 800 ? 30 : 33}
+                      size={deviceHeight < 800 ? 30 : 30}
                       color={color}
                     />
                   ) : (
