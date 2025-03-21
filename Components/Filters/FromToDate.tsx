@@ -7,9 +7,9 @@ import {
   View,
 } from 'react-native';
 import { dateStyles } from '../../Style/FromToDateStyle';
+import { TimeConverter } from '../../Utils/TimeConverter';
 import AlertDialog from '../AlertDialog';
 import CustomCalendar from '../CustomCalander';
-import { TimeConverter } from '../../Utils/TimeConverter';
 
 interface FromToDateProps {
   fromDate: Date | null;
@@ -35,7 +35,7 @@ export function FromToDate({
     if (!fromDate && !toDate) {
       const today = new Date();
       const thirtyDaysAgo = new Date();
-      thirtyDaysAgo.setDate(today.getDate() - 30);
+      thirtyDaysAgo.setDate(today.getDate() - 29);
 
       setFromDate(thirtyDaysAgo);
       setToDate(today);

@@ -86,13 +86,28 @@ export function MeterSearch({ setSelectedMeter }: MeterSearchProps) {
           style={meterSearch.touchArea}
           onPress={handlePress}
         >
-          <Text
-            style={meterSearch.pickerText}
-            numberOfLines={1}
-            ellipsizeMode="tail"
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
           >
-            {selectedMeter?.toString() || 'Mätare'}
-          </Text>
+            {filterstate.meter.length > 0 && (
+              <View style={{ flex: 1 }}>
+                <MeterIcon productCode={filterstate.meter[0].ProductCode} />
+              </View>
+            )}
+            <View style={{ flex: 8 }}>
+              <Text
+                style={meterSearch.pickerText}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+              >
+                {selectedMeter?.toString() || 'Mätare'}
+              </Text>
+            </View>
+          </View>
         </TouchableOpacity>
       </View>
       <Modal
