@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Image, SafeAreaView } from 'react-native';
-import logoKAE from '../assets/UpscaleLogo2.jpg';
+import logoKAE from '../assets/UpscaleLogo2.png';
 import { headerStyle } from '../Style/HeaderStyle';
 
 export function LogoTitle() {
