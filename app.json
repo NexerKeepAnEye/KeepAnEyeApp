@@ -4,11 +4,11 @@
     "slug": "KeepAnEyeApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/upscalelogo2.jpg",
+    "icon": "./assets/UpscaleLogo2.jpg",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/upscalelogo2.jpg",
+      "image": "./assets/UpscaleLogo2.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,7 +21,7 @@
       "bundleIdentifier": "info.plist",
       "buildNumber": "1.0.0",
       "splash": {
-        "image": "./assets/upscalelogo2.jpg",
+        "image": "./assets/UpscaleLogo2.jpg",
         "resizeMode": "contain",
         "backgroundColor": "#ffffff"
       },
@@ -32,7 +32,7 @@
     "android": {
       "icon": "./assets/UpscaleIcon.jpg",
       "splash": {
-        "image": "./assets/upscalelogo2.jpg",
+        "image": "./assets/UpscaleLogo2.jpg",
         "resizeMode": "contain",
         "backgroundColor": "#ffffff"
       },
@@ -59,9 +59,9 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/upscalelogo2.jpg",
+          "image": "./assets/UpscaleLogo2.jpg",
           "dark": {
-            "image": "./assets/upscalelogo2.jpg"
+            "image": "./assets/UpscaleLogo2.jpg"
           }
         }
       ],
